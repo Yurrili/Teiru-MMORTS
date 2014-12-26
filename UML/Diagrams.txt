@@ -1,0 +1,7 @@
+diagram przypadków użycia (ze scenariuszami)
+diagram klas (wraz ze specyfikacją ograniczeń w języku OCL) - Class diagram - IN PROGRESS
+diagramy sekwencji
+diagramy komunikacji(współdziałania/współpracy/kooperacji)
+diagramy stanów i czynności
+diagram komponentów i wdrożeń 
+P.S. diagramy sekwencji, komunikacji i stanów i czynności tylko w odniesieniu do najważniejszych/kluczowych funkcjonalności aplikacji
