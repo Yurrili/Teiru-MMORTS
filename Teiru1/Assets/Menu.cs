@@ -23,13 +23,13 @@ public class Menu : MonoBehaviour
 
 	public void Update()
 	{
-	if (!_animator.GetCurrentAnimatorStateInfo(0).IsName ("Open")) 
+	if (!_animator.GetCurrentAnimatorStateInfo(0).IsName ("MainMOpen")) 
 		{
-		_canvasGroup.blocksRaycasts = _canvasGroup.interactable = true;
+		_canvasGroup.blocksRaycasts = _canvasGroup.interactable = false;
 	    } 
 	else 
 		{
-			_canvasGroup.blocksRaycasts = _canvasGroup.interactable = false;
+			_canvasGroup.blocksRaycasts = _canvasGroup.interactable = true;
 		}
 
 	}
