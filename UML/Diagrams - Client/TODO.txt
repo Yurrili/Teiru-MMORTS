@@ -1,0 +1,5 @@
+Diagramy:
+Czynnoœci
+Stanów
+Klas
+Wdro¿enia (ogolny dla projektu)

@@ -12,7 +12,7 @@ Platform assembly: C:\Users\Kedam\Documents\Visual Studio 2013\Projects\Nigga\Ni
 Loading C:\Users\Kedam\Documents\Visual Studio 2013\Projects\Nigga\Nigga\Teiru-MMORTS\a_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
 Platform assembly: C:\Users\Kedam\Documents\Visual Studio 2013\Projects\Nigga\Nigga\Teiru-MMORTS\a_Data\Managed\UnityEngine.UI.dll (this message is harmless)
 Loading C:\Users\Kedam\Documents\Visual Studio 2013\Projects\Nigga\Nigga\Teiru-MMORTS\a_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
-- Completed reload, in  0.181 seconds
+- Completed reload, in  0.221 seconds
 desktop: 1280x800 60Hz; virtual: 1280x800 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
