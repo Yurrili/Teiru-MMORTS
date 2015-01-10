@@ -49,6 +49,12 @@
      <Compile Include="Assets\Menu.cs" />
      <Compile Include="Assets\MenuEvents.cs" />
      <Compile Include="Assets\MenuManager.cs" />
+     <Compile Include="Assets\_Scripts\Networking\Decoding\PacketDecoder.cs" />
+     <Compile Include="Assets\_Scripts\Networking\Encoding\PacketEncoder.cs" />
+     <Compile Include="Assets\_Scripts\Networking\MasterClient.cs" />
+     <Compile Include="Assets\_Scripts\Networking\Streams\DataInputStream.cs" />
+     <Compile Include="Assets\_Scripts\Networking\Streams\DataOutputStream.cs" />
+     <Compile Include="Assets\_Scripts\UI\ButtonManager.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>F:/Unity/Data/UnityExtensions/Unity/GUISystem/4.6.0/UnityEngine.UI.dll</HintPath>
  </Reference>

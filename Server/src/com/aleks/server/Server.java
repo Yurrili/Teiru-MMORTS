@@ -3,6 +3,7 @@ package com.aleks.server;
 
 import org.jboss.netty.bootstrap.ServerBootstrap;
 import org.jboss.netty.channel.socket.nio.NioServerSocketChannelFactory;
+import com.aleks.server.net.PipeLineFactory;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -28,7 +29,7 @@ public class Server
     {
         ServerBootstrap serverBootstrap;
         serverBootstrap = new ServerBootstrap(new NioServerSocketChannelFactory(Executors.newCachedThreadPool(), Executors.newCachedThreadPool()));
-        // serverBootstrap.setPipelineFactory(new PipelineFactory());
+        serverBootstrap.setPipelineFactory(new PipeLineFactory());
         serverBootstrap.bind(new InetSocketAddress(FIND_ADDRESS, PORT));
         System.err.println("Server initialized...");
     }

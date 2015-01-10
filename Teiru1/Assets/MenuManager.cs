@@ -135,7 +135,7 @@ public class MenuManager : MonoBehaviour {
 		
 	}
 
-	public void OnMouseDownLog()
+	public void OnMouseDownLog()// Registration button hide
 	{
 		obj1 = GameObject.FindGameObjectWithTag ("Registration");
 		if (obj1)

@@ -15,6 +15,7 @@ public class PipeLineFactory implements ChannelPipelineFactory
         ChannelPipeline pipeline = new DefaultChannelPipeline();
         pipeline.addLast("encoder", new Encoder());
         pipeline.addLast("decoder", new LoginServerDecoder());
+        pipeline.addLast("handler", new ChannelHandler());
         return pipeline;
     }
 }

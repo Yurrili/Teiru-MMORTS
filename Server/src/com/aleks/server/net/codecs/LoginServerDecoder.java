@@ -1,5 +1,7 @@
 package com.aleks.server.net.codecs;
 
+import com.aleks.server.net.model.player.Account;
+import com.aleks.server.util.MySQL;
 import org.jboss.netty.buffer.ChannelBuffer;
 import org.jboss.netty.buffer.ChannelBufferInputStream;
 import org.jboss.netty.channel.Channel;
@@ -22,6 +24,22 @@ public class LoginServerDecoder extends FrameDecoder
         //if true create account
         //Remove LoginServerDecoder , Set up GameServerDecoder
         //return the account
+        if (MySQL.Login(username,password))
+        {
+            Account account = new Account(channel, username);
+            ctx.getPipeline().remove("decoder");//remove login server
+            channel.getPipeline().addFirst("decoder", new GameServerDecoder());//start game server
+            in.close();
+            return  account;
+        }
+        else
+        {
+        // TODO Sena a packet that login was invalid
+            PacketEncoder failedEncoder = new PacketEncoder(channel);
+            failedEncoder.sendLogin(false,null,(byte)0);
+            System.err.println("Player attempted login with invalid information");
+        }
+        in.close();
         return null;
     }
 }

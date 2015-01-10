@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="/Server/src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/mysql-connector-java-5.1.34-bin"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/netty-3.6.10.Final"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
