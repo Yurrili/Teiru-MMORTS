@@ -1,5 +1,5 @@
 Diagramy:
-Czynnoœci
-Stanów
 Klas
 Wdro¿enia (ogolny dla projektu)
+Komponentów (ogólny)
+Poprawki diagramów - pn/wt
