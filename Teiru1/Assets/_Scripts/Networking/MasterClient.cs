@@ -28,7 +28,7 @@ public class MasterClient : MonoBehaviour {
 	{
 		if (Client == null)
 		{
-			Connect();
+	//		Connect();
 		}
 	}
 
@@ -116,6 +116,6 @@ public class MasterClient : MonoBehaviour {
 
 	void OnApplicationQuit()
 	{
-		Client.Close ();
+	//	Client.Close ();
 	}
 }
