@@ -41,7 +41,7 @@ public class DBManager : MonoBehaviour {
 				form.AddField("username",usernameStr);
 				form.AddField("password",passwordStr);
 				form.AddField("email",emailStr);
-				WWW w = new WWW("http://localhost/tutorial/register.php",form);
+				WWW w = new WWW("http://f12-preview.awardspace.net/teiru.ac.dx/register.php",form);
 				StartCoroutine(register (w));
 			//	ShowMenu (menu);
 			}

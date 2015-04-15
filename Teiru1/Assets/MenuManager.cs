@@ -14,27 +14,27 @@ public class MenuManager : MonoBehaviour {
 	public Text INT;
 	public Text WIS;
 	public Text CHA;
-	public Text PTS;
+	public Text PTS;//summary points
 
 	public void Start()
 	{
 		ShowMenu (CurrentMenu);
 		obj = GameObject.FindGameObjectWithTag ("Back");
 		obj.SetActive (false);
-		STR = GameObject.Find ("Str").GetComponentInChildren<Text>();
-		DEX = GameObject.Find ("Dex").GetComponentInChildren<Text>();
-		CON = GameObject.Find ("Con").GetComponentInChildren<Text>();
-		INT = GameObject.Find ("Int").GetComponentInChildren<Text>();
-		WIS = GameObject.Find ("Wis").GetComponentInChildren<Text>();
-		CHA = GameObject.Find ("Cha").GetComponentInChildren<Text>();
-		PTS = GameObject.Find ("PointsYouHave").GetComponentInChildren<Text>();
+		//STR = GameObject.Find ("Str").GetComponent<InputField>();
+	//	DEX = GameObject.Find ("Dex").GetComponentInChildren<Text>();
+	//	CON = GameObject.Find ("Con").GetComponentInChildren<Text>();
+	//	INT = GameObject.Find ("Int").GetComponentInChildren<Text>();
+	//	WIS = GameObject.Find ("Wis").GetComponentInChildren<Text>();
+	//	CHA = GameObject.Find ("Cha").GetComponentInChildren<Text>();
+	//	PTS = GameObject.Find ("PointsYouHave").GetComponentInChildren<Text>();
 		PTS.text = pointsToGive.ToString();
 		STR.text = "8";
 	}
 
 	public void Update()
 	{
-		if (CurrentMenu.name == "SelectMenu") {
+		/*if (CurrentMenu.name == "SelectMenu") {
 			Check (STR);	
 			Check (DEX);	
 			Check (CON);	
@@ -42,7 +42,42 @@ public class MenuManager : MonoBehaviour {
 			Check (WIS);	
 			Check (CHA);
 			PTS.text = pointsToGive.ToString();
-		}
+		}*/
+	}
+
+	public void IncreaseSTR(){
+
+		STR.text = "1";
+	}
+
+	public void IncreaseCHA(){
+		
+		CHA.text = "1";
+	}
+
+	public void IncreaseINT(){
+		
+		INT.text = "1";
+	}
+
+	public void IncreaseDEX(){
+		
+		DEX.text = "1";
+	}
+
+	public void IncreaseWIS(){
+		
+		WIS.text = "1";
+	}
+
+	public void IncreaseCON(){
+		
+		CON.text = "1";
+	}
+
+	public void DecreaseSTR(){
+		
+		STR.text = "1";
 	}
 
 	public void Check(Text temp )
