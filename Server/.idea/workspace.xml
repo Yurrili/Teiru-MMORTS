@@ -53,11 +53,10 @@
       <file leaf-file-name="PacketEncoder.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/aleks/server/net/codecs/PacketEncoder.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.37037036" vertical-offset="375" max-vertical-offset="2091">
-              <caret line="41" column="53" selection-start-line="41" selection-start-column="53" selection-end-line="41" selection-end-column="53" />
+            <state vertical-scroll-proportion="0.45454547" vertical-offset="631" max-vertical-offset="2465">
+              <caret line="59" column="0" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="method#sendCharacters#0;class#PacketEncoder#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -84,25 +83,53 @@
               <OriginalElement>com.aleks.server</OriginalElement>
               <nodes>
                 <node x="592.3333333333335" y="413.00000000000006">com.aleks.server.net.packets.impl.CharacterLoadPacket</node>
-                <node x="640.625" y="860.375">com.aleks.server.net.codecs.LoginServerDecoder</node>
                 <node x="638.6666666666666" y="121.66666666666669">com.aleks.server.net.packets.PacketOpcodeHeader</node>
+                <node x="640.625" y="860.375">com.aleks.server.net.codecs.LoginServerDecoder</node>
                 <node x="635.7083333333335" y="1296.4583333333333">com.aleks.server.Server</node>
                 <node x="761.9166666666667" y="1023.1666666666667">com.aleks.server.net.codecs.Encoder</node>
                 <node x="365.625" y="1119.75">com.aleks.server.net.PipeLineFactory</node>
                 <node x="-573.2916666666666" y="861.6666666666667">com.aleks.server.util.Position</node>
                 <node x="867.3333333333334" y="409.6666666666667">com.aleks.server.net.packets.impl.CharacterCreatePacket</node>
                 <node x="-419.58333333333326" y="546.8333333333335">com.aleks.server.net.model.player.Character</node>
-                <node x="628.3333333333334" y="522.6666666666667">com.aleks.server.net.model.player.TempChar</node>
-                <node x="-379.7916666666665" y="752.4166666666667">com.aleks.server.net.codecs.PacketEncoder</node>
                 <node x="91.25" y="615.2916666666666">com.aleks.server.net.model.player.Account</node>
+                <node x="-379.7916666666665" y="752.4166666666667">com.aleks.server.net.codecs.PacketEncoder</node>
+                <node x="628.3333333333334" y="522.6666666666667">com.aleks.server.net.model.player.TempChar</node>
                 <node x="-210.7499999999999" y="1218.7916666666665">com.aleks.server.net.ChannelHandler</node>
                 <node x="-328.6249999999998" y="444.8333333333336">com.aleks.server.net.codecs.GameServerDecoder</node>
-                <node x="548.8333333333334" y="218.66666666666669">com.aleks.server.net.packets.Packet</node>
                 <node x="-88.33333333333331" y="-5.0">com.aleks.server.util.MySQL</node>
+                <node x="548.8333333333334" y="218.66666666666669">com.aleks.server.net.packets.Packet</node>
                 <node x="317.33333333333337" y="409.6666666666667">com.aleks.server.net.packets.impl.CharacterRequestPacket</node>
               </nodes>
               <notes />
               <edges>
+                <edge source="com.aleks.server.net.packets.impl.CharacterLoadPacket" target="com.aleks.server.net.packets.PacketOpcodeHeader">
+                  <point x="63.75" y="-26.0" />
+                  <point x="783.5833333333334" y="389.6666666666667" />
+                  <point x="780.3333333333334" y="389.6666666666667" />
+                  <point x="780.3333333333334" y="198.66666666666669" />
+                  <point x="738.4583333333334" y="198.66666666666669" />
+                  <point x="18.625" y="26.0" />
+                </edge>
+                <edge source="com.aleks.server.net.packets.impl.CharacterCreatePacket" target="com.aleks.server.net.packets.PacketOpcodeHeader">
+                  <point x="63.75" y="-26.0" />
+                  <point x="1058.5833333333335" y="188.66666666666669" />
+                  <point x="775.7083333333334" y="188.66666666666669" />
+                  <point x="55.875" y="26.0" />
+                </edge>
+                <edge source="com.aleks.server.net.packets.impl.CharacterCreatePacket" target="com.aleks.server.net.packets.Packet">
+                  <point x="-63.75" y="-26.0" />
+                  <point x="931.0833333333334" y="379.6666666666667" />
+                  <point x="733.0000000000001" y="379.6666666666667" />
+                  <point x="73.66666666666674" y="70.5" />
+                </edge>
+                <edge source="com.aleks.server.net.packets.impl.CharacterRequestPacket" target="com.aleks.server.net.packets.PacketOpcodeHeader">
+                  <point x="-63.75" y="-26.0" />
+                  <point x="381.08333333333337" y="389.6666666666667" />
+                  <point x="402.39583333333337" y="389.6666666666667" />
+                  <point x="402.39583333333337" y="188.66666666666669" />
+                  <point x="663.9583333333334" y="188.66666666666669" />
+                  <point x="-55.875" y="26.0" />
+                </edge>
                 <edge source="com.aleks.server.net.packets.impl.CharacterRequestPacket" target="com.aleks.server.net.packets.Packet">
                   <point x="63.75" y="-26.0" />
                   <point x="508.58333333333337" y="389.6666666666667" />
@@ -114,34 +141,6 @@
                   <point x="656.0833333333334" y="389.6666666666667" />
                   <point x="659.3333333333334" y="389.6666666666667" />
                   <point x="0.0" y="70.5" />
-                </edge>
-                <edge source="com.aleks.server.net.packets.impl.CharacterCreatePacket" target="com.aleks.server.net.packets.Packet">
-                  <point x="-63.75" y="-26.0" />
-                  <point x="931.0833333333334" y="379.6666666666667" />
-                  <point x="733.0000000000001" y="379.6666666666667" />
-                  <point x="73.66666666666674" y="70.5" />
-                </edge>
-                <edge source="com.aleks.server.net.packets.impl.CharacterCreatePacket" target="com.aleks.server.net.packets.PacketOpcodeHeader">
-                  <point x="63.75" y="-26.0" />
-                  <point x="1058.5833333333335" y="188.66666666666669" />
-                  <point x="775.7083333333334" y="188.66666666666669" />
-                  <point x="55.875" y="26.0" />
-                </edge>
-                <edge source="com.aleks.server.net.packets.impl.CharacterLoadPacket" target="com.aleks.server.net.packets.PacketOpcodeHeader">
-                  <point x="63.75" y="-26.0" />
-                  <point x="783.5833333333334" y="389.6666666666667" />
-                  <point x="780.3333333333334" y="389.6666666666667" />
-                  <point x="780.3333333333334" y="198.66666666666669" />
-                  <point x="738.4583333333334" y="198.66666666666669" />
-                  <point x="18.625" y="26.0" />
-                </edge>
-                <edge source="com.aleks.server.net.packets.impl.CharacterRequestPacket" target="com.aleks.server.net.packets.PacketOpcodeHeader">
-                  <point x="-63.75" y="-26.0" />
-                  <point x="381.08333333333337" y="389.6666666666667" />
-                  <point x="402.39583333333337" y="389.6666666666667" />
-                  <point x="402.39583333333337" y="188.66666666666669" />
-                  <point x="663.9583333333334" y="188.66666666666669" />
-                  <point x="-55.875" y="26.0" />
                 </edge>
                 <edge source="com.aleks.server.net.packets.Packet" target="com.aleks.server.net.packets.PacketOpcodeHeader">
                   <point x="0.0" y="0.0" />
@@ -288,6 +287,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -449,7 +449,6 @@
         </subPane>
       </pane>
       <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -796,11 +795,12 @@
       <workItem from="1420905543481" duration="6951000" />
       <workItem from="1420912702138" duration="3746000" />
       <workItem from="1420970526127" duration="1201000" />
+      <workItem from="1421406955817" duration="38000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="31703000" />
+    <option name="totallyTimeSpent" value="31741000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
@@ -900,7 +900,6 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#sendCharacters#0;class#PacketEncoder#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1235,9 +1234,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="17" max-vertical-offset="765">
           <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1307,25 +1303,53 @@
           <OriginalElement>com.aleks.server</OriginalElement>
           <nodes>
             <node x="592.3333333333335" y="413.00000000000006">com.aleks.server.net.packets.impl.CharacterLoadPacket</node>
-            <node x="640.625" y="860.375">com.aleks.server.net.codecs.LoginServerDecoder</node>
             <node x="638.6666666666666" y="121.66666666666669">com.aleks.server.net.packets.PacketOpcodeHeader</node>
+            <node x="640.625" y="860.375">com.aleks.server.net.codecs.LoginServerDecoder</node>
             <node x="635.7083333333335" y="1296.4583333333333">com.aleks.server.Server</node>
             <node x="761.9166666666667" y="1023.1666666666667">com.aleks.server.net.codecs.Encoder</node>
             <node x="365.625" y="1119.75">com.aleks.server.net.PipeLineFactory</node>
             <node x="-573.2916666666666" y="861.6666666666667">com.aleks.server.util.Position</node>
             <node x="867.3333333333334" y="409.6666666666667">com.aleks.server.net.packets.impl.CharacterCreatePacket</node>
             <node x="-419.58333333333326" y="546.8333333333335">com.aleks.server.net.model.player.Character</node>
-            <node x="628.3333333333334" y="522.6666666666667">com.aleks.server.net.model.player.TempChar</node>
-            <node x="-379.7916666666665" y="752.4166666666667">com.aleks.server.net.codecs.PacketEncoder</node>
             <node x="91.25" y="615.2916666666666">com.aleks.server.net.model.player.Account</node>
+            <node x="-379.7916666666665" y="752.4166666666667">com.aleks.server.net.codecs.PacketEncoder</node>
+            <node x="628.3333333333334" y="522.6666666666667">com.aleks.server.net.model.player.TempChar</node>
             <node x="-210.7499999999999" y="1218.7916666666665">com.aleks.server.net.ChannelHandler</node>
             <node x="-328.6249999999998" y="444.8333333333336">com.aleks.server.net.codecs.GameServerDecoder</node>
-            <node x="548.8333333333334" y="218.66666666666669">com.aleks.server.net.packets.Packet</node>
             <node x="-88.33333333333331" y="-5.0">com.aleks.server.util.MySQL</node>
+            <node x="548.8333333333334" y="218.66666666666669">com.aleks.server.net.packets.Packet</node>
             <node x="317.33333333333337" y="409.6666666666667">com.aleks.server.net.packets.impl.CharacterRequestPacket</node>
           </nodes>
           <notes />
           <edges>
+            <edge source="com.aleks.server.net.packets.impl.CharacterLoadPacket" target="com.aleks.server.net.packets.PacketOpcodeHeader">
+              <point x="63.75" y="-26.0" />
+              <point x="783.5833333333334" y="389.6666666666667" />
+              <point x="780.3333333333334" y="389.6666666666667" />
+              <point x="780.3333333333334" y="198.66666666666669" />
+              <point x="738.4583333333334" y="198.66666666666669" />
+              <point x="18.625" y="26.0" />
+            </edge>
+            <edge source="com.aleks.server.net.packets.impl.CharacterCreatePacket" target="com.aleks.server.net.packets.PacketOpcodeHeader">
+              <point x="63.75" y="-26.0" />
+              <point x="1058.5833333333335" y="188.66666666666669" />
+              <point x="775.7083333333334" y="188.66666666666669" />
+              <point x="55.875" y="26.0" />
+            </edge>
+            <edge source="com.aleks.server.net.packets.impl.CharacterCreatePacket" target="com.aleks.server.net.packets.Packet">
+              <point x="-63.75" y="-26.0" />
+              <point x="931.0833333333334" y="379.6666666666667" />
+              <point x="733.0000000000001" y="379.6666666666667" />
+              <point x="73.66666666666674" y="70.5" />
+            </edge>
+            <edge source="com.aleks.server.net.packets.impl.CharacterRequestPacket" target="com.aleks.server.net.packets.PacketOpcodeHeader">
+              <point x="-63.75" y="-26.0" />
+              <point x="381.08333333333337" y="389.6666666666667" />
+              <point x="402.39583333333337" y="389.6666666666667" />
+              <point x="402.39583333333337" y="188.66666666666669" />
+              <point x="663.9583333333334" y="188.66666666666669" />
+              <point x="-55.875" y="26.0" />
+            </edge>
             <edge source="com.aleks.server.net.packets.impl.CharacterRequestPacket" target="com.aleks.server.net.packets.Packet">
               <point x="63.75" y="-26.0" />
               <point x="508.58333333333337" y="389.6666666666667" />
@@ -1337,34 +1361,6 @@
               <point x="656.0833333333334" y="389.6666666666667" />
               <point x="659.3333333333334" y="389.6666666666667" />
               <point x="0.0" y="70.5" />
-            </edge>
-            <edge source="com.aleks.server.net.packets.impl.CharacterCreatePacket" target="com.aleks.server.net.packets.Packet">
-              <point x="-63.75" y="-26.0" />
-              <point x="931.0833333333334" y="379.6666666666667" />
-              <point x="733.0000000000001" y="379.6666666666667" />
-              <point x="73.66666666666674" y="70.5" />
-            </edge>
-            <edge source="com.aleks.server.net.packets.impl.CharacterCreatePacket" target="com.aleks.server.net.packets.PacketOpcodeHeader">
-              <point x="63.75" y="-26.0" />
-              <point x="1058.5833333333335" y="188.66666666666669" />
-              <point x="775.7083333333334" y="188.66666666666669" />
-              <point x="55.875" y="26.0" />
-            </edge>
-            <edge source="com.aleks.server.net.packets.impl.CharacterLoadPacket" target="com.aleks.server.net.packets.PacketOpcodeHeader">
-              <point x="63.75" y="-26.0" />
-              <point x="783.5833333333334" y="389.6666666666667" />
-              <point x="780.3333333333334" y="389.6666666666667" />
-              <point x="780.3333333333334" y="198.66666666666669" />
-              <point x="738.4583333333334" y="198.66666666666669" />
-              <point x="18.625" y="26.0" />
-            </edge>
-            <edge source="com.aleks.server.net.packets.impl.CharacterRequestPacket" target="com.aleks.server.net.packets.PacketOpcodeHeader">
-              <point x="-63.75" y="-26.0" />
-              <point x="381.08333333333337" y="389.6666666666667" />
-              <point x="402.39583333333337" y="389.6666666666667" />
-              <point x="402.39583333333337" y="188.66666666666669" />
-              <point x="663.9583333333334" y="188.66666666666669" />
-              <point x="-55.875" y="26.0" />
             </edge>
             <edge source="com.aleks.server.net.packets.Packet" target="com.aleks.server.net.packets.PacketOpcodeHeader">
               <point x="0.0" y="0.0" />
@@ -1436,11 +1432,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/aleks/server/net/codecs/PacketEncoder.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.37037036" vertical-offset="375" max-vertical-offset="2091">
-          <caret line="41" column="53" selection-start-line="41" selection-start-column="53" selection-end-line="41" selection-end-column="53" />
+        <state vertical-scroll-proportion="0.45454547" vertical-offset="631" max-vertical-offset="2465">
+          <caret line="59" column="0" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#sendCharacters#0;class#PacketEncoder#0" expanded="false" />
           </folding>
         </state>
       </provider>
