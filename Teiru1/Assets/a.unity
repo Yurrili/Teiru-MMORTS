@@ -8427,12 +8427,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CurrentMenu: {fileID: 2023987875}
   pointsToGive: 32
-  STR: {fileID: 2082310561}
-  DEX: {fileID: 482272261}
-  CON: {fileID: 1744711986}
-  INT: {fileID: 893685089}
-  WIS: {fileID: 398130798}
-  CHA: {fileID: 1544540981}
+  STR: {fileID: 370299758}
+  DEX: {fileID: 298049714}
+  CON: {fileID: 1834231853}
+  INT: {fileID: 1890619659}
+  WIS: {fileID: 766912759}
+  CHA: {fileID: 2012523202}
   PTS: {fileID: 2080643553}
 --- !u!95 &1196794938
 Animator:
