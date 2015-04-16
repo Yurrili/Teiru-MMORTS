@@ -5,8 +5,9 @@ using UnityEngine.UI;
 public class DBManager : MonoBehaviour {
 	
 	public InputField username ,email,password , password2;
-	public Text errorText;
-	public Menu CurrentMenu;
+	public InputField loginUsername, loginPassword;
+	public Text errorText,txtLoginMessage;
+	private Menu CurrentMenu;
 	
 	void Start () 
 	{
@@ -22,8 +23,41 @@ public class DBManager : MonoBehaviour {
 	
 	}
 
+	public void LoginButtonClicked(Menu menu)
+	{
+		CurrentMenu = menu;
+		WWWForm form = new WWWForm();
+		form.AddField("username", loginUsername.text.ToString());
+		print (loginUsername.text.ToString());
+		form.AddField("password",loginPassword.text.ToString());
+		WWW w = new WWW("http://f12-preview.awardspace.net/teiru.ac.dx/login.php",form);
+		StartCoroutine(login (w));
+	}
+
+	IEnumerator login(WWW w)
+	{
+
+		yield return w;
+
+		if (w.error == null) 
+		{
+			if(w.text == "login-SUCCESS")
+			{
+				txtLoginMessage.text = "Successfully logged in";
+				//	ShowMenu (menu);
+			}		
+		}
+		else
+		{
+			txtLoginMessage.text = "Login failed";
+			
+		}
+	}
+
+
 	public void RegisterButtonClicked(Menu menu)
 	{
+		CurrentMenu = menu;
 		string usernameStr = username.text.ToString ();
 		string passwordStr = password.text.ToString ();
 		string password2Str = password2.text.ToString ();
@@ -32,6 +66,14 @@ public class DBManager : MonoBehaviour {
 		{
 			errorText.text = "There is some empty fields, please try again";
 
+		}
+		else if (usernameStr.Length<4)
+		{
+			errorText.text = "Your username is too short";
+		}
+		else if (passwordStr.Length<5)
+		{
+			errorText.text = "Your password is too short";
 		}
 		else
 		{
@@ -58,12 +100,12 @@ public class DBManager : MonoBehaviour {
 		yield return w;
 		if (w.error == null) 
 		{
-			errorText.text = "Return";
+			errorText.text = "Successfully registered";
 
 		}
 		else
 		{
-			errorText.text = "Not return";
+			errorText.text = "Registration failed";
 
 		}
 	}
