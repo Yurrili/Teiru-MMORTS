@@ -31,20 +31,21 @@ public class DBManager : MonoBehaviour {
 		print (loginUsername.text.ToString());
 		form.AddField("password",loginPassword.text.ToString());
 		WWW w = new WWW("http://f12-preview.awardspace.net/teiru.ac.dx/login.php",form);
-		StartCoroutine(login (w));
+		StartCoroutine(login (w, menu));
+
 	}
 
-	IEnumerator login(WWW w)
+	IEnumerator login(WWW w, Menu menu)
 	{
 
 		yield return w;
-
+		//Menu menu;
 		if (w.error == null) 
 		{
 			if(w.text == "login-SUCCESS")
 			{
 				txtLoginMessage.text = "Successfully logged in";
-				//	ShowMenu (menu);
+				ShowMenu (menu);
 			}		
 		}
 		else
@@ -85,7 +86,7 @@ public class DBManager : MonoBehaviour {
 				form.AddField("email",emailStr);
 				WWW w = new WWW("http://f12-preview.awardspace.net/teiru.ac.dx/register.php",form);
 				StartCoroutine(register (w));
-			//	ShowMenu (menu);
+				//ShowMenu (menu);
 			}
 			else
 			{

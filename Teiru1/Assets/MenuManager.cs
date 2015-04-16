@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 
+
 public class MenuManager : MonoBehaviour {
 
 	public Menu CurrentMenu;
@@ -15,15 +16,24 @@ public class MenuManager : MonoBehaviour {
 	public Text WIS;
 	public Text CHA;
 	public Text PTS;//summary points
+	public Text Name;
+	public CharacterStats stats;
 
 	public void Start()
 	{
 		ShowMenu (CurrentMenu);
 		obj = GameObject.FindGameObjectWithTag ("Back");
 		obj.SetActive (false);
-	
-		PTS.text = pointsToGive.ToString();
 
+		stats = new CharacterStats ();
+		PTS.text = stats.getPTS().ToString();
+		STR.text = stats.getSTR().ToString();
+		CHA.text = stats.getCHA().ToString();
+		INT.text = stats.getINT().ToString();
+		DEX.text = stats.getDEX().ToString();
+		WIS.text = stats.getWIS().ToString();
+		CON.text = stats.getCON().ToString();
+		ChangeInputFieldText("None");
 	}
 
 	public void Update()
@@ -41,76 +51,98 @@ public class MenuManager : MonoBehaviour {
 
 	public void IncreaseSTR(){
 
-		STR.text = "1";
+		STR.text = stats.increaseSTR().ToString();
+		PTS.text = stats.getPTS().ToString();
 	}
 
 	public void IncreaseCHA(){
 		
-		CHA.text = "1";
+		CHA.text = stats.increaseCHA().ToString();
+		PTS.text = stats.getPTS().ToString();
 	}
 
 	public void IncreaseINT(){
 		
-		INT.text = "1";
+		INT.text = stats.increaseINT().ToString();
+		PTS.text = stats.getPTS().ToString();
 	}
 
 	public void IncreaseDEX(){
 		
-		DEX.text = "1";
+		DEX.text = stats.increaseDEX().ToString();
+		PTS.text = stats.getPTS().ToString();
 	}
 
 	public void IncreaseWIS(){
 		
-		WIS.text = "1";
+		WIS.text = stats.increaseWIS().ToString();
+		PTS.text = stats.getPTS().ToString();
 	}
 
 	public void IncreaseCON(){
 		
-		CON.text = "1";
+		CON.text = stats.increaseCON().ToString();
+		PTS.text = stats.getPTS().ToString();
 	}
 
 	public void DecreaseSTR(){
 		
-		STR.text = "1";
+		STR.text = stats.decreaseSTR().ToString();
+		PTS.text = stats.getPTS().ToString();
 	}
 
 	public void DecreaseDEX(){
 		
-		DEX.text = "1";
+		DEX.text = stats.decreaseDEX().ToString();
+		PTS.text = stats.getPTS().ToString();
 	}
 
 	public void DecreaseWIS(){
 		
-		WIS.text = "1";
+		WIS.text = stats.decreaseWIS().ToString();
+		PTS.text = stats.getPTS().ToString();
 	}
 
 	public void DecreaseCON(){
 		
-		CON.text = "1";
+		CON.text = stats.decreaseCON().ToString();
+		PTS.text = stats.getPTS().ToString();
 	}
 
 	public void DecreaseCHA(){
 		
-		CHA.text = "1";
+		CHA.text = stats.decreaseCHA().ToString();
+		PTS.text = stats.getPTS ().ToString ();
 	}
 
 	public void DecreaseInt(){
 		
-		INT.text = "1";
+		INT.text = stats.decreaseINT().ToString();
+		PTS.text = stats.getPTS().ToString();
 	}
 
-	public void Check(Text temp )
+	public bool Check()
 	{
+		if (stats.getPTS () > 0) {
+			return false;
+		}
 
+		Text NAME = GameObject.Find ("NameText").GetComponentInChildren<Text>();
+
+
+		return true;
+		
 	}
 
 	public void ShowMenu(Menu menu)
 	{
-		if (CurrentMenu != null)
-		CurrentMenu.isOpen = false;
 
-		CurrentMenu = menu;
-		CurrentMenu.isOpen = true;
+			if (CurrentMenu != null)
+				CurrentMenu.isOpen = false;
+
+			CurrentMenu = menu;
+			CurrentMenu.isOpen = true;
+
 	}
 
 	public void OnMouseDown()
@@ -171,6 +203,12 @@ public class MenuManager : MonoBehaviour {
 		//if(textscript == null){Debug.LogError("Script not found");return;}
 		switch (IFname)
 		{
+		case "None":
+			BAB.text = "0";
+			FORT.text = "0";
+			REF.text = "0";
+			WILL.text = "0";
+			break;
 		case "Ranger":
 			BAB.text = "1";
 			FORT.text = "2";

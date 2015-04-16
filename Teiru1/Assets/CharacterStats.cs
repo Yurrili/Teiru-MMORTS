@@ -3,12 +3,29 @@ using System.Collections;
 
 public class CharacterStats {
 
+
+	private int PTS;
 	private int STR;
 	private int DEX;
 	private int CON;
 	private int INT;
 	private int WIS;
 	private int CHA;
+
+	public CharacterStats(){
+		PTS = 32;
+		STR = 8;
+		DEX = 8;
+		CON = 8;
+		INT = 8;
+		WIS = 8;
+		CHA = 8;
+
+	}
+
+	public int getPTS(){
+		return PTS;
+	}
 
 	public int getSTR(){
 		return STR;
@@ -29,79 +46,105 @@ public class CharacterStats {
 		return CHA;
 	}
 
-	public void increaseSTR(){
-		STR++;
-	}
+	public int increase(int actualPoints){
 
-	public void increaseDEX(){
-		DEX++;
-	}
+		if (PTS > 0) {
 
-	public void increaseCON(){
-		CON++;
-	}
-	public void increaseINT(){
-		INT++;
-	}
-	public void increaseWIS(){
-		WIS++;
-	}
-	public void increaseCHA(){
-		CHA++;
-	}
+			if (actualPoints >= 17 && actualPoints < 18 && PTS >= 4) {
+				PTS = PTS - 4;
 
-	public void decreaseSTR(){
+			}
 
-		if (STR > 0) {
-			STR--;
-		} else {
-			STR = 0;
+			if (actualPoints >= 13 && actualPoints < 17 && PTS >= 3) {
+				PTS = PTS - 3;
+
+			}
+
+			if (actualPoints >= 8 && actualPoints < 13&& PTS >= 1) {
+
+				PTS--;
+			}
+
+			actualPoints++;
 		}
+		return actualPoints;
 	}
 
-	public void decreaseDEX(){
+	public int increaseSTR(){
+		return STR = increase(STR);
+	}
+
+	public int increaseDEX(){
+		return DEX = increase(DEX);
+	}
+
+	public int increaseCON(){
+		return CON = increase(CON);
+	}
+
+	public int increaseINT(){
+		return INT = increase(INT);
+	}
+
+	public int increaseWIS(){
+		return WIS = increase(WIS);
+	}
+
+	public int increaseCHA(){
+		return CHA = increase(CHA);
+	}
+
+	public int decrease(int actualPoints){
+
+		if (PTS < 32) {
 		
-		if (DEX > 0) {
-			DEX--;
-		} else {
-			DEX = 0;
+			if (actualPoints >= 17 && actualPoints < 18) {
+				PTS = PTS + 4;
+			}
+		
+			if (actualPoints >= 13 && actualPoints < 17) {
+				PTS = PTS + 3;
+			}
+		
+			if (actualPoints > 8 && actualPoints < 13) {
+			
+				PTS++;
+			}
+
+			actualPoints--;
 		}
+
+		return actualPoints;
 	}
 
-	public void decreaseCON(){
-		
-		if (CON > 0) {
-			CON--;
-		} else {
-			CON = 0;
-		}
+	public int decreaseSTR(){
+
+		return STR = decrease(STR);
 	}
 
-	public void decreaseINT(){
+	public int decreaseDEX(){
 		
-		if (INT > 0) {
-			INT--;
-		} else {
-			INT = 0;
-		}
+		return DEX = decrease(DEX);
 	}
 
-	public void decreaseWIS(){
+	public int decreaseCON(){
 		
-		if (WIS > 0) {
-			WIS--;
-		} else {
-			WIS = 0;
-		}
+		return CON = decrease(CON);
 	}
 
-	public void decreaseCHA(){
+	public int decreaseINT(){
 		
-		if (CHA > 0) {
-			CHA--;
-		} else {
-			CHA = 0;
-		}
+		return INT = decrease(INT);
+	}
+
+	public int decreaseWIS(){
+		
+		return WIS = decrease(WIS);
+	}
+
+	public int decreaseCHA(){
+		
+		return CHA = decrease(CHA);
 	}
 
 

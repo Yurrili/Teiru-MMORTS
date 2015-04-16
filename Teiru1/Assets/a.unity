@@ -9366,6 +9366,7 @@ MonoBehaviour:
   WIS: {fileID: 766912759}
   CHA: {fileID: 2012523202}
   PTS: {fileID: 2080643553}
+  Name: {fileID: 0}
 --- !u!95 &1196794938
 Animator:
   serializedVersion: 3
