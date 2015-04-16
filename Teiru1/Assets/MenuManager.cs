@@ -21,15 +21,9 @@ public class MenuManager : MonoBehaviour {
 		ShowMenu (CurrentMenu);
 		obj = GameObject.FindGameObjectWithTag ("Back");
 		obj.SetActive (false);
-		//STR = GameObject.Find ("Str").GetComponent<InputField>();
-	//	DEX = GameObject.Find ("Dex").GetComponentInChildren<Text>();
-	//	CON = GameObject.Find ("Con").GetComponentInChildren<Text>();
-	//	INT = GameObject.Find ("Int").GetComponentInChildren<Text>();
-	//	WIS = GameObject.Find ("Wis").GetComponentInChildren<Text>();
-	//	CHA = GameObject.Find ("Cha").GetComponentInChildren<Text>();
-	//	PTS = GameObject.Find ("PointsYouHave").GetComponentInChildren<Text>();
+	
 		PTS.text = pointsToGive.ToString();
-		STR.text = "8";
+
 	}
 
 	public void Update()
@@ -80,77 +74,40 @@ public class MenuManager : MonoBehaviour {
 		STR.text = "1";
 	}
 
+	public void DecreaseDEX(){
+		
+		DEX.text = "1";
+	}
+
+	public void DecreaseWIS(){
+		
+		WIS.text = "1";
+	}
+
+	public void DecreaseCON(){
+		
+		CON.text = "1";
+	}
+
+	public void DecreaseCHA(){
+		
+		CHA.text = "1";
+	}
+
+	public void DecreaseInt(){
+		
+		INT.text = "1";
+	}
+
 	public void Check(Text temp )
 	{
-		int parsedInt = 0;
-		if (int.TryParse(temp.text, out parsedInt))
-		{
 
-			if ((parsedInt-8)>0 &&(parsedInt-8)<=3) // 8-11
-			{
-				if (pointsToGive >= (parsedInt-8)*3)
-				{
-			//		Debug.Log ("1");
-				pointsToGive =- (parsedInt-8)*3;
-					//Debug.Log (pointsToGive);
-				PTS.text = pointsToGive.ToString();
-				
-				}
-			}
-			else if ((parsedInt-8)==4) //12
-			{
-			//	Debug.Log ("2");
-				if (pointsToGive >= 9 + 4)
-				{
-					pointsToGive =- 13;
-					PTS.text =pointsToGive.ToString();
-				}
-			}
-			else if ((parsedInt-8)==5)//13
-			{
-			//	Debug.Log ("3");
-				if (pointsToGive >= 9 + 9)
-				{
-					pointsToGive =- 18;
-					PTS.text =pointsToGive.ToString();
-				}
-			}
-			else if ((parsedInt-8)==6)//14
-			{
-			//	Debug.Log ("4");
-				if (pointsToGive >= 9 + 15)
-				{
-					pointsToGive =- 24;
-					PTS.text =pointsToGive.ToString();
-				}
-			}
-			else if ((parsedInt-8)==7)//15
-			{
-				Debug.Log ("5");
-				if (pointsToGive >= 9 + 23)
-				{
-					pointsToGive =- 32;
-					PTS.text = pointsToGive.ToString();
-				}
-			}
-			else 
-			{
-			//	Debug.Log ("6");
-				temp.text = "8";
-			}
-
-		}
-		else
-		{
-		//	Debug.Log ("8");
-			temp.text = "8";
-		}
 	}
 
 	public void ShowMenu(Menu menu)
 	{
 		if (CurrentMenu != null)
-						CurrentMenu.isOpen = false;
+		CurrentMenu.isOpen = false;
 
 		CurrentMenu = menu;
 		CurrentMenu.isOpen = true;
