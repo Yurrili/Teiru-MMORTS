@@ -7,7 +7,6 @@ public class DBManager : MonoBehaviour {
 	public InputField username ,email,password , password2;
 	public InputField loginUsername, loginPassword;
 	public Text errorText,txtLoginMessage;
-	//private Menu CurrentMenu;
 	public Menu LogedMenu, MainMenu;
 	
 	void Start () 
@@ -24,7 +23,6 @@ public class DBManager : MonoBehaviour {
 	{
 		WWWForm form = new WWWForm();
 		form.AddField("username", loginUsername.text.ToString());
-		print (loginUsername.text.ToString());
 		form.AddField("password",loginPassword.text.ToString());
 		WWW w = new WWW("http://f12-preview.awardspace.net/teiru.ac.dx/login.php",form);
 		StartCoroutine(login (w, LogedMenu));
@@ -44,6 +42,7 @@ public class DBManager : MonoBehaviour {
 				txtLoginMessage.text = "";
 				loginUsername.text = "";
 				loginPassword.text  = "";
+				MenuManager.HideRegistrationButton();
 			}
 			else 
 			{
