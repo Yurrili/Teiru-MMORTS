@@ -39,10 +39,10 @@
 	<Reference Include="System.Core" />
 	<Reference Include="System.Xml.Linq" />
 	<Reference Include="UnityEngine">
-	  <HintPath>F:/Unity/Data/Managed/UnityEngine.dll</HintPath>
+	  <HintPath>D:/Program Files/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
 	</Reference>
 	<Reference Include="UnityEditor">
-	  <HintPath>F:/Unity/Data/Managed/UnityEditor.dll</HintPath>
+	  <HintPath>D:/Program Files/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
 	</Reference>
   </ItemGroup>
   <ItemGroup>
@@ -54,10 +54,10 @@
      <Compile Include="Assets\_Scripts\networking\Client.cs" />
      <Compile Include="Assets\_Scripts\networking\packets\Packet_01_Login.cs" />
  <Reference Include="UnityEngine.UI">
- <HintPath>F:/Unity/Data/UnityExtensions/Unity/GUISystem/4.6.0/UnityEngine.UI.dll</HintPath>
+ <HintPath>D:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.0/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="ogclient-framework">
- <HintPath>E:/GitHub/Teiru-MMORTS/Teiru1/Assets/plugins/ogclient-framework.dll</HintPath>
+ <HintPath>D:/LICPRO/Teiru-MMORTS/Teiru1/Assets/plugins/ogclient-framework.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

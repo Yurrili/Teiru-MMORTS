@@ -52,20 +52,20 @@ public class CharacterStats {
 
 			if (actualPoints >= 17 && actualPoints < 18 && PTS >= 4) {
 				PTS = PTS - 4;
-
+				actualPoints++;
 			}
 
 			if (actualPoints >= 13 && actualPoints < 17 && PTS >= 3) {
 				PTS = PTS - 3;
-
+				actualPoints++;
 			}
 
 			if (actualPoints >= 8 && actualPoints < 13&& PTS >= 1) {
-
+				actualPoints++;
 				PTS--;
 			}
 
-			actualPoints++;
+
 		}
 		return actualPoints;
 	}
@@ -100,18 +100,20 @@ public class CharacterStats {
 		
 			if (actualPoints >= 17 && actualPoints < 18) {
 				PTS = PTS + 4;
+				actualPoints--;
 			}
 		
 			if (actualPoints >= 13 && actualPoints < 17) {
 				PTS = PTS + 3;
+				actualPoints--;
 			}
 		
 			if (actualPoints > 8 && actualPoints < 13) {
-			
+				actualPoints--;
 				PTS++;
 			}
 
-			actualPoints--;
+
 		}
 
 		return actualPoints;
