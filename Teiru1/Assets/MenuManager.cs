@@ -202,7 +202,34 @@ public class MenuManager : MonoBehaviour {
 		
 	}
 
+	public  void ShowRegistrationButtonNonStatic()// Registration button hide
+	{
+		if (registrationButton)
+			registrationButton.SetActive (true);
+		
+	}
+
+	public static void HideRegistrationButton()// Registration button hide
+	{
+		if (registrationButton)
+			registrationButton.SetActive (false);
+		
+	}
+	
+	public  void HideRegistrationButtonNonStatic()// Registration button hide
+	{
+		if (registrationButton)
+			registrationButton.SetActive (false);
+		
+	}
+
 	public static void HideBackButton()// Registration button hide
+	{
+		if (backButton)
+			backButton.SetActive (false);		
+	}
+
+	public  void HideBackButtonNonStatic()// Registration button hide
 	{
 		if (backButton)
 			backButton.SetActive (false);		
