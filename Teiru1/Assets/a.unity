@@ -9357,7 +9357,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fea8638ebcd8134493993d1f7885f3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentMenu: {fileID: 2023987875}
+  initialMenu: {fileID: 2023987875}
   pointsToGive: 32
   STR: {fileID: 370299758}
   DEX: {fileID: 298049714}
@@ -9412,6 +9412,8 @@ MonoBehaviour:
   loginPassword: {fileID: 1436291047}
   errorText: {fileID: 855577458}
   txtLoginMessage: {fileID: 2035374782}
+  LogedMenu: {fileID: 229318431}
+  MainMenu: {fileID: 2023987875}
 --- !u!1 &1206532764
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,15 +7,12 @@ public class DBManager : MonoBehaviour {
 	public InputField username ,email,password , password2;
 	public InputField loginUsername, loginPassword;
 	public Text errorText,txtLoginMessage;
-	private Menu CurrentMenu;
+	//private Menu CurrentMenu;
+	public Menu LogedMenu, MainMenu;
 	
 	void Start () 
 	{
-		//username = GameObject.Find ("UsernameReg").GetComponentInChildren<Text>();
-		//email = GameObject.Find ("Email").GetComponentInChildren<Text>();
-		//password = GameObject.Find ("Password").GetComponentInChildren<Text>();
-		//password2 = GameObject.Find ("Password2").GetComponentInChildren<Text>();
-		//errorText = GameObject.Find ("Password2").GetComponentInChildren<Text>();
+
 	}
 	
 	// Update is called once per frame
@@ -25,13 +22,12 @@ public class DBManager : MonoBehaviour {
 
 	public void LoginButtonClicked(Menu menu)
 	{
-		CurrentMenu = menu;
 		WWWForm form = new WWWForm();
 		form.AddField("username", loginUsername.text.ToString());
 		print (loginUsername.text.ToString());
 		form.AddField("password",loginPassword.text.ToString());
 		WWW w = new WWW("http://f12-preview.awardspace.net/teiru.ac.dx/login.php",form);
-		StartCoroutine(login (w, menu));
+		StartCoroutine(login (w, LogedMenu));
 
 	}
 
@@ -39,14 +35,20 @@ public class DBManager : MonoBehaviour {
 	{
 
 		yield return w;
-		//Menu menu;
 		if (w.error == null) 
 		{
 			if(w.text == "login-SUCCESS")
 			{
 				txtLoginMessage.text = "Successfully logged in";
 				ShowMenu (menu);
-			}		
+				txtLoginMessage.text = "";
+				loginUsername.text = "";
+				loginPassword.text  = "";
+			}
+			else 
+			{
+				txtLoginMessage.text = w.text;
+			}
 		}
 		else
 		{
@@ -58,7 +60,7 @@ public class DBManager : MonoBehaviour {
 
 	public void RegisterButtonClicked(Menu menu)
 	{
-		CurrentMenu = menu;
+	//	CurrentMenu = menu;
 		string usernameStr = username.text.ToString ();
 		string passwordStr = password.text.ToString ();
 		string password2Str = password2.text.ToString ();
@@ -86,7 +88,13 @@ public class DBManager : MonoBehaviour {
 				form.AddField("email",emailStr);
 				WWW w = new WWW("http://f12-preview.awardspace.net/teiru.ac.dx/register.php",form);
 				StartCoroutine(register (w));
-				//ShowMenu (menu);
+				
+
+				errorText.text = "";
+				username.text = "";
+				password.text  = "";
+				password2.text  = "";
+				email.text  = "";
 			}
 			else
 			{
@@ -101,8 +109,10 @@ public class DBManager : MonoBehaviour {
 		yield return w;
 		if (w.error == null) 
 		{
-			errorText.text = "Successfully registered";
-
+			txtLoginMessage.text = "Successfully registered";
+			ShowMenu (MainMenu);
+			MenuManager.HideBackButton();
+			MenuManager.ShowRegistrationButton();
 		}
 		else
 		{
@@ -113,11 +123,11 @@ public class DBManager : MonoBehaviour {
 
 	public void ShowMenu(Menu menu)
 	{
-		if (CurrentMenu != null)
-			CurrentMenu.isOpen = false;
+		if (MenuManager.getCurrentMenu() != null)
+			MenuManager.setCurrentMenuOpenFalse();
 		
-		CurrentMenu = menu;
-		CurrentMenu.isOpen = true;
+		MenuManager.setCurrentMenu(menu);
+		MenuManager.setCurrentMenuOpenTrue ();
 	}
 
 

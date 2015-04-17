@@ -5,10 +5,13 @@ using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour {
 
-	public Menu CurrentMenu;
+	public static Menu CurrentMenu;
+	public Menu initialMenu;
 	public int pointsToGive = 32;
-	GameObject obj;
-	GameObject obj1;
+	static GameObject obj;
+	static GameObject obj1;
+	public static GameObject registrationButton;
+	public static GameObject backButton;
 	public Text STR;
 	public Text DEX;
 	public Text CON;
@@ -19,11 +22,36 @@ public class MenuManager : MonoBehaviour {
 	public Text Name;
 	public CharacterStats stats;
 
+	public static void setCurrentMenu(Menu menu)
+	{
+		CurrentMenu = menu;
+	}
+
+	public static Menu getCurrentMenu()
+	{
+		return CurrentMenu;
+	}
+
+	public static void setCurrentMenuOpenFalse()
+	{
+		CurrentMenu.isOpen = false;
+	}
+	public static void setCurrentMenuOpenTrue()
+	{
+		CurrentMenu.isOpen = true;
+	}
+
+
+
 	public void Start()
 	{
+		setCurrentMenu (initialMenu);
 		ShowMenu (CurrentMenu);
 		obj = GameObject.FindGameObjectWithTag ("Back");
+		backButton = GameObject.FindGameObjectWithTag ("Back");
 		obj.SetActive (false);
+		registrationButton = GameObject.Find("Registration");
+
 
 		stats = new CharacterStats ();
 		PTS.text = stats.getPTS().ToString();
@@ -165,6 +193,19 @@ public class MenuManager : MonoBehaviour {
 		if (obj1)
 			obj1.SetActive (false);
 		
+	}
+
+	public static void ShowRegistrationButton()// Registration button hide
+	{
+		if (registrationButton)
+			registrationButton.SetActive (true);
+		
+	}
+
+	public static void HideBackButton()// Registration button hide
+	{
+		if (backButton)
+			backButton.SetActive (false);		
 	}
 	
 	public void OnMouseDownLOg1()
