@@ -50,7 +50,7 @@ public class MenuManager : MonoBehaviour {
 		backButton = GameObject.FindGameObjectWithTag ("Back");
 		obj.SetActive (false);
 		registrationButton = GameObject.Find("Registration");
-		//GameObject.Find("ClassButton").SetActive(true);
+		GameObject.Find ("ClassButton");
 		stats = new CharacterStats ();
 		PTS.text = stats.getPTS().ToString();
 		STR.text = stats.getSTR().ToString();
