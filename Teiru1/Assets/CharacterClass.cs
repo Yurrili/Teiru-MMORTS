@@ -11,7 +11,7 @@ public class CharacterClass {
 	private string className;
 	private int lvl;
 
-	CharacterClass(int BAB, int FORT, int WILL, int REF, int HP, string className){
+	public CharacterClass(int BAB, int FORT, int WILL, int REF, int HP, string className){
 		this.BAB = BAB;
 		this.FORT = FORT;
 		this.WILL = WILL;
