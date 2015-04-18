@@ -12,17 +12,17 @@ public class HPValue {
 	public HPValue(int basic){
 		HPmod = basic;// + mod
 		BonusHP = 0;
-		CalculateHP (basic);
+		CalculateHP ();
 		CurrentHP = HPBasic;
 	}
 
 
-	private void CalculateHP(){
+	private void CalculateHP(){//to bedzie trzeba przetestowac dobrze
 		HPBasic = HPmod;
 		MAXHP = HPBasic + BonusHP;
 	}
 	
-	public void setHPmod(string mod){
+	public void setHPmod(int mod){
 		HPmod = mod;	
 	}
 	

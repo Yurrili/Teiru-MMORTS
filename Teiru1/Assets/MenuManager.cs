@@ -19,7 +19,6 @@ public class MenuManager : MonoBehaviour {
 	public Text WIS;
 	public Text CHA;
 	public Text PTS;//summary points
-	public Text Name;
 	public CharacterStats stats;
 
 	public static void setCurrentMenu(Menu menu)
@@ -51,8 +50,7 @@ public class MenuManager : MonoBehaviour {
 		backButton = GameObject.FindGameObjectWithTag ("Back");
 		obj.SetActive (false);
 		registrationButton = GameObject.Find("Registration");
-
-
+		//GameObject.Find("ClassButton").SetActive(true);
 		stats = new CharacterStats ();
 		PTS.text = stats.getPTS().ToString();
 		STR.text = stats.getSTR().ToString();
@@ -149,13 +147,13 @@ public class MenuManager : MonoBehaviour {
 		PTS.text = stats.getPTS().ToString();
 	}
 
-	public bool Check()
+	public bool Check()//trzeba tu zrobic sprawdzanie czy wszystkie pola zostaly wybrane , czy klasa jest, czy nick postaci.
 	{
 		if (stats.getPTS () > 0) {
 			return false;
 		}
 
-		Text NAME = GameObject.Find ("NameText").GetComponentInChildren<Text>();
+		//Text NAME = GameObject.Find ("NameText").GetComponentInChildren<Text>();
 
 
 		return true;

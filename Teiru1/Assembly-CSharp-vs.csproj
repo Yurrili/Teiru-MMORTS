@@ -46,8 +46,14 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\CharacterStats.cs" />
+     <Compile Include="Assets\CharacterClass\CharacterClass.cs" />
+     <Compile Include="Assets\CharacterClass\CharacterClass_Knight.cs" />
+     <Compile Include="Assets\CharacterClass\CharacterClass_Mage.cs" />
+     <Compile Include="Assets\CharacterClass\CharacterClass_Mystiq.cs" />
+     <Compile Include="Assets\CharacterClass\CharacterClass_Ranger.cs" />
+     <Compile Include="Assets\CharacterClass\CharacterStats.cs" />
      <Compile Include="Assets\DBManager.cs" />
+     <Compile Include="Assets\HPValue.cs" />
      <Compile Include="Assets\Menu.cs" />
      <Compile Include="Assets\MenuEvents.cs" />
      <Compile Include="Assets\MenuManager.cs" />
