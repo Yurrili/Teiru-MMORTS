@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 
 public class MenuManager : MonoBehaviour {
@@ -12,6 +13,7 @@ public class MenuManager : MonoBehaviour {
 	static GameObject obj1;
 	public static GameObject registrationButton;
 	public static GameObject backButton;
+	public GameObject loginButton;
 	public Text STR;
 	public Text DEX;
 	public Text CON;
@@ -64,6 +66,11 @@ public class MenuManager : MonoBehaviour {
 
 	public void Update()
 	{
+		if (Input.GetKey(KeyCode.KeypadEnter)  || Input.GetKey ("enter") || (Input.GetKey(KeyCode.Return)))
+		{
+			print ("enter");
+			ExecuteEvents.Execute (loginButton, new PointerEventData(EventSystem.current), ExecuteEvents.pointerClickHandler);
+		}
 		/*if (CurrentMenu.name == "SelectMenu") {
 			Check (STR);	
 			Check (DEX);	

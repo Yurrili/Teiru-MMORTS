@@ -2444,7 +2444,7 @@ GameObject:
   - 114: {fileID: 297186457}
   - 95: {fileID: 297186456}
   m_Layer: 5
-  m_Name: Button
+  m_Name: loginButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12986,6 +12986,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initialMenu: {fileID: 2023987875}
   pointsToGive: 32
+  loginButton: {fileID: 297186454}
   STR: {fileID: 370299758}
   DEX: {fileID: 298049714}
   CON: {fileID: 1834231853}
