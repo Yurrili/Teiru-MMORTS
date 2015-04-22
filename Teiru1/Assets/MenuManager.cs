@@ -81,6 +81,7 @@ public class MenuManager : MonoBehaviour {
 		DEX.text = stats.getDEX().ToString();
 		WIS.text = stats.getWIS().ToString();
 		CON.text = stats.getCON().ToString();
+		onRank1Click ();
 
 	}
 
@@ -402,7 +403,7 @@ public class MenuManager : MonoBehaviour {
 	public void onValueChanged21()
 	{
 		Ranks [1, 0] = true;
-		print ("lal");
+		print ("Clouuuudy");
 	}
 	
 	public void onValueChanged22()

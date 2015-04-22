@@ -55,8 +55,10 @@
      <Compile Include="Assets\DBManager.cs" />
      <Compile Include="Assets\HPValue.cs" />
      <Compile Include="Assets\Menu.cs" />
+     <Compile Include="Assets\MenuCharacterCreator.cs" />
      <Compile Include="Assets\MenuEvents.cs" />
      <Compile Include="Assets\MenuManager.cs" />
+     <Compile Include="Assets\Skills.cs" />
      <Compile Include="Assets\_Scripts\networking\Client.cs" />
      <Compile Include="Assets\_Scripts\networking\packets\Packet_01_Login.cs" />
  <Reference Include="UnityEngine.UI">
