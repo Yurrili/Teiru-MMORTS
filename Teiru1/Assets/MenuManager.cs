@@ -82,7 +82,6 @@ public class MenuManager : MonoBehaviour {
 		WIS.text = stats.getWIS().ToString();
 		CON.text = stats.getCON().ToString();
 		onRank1Click ();
-
 	}
 
 	public void Update()
