@@ -32,11 +32,13 @@ public class MenuManager : MonoBehaviour {
 	//
 	
 	bool [,] Ranks = new bool[5, 5];
+
 	public GameObject toggleGroup1;
 	public GameObject toggleGroup2;
 	public GameObject toggleGroup3;
 	public GameObject toggleGroup4;
 	public GameObject toggleGroup5;
+
 	public ToggleGroup toggleGroup1G;
 	public ToggleGroup toggleGroup2G;
 	public ToggleGroup toggleGroup3G;
@@ -90,6 +92,58 @@ public class MenuManager : MonoBehaviour {
 		{
 			print ("enter");
 			ExecuteEvents.Execute (loginButton, new PointerEventData(EventSystem.current), ExecuteEvents.pointerClickHandler);
+		}
+	}
+
+	public bool check()
+	{
+
+		//print(GameObject.Find ("NameTAG").GetComponentInChildren<Text>().ToString());
+
+		if (Characterchooseclass == 0 || PTS.text != "0" || GameObject.Find ("NameTAG").GetComponent<InputField>().textComponent.text == "" ) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	public void moveOn(Menu menu){
+
+		if (check ()) {
+
+			switch(Characterchooseclass)
+			{
+			case 1:
+				classCha = new CharacterClass_Ranger(stats.getCON());
+
+				break;
+			case 2:
+				classCha = new CharacterClass_Mage(stats.getCON());
+				break;
+			case 3:
+				classCha = new CharacterClass_Knight(stats.getCON());
+				break;
+			case 4:
+				classCha = new CharacterClass_Mystiq(stats.getCON());
+				break;
+			}
+
+			GameObject.Find ("NameTextPlace").GetComponent<Text>().text = GameObject.Find ("NameTAG").GetComponent<InputField>().textComponent.text;
+			GameObject.Find ("ClassTextPlace").GetComponent<Text>().text = classCha.getClass();
+			GameObject.Find ("LevelTextPlace").GetComponent<Text>().text = classCha.getLvl()+ "";
+
+			GameObject.Find ("STRTextPlace").GetComponent<Text>().text = stats.getSTR() + "";
+			GameObject.Find ("DEXTextPlace").GetComponent<Text>().text = stats.getDEX() + "";
+			GameObject.Find ("CONTextPlace").GetComponent<Text>().text = stats.getCON() + "";
+			GameObject.Find ("INTTextPlace").GetComponent<Text>().text = stats.getINT() + "";
+			GameObject.Find ("WISTextPlace").GetComponent<Text>().text = stats.getWIS() + "";
+			GameObject.Find ("CHATextPlace").GetComponent<Text>().text = stats.getCHA() + "";
+
+			ShowMenu(menu);
+
+		} else {
+			print(GameObject.Find ("NameTAG"). GetComponent<InputField>().textComponent.text);
+			//print("validation failed");
 		}
 	}
 
@@ -282,42 +336,42 @@ public class MenuManager : MonoBehaviour {
 			FORT.text = "0";
 			REF.text = "0";
 			WILL.text = "0";
-
+			Characterchooseclass = 0;
 			break;
 		case "Ranger":
 			BAB.text = "1";
 			FORT.text = "2";
 			REF.text = "2";
 			WILL.text = "0";
-			Characterchooseclass = 0;
+			Characterchooseclass = 1;
 			break;
 		case "Mage":
 			BAB.text = "1";
 			FORT.text = "2";
 			REF.text = "2";
 			WILL.text = "0";
-			Characterchooseclass = 1;
+			Characterchooseclass = 2;
 			break;
 		case "Knight":
 			BAB.text = "1";
 			FORT.text = "2";
 			REF.text = "0";
 			WILL.text = "1";
-			Characterchooseclass = 2;
+			Characterchooseclass = 3;
 			break;
 		case "Mystic":
 			BAB.text = "0";
 			FORT.text = "2";
 			REF.text = "0";
 			WILL.text = "2";
-			Characterchooseclass = 3;
+			Characterchooseclass = 4;
 			break;
 		default: 
 			BAB.text = "0";
 			FORT.text = "0";
 			REF.text = "0";
 			WILL.text = "0";
-			classCha = null;
+			Characterchooseclass = 0;
 			break;
 		}
 	}
