@@ -8,12 +8,14 @@ public class MenuManager : MonoBehaviour {
 
 	public static Menu CurrentMenu;
 	public Menu initialMenu;
-	public int pointsToGive = 32;
 	static GameObject obj;
 	static GameObject obj1;
 	public static GameObject registrationButton;
 	public static GameObject backButton;
 	public GameObject loginButton;
+
+	//Statystyki
+	public int pointsToGive = 32;
 	public Text STR;
 	public Text DEX;
 	public Text CON;
@@ -21,7 +23,26 @@ public class MenuManager : MonoBehaviour {
 	public Text WIS;
 	public Text CHA;
 	public Text PTS;//summary points
-	public CharacterStats stats;
+	//
+
+	public CharacterStats stats; //statystyki
+	public CharacterClass classCha; // element  postaci
+	public int Characterchooseclass; // wybor klasy postaci
+
+	//
+	
+	bool [,] Ranks = new bool[5, 5];
+	public GameObject toggleGroup1;
+	public GameObject toggleGroup2;
+	public GameObject toggleGroup3;
+	public GameObject toggleGroup4;
+	public GameObject toggleGroup5;
+	public ToggleGroup toggleGroup1G;
+	public ToggleGroup toggleGroup2G;
+	public ToggleGroup toggleGroup3G;
+	public ToggleGroup toggleGroup4G;
+	public ToggleGroup toggleGroup5G;
+
 
 	public static void setCurrentMenu(Menu menu)
 	{
@@ -42,8 +63,6 @@ public class MenuManager : MonoBehaviour {
 		CurrentMenu.isOpen = true;
 	}
 
-
-
 	public void Start()
 	{
 		setCurrentMenu (initialMenu);
@@ -53,6 +72,7 @@ public class MenuManager : MonoBehaviour {
 		obj.SetActive (false);
 		registrationButton = GameObject.Find("Registration");
 		GameObject.Find ("ClassButton");
+
 		stats = new CharacterStats ();
 		PTS.text = stats.getPTS().ToString();
 		STR.text = stats.getSTR().ToString();
@@ -61,7 +81,7 @@ public class MenuManager : MonoBehaviour {
 		DEX.text = stats.getDEX().ToString();
 		WIS.text = stats.getWIS().ToString();
 		CON.text = stats.getCON().ToString();
-		ChangeInputFieldText("None");
+
 	}
 
 	public void Update()
@@ -71,16 +91,9 @@ public class MenuManager : MonoBehaviour {
 			print ("enter");
 			ExecuteEvents.Execute (loginButton, new PointerEventData(EventSystem.current), ExecuteEvents.pointerClickHandler);
 		}
-		/*if (CurrentMenu.name == "SelectMenu") {
-			Check (STR);	
-			Check (DEX);	
-			Check (CON);	
-			Check (INT);	
-			Check (WIS);	
-			Check (CHA);
-			PTS.text = pointsToGive.ToString();
-		}*/
 	}
+
+
 
 	public void IncreaseSTR(){
 
@@ -154,18 +167,6 @@ public class MenuManager : MonoBehaviour {
 		PTS.text = stats.getPTS().ToString();
 	}
 
-	public bool Check()//trzeba tu zrobic sprawdzanie czy wszystkie pola zostaly wybrane , czy klasa jest, czy nick postaci.
-	{
-		if (stats.getPTS () > 0) {
-			return false;
-		}
-
-		//Text NAME = GameObject.Find ("NameText").GetComponentInChildren<Text>();
-
-
-		return true;
-		
-	}
 
 	public void ShowMenu(Menu menu)
 	{
@@ -281,41 +282,243 @@ public class MenuManager : MonoBehaviour {
 			FORT.text = "0";
 			REF.text = "0";
 			WILL.text = "0";
+
 			break;
 		case "Ranger":
 			BAB.text = "1";
 			FORT.text = "2";
 			REF.text = "2";
 			WILL.text = "0";
+			Characterchooseclass = 0;
 			break;
 		case "Mage":
 			BAB.text = "1";
 			FORT.text = "2";
 			REF.text = "2";
 			WILL.text = "0";
+			Characterchooseclass = 1;
 			break;
 		case "Knight":
 			BAB.text = "1";
 			FORT.text = "2";
 			REF.text = "0";
 			WILL.text = "1";
+			Characterchooseclass = 2;
 			break;
 		case "Mystic":
 			BAB.text = "0";
 			FORT.text = "2";
 			REF.text = "0";
 			WILL.text = "2";
+			Characterchooseclass = 3;
 			break;
 		default: 
 			BAB.text = "0";
 			FORT.text = "0";
 			REF.text = "0";
 			WILL.text = "0";
+			classCha = null;
 			break;
 		}
 	}
 
 	
+	public void onRank1Click()
+	{
+		toggleGroup1.SetActive (true);
+		toggleGroup2.SetActive (false);
+		toggleGroup3.SetActive (false);
+		toggleGroup4.SetActive (false);
+		toggleGroup5.SetActive (false);
+	}
+	
+	public void onRank2Click()
+	{
+		toggleGroup1.SetActive (false);
+		toggleGroup2.SetActive (true);
+		toggleGroup3.SetActive (false);
+		toggleGroup4.SetActive (false);
+		toggleGroup5.SetActive (false);
+	}
+	
+	public void onRank3Click()
+	{
+		toggleGroup1.SetActive (false);
+		toggleGroup2.SetActive (false);
+		toggleGroup3.SetActive (true);
+		toggleGroup4.SetActive (false);
+		toggleGroup5.SetActive (false);
+	}
+	
+	public void onRank4Click()
+	{
+		toggleGroup1.SetActive (false);
+		toggleGroup2.SetActive (false);
+		toggleGroup3.SetActive (false);
+		toggleGroup4.SetActive (true);
+		toggleGroup5.SetActive (false);
+	}
+	
+	public void onRank5Click()
+	{
+		toggleGroup1.SetActive (false);
+		toggleGroup2.SetActive (false);
+		toggleGroup3.SetActive (false);
+		toggleGroup4.SetActive (false);
+		toggleGroup5.SetActive (true);
+	}
+	
+	public void onValueChanged11()
+	{
+		Ranks [0, 0] = true;
+		print ("lal");
+	}
+	
+	public void onValueChanged12()
+	{
+		Ranks [0, 1] = true;
+		print ("lal");
+	}
+	
+	public void onValueChanged13()
+	{
+		Ranks [0, 2] = true;
+		print ("lal");
+	}
+	
+	public void onValueChanged14()
+	{
+		Ranks [0, 3] = true;
+		print ("lal");
+	}
+	
+	public void onValueChanged15()
+	{
+		Ranks [0, 4] = true;
+		print ("lal");
+	}
+	
+	
+	public void onValueChanged21()
+	{
+		Ranks [1, 0] = true;
+		print ("lal");
+	}
+	
+	public void onValueChanged22()
+	{
+		Ranks [1, 1] = true;
+		print ("lal");
+	}
+	
+	public void onValueChanged23()
+	{
+		Ranks [1, 2] = true;
+		print ("lal");
+	}
+	
+	public void onValueChanged24()
+	{
+		Ranks [1, 3] = true;
+		print ("lal");
+	}
+	
+	public void onValueChanged25()
+	{
+		Ranks [1, 4] = true;
+		print ("lal");
+	}
+	
+	public void onValueChanged31()
+	{
+		Ranks [2, 0] = true;
+		print ("lal");
+	}
+	
+	public void onValueChanged32()
+	{
+		Ranks [2, 1] = true;
+		print ("lal");
+	}
+	
+	public void onValueChanged33()
+	{
+		Ranks [2, 2] = true;
+		print ("lal");
+	}
+	
+	public void onValueChanged34()
+	{
+		Ranks [2, 3] = true;
+		print ("lal");
+	}
+	
+	public void onValueChanged35()
+	{
+		Ranks [2, 4] = true;
+		print ("lal");
+	}
+	
+	public void onValueChanged41()
+	{
+		Ranks [3, 0] = true;
+		print ("lal");
+	}
+	
+	public void onValueChanged42()
+	{
+		Ranks [3, 1] = true;
+		print ("lal");
+	}
+	
+	public void onValueChanged43()
+	{
+		Ranks [3, 2] = true;
+		print ("lal");
+	}
+	
+	public void onValueChanged44()
+	{
+		Ranks [3, 3] = true;
+		print ("lal");
+	}
+	
+	public void onValueChanged45()
+	{
+		Ranks [3, 4] = true;
+		print ("lal");
+	}
+	
+	public void onValueChanged51()
+	{
+		Ranks [4, 0] = true;
+		print ("lal");
+	}
+	
+	public void onValueChanged52()
+	{
+		Ranks [4, 1] = true;
+		print ("lal");
+	}
+	
+	public void onValueChanged53()
+	{
+		Ranks [4, 2] = true;
+		print ("lal");
+	}
+	
+	public void onValueChanged54()
+	{
+		Ranks [4, 3] = true;
+		print ("lal");
+	}
+	
+	public void onValueChanged55()
+	{
+		Ranks [4, 4] = true;
+		print ("lal");
+	}
+
 
 	
 }
