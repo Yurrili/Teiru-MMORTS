@@ -11,6 +11,9 @@ public class CharacterClass {
 	private string className;
 	private int lvl;
 
+	private int[] Arts;//amount of skills in every lvl of Ranger Arts
+	private Skill[,] SkillList;
+
 	public CharacterClass(int BAB, int FORT, int REF, int WILL, int HP, string className){
 		this.BAB = BAB;
 		this.FORT = FORT;
@@ -19,6 +22,49 @@ public class CharacterClass {
 		this.HP = new HPValue(HP);
 		this.className = className;
 		this.lvl = 1;
+
+		Arts = new int[5];
+		Arts [0] = 1;
+		
+		for (int i = 1; i < Arts.Length; i++) {
+			Arts[i] = 0;	
+		}
+
+		SkillList = new Skill[5, 5];
+	}
+
+	public string getSkillName(int Rank, int skill){
+		if (Rank == 0)
+				if (getSkillListEle (Rank, skill) == null) {
+					return "";
+				} else {
+					return getSkillListEle (Rank, skill).getSkillName ();
+				}
+		else
+			return "";
+	}
+	
+	public string getSkillDescription(int Rank, int skill){
+		if (Rank == 0)
+			return getSkillListEle(Rank ,skill).getDescription();
+		else
+			return "";
+	}
+
+	protected int getArts(int a){
+				return Arts[a];
+	}
+
+	protected void setArts(int a, int b){
+		Arts[a] = b;
+	}
+
+	protected Skill getSkillListEle(int a, int b){
+		return SkillList[a,b];
+	}
+
+	protected void setSkillListEle(int a, int b, Skill c){
+		SkillList [a,b] = c;
 	}
 
 	protected void increaseBAB(){

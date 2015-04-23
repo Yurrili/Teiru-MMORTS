@@ -3,17 +3,14 @@ using System.Collections;
 
 public class CharacterClass_Knight : CharacterClass {
 
-	private int[] Arts;//amount of skills in every lvl of Ranger Arts
+
 
 	public CharacterClass_Knight(int CON_)
 		:base(1,2,0,2,10+CON_, "Mage")//6+CON modyficator z CON
 	{
-		Arts = new int[5];
-		Arts [0] = 1;
-		
-		for (int i = 1; i < Arts.Length; i++) {
-			Arts[i] = 0;	
-		}
+
+
+		CreateSkillList ();
 	}
 	
 	public void LVLup(){
@@ -35,18 +32,29 @@ public class CharacterClass_Knight : CharacterClass {
 
 			//Knight Arts increasing
 			if(base.getLvl() == 3 || base.getLvl() == 5 || base.getLvl () == 7 ){
-				Arts[base.getLvl()-3]=2;
-				Arts[base.getLvl()-2]=1;
+				base.setArts(base.getLvl()-3,2);
+				base.setArts(base.getLvl()-2,1);
 
 				if( base.getLvl() == 5 ) {
-					Arts[0] = 3;
+					base.setArts(0 ,3);
 				}
 
 			}  else {
 				if(base.getLvl () == 8) {
-					Arts[4] = 2;
+					base.setArts(4 ,2);
 				}
 			}
 		}
+	}
+
+
+
+	public void CreateSkillList(){
+		
+		base.setSkillListEle(0,0, new Skill ("E Elements", 1, "standard", "standard action, Resistance 5 ( + 5 HP ) to all elements \n until absorbed 5 dmg or encounter ends)", 0, 0, ""));
+		base.setSkillListEle(0,1, new Skill ("Wd's Blessing", 1, "buff", " swift, you gain extra round ", 0, 0, ""));
+		base.setSkillListEle(0,2, new Skill ("Sner's Shot", 1, "attack", " standard action, one shot from a bow that \nthreatens double damage", 2, 6, ""));
+		base.setSkillListEle(0,3, new Skill ("Blades ents", 1, "attack", " swift, melee weapons deal +1d6 fire or acid \n damage until next round ", 1, 6, ""));
+	    base.setSkillListEle(0,4,  null);
 	}
 }
