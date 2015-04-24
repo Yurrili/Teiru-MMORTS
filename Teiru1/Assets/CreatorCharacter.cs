@@ -27,6 +27,7 @@ public class CreatorCharacter : MonoBehaviour {
 	public GameObject Rank5But;
 	
 	//Statystyki
+	public int ArtPoints;
 	public int pointsToGive = 32;
 	public Text STR;
 	public Text DEX;
@@ -249,7 +250,8 @@ public class CreatorCharacter : MonoBehaviour {
 
 			print (classCha.getClass());
 			classchoose ();
-			
+			ArtPoints = classCha.getArts(0);
+			GameObject.Find ("RemainingSkillPointsText").GetComponent<Text>().text = ArtPoints + "";
 			GameObject.Find ("NameTextPlace").GetComponent<Text>().text = GameObject.Find ("NameTAG").GetComponent<InputField>().textComponent.text;
 			
 			GameObject.Find ("ClassTextPlace").GetComponent<Text>().text = classCha.getClass();
@@ -561,157 +563,184 @@ public class CreatorCharacter : MonoBehaviour {
 			GameObject.Find ("Skill5").GetComponent<Toggle> ().GetComponentInChildren<Text> ().text = classCha.getSkillName (4, 4);
 		} else {
 			GameObject.Find ("Skill5").SetActive (false);
+
 		}
+	}
+
+	public void change(int a, int b){
+		if(Ranks [a,b] == false ){
+			if( ArtPoints > 0 ){
+				ArtPoints--;
+				Ranks [a,b] = true;
+				//makeNOTinteractable();
+			}
+		} else {
+			if(ArtPoints != classCha.getArts(0)){
+				Ranks [a,b] = false;
+				ArtPoints++;
+			}
+		}
+
+		GameObject.Find ("RemainingSkillPointsText").GetComponent<Text>().text = ArtPoints + "";
+	}
+
+	public void makeNOTinteractable() {//not working
+
+		GameObject.Find ("Skill5").GetComponent<Toggle>().interactable = false; 
+		GameObject.Find ("Skill4").GetComponent<Toggle>().interactable = false;
+		GameObject.Find ("Skill3").GetComponent<Toggle>().interactable = false;
+		GameObject.Find ("Skill2").GetComponent<Toggle>().interactable = false;
+		GameObject.Find ("Skill1").GetComponent<Toggle>().interactable = false;
 	}
 	
 	public void onValueChanged11()
 	{
-		Ranks [0, 0] = true;
+		change (0, 0);
 		print ("lal");
 	}
 	
 	public void onValueChanged12()
 	{
-		Ranks [0, 1] = true;
+		change (0, 1);
 		print ("lal");
 	}
 	
 	public void onValueChanged13()
 	{
-		Ranks [0, 2] = true;
+		change (0, 2);
 		print ("lal");
 	}
 	
 	public void onValueChanged14()
 	{
-		Ranks [0, 3] = true;
+		change (0, 3);
 		print ("lal");
 	}
 	
 	public void onValueChanged15()
 	{
-		Ranks [0, 4] = true;
+		change (0, 4);
 		print ("lal");
 	}
 	
 	
 	public void onValueChanged21()
 	{
-		Ranks [1, 0] = true;
+		change (1, 0);
 		print ("Clouuuudy");
 	}
 	
 	public void onValueChanged22()
 	{
-		Ranks [1, 1] = true;
+		change (1, 1);
 		print ("lal");
 	}
 	
 	public void onValueChanged23()
 	{
-		Ranks [1, 2] = true;
+		change (1, 2);
 		print ("lal");
 	}
 	
 	public void onValueChanged24()
 	{
-		Ranks [1, 3] = true;
+		change (1, 3);
 		print ("lal");
 	}
 	
 	public void onValueChanged25()
 	{
-		Ranks [1, 4] = true;
+		change (1, 4);
 		print ("lal");
 	}
 	
 	public void onValueChanged31()
 	{
-		Ranks [2, 0] = true;
+		change (2, 0);
 		print ("lal");
 	}
 	
 	public void onValueChanged32()
 	{
-		Ranks [2, 1] = true;
+		change (2, 1);
 		print ("lal");
 	}
 	
 	public void onValueChanged33()
 	{
-		Ranks [2, 2] = true;
+		change (2, 2);
 		print ("lal");
 	}
 	
 	public void onValueChanged34()
 	{
-		Ranks [2, 3] = true;
+		change (2, 3);
 		print ("lal");
 	}
 	
 	public void onValueChanged35()
 	{
-		Ranks [2, 4] = true;
+		change (2, 4);
 		print ("lal");
 	}
 	
 	public void onValueChanged41()
 	{
-		Ranks [3, 0] = true;
+		change (3, 0);
 		print ("lal");
 	}
 	
 	public void onValueChanged42()
 	{
-		Ranks [3, 1] = true;
+		change (3, 1);
 		print ("lal");
 	}
 	
 	public void onValueChanged43()
 	{
-		Ranks [3, 2] = true;
+		change (3, 2);
 		print ("lal");
 	}
 	
 	public void onValueChanged44()
 	{
-		Ranks [3, 3] = true;
+		change (3, 3);
 		print ("lal");
 	}
 	
 	public void onValueChanged45()
 	{
-		Ranks [3, 4] = true;
+		change (3, 4);
 		print ("lal");
 	}
 	
 	public void onValueChanged51()
 	{
-		Ranks [4, 0] = true;
+		change (4, 0);
 		print ("lal");
 	}
 	
 	public void onValueChanged52()
 	{
-		Ranks [4, 1] = true;
+		change (4, 1);
 		print ("lal");
 	}
 	
 	public void onValueChanged53()
 	{
-		Ranks [4, 2] = true;
+		change (4, 2);
 		print ("lal");
 	}
 	
 	public void onValueChanged54()
 	{
-		Ranks [4, 3] = true;
+		change (4, 3);
 		print ("lal");
 	}
 	
 	public void onValueChanged55()
 	{
-		Ranks [4, 4] = true;
+		change (4, 4);
 		print ("lal");
 	}
 	

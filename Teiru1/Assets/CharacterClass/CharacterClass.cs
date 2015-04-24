@@ -50,7 +50,7 @@ public class CharacterClass {
 			return "";
 	}
 
-	protected int getArts(int a){
+	public int getArts(int a){
 				return Arts[a];
 	}
 
