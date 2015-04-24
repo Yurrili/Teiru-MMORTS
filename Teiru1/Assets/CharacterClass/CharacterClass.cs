@@ -34,14 +34,13 @@ public class CharacterClass {
 	}
 
 	public string getSkillName(int Rank, int skill){
-		if (Rank == 0)
-				if (getSkillListEle (Rank, skill) == null) {
-					return "";
-				} else {
-					return getSkillListEle (Rank, skill).getSkillName ();
-				}
-		else
-			return "";
+
+			if (SkillList [Rank, skill] == null) {
+				return "";
+			} else {
+				return SkillList [Rank, skill].getSkillName ();
+			}
+
 	}
 	
 	public string getSkillDescription(int Rank, int skill){
