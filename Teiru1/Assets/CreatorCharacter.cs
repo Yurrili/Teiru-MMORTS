@@ -20,7 +20,11 @@ public class CreatorCharacter : MonoBehaviour {
 	public ToggleGroup toggleGroup4G;
 	public ToggleGroup toggleGroup5G;
 	
-
+	public GameObject Rank1But;
+	public GameObject Rank2But;
+	public GameObject Rank3But;
+	public GameObject Rank4But;
+	public GameObject Rank5But;
 	
 	//Statystyki
 	public int pointsToGive = 32;
@@ -273,98 +277,90 @@ public class CreatorCharacter : MonoBehaviour {
 	public void ShowonRankButtons(){
 		
 		if (checkRankPart (0) == false) {
-			GameObject.Find ("Rank1Button").SetActive (false);
+			Rank1But.SetActive (false);
 		} else {
-			GameObject.Find ("Rank1Button").SetActive (true);
+			Rank1But.SetActive (true);
 		}
 		
 		if (checkRankPart (1) == false) {
-			GameObject.Find ("Rank2Button").SetActive (false);
+			Rank2But.SetActive (false);
 		} else {
-			GameObject.Find ("Rank2Button").SetActive (true);
+			Rank2But.SetActive (true);
 		}
 		
 		if (checkRankPart (2) == false) {
-			GameObject.Find ("Rank3Button").SetActive (false);
+			Rank3But.SetActive (false);
 		} else {
-			GameObject.Find ("Rank3Button").SetActive (true);
+			Rank3But.SetActive (true);
 		}
 		
 		if (checkRankPart (3) == false) {
-			GameObject.Find ("Rank4Button").SetActive (false);//utyka tu, why ?
+			Rank4But.SetActive (false);//utyka tu, why ?
 		}  else {
-			GameObject.Find ("Rank4Button").SetActive (true);
+			Rank4But.SetActive (true);
 		}
 		
 		if (checkRankPart (4) == false) {
-			GameObject.Find ("Rank5Button").SetActive (false);
+			Rank5But.SetActive (false);
 		}  else {
-			GameObject.Find ("Rank5Button").SetActive (true);
+			Rank5But.SetActive (true);
 		}
 	}
 
-	public void AllTrue(){
-		GameObject.Find ("Rank1Button").SetActive (true);
-		GameObject.Find ("Rank2Button").SetActive (true);
-		GameObject.Find ("Rank3Button").SetActive (true);
-		GameObject.Find ("Rank4Button").SetActive (true);
-		GameObject.Find ("Rank5Button").SetActive (true);
-	}
+
 
 	
 	public void onRank1Click()
 	{
-
 		toggleGroup1.SetActive (true);
 		toggleGroup2.SetActive (false);
 		toggleGroup3.SetActive (false);
 		toggleGroup4.SetActive (false);
 		toggleGroup5.SetActive (false);
 
-		AllTrue ();
 		ShowonRankButtons ();
 
 		if (classCha.getSkillName (0, 0) != "") {
 
-				GameObject.Find ("Skill1").SetActive (true);
+			GameObject.Find ("Skill1").SetActive (true);
 			GameObject.Find ("Skill1").GetComponent<Toggle> ().GetComponentInChildren<Text> ().text = classCha.getSkillName (0, 0);
 		} else {
 
-				GameObject.Find ("Skill1").SetActive (false);	
+			GameObject.Find ("Skill1").SetActive (false);	
 		}
 		
 		if (classCha.getSkillName (0, 1) != "") {
-		GameObject.Find ("Skill2").SetActive (true);
+			GameObject.Find ("Skill2").SetActive (true);
 			GameObject.Find ("Skill2").GetComponent<Toggle> ().GetComponentInChildren<Text> ().text = classCha.getSkillName (0, 1);
 		} else {
 		
-				GameObject.Find ("Skill2").SetActive (false);
+			GameObject.Find ("Skill2").SetActive (false);
 		}
 		
 		if (classCha.getSkillName (0, 2) != "") {
 
-				GameObject.Find ("Skill3").SetActive (true);
+			GameObject.Find ("Skill3").SetActive (true);
 			GameObject.Find ("Skill3").GetComponent<Toggle> ().GetComponentInChildren<Text> ().text = classCha.getSkillName (0, 2);
 		} else {
 		
-				GameObject.Find ("Skill3").SetActive (false);
+			GameObject.Find ("Skill3").SetActive (false);
 		}
 		if (classCha.getSkillName (0, 3) != "") {
 
-				GameObject.Find ("Skill4").SetActive (true);
+			GameObject.Find ("Skill4").SetActive (true);
 			GameObject.Find ("Skill4").GetComponent<Toggle> ().GetComponentInChildren<Text> ().text = classCha.getSkillName (0, 3);
 		} else {
 		
-				GameObject.Find ("Skill4").SetActive (false);
+			GameObject.Find ("Skill4").SetActive (false);
 		}
 		
 		if (classCha.getSkillName (0, 4) != "") {
 		
-				GameObject.Find ("Skill5").SetActive (true);
+			GameObject.Find ("Skill5").SetActive (true);
 			GameObject.Find ("Skill5").GetComponent<Toggle> ().GetComponentInChildren<Text> ().text = classCha.getSkillName (0, 4);
 		} else {
 
-				GameObject.Find ("Skill5").SetActive (false);
+			GameObject.Find ("Skill5").SetActive (false);
 		}
 	}
 	
@@ -380,7 +376,7 @@ public class CreatorCharacter : MonoBehaviour {
 		
 		if (classCha.getSkillName (1, 0) != "") {
 
-				GameObject.Find ("Skill1").SetActive (true);
+			GameObject.Find ("Skill1").SetActive (true);
 			GameObject.Find ("Skill1").GetComponent<Toggle> ().GetComponentInChildren<Text> ().text = classCha.getSkillName (1, 0);
 		} else {
 			GameObject.Find ("Skill1").SetActive (false);	
@@ -388,7 +384,7 @@ public class CreatorCharacter : MonoBehaviour {
 		
 		if (classCha.getSkillName (1, 1) != "") {
 
-				GameObject.Find ("Skill2").SetActive (true);
+			GameObject.Find ("Skill2").SetActive (true);
 			GameObject.Find ("Skill2").GetComponent<Toggle> ().GetComponentInChildren<Text> ().text = classCha.getSkillName (1, 1);
 		} else {
 			GameObject.Find ("Skill2").SetActive (false);	
@@ -396,14 +392,14 @@ public class CreatorCharacter : MonoBehaviour {
 		
 		if (classCha.getSkillName (1, 2) != "") {
 
-				GameObject.Find ("Skill3").SetActive (true);
+			GameObject.Find ("Skill3").SetActive (true);
 			GameObject.Find ("Skill3").GetComponent<Toggle> ().GetComponentInChildren<Text> ().text = classCha.getSkillName (1, 2);
 		} else {
 			GameObject.Find ("Skill3").SetActive (false);
 		}
 		if (classCha.getSkillName (1, 3) != "") {
 
-				GameObject.Find ("Skill4").SetActive (true);
+			GameObject.Find ("Skill4").SetActive (true);
 			GameObject.Find ("Skill4").GetComponent<Toggle> ().GetComponentInChildren<Text> ().text = classCha.getSkillName (1, 3);
 		} else {
 			GameObject.Find ("Skill4").SetActive (false);
@@ -427,7 +423,7 @@ public class CreatorCharacter : MonoBehaviour {
 		
 		if (classCha.getSkillName (2, 0) != "") {
 
-				GameObject.Find ("Skill1").SetActive (true);
+			GameObject.Find ("Skill1").SetActive (true);
 			GameObject.Find ("Skill1").GetComponent<Toggle> ().GetComponentInChildren<Text> ().text = classCha.getSkillName (2, 0);
 		} else {
 			GameObject.Find ("Skill1").SetActive (false);	
@@ -435,7 +431,7 @@ public class CreatorCharacter : MonoBehaviour {
 		
 		if (classCha.getSkillName (2, 1) != "") {
 
-				GameObject.Find ("Skill2").SetActive (true);
+			GameObject.Find ("Skill2").SetActive (true);
 			GameObject.Find ("Skill2").GetComponent<Toggle> ().GetComponentInChildren<Text> ().text = classCha.getSkillName (2, 1);
 		} else {
 			GameObject.Find ("Skill2").SetActive (false);	
@@ -449,7 +445,7 @@ public class CreatorCharacter : MonoBehaviour {
 		}
 		if (classCha.getSkillName (2, 3) != "") {
 
-				GameObject.Find ("Skill4").SetActive (true);
+			GameObject.Find ("Skill4").SetActive (true);
 			GameObject.Find ("Skill4").GetComponent<Toggle> ().GetComponentInChildren<Text> ().text = classCha.getSkillName (2, 3);
 		} else {
 			GameObject.Find ("Skill4").SetActive (false);
@@ -457,7 +453,7 @@ public class CreatorCharacter : MonoBehaviour {
 		
 		if (classCha.getSkillName (2, 4) != "") {
 
-				GameObject.Find ("Skill5").SetActive (true);
+			GameObject.Find ("Skill5").SetActive (true);
 			GameObject.Find ("Skill5").GetComponent<Toggle> ().GetComponentInChildren<Text> ().text = classCha.getSkillName (2, 4);
 		} else {
 			GameObject.Find ("Skill5").SetActive (false);
@@ -474,7 +470,7 @@ public class CreatorCharacter : MonoBehaviour {
 		
 		if (classCha.getSkillName (3, 0) != "") {
 
-				GameObject.Find ("Skill1").SetActive (true);
+			GameObject.Find ("Skill1").SetActive (true);
 			GameObject.Find ("Skill1").GetComponent<Toggle> ().GetComponentInChildren<Text> ().text = classCha.getSkillName (3, 0);
 		} else {
 			GameObject.Find ("Skill1").SetActive (false);	
@@ -482,21 +478,21 @@ public class CreatorCharacter : MonoBehaviour {
 		
 		if (classCha.getSkillName (3, 1) != "") {
 
-				GameObject.Find ("Skill2").SetActive (true);
+			GameObject.Find ("Skill2").SetActive (true);
 			GameObject.Find ("Skill2").GetComponent<Toggle> ().GetComponentInChildren<Text> ().text = classCha.getSkillName (3, 1);
 		} else {
 			GameObject.Find ("Skill2").SetActive (false);	
 		}
 		
 		if (classCha.getSkillName (3, 2) != "") {
-			//GameObject.Find ("Skill3").SetActive (true);
+			GameObject.Find ("Skill3").SetActive (true);
 			GameObject.Find ("Skill3").GetComponent<Toggle> ().GetComponentInChildren<Text> ().text = classCha.getSkillName (3, 2);
 		} else {
 			GameObject.Find ("Skill3").SetActive (false);
 		}
 		if (classCha.getSkillName (3, 3) != "") {
 
-				GameObject.Find ("Skill4").SetActive (true);
+			GameObject.Find ("Skill4").SetActive (true);
 			GameObject.Find ("Skill4").GetComponent<Toggle> ().GetComponentInChildren<Text> ().text = classCha.getSkillName (3, 3);
 		} else {
 			GameObject.Find ("Skill4").SetActive (false);
@@ -504,7 +500,7 @@ public class CreatorCharacter : MonoBehaviour {
 		
 		if (classCha.getSkillName (3, 4) != "") {
 
-				GameObject.Find ("Skill5").SetActive (true);
+			GameObject.Find ("Skill5").SetActive (true);
 			GameObject.Find ("Skill5").GetComponent<Toggle> ().GetComponentInChildren<Text> ().text = classCha.getSkillName (3, 4);
 		} else {
 			GameObject.Find ("Skill5").SetActive (false);
@@ -534,34 +530,34 @@ public class CreatorCharacter : MonoBehaviour {
 		toggleGroup5.SetActive (true);
 		
 		if (classCha.getSkillName (4, 0) != "") {
-			//GameObject.Find ("Skill1").SetActive (true);
+			GameObject.Find ("Skill1").SetActive (true);
 			GameObject.Find ("Skill1").GetComponent<Toggle> ().GetComponentInChildren<Text> ().text = classCha.getSkillName (4, 0);
 		} else {
 			GameObject.Find ("Skill1").SetActive (false);	
 		}
 		
 		if (classCha.getSkillName (4, 1) != "") {
-			//GameObject.Find ("Skill2").SetActive (true);
+			GameObject.Find ("Skill2").SetActive (true);
 			GameObject.Find ("Skill2").GetComponent<Toggle> ().GetComponentInChildren<Text> ().text = classCha.getSkillName (4, 1);
 		} else {
 			GameObject.Find ("Skill2").SetActive (false);	
 		}
 		
 		if (classCha.getSkillName (4, 2) != "") {
-			//GameObject.Find ("Skill3").SetActive (true);
+			GameObject.Find ("Skill3").SetActive (true);
 			GameObject.Find ("Skill3").GetComponent<Toggle> ().GetComponentInChildren<Text> ().text = classCha.getSkillName (4, 2);
 		} else {
 			GameObject.Find ("Skill3").SetActive (false);
 		}
 		if (classCha.getSkillName (4, 3) != "") {
-			//GameObject.Find ("Skill4").SetActive (false);
+			GameObject.Find ("Skill4").SetActive (false);
 			GameObject.Find ("Skill4").GetComponent<Toggle> ().GetComponentInChildren<Text> ().text = classCha.getSkillName (4, 3);
 		} else {
 			GameObject.Find ("Skill4").SetActive (false);
 		}
 		
 		if (classCha.getSkillName (4, 4) != "") {
-			//GameObject.Find ("Skill5").SetActive (true);
+			GameObject.Find ("Skill5").SetActive (true);
 			GameObject.Find ("Skill5").GetComponent<Toggle> ().GetComponentInChildren<Text> ().text = classCha.getSkillName (4, 4);
 		} else {
 			GameObject.Find ("Skill5").SetActive (false);
