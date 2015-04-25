@@ -5137,11 +5137,11 @@ MonoBehaviour:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 14
     m_FontStyle: 0
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 10
     m_MaxSize: 40
-    m_Alignment: 1
-    m_RichText: 0
+    m_Alignment: 4
+    m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
@@ -5294,6 +5294,7 @@ GameObject:
   - 224: {fileID: 310019059}
   - 114: {fileID: 310019061}
   - 114: {fileID: 310019060}
+  - 114: {fileID: 310019062}
   m_Layer: 5
   m_Name: Skill2
   m_TagString: Untagged
@@ -5389,6 +5390,36 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.Toggle+ToggleEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
   m_IsOn: 0
+--- !u!114 &310019062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 310019058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 591071606}
+          m_MethodName: onToggle12IsEntered
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine, Version=0.0.0.0,
+              Culture=neutral, PublicKeyToken=null
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
 --- !u!1 &318307392
 GameObject:
   m_ObjectHideFlags: 0
@@ -10220,6 +10251,7 @@ GameObject:
   - 114: {fileID: 591071605}
   - 225: {fileID: 591071604}
   - 95: {fileID: 591071603}
+  - 114: {fileID: 591071606}
   m_Layer: 5
   m_Name: CharacterCreatorSkillsMenu
   m_TagString: Untagged
@@ -10284,6 +10316,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Menu1: 5
+--- !u!114 &591071606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 591071601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d494b3910231f04c95a9e3ca28544df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &594366158
 GameObject:
   m_ObjectHideFlags: 0
@@ -21008,6 +21051,7 @@ GameObject:
   - 224: {fileID: 1166909875}
   - 114: {fileID: 1166909877}
   - 114: {fileID: 1166909876}
+  - 114: {fileID: 1166909878}
   m_Layer: 5
   m_Name: Skill1
   m_TagString: Untagged
@@ -21103,6 +21147,36 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.Toggle+ToggleEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
   m_IsOn: 0
+--- !u!114 &1166909878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1166909874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 591071606}
+          m_MethodName: onToggle11IsEntered
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine, Version=0.0.0.0,
+              Culture=neutral, PublicKeyToken=null
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
 --- !u!1 &1174167049
 GameObject:
   m_ObjectHideFlags: 0
@@ -21695,6 +21769,12 @@ MonoBehaviour:
   toggleGroup3G: {fileID: 280937375}
   toggleGroup4G: {fileID: 833939084}
   toggleGroup5G: {fileID: 1785335177}
+  Rank1But: {fileID: 0}
+  Rank2But: {fileID: 0}
+  Rank3But: {fileID: 0}
+  Rank4But: {fileID: 0}
+  Rank5But: {fileID: 0}
+  ArtPoints: 0
   pointsToGive: 32
   STR: {fileID: 370299758}
   DEX: {fileID: 298049714}
@@ -21704,6 +21784,11 @@ MonoBehaviour:
   CHA: {fileID: 2012523202}
   PTS: {fileID: 2080643553}
   ClassYou: {fileID: 1309226271}
+  rank1: []
+  rank2: []
+  rank3: []
+  rank4: []
+  rank5: []
   Characterchooseclass: 0
 --- !u!1 &1199014829
 GameObject:
@@ -34517,6 +34602,7 @@ GameObject:
   - 224: {fileID: 2052229158}
   - 114: {fileID: 2052229160}
   - 114: {fileID: 2052229159}
+  - 114: {fileID: 2052229161}
   m_Layer: 5
   m_Name: Skill3
   m_TagString: Untagged
@@ -34612,6 +34698,36 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.Toggle+ToggleEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
   m_IsOn: 0
+--- !u!114 &2052229161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2052229157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 591071606}
+          m_MethodName: onToggle13IsEntered
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine, Version=0.0.0.0,
+              Culture=neutral, PublicKeyToken=null
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
 --- !u!1 &2057879637
 GameObject:
   m_ObjectHideFlags: 0

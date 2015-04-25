@@ -76,7 +76,11 @@ public class CreatorCharacter : MonoBehaviour {
 		g = GameObject.Find ("SkillToggleGroup5");
 		rank5 = g.GetComponentsInChildren<Toggle> ();
 
-		
+		Rank1But = GameObject.Find ("Rank1Button");
+		Rank2But = GameObject.Find ("Rank2Button");
+		Rank3But = GameObject.Find ("Rank3Button");
+		Rank4But = GameObject.Find ("Rank4Button");
+		Rank5But = GameObject.Find ("Rank5Button");
 	}
 	
 	// Update is called once per frame
