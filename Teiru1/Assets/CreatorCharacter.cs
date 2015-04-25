@@ -38,6 +38,12 @@ public class CreatorCharacter : MonoBehaviour {
 	public Text PTS;//summary points
 	public Text ClassYou;
 	//
+
+	public Toggle[] rank1; 
+	public Toggle[] rank2;
+	public Toggle[] rank3;
+	public Toggle[] rank4;
+	public Toggle[] rank5;
 	
 	public CharacterStats stats = new CharacterStats (); //statystyki
 	public CharacterClass classCha; // element  postaci
@@ -52,6 +58,25 @@ public class CreatorCharacter : MonoBehaviour {
 		DEX.text = stats.getDEX().ToString();
 		WIS.text = stats.getWIS().ToString();
 		CON.text = stats.getCON().ToString();
+
+		GameObject g = GameObject.Find ("SkillToggleGroup");
+		rank1 = g.GetComponentsInChildren<Toggle> ();
+
+		g = GameObject.Find ("SkillToggleGroup2");
+		rank2 = g.GetComponentsInChildren<Toggle> ();
+		
+		g = GameObject.Find ("SkillToggleGroup3");
+		rank3 = g.GetComponentsInChildren<Toggle> ();
+
+		
+		g = GameObject.Find ("SkillToggleGroup4");
+		rank4 = g.GetComponentsInChildren<Toggle> ();
+
+		
+		g = GameObject.Find ("SkillToggleGroup5");
+		rank5 = g.GetComponentsInChildren<Toggle> ();
+
+		
 	}
 	
 	// Update is called once per frame
@@ -326,6 +351,7 @@ public class CreatorCharacter : MonoBehaviour {
 
 			GameObject.Find ("Skill1").SetActive (true);
 			GameObject.Find ("Skill1").GetComponent<Toggle> ().GetComponentInChildren<Text> ().text = classCha.getSkillName (0, 0);
+			//GameObject.Find ("Skill1").GetComponent<Toggle> ().interactable = false;
 		} else {
 
 			GameObject.Find ("Skill1").SetActive (false);	
@@ -534,6 +560,7 @@ public class CreatorCharacter : MonoBehaviour {
 		if (classCha.getSkillName (4, 0) != "") {
 			GameObject.Find ("Skill1").SetActive (true);
 			GameObject.Find ("Skill1").GetComponent<Toggle> ().GetComponentInChildren<Text> ().text = classCha.getSkillName (4, 0);
+
 		} else {
 			GameObject.Find ("Skill1").SetActive (false);	
 		}
@@ -568,14 +595,22 @@ public class CreatorCharacter : MonoBehaviour {
 	}
 
 	public void change(int a, int b){
-		if(Ranks [a,b] == false ){
+
+		if(Ranks [a,b] == false ){ //++Ranks
 			if( ArtPoints > 0 ){
 				ArtPoints--;
 				Ranks [a,b] = true;
-				//makeNOTinteractable();
+				if(ArtPoints==0){
+					makeNOTinteractable1();
+				}
 			}
-		} else {
+		}
+
+		if(Ranks [a,b] == true ){ //--Ranks
 			if(ArtPoints != classCha.getArts(0)){
+				if(ArtPoints==0){
+					makeinteractable1();
+				}
 				Ranks [a,b] = false;
 				ArtPoints++;
 			}
@@ -584,13 +619,89 @@ public class CreatorCharacter : MonoBehaviour {
 		GameObject.Find ("RemainingSkillPointsText").GetComponent<Text>().text = ArtPoints + "";
 	}
 
-	public void makeNOTinteractable() {//not working
 
-		GameObject.Find ("Skill5").GetComponent<Toggle>().interactable = false; 
-		GameObject.Find ("Skill4").GetComponent<Toggle>().interactable = false;
-		GameObject.Find ("Skill3").GetComponent<Toggle>().interactable = false;
-		GameObject.Find ("Skill2").GetComponent<Toggle>().interactable = false;
-		GameObject.Find ("Skill1").GetComponent<Toggle>().interactable = false;
+
+	public void makeNOTinteractable1() {//not working
+
+
+			for (int i = 0; i < rank1.Length; i++) {
+				if(Ranks[0,i] == false){
+					rank1[i].interactable = false;
+				}
+			}
+
+	
+		for (int i = 0; i < rank2.Length; i++) {
+			if(Ranks[1,i] == false){
+				rank2[i].interactable = false;
+			}
+		}
+
+
+		
+		for (int i = 0; i < rank3.Length; i++) {
+			if(Ranks[2,i] == false){
+				rank3[i].interactable = false;
+			}
+		}
+
+	
+		
+		for (int i = 0; i < rank4.Length; i++) {
+			if(Ranks[3,i] == false){
+				rank4[i].interactable = false;
+			}
+		}
+
+	
+		
+		for (int i = 0; i < rank5.Length; i++) {
+			if(Ranks[4,i] == false){
+				rank5[i].interactable = false;
+			}
+		}
+		
+	}
+
+	public void makeinteractable1() {//not working
+		
+
+		for (int i = 0; i < rank1.Length; i++) {
+			if(Ranks[0,i] == false){
+				rank1[i].interactable = true;
+			}
+		}
+		
+	
+		for (int i = 0; i < rank2.Length; i++) {
+			if(Ranks[1,i] == false){
+				rank2[i].interactable = true;
+			}
+		}
+		
+
+		
+		for (int i = 0; i < rank3.Length; i++) {
+			if(Ranks[2,i] == false){
+				rank3[i].interactable = true;
+			}
+		}
+		
+
+		
+		for (int i = 0; i < rank4.Length; i++) {
+			if(Ranks[3,i] == false){
+				rank4[i].interactable = true;
+			}
+		}
+		
+	
+		for (int i = 0; i < rank5.Length; i++) {
+			if(Ranks[4,i] == false){
+				rank5[i].interactable = true;
+			}
+		}
+		
 	}
 	
 	public void onValueChanged11()
