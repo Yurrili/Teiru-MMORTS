@@ -52,13 +52,15 @@
      <Compile Include="Assets\CharacterClass\CharacterClass_Mystiq.cs" />
      <Compile Include="Assets\CharacterClass\CharacterClass_Ranger.cs" />
      <Compile Include="Assets\CharacterClass\CharacterStats.cs" />
+     <Compile Include="Assets\CharacterClass\Dice.cs" />
+     <Compile Include="Assets\CharacterClass\Skill.cs" />
+     <Compile Include="Assets\CreatorCharacter.cs" />
      <Compile Include="Assets\DBManager.cs" />
      <Compile Include="Assets\HPValue.cs" />
      <Compile Include="Assets\Menu.cs" />
-     <Compile Include="Assets\MenuCharacterCreator.cs" />
      <Compile Include="Assets\MenuEvents.cs" />
      <Compile Include="Assets\MenuManager.cs" />
-     <Compile Include="Assets\Skills.cs" />
+     <Compile Include="Assets\OnHoverEventsBitch.cs" />
      <Compile Include="Assets\_Scripts\networking\Client.cs" />
      <Compile Include="Assets\_Scripts\networking\packets\Packet_01_Login.cs" />
  <Reference Include="UnityEngine.UI">
