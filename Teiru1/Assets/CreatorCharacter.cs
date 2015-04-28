@@ -93,6 +93,7 @@ public class CreatorCharacter : MonoBehaviour {
 	{
 		ChangeInputFieldText ("Ranger");
 		classchoose ();
+
 	}
 	
 	public void PushedF()
@@ -260,6 +261,7 @@ public class CreatorCharacter : MonoBehaviour {
 			print ("Mystic");
 			break;
 		}
+		Prevent ();
 	}
 
 	public void ShowMenu(Menu menu) //testowane
@@ -600,39 +602,77 @@ public class CreatorCharacter : MonoBehaviour {
 
 	public void change(int a, int b){
 
-		if(Ranks [a,b] == false ){ //++Ranks
-			if( ArtPoints > 0 ){
-				ArtPoints--;
-				Ranks [a,b] = true;
+		if(Ranks [a,b] == true ){ //--Ranks
+			if(ArtPoints != classCha.getArts(0)){
+				Ranks [a,b] = false;
+
 				if(ArtPoints==0){
-					makeNOTinteractable1();
+					makeinteractable1();
+					Prevent ();
+				}
+
+				ArtPoints++;
+			}
+		} else {
+		
+			if(Ranks [a,b] == false ){ //++Ranks
+				if( ArtPoints > 0 ){
+					Ranks [a,b] = true;
+					ArtPoints--;
+					if(ArtPoints==0){
+						makeNOTinteractable1();
+					}
 				}
 			}
 		}
 
-		if(Ranks [a,b] == true ){ //--Ranks
-			if(ArtPoints != classCha.getArts(0)){
-				if(ArtPoints==0){
-					makeinteractable1();
-				}
-				Ranks [a,b] = false;
-				ArtPoints++;
-			}
-		}
+
 
 		GameObject.Find ("RemainingSkillPointsText").GetComponent<Text>().text = ArtPoints + "";
 	}
 
+	public void Prevent(){
 
+		if (classCha.getArts (1) == 0) {
+			for (int i = 0; i < rank2.Length; i++) {
+				if(Ranks[1,i] == false){
+					rank2[i].interactable = false;
+				}
+			}
+		}
+
+		if (classCha.getArts (2) == 0) {
+			for (int i = 0; i < rank3.Length; i++) {
+				if(Ranks[2,i] == false){
+					rank3[i].interactable = false;
+				}
+			}
+		}
+
+		if (classCha.getArts (3) == 0) {
+			for (int i = 0; i < rank4.Length; i++) {
+				if(Ranks[3,i] == false){
+					rank4[i].interactable = false;
+				}
+			}
+		}
+		if (classCha.getArts (4) == 0) {
+			for (int i = 0; i < rank5.Length; i++) {
+				if(Ranks[4,i] == false){
+					rank5[i].interactable = false;
+				}
+			}
+		}
+	}
 
 	public void makeNOTinteractable1() {//not working
 
 
-			for (int i = 0; i < rank1.Length; i++) {
+		for (int i = 0; i < rank1.Length; i++) {
 				if(Ranks[0,i] == false){
 					rank1[i].interactable = false;
 				}
-			}
+		}
 
 	
 		for (int i = 0; i < rank2.Length; i++) {
