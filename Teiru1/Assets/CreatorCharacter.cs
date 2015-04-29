@@ -67,12 +67,10 @@ public class CreatorCharacter : MonoBehaviour {
 		
 		g = GameObject.Find ("SkillToggleGroup3");
 		rank3 = g.GetComponentsInChildren<Toggle> ();
-
-		
+			
 		g = GameObject.Find ("SkillToggleGroup4");
 		rank4 = g.GetComponentsInChildren<Toggle> ();
-
-		
+			
 		g = GameObject.Find ("SkillToggleGroup5");
 		rank5 = g.GetComponentsInChildren<Toggle> ();
 

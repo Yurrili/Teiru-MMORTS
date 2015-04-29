@@ -44,10 +44,10 @@ public class CharacterClass {
 	}
 	
 	public string getSkillDescription(int Rank, int skill){
-		if (Rank == 0)
+		//if (Rank == 0)
 			return getSkillListEle(Rank ,skill).getDescription();
-		else
-			return "";
+		//else
+	//		return "";
 	}
 
 	public int getArts(int a){
