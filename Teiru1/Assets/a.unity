@@ -38048,6 +38048,7 @@ GameObject:
   - 114: {fileID: 2023987875}
   - 225: {fileID: 2023987876}
   - 95: {fileID: 2023987877}
+  - 114: {fileID: 2023987878}
   m_Layer: 5
   m_Name: MainMen
   m_TagString: MainMenu
@@ -38110,6 +38111,20 @@ Animator:
   m_ApplyRootMotion: 1
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &2023987878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2023987873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a046e0e6f8c00544b97208fc8f82059c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loginButton: {fileID: 297186454}
+  inputField: {fileID: 1436291047}
+  inputFieldUsername: {fileID: 394191712}
 --- !u!1 &2024233992
 GameObject:
   m_ObjectHideFlags: 0
