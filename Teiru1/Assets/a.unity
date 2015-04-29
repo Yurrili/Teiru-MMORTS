@@ -2754,7 +2754,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1682659269}
   toggleTransition: 1
   graphic: {fileID: 1059255068}
-  m_Group: {fileID: 142528342}
+  m_Group: {fileID: 2021528884}
   onValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -5177,7 +5177,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 1, y: -56}
+  m_AnchoredPosition: {x: 3, y: -63.5999985}
   m_SizeDelta: {x: 160, y: 40}
   m_Pivot: {x: .5, y: .5}
 --- !u!95 &297186456
@@ -7751,7 +7751,7 @@ RectTransform:
   m_RootOrder: 1
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 1, y: 52}
+  m_AnchoredPosition: {x: 3.9000001, y: 73.0999985}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &394191712
@@ -10048,7 +10048,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1980703326}
   toggleTransition: 1
   graphic: {fileID: 1404677642}
-  m_Group: {fileID: 509513709}
+  m_Group: {fileID: 2021528884}
   onValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -15885,7 +15885,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1103985836}
   toggleTransition: 1
   graphic: {fileID: 2139092358}
-  m_Group: {fileID: 825695464}
+  m_Group: {fileID: 2021528884}
   onValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -20235,7 +20235,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1534910903}
   toggleTransition: 1
   graphic: {fileID: 1935018289}
-  m_Group: {fileID: 1034437422}
+  m_Group: {fileID: 2021528884}
   onValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -21291,7 +21291,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 362870058}
   toggleTransition: 1
   graphic: {fileID: 377605785}
-  m_Group: {fileID: 1080850163}
+  m_Group: {fileID: 2021528884}
   onValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -22078,7 +22078,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Sprite: {fileID: 21300000, guid: 49420b5f059bf76409047c00e93c3d38, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9d94af69283054749949b40059bfbb06, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -25389,13 +25389,13 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1106923951}
   toggleTransition: 1
   graphic: {fileID: 1739089190}
-  m_Group: {fileID: 1281312473}
+  m_Group: {fileID: 2021528884}
   onValueChanged:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Toggle+ToggleEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  m_IsOn: 0
+  m_IsOn: 1
 --- !u!1 &1306146986
 GameObject:
   m_ObjectHideFlags: 0
@@ -26025,7 +26025,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1098926034}
   toggleTransition: 1
   graphic: {fileID: 1464176428}
-  m_Group: {fileID: 1321160588}
+  m_Group: {fileID: 2021528884}
   onValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -27200,7 +27200,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1337651434}
   toggleTransition: 1
   graphic: {fileID: 1639829950}
-  m_Group: {fileID: 1370209141}
+  m_Group: {fileID: 2021528884}
   onValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -28272,7 +28272,7 @@ RectTransform:
   m_RootOrder: 2
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 1, y: -1}
+  m_AnchoredPosition: {x: 3, y: 4.4000001}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &1436291047
@@ -31945,7 +31945,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1215986002}
   toggleTransition: 1
   graphic: {fileID: 25530706}
-  m_Group: {fileID: 1666535667}
+  m_Group: {fileID: 2021528884}
   onValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -33768,8 +33768,8 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: -73.6999969, y: -126}
-  m_SizeDelta: {x: 100, y: 40}
+  m_AnchoredPosition: {x: 4, y: -126}
+  m_SizeDelta: {x: 180, y: 40}
   m_Pivot: {x: .5, y: .5}
 --- !u!95 &1758091904
 Animator:
@@ -35060,7 +35060,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1816316946}
   toggleTransition: 1
   graphic: {fileID: 992098455}
-  m_Group: {fileID: 1835436476}
+  m_Group: {fileID: 2021528884}
   onValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -37350,7 +37350,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 133383520}
   toggleTransition: 1
   graphic: {fileID: 587706799}
-  m_Group: {fileID: 1985751758}
+  m_Group: {fileID: 2021528884}
   onValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -39464,7 +39464,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 433153773}
   toggleTransition: 1
   graphic: {fileID: 1698326232}
-  m_Group: {fileID: 2084882747}
+  m_Group: {fileID: 2021528884}
   onValueChanged:
     m_PersistentCalls:
       m_Calls: []
