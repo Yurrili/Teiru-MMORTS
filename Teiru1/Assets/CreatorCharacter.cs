@@ -7,6 +7,7 @@ public class CreatorCharacter : MonoBehaviour {
 	//
 	
 	bool [,] Ranks = new bool[5, 5];
+
 	
 	public GameObject toggleGroup1;
 	public GameObject toggleGroup2;
@@ -19,6 +20,12 @@ public class CreatorCharacter : MonoBehaviour {
 	public ToggleGroup toggleGroup3G;
 	public ToggleGroup toggleGroup4G;
 	public ToggleGroup toggleGroup5G;
+
+
+	public GameObject heads;
+	public GameObject chests;
+	public GameObject boots;
+	public GameObject weapons;
 	
 	public GameObject Rank1But;
 	public GameObject Rank2But;
@@ -48,6 +55,8 @@ public class CreatorCharacter : MonoBehaviour {
 	public CharacterStats stats = new CharacterStats (); //statystyki
 	public CharacterClass classCha; // element  postaci
 	public int Characterchooseclass; // wybor klasy postaci
+
+	public string Avatar;
 
 	void Start () 
 	{
@@ -896,6 +905,103 @@ public class CreatorCharacter : MonoBehaviour {
 		change (4, 4);
 		print ("lal");
 	}
-	
 
+	//avatars
+
+	public void onAvatarChanged1()
+	{
+		Avatar = "av1";
+	}
+
+	public void onAvatarChanged2()
+	{
+		Avatar = "av2";
+	}
+	
+	public void onAvatarChanged3()
+	{
+		Avatar = "av3";
+	}
+
+	public void onAvatarChanged4()
+	{
+		Avatar = "av4";
+	}
+
+	public void onAvatarChanged5()
+	{
+		Avatar = "av5";
+	}
+
+	public void onAvatarChanged6()
+	{
+		Avatar = "av6";
+	}
+
+	public void onAvatarChanged7()
+	{
+		Avatar = "av7";
+	}
+
+	public void onAvatarChanged8()
+	{
+		Avatar = "av8";
+	}
+
+	public void onAvatarChanged9()
+	{
+		Avatar = "av9";
+	}
+
+	public void onAvatarChanged10()
+	{
+		Avatar = "av10";
+	}
+
+	public void onAvatarChanged11()
+	{
+		Avatar = "av11";
+	}
+
+	public void onAvatarChanged12()
+	{
+		Avatar = "av12";
+	}
+
+	//Interactions on part of equ 
+
+	public void onPartofBodyClick()
+	{
+		heads.SetActive (true);
+		chests.SetActive (false);
+		boots.SetActive (false);
+		weapons.SetActive (false);
+
+	}
+	public void onPartofBodyClick1()
+	{
+		heads.SetActive (false);
+		chests.SetActive (true);
+		boots.SetActive (false);
+		weapons.SetActive (false);
+		
+	}
+
+	public void onPartofBodyClick2()
+	{
+		heads.SetActive (false);
+		chests.SetActive (false);
+		boots.SetActive (true);
+		weapons.SetActive (false);
+		
+	}
+
+	public void onPartofBodyClick3()
+	{
+		heads.SetActive (false);
+		chests.SetActive (false);
+		boots.SetActive (false);
+		weapons.SetActive (true);
+		
+	}
 }

@@ -61,13 +61,14 @@
      <Compile Include="Assets\MenuEvents.cs" />
      <Compile Include="Assets\MenuManager.cs" />
      <Compile Include="Assets\OnHoverEventsBitch.cs" />
+     <Compile Include="Assets\TabEntermainMenu.cs" />
      <Compile Include="Assets\_Scripts\networking\Client.cs" />
      <Compile Include="Assets\_Scripts\networking\packets\Packet_01_Login.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>D:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.0/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="ogclient-framework">
- <HintPath>D:/LICPRO/Teiru-MMORTS/Teiru1/Assets/plugins/ogclient-framework.dll</HintPath>
+ <HintPath>C:/Users/Klaudia/Documents/Teiru-MMORTS/Teiru1/Assets/plugins/ogclient-framework.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
