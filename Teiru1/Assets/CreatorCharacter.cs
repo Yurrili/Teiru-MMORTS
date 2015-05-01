@@ -52,11 +52,14 @@ public class CreatorCharacter : MonoBehaviour {
 	public Toggle[] rank4;
 	public Toggle[] rank5;
 	
-	public CharacterStats stats = new CharacterStats (); //statystyki
-	public CharacterClass classCha; // element  postaci
-	public int Characterchooseclass; // wybor klasy postaci
+	public static CharacterStats stats = new CharacterStats (); //statystyki
+	public static CharacterClass classCha; // element  postaci
+	public static int Characterchooseclass; // wybor klasy postaci
 
-	public string Avatar;
+	public static string Avatar;
+
+	public static int aA = -1; //rank
+	public static int bB = -1;//skill
 
 	void Start () 
 	{
@@ -250,22 +253,22 @@ public class CreatorCharacter : MonoBehaviour {
 		case 1:
 			classCha = new CharacterClass_Ranger(stats.getCON());
 			ClassYou.text = "Ranger";
-			print ("Ranger");
+			//print ("Ranger");
 			break;
 		case 2:
 			classCha = new CharacterClass_Mage(stats.getCON());
 			ClassYou.text = "Mage";
-			print ("Mage");
+		//	print ("Mage");
 			break;
 		case 3:
 			classCha = new CharacterClass_Knight(stats.getCON());
 			ClassYou.text = "Knight";
-			print ("Knight");
+		//	print ("Knight");
 			break;
 		case 4:
 			classCha = new CharacterClass_Mystiq(stats.getCON());
 			ClassYou.text = "Mystic";
-			print ("Mystic");
+		//	print ("Mystic");
 			break;
 		}
 		Prevent ();
@@ -607,9 +610,12 @@ public class CreatorCharacter : MonoBehaviour {
 		}
 	}
 
-	public void change(int a, int b){
-
-		if(Ranks [a,b] == true ){ //--Ranks
+	public void change(int a, int b)
+	{
+		if(Ranks [a,b] == true )
+		{ //--Ranks
+			aA = -1;
+			bB = -1;
 			if(ArtPoints != classCha.getArts(0)){
 				Ranks [a,b] = false;
 
@@ -622,7 +628,10 @@ public class CreatorCharacter : MonoBehaviour {
 			}
 		} else {
 		
-			if(Ranks [a,b] == false ){ //++Ranks
+			if(Ranks [a,b] == false )
+			{ //++Ranks
+				aA = a;
+				bB = b;
 				if( ArtPoints > 0 ){
 					Ranks [a,b] = true;
 					ArtPoints--;

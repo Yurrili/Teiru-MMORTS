@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 
 
-public class OnHoverEventsBitch : MonoBehaviour {
+public class OnHoverEvents : MonoBehaviour {
 
 
 	CharacterClass classCha;
@@ -22,22 +22,22 @@ public class OnHoverEventsBitch : MonoBehaviour {
 		case "Ranger":
 			classCha = new CharacterClass_Ranger(0);
 
-			print ("Ranger");
+			//print ("Ranger");
 			break;
 		case "Mage":
 			classCha = new CharacterClass_Mage(0);
 
-			print ("Mage");
+			//print ("Mage");
 			break;
 		case "Knight":
 			classCha = new CharacterClass_Knight(0);
 
-			print ("Knight");
+		//	print ("Knight");
 			break;
 		case "Mystic":
 			classCha = new CharacterClass_Mystiq(0);
 
-			print ("Mystic");
+		//	print ("Mystic");
 			break;
 		}
 	}
