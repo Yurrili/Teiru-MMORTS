@@ -1061,92 +1061,104 @@ public class CreatorCharacter : MonoBehaviour {
 
 	public void BlockItems(){
 		int i;
+
 		if (GoldDD > 40) {
+
 			for(i = 0; i < HelmettoggleGroup.Length; i++){
 				HelmettoggleGroup[i].interactable = true;
 			}
 			
-			for(i = 0; i < HelmettoggleGroup.Length; i++){
+			for(i = 0; i < ChesttoggleGroup.Length; i++){
 				ChesttoggleGroup[i].interactable = true;
 			}
 			
-			for( i = 0; i < HelmettoggleGroup.Length; i++){
+			for( i = 0; i < BootstoggleGroup.Length; i++){
 				BootstoggleGroup[i].interactable = true;
 			}
 			
-			for(i = 0; i < HelmettoggleGroup.Length; i++){
+			for(i = 0; i < WeapontoggleGroup.Length; i++){
 				WeapontoggleGroup[i].interactable = true;
 			}
-		} 
+		} else {
 
-		if (GoldDD > 20 && GoldDD <= 40) {
-			HelmettoggleGroup[1].interactable = true;
-			HelmettoggleGroup[4].interactable = true;
-			HelmettoggleGroup[2].interactable = false;
-			HelmettoggleGroup[5].interactable = false;
+			if (GoldDD > 20 && GoldDD <= 40) {
+				HelmettoggleGroup[1].interactable = true;
+				HelmettoggleGroup[4].interactable = true;
+				HelmettoggleGroup[2].interactable = false;
+				HelmettoggleGroup[5].interactable = false;
 
-			ChesttoggleGroup[1].interactable = true;
-			ChesttoggleGroup[4].interactable = true;
-			ChesttoggleGroup[2].interactable = false;
-			ChesttoggleGroup[5].interactable = false;
+				ChesttoggleGroup[1].interactable = true;
+				ChesttoggleGroup[4].interactable = true;
+				ChesttoggleGroup[2].interactable = false;
+				ChesttoggleGroup[5].interactable = false;
 
-			BootstoggleGroup[1].interactable = true;
-			BootstoggleGroup[4].interactable = true;
-			BootstoggleGroup[2].interactable = false;
-			BootstoggleGroup[5].interactable = false;
+				BootstoggleGroup[1].interactable = true;
+				BootstoggleGroup[4].interactable = true;
+				BootstoggleGroup[2].interactable = false;
+				BootstoggleGroup[5].interactable = false;
 
-			WeapontoggleGroup[1].interactable = true;
-			WeapontoggleGroup[4].interactable = true;
-			WeapontoggleGroup[2].interactable = false;
-			WeapontoggleGroup[5].interactable = false;
-		}
+				WeapontoggleGroup[1].interactable = true;
+				WeapontoggleGroup[4].interactable = true;
+				WeapontoggleGroup[2].interactable = false;
+				WeapontoggleGroup[5].interactable = false;
+			} else {
 
-		if (GoldDD > 0 && GoldDD <= 20) {
-			HelmettoggleGroup[1].interactable = false;
-			HelmettoggleGroup[4].interactable = false;
-			HelmettoggleGroup[2].interactable = false;
-			HelmettoggleGroup[5].interactable = false;
+				if (GoldDD > 0 && GoldDD <= 20) {
+					HelmettoggleGroup[1].interactable = false;
+					HelmettoggleGroup[4].interactable = false;
+					HelmettoggleGroup[2].interactable = false;
+					HelmettoggleGroup[5].interactable = false;
+					
+					ChesttoggleGroup[2].interactable = false;
+					ChesttoggleGroup[5].interactable = false;
+					ChesttoggleGroup[1].interactable = false;
+					ChesttoggleGroup[4].interactable = false;
+					
+					BootstoggleGroup[2].interactable = false;
+					BootstoggleGroup[5].interactable = false;
+					BootstoggleGroup[1].interactable = false;
+					BootstoggleGroup[4].interactable = false;
+					
+					WeapontoggleGroup[2].interactable = false;
+					WeapontoggleGroup[5].interactable = false;
+					WeapontoggleGroup[1].interactable = false;
+					WeapontoggleGroup[4].interactable = false;
+				} else {
 			
-			ChesttoggleGroup[2].interactable = false;
-			ChesttoggleGroup[5].interactable = false;
-			ChesttoggleGroup[1].interactable = false;
-			ChesttoggleGroup[4].interactable = false;
-			
-			BootstoggleGroup[2].interactable = false;
-			BootstoggleGroup[5].interactable = false;
-			BootstoggleGroup[1].interactable = false;
-			BootstoggleGroup[4].interactable = false;
-			
-			WeapontoggleGroup[2].interactable = false;
-			WeapontoggleGroup[5].interactable = false;
-			WeapontoggleGroup[1].interactable = false;
-			WeapontoggleGroup[4].interactable = false;
+
+					if (GoldDD == 0) {
+
+						for(i = 0; i < HelmettoggleGroup.Length; i++){
+							HelmettoggleGroup[i].interactable = false;
+						}
+
+						for(i = 0; i < ChesttoggleGroup.Length; i++){
+							ChesttoggleGroup[i].interactable = false;
+						}
+
+						for(i = 0; i < BootstoggleGroup.Length; i++){
+							BootstoggleGroup[i].interactable = false;
+						}
+
+						for(i = 0; i < WeapontoggleGroup.Length; i++){
+							WeapontoggleGroup[i].interactable = false;
+						}
+
+					}
+				}
+			}
 		}
+		if(Equ[0]!=null)
+			HelmettoggleGroup[Equ[0].itemDD].interactable = true;
 
-		if (GoldDD == 0) {
+		if(Equ[1]!=null)
+			ChesttoggleGroup[Equ[1].itemDD].interactable = true;
 
-			for(i = 0; i < HelmettoggleGroup.Length; i++){
-				HelmettoggleGroup[i].interactable = false;
-			}
+		if(Equ[2]!=null)
+			BootstoggleGroup[Equ[2].itemDD].interactable = true;
 
-			for(i = 0; i < HelmettoggleGroup.Length; i++){
-				ChesttoggleGroup[i].interactable = false;
-			}
-
-			for(i = 0; i < HelmettoggleGroup.Length; i++){
-				BootstoggleGroup[i].interactable = false;
-			}
-
-			for(i = 0; i < HelmettoggleGroup.Length; i++){
-				WeapontoggleGroup[i].interactable = false;
-			}
-
-		}
-
-		HelmettoggleGroup[Equ[0].itemDD].interactable = true;
-		ChesttoggleGroup[Equ[1].itemDD].interactable = true;
-		BootstoggleGroup[Equ[2].itemDD].interactable = true;
-		WeapontoggleGroup[Equ[3].itemDD].interactable = true;
+		if(Equ[3]!=null)
+			WeapontoggleGroup[Equ[3].itemDD].interactable = true;
 	}
 	//Chest
 
@@ -1154,15 +1166,22 @@ public class CreatorCharacter : MonoBehaviour {
 	
 		if(Equ[index] != null ){
 			if (Equ [index].getName () == a.getName ()) {
-				GoldDD += Equ[index].getCost();
+
+				GoldDD = GoldDD + Equ[index].getCost();
 				Equ[index] = null;
 			} else {
-				GoldDD += Equ[index].getCost() - a.getCost();
-				Equ[index] = a;
+				if(Equ [index].getName () != a.getName ()){
+
+					GoldDD += Equ[index].getCost() - a.getCost();
+					Equ[index] = a;
+				}
 			}
 		} else {
-			Equ[index] = a;
-			GoldDD -= a.getCost();
+			if(Equ[index] == null ){
+
+				GoldDD -= a.getCost();
+				Equ[index] = a;
+			}
 		}
 
 		RefreshGold ();
