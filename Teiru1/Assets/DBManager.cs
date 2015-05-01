@@ -8,6 +8,7 @@ public class DBManager : MonoBehaviour {
 	public InputField loginUsername, loginPassword;
 	public Text errorText,txtLoginMessage;
 	public Menu LogedMenu, MainMenu;
+	public string loggedInUser;
 	
 	void Start () 
 	{
@@ -19,10 +20,49 @@ public class DBManager : MonoBehaviour {
 	
 	}
 
-	public void LoginButtonClicked(Menu menu)
+	public void createnewCharacter(Menu menu)
 	{
 		WWWForm form = new WWWForm();
-		form.AddField("username", loginUsername.text.ToString());
+		form.AddField ("username",loggedInUser);
+		print (loggedInUser);
+		form.AddField ("name",GameObject.Find ("NameTAG").GetComponent<InputField>().textComponent.text);
+		form.AddField ("class", CreatorCharacter.Characterchooseclass);
+		form.AddField ("level", 1);
+		form.AddField ("str",CreatorCharacter.stats.getSTR());
+		form.AddField ("dex",CreatorCharacter.stats.getDEX());
+		form.AddField ("con",CreatorCharacter.stats.getCON());
+		form.AddField ("int",CreatorCharacter.stats.getINT ());
+		form.AddField ("wis",CreatorCharacter.stats.getWIS());
+		form.AddField ("cha",CreatorCharacter.stats.getCHA());
+		form.AddField ("helm", "helmo");
+		form.AddField ("chest", "chesto");
+		form.AddField ("sword", "tiesto");
+		form.AddField ("boot", "franczesto");
+		form.AddField ("avatar", "av1"); //CreatorCharacter.Avatar);
+		form.AddField ("skills", CreatorCharacter.classCha.getSkillName(CreatorCharacter.aA, CreatorCharacter.bB) );
+		WWW w = new WWW("http://f12-preview.awardspace.net/teiru.ac.dx/charCreate.php",form);
+		StartCoroutine(createChar(w));
+	}
+
+	IEnumerator createChar(WWW w)
+	{
+		yield return w;
+		if (w.error == null) 
+		{
+			print("Successfully created character");
+		}
+		else
+		{
+			print("Registration failed");
+			
+		}
+	}
+
+	public void LoginButtonClicked(Menu menu)
+	{
+		loggedInUser = loginUsername.text.ToString ();
+		WWWForm form = new WWWForm();
+		form.AddField("username", loggedInUser);
 		form.AddField("password",loginPassword.text.ToString());
 		WWW w = new WWW("http://f12-preview.awardspace.net/teiru.ac.dx/login.php",form);
 		StartCoroutine(login (w, LogedMenu));

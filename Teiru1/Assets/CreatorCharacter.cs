@@ -62,11 +62,14 @@ public class CreatorCharacter : MonoBehaviour {
 	public Toggle[] rank4;
 	public Toggle[] rank5;
 	
-	public CharacterStats stats = new CharacterStats (); //statystyki
-	public CharacterClass classCha; // element  postaci
-	public int Characterchooseclass; // wybor klasy postaci
+	public static CharacterStats stats = new CharacterStats (); //statystyki
+	public static CharacterClass classCha; // element  postaci
+	public static int Characterchooseclass; // wybor klasy postaci
 
-	public string Avatar;
+	public static string Avatar;
+
+	public static int aA = -1; //rank
+	public static int bB = -1;//skill
 
 	void Start () 
 	{
@@ -291,22 +294,22 @@ public class CreatorCharacter : MonoBehaviour {
 		case 1:
 			classCha = new CharacterClass_Ranger(stats.getCON());
 			ClassYou.text = "Ranger";
-			print ("Ranger");
+			//print ("Ranger");
 			break;
 		case 2:
 			classCha = new CharacterClass_Mage(stats.getCON());
 			ClassYou.text = "Mage";
-			print ("Mage");
+		//	print ("Mage");
 			break;
 		case 3:
 			classCha = new CharacterClass_Knight(stats.getCON());
 			ClassYou.text = "Knight";
-			print ("Knight");
+		//	print ("Knight");
 			break;
 		case 4:
 			classCha = new CharacterClass_Mystiq(stats.getCON());
 			ClassYou.text = "Mystic";
-			print ("Mystic");
+		//	print ("Mystic");
 			break;
 		}
 		Prevent ();
@@ -648,9 +651,12 @@ public class CreatorCharacter : MonoBehaviour {
 		}
 	}
 
-	public void change(int a, int b){
-
-		if(Ranks [a,b] == true ){ //--Ranks
+	public void change(int a, int b)
+	{
+		if(Ranks [a,b] == true )
+		{ //--Ranks
+			aA = -1;
+			bB = -1;
 			if(ArtPoints != classCha.getArts(0)){
 				Ranks [a,b] = false;
 
@@ -663,7 +669,10 @@ public class CreatorCharacter : MonoBehaviour {
 			}
 		} else {
 		
-			if(Ranks [a,b] == false ){ //++Ranks
+			if(Ranks [a,b] == false )
+			{ //++Ranks
+				aA = a;
+				bB = b;
 				if( ArtPoints > 0 ){
 					Ranks [a,b] = true;
 					ArtPoints--;
@@ -1052,92 +1061,104 @@ public class CreatorCharacter : MonoBehaviour {
 
 	public void BlockItems(){
 		int i;
+
 		if (GoldDD > 40) {
+
 			for(i = 0; i < HelmettoggleGroup.Length; i++){
 				HelmettoggleGroup[i].interactable = true;
 			}
 			
-			for(i = 0; i < HelmettoggleGroup.Length; i++){
+			for(i = 0; i < ChesttoggleGroup.Length; i++){
 				ChesttoggleGroup[i].interactable = true;
 			}
 			
-			for( i = 0; i < HelmettoggleGroup.Length; i++){
+			for( i = 0; i < BootstoggleGroup.Length; i++){
 				BootstoggleGroup[i].interactable = true;
 			}
 			
-			for(i = 0; i < HelmettoggleGroup.Length; i++){
+			for(i = 0; i < WeapontoggleGroup.Length; i++){
 				WeapontoggleGroup[i].interactable = true;
 			}
-		} 
+		} else {
 
-		if (GoldDD > 20 && GoldDD <= 40) {
-			HelmettoggleGroup[1].interactable = true;
-			HelmettoggleGroup[4].interactable = true;
-			HelmettoggleGroup[2].interactable = false;
-			HelmettoggleGroup[5].interactable = false;
+			if (GoldDD > 20 && GoldDD <= 40) {
+				HelmettoggleGroup[1].interactable = true;
+				HelmettoggleGroup[4].interactable = true;
+				HelmettoggleGroup[2].interactable = false;
+				HelmettoggleGroup[5].interactable = false;
 
-			ChesttoggleGroup[1].interactable = true;
-			ChesttoggleGroup[4].interactable = true;
-			ChesttoggleGroup[2].interactable = false;
-			ChesttoggleGroup[5].interactable = false;
+				ChesttoggleGroup[1].interactable = true;
+				ChesttoggleGroup[4].interactable = true;
+				ChesttoggleGroup[2].interactable = false;
+				ChesttoggleGroup[5].interactable = false;
 
-			BootstoggleGroup[1].interactable = true;
-			BootstoggleGroup[4].interactable = true;
-			BootstoggleGroup[2].interactable = false;
-			BootstoggleGroup[5].interactable = false;
+				BootstoggleGroup[1].interactable = true;
+				BootstoggleGroup[4].interactable = true;
+				BootstoggleGroup[2].interactable = false;
+				BootstoggleGroup[5].interactable = false;
 
-			WeapontoggleGroup[1].interactable = true;
-			WeapontoggleGroup[4].interactable = true;
-			WeapontoggleGroup[2].interactable = false;
-			WeapontoggleGroup[5].interactable = false;
-		}
+				WeapontoggleGroup[1].interactable = true;
+				WeapontoggleGroup[4].interactable = true;
+				WeapontoggleGroup[2].interactable = false;
+				WeapontoggleGroup[5].interactable = false;
+			} else {
 
-		if (GoldDD > 0 && GoldDD <= 20) {
-			HelmettoggleGroup[1].interactable = false;
-			HelmettoggleGroup[4].interactable = false;
-			HelmettoggleGroup[2].interactable = false;
-			HelmettoggleGroup[5].interactable = false;
+				if (GoldDD > 0 && GoldDD <= 20) {
+					HelmettoggleGroup[1].interactable = false;
+					HelmettoggleGroup[4].interactable = false;
+					HelmettoggleGroup[2].interactable = false;
+					HelmettoggleGroup[5].interactable = false;
+					
+					ChesttoggleGroup[2].interactable = false;
+					ChesttoggleGroup[5].interactable = false;
+					ChesttoggleGroup[1].interactable = false;
+					ChesttoggleGroup[4].interactable = false;
+					
+					BootstoggleGroup[2].interactable = false;
+					BootstoggleGroup[5].interactable = false;
+					BootstoggleGroup[1].interactable = false;
+					BootstoggleGroup[4].interactable = false;
+					
+					WeapontoggleGroup[2].interactable = false;
+					WeapontoggleGroup[5].interactable = false;
+					WeapontoggleGroup[1].interactable = false;
+					WeapontoggleGroup[4].interactable = false;
+				} else {
 			
-			ChesttoggleGroup[2].interactable = false;
-			ChesttoggleGroup[5].interactable = false;
-			ChesttoggleGroup[1].interactable = false;
-			ChesttoggleGroup[4].interactable = false;
-			
-			BootstoggleGroup[2].interactable = false;
-			BootstoggleGroup[5].interactable = false;
-			BootstoggleGroup[1].interactable = false;
-			BootstoggleGroup[4].interactable = false;
-			
-			WeapontoggleGroup[2].interactable = false;
-			WeapontoggleGroup[5].interactable = false;
-			WeapontoggleGroup[1].interactable = false;
-			WeapontoggleGroup[4].interactable = false;
+
+					if (GoldDD == 0) {
+
+						for(i = 0; i < HelmettoggleGroup.Length; i++){
+							HelmettoggleGroup[i].interactable = false;
+						}
+
+						for(i = 0; i < ChesttoggleGroup.Length; i++){
+							ChesttoggleGroup[i].interactable = false;
+						}
+
+						for(i = 0; i < BootstoggleGroup.Length; i++){
+							BootstoggleGroup[i].interactable = false;
+						}
+
+						for(i = 0; i < WeapontoggleGroup.Length; i++){
+							WeapontoggleGroup[i].interactable = false;
+						}
+
+					}
+				}
+			}
 		}
+		if(Equ[0]!=null)
+			HelmettoggleGroup[Equ[0].itemDD].interactable = true;
 
-		if (GoldDD == 0) {
+		if(Equ[1]!=null)
+			ChesttoggleGroup[Equ[1].itemDD].interactable = true;
 
-			for(i = 0; i < HelmettoggleGroup.Length; i++){
-				HelmettoggleGroup[i].interactable = false;
-			}
+		if(Equ[2]!=null)
+			BootstoggleGroup[Equ[2].itemDD].interactable = true;
 
-			for(i = 0; i < HelmettoggleGroup.Length; i++){
-				ChesttoggleGroup[i].interactable = false;
-			}
-
-			for(i = 0; i < HelmettoggleGroup.Length; i++){
-				BootstoggleGroup[i].interactable = false;
-			}
-
-			for(i = 0; i < HelmettoggleGroup.Length; i++){
-				WeapontoggleGroup[i].interactable = false;
-			}
-
-		}
-
-		HelmettoggleGroup[Equ[0].itemDD].interactable = true;
-		ChesttoggleGroup[Equ[1].itemDD].interactable = true;
-		BootstoggleGroup[Equ[2].itemDD].interactable = true;
-		WeapontoggleGroup[Equ[3].itemDD].interactable = true;
+		if(Equ[3]!=null)
+			WeapontoggleGroup[Equ[3].itemDD].interactable = true;
 	}
 	//Chest
 
@@ -1145,15 +1166,22 @@ public class CreatorCharacter : MonoBehaviour {
 	
 		if(Equ[index] != null ){
 			if (Equ [index].getName () == a.getName ()) {
-				GoldDD += Equ[index].getCost();
+
+				GoldDD = GoldDD + Equ[index].getCost();
 				Equ[index] = null;
 			} else {
-				GoldDD += Equ[index].getCost() - a.getCost();
-				Equ[index] = a;
+				if(Equ [index].getName () != a.getName ()){
+
+					GoldDD += Equ[index].getCost() - a.getCost();
+					Equ[index] = a;
+				}
 			}
 		} else {
-			Equ[index] = a;
-			GoldDD -= a.getCost();
+			if(Equ[index] == null ){
+
+				GoldDD -= a.getCost();
+				Equ[index] = a;
+			}
 		}
 
 		RefreshGold ();
