@@ -88,6 +88,8 @@ public class CreatorCharacter : MonoBehaviour {
 		Rank3But = GameObject.Find ("Rank3Button");
 		Rank4But = GameObject.Find ("Rank4Button");
 		Rank5But = GameObject.Find ("Rank5Button");
+
+		onPartofBodyClick ();
 	}
 	
 	// Update is called once per frame
