@@ -2219,8 +2219,8 @@ RectTransform:
   m_RootOrder: 9
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 263, y: -16}
-  m_SizeDelta: {x: 140, y: 360}
+  m_AnchoredPosition: {x: 247, y: 48}
+  m_SizeDelta: {x: 140, y: 200}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &94828784
 MonoBehaviour:
@@ -16659,7 +16659,7 @@ RectTransform:
   m_RootOrder: 17
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: -43, y: -191}
+  m_AnchoredPosition: {x: 237, y: -89}
   m_SizeDelta: {x: 140, y: 50}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &706493217
@@ -16971,7 +16971,7 @@ GameObject:
   - 222: {fileID: 724022672}
   - 114: {fileID: 724022671}
   m_Layer: 5
-  m_Name: STRTextPlace
+  m_Name: STRTextBONUS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16991,7 +16991,7 @@ RectTransform:
   m_RootOrder: 20
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 342, y: 114.800003}
+  m_AnchoredPosition: {x: 326, y: 89}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &724022671
@@ -17019,7 +17019,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Level
+  m_Text: '0
+
+'
 --- !u!222 &724022672
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -20140,7 +20142,7 @@ GameObject:
   - 222: {fileID: 842717216}
   - 114: {fileID: 842717215}
   m_Layer: 5
-  m_Name: WISTextPlace
+  m_Name: WISTextBONUS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20160,7 +20162,7 @@ RectTransform:
   m_RootOrder: 21
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 343, y: 50.7999992}
+  m_AnchoredPosition: {x: 327, y: 25}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &842717215
@@ -20188,7 +20190,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Level
+  m_Text: '0
+
+'
 --- !u!222 &842717216
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -22348,7 +22352,7 @@ RectTransform:
   m_RootOrder: 18
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 77, y: -191}
+  m_AnchoredPosition: {x: 241, y: -130}
   m_SizeDelta: {x: 57, y: 30}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &934363934
@@ -22945,7 +22949,7 @@ RectTransform:
   m_RootOrder: 19
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 303, y: 74.8000031}
+  m_AnchoredPosition: {x: 287, y: 49}
   m_SizeDelta: {x: 160, y: 100}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &954477594
@@ -30632,7 +30636,7 @@ GameObject:
   - 222: {fileID: 1241527715}
   - 114: {fileID: 1241527714}
   m_Layer: 5
-  m_Name: CHATextPlace
+  m_Name: CHATextBONUS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30652,7 +30656,7 @@ RectTransform:
   m_RootOrder: 22
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 343, y: 66.8000031}
+  m_AnchoredPosition: {x: 327, y: 41}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &1241527714
@@ -30680,7 +30684,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Level
+  m_Text: '0
+
+'
 --- !u!222 &1241527715
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -30721,7 +30727,7 @@ RectTransform:
   m_RootOrder: 10
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 263, y: 155}
+  m_AnchoredPosition: {x: 246, y: 154}
   m_SizeDelta: {x: 200, y: 40}
   m_Pivot: {x: .5, y: .5}
 --- !u!95 &1241751572
@@ -39818,7 +39824,7 @@ GameObject:
   - 222: {fileID: 1622126553}
   - 114: {fileID: 1622126552}
   m_Layer: 5
-  m_Name: DEXTextPlace
+  m_Name: DEXTextBONUS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -39838,7 +39844,7 @@ RectTransform:
   m_RootOrder: 23
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 343, y: 97.8000031}
+  m_AnchoredPosition: {x: 327, y: 72}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &1622126552
@@ -39866,7 +39872,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Level
+  m_Text: '0
+
+'
 --- !u!222 &1622126553
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -41869,7 +41877,7 @@ GameObject:
   - 222: {fileID: 1712319665}
   - 114: {fileID: 1712319664}
   m_Layer: 5
-  m_Name: INTTextPlace
+  m_Name: INTTextBONUS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -41889,7 +41897,7 @@ RectTransform:
   m_RootOrder: 25
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 343, y: 33.7999992}
+  m_AnchoredPosition: {x: 327, y: 8}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &1712319664
@@ -41917,7 +41925,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Level
+  m_Text: 0
 --- !u!222 &1712319665
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -48257,7 +48265,7 @@ RectTransform:
   m_RootOrder: 11
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 263, y: -187}
+  m_AnchoredPosition: {x: 248, y: -48}
   m_SizeDelta: {x: 200, y: 40}
   m_Pivot: {x: .5, y: .5}
 --- !u!95 &1993974820
@@ -49498,7 +49506,7 @@ GameObject:
   - 222: {fileID: 2036094674}
   - 114: {fileID: 2036094673}
   m_Layer: 5
-  m_Name: CONTextPlace
+  m_Name: CONTextBONUS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -49518,7 +49526,7 @@ RectTransform:
   m_RootOrder: 24
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 343, y: 81.8000031}
+  m_AnchoredPosition: {x: 327, y: 56}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &2036094673
@@ -49546,7 +49554,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Level
+  m_Text: '0
+
+'
 --- !u!222 &2036094674
 CanvasRenderer:
   m_ObjectHideFlags: 0

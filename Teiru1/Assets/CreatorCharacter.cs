@@ -71,6 +71,13 @@ public class CreatorCharacter : MonoBehaviour {
 	public static int aA = -1; //rank
 	public static int bB = -1;//skill
 
+	public int STRSUM;
+	public int DEXSUM;
+	public int CONSUM;
+	public int INTSUM;
+	public int WISSUM;
+	public int CHASUM;
+
 	void Start () 
 	{
 
@@ -131,12 +138,80 @@ public class CreatorCharacter : MonoBehaviour {
 	}
 
 	public void RefreshGold(){
+		CalculateBonusStats ();
 		Gold.text = GoldDD + "";
 		BlockItems ();
 	}
 	// Update is called once per frame
 	void Update () {
 		
+	}
+
+	public void CalculateBonusStats(){
+	
+		int strB, conB, chaB, intB, wisB, dexB;
+
+		strB = conB = chaB = intB = dexB = wisB = 0;
+		if (Equ [0] != null) {
+			strB += Equ[0].getBonus().getSTR();
+			conB += Equ[0].getBonus().getCON();
+			chaB += Equ[0].getBonus().getCHA();
+			intB += Equ[0].getBonus().getINT();
+			wisB += Equ[0].getBonus().getWIS();
+			dexB += Equ[0].getBonus().getDEX();
+		}
+	
+		if (Equ [1] != null) {
+
+			strB += Equ[1].getBonus().getSTR();
+			conB += Equ[1].getBonus().getCON();
+			chaB += Equ[1].getBonus().getCHA();
+			intB += Equ[1].getBonus().getINT();
+			wisB += Equ[1].getBonus().getWIS();
+			dexB += Equ[1].getBonus().getDEX();
+		}
+		if (Equ [2] != null) {
+			
+			strB += Equ[2].getBonus().getSTR();
+			conB += Equ[2].getBonus().getCON();
+			chaB += Equ[2].getBonus().getCHA();
+			intB += Equ[2].getBonus().getINT();
+			wisB += Equ[2].getBonus().getWIS();
+			dexB += Equ[2].getBonus().getDEX();
+		}
+
+			
+		if (Equ [3] != null) {
+			
+			strB += Equ[3].getBonus().getSTR();
+			conB += Equ[3].getBonus().getCON();
+			chaB += Equ[3].getBonus().getCHA();
+			intB += Equ[3].getBonus().getINT();
+			wisB += Equ[3].getBonus().getWIS();
+			dexB += Equ[3].getBonus().getDEX();
+		}
+
+		Text A = GameObject.Find ("STRTextBONUS").GetComponentInChildren<Text>();
+		Text B = GameObject.Find ("CONTextBONUS").GetComponentInChildren<Text>();
+		Text C = GameObject.Find ("CHATextBONUS").GetComponentInChildren<Text>();
+		Text D = GameObject.Find ("INTTextBONUS").GetComponentInChildren<Text>();
+		Text E = GameObject.Find ("WISTextBONUS").GetComponentInChildren<Text>();
+		Text F = GameObject.Find ("DEXTextBONUS").GetComponentInChildren<Text>();
+
+		A.text = stats.getSTR() + " +" + strB;
+		B.text = stats.getCON() + " +" + conB;
+		C.text = stats.getCHA() + " +" + chaB;
+		D.text = stats.getINT() + " +" + intB;
+		E.text = stats.getWIS() + " +" + wisB;
+		F.text = stats.getDEX() + " +" + dexB;
+
+		STRSUM = stats.getSTR() + strB;
+		DEXSUM = stats.getCON() + conB;
+		CONSUM = stats.getCHA() + chaB;
+		INTSUM = stats.getINT() + intB;
+		WISSUM = stats.getWIS() + wisB;
+		CHASUM = stats.getDEX() + dexB;
+
 	}
 
 	
@@ -209,72 +284,84 @@ public class CreatorCharacter : MonoBehaviour {
 		
 		STR.text = stats.increaseSTR().ToString();
 		PTS.text = stats.getPTS().ToString();
+		CalculateBonusStats ();
 	}
 	
 	public void IncreaseCHA(){
 		
 		CHA.text = stats.increaseCHA().ToString();
 		PTS.text = stats.getPTS().ToString();
+		CalculateBonusStats ();
 	}
 	
 	public void IncreaseINT(){
 		
 		INT.text = stats.increaseINT().ToString();
 		PTS.text = stats.getPTS().ToString();
+		CalculateBonusStats ();
 	}
 	
 	public void IncreaseDEX(){
 		
 		DEX.text = stats.increaseDEX().ToString();
 		PTS.text = stats.getPTS().ToString();
+		CalculateBonusStats ();
 	}
 	
 	public void IncreaseWIS(){
 		
 		WIS.text = stats.increaseWIS().ToString();
 		PTS.text = stats.getPTS().ToString();
+		CalculateBonusStats ();
 	}
 	
 	public void IncreaseCON(){
 		
 		CON.text = stats.increaseCON().ToString();
 		PTS.text = stats.getPTS().ToString();
+		CalculateBonusStats ();
 	}
 	
 	public void DecreaseSTR(){
 		
 		STR.text = stats.decreaseSTR().ToString();
 		PTS.text = stats.getPTS().ToString();
+		CalculateBonusStats ();
 	}
 	
 	public void DecreaseDEX(){
 		
 		DEX.text = stats.decreaseDEX().ToString();
 		PTS.text = stats.getPTS().ToString();
+		CalculateBonusStats ();
 	}
 	
 	public void DecreaseWIS(){
 		
 		WIS.text = stats.decreaseWIS().ToString();
 		PTS.text = stats.getPTS().ToString();
+		CalculateBonusStats ();
 	}
 	
 	public void DecreaseCON(){
 		
 		CON.text = stats.decreaseCON().ToString();
 		PTS.text = stats.getPTS().ToString();
+		CalculateBonusStats ();
 	}
 	
 	public void DecreaseCHA(){ //testowane
 		
 		CHA.text = stats.decreaseCHA().ToString();
 		PTS.text = stats.getPTS ().ToString ();
+		CalculateBonusStats ();
 	}
 	
 	public void DecreaseInt(){ //testowane
 		
 		INT.text = stats.decreaseINT().ToString();
 		PTS.text = stats.getPTS().ToString();
+		CalculateBonusStats ();
 	}
 
 	public bool check() //testowane
@@ -339,16 +426,17 @@ public class CreatorCharacter : MonoBehaviour {
 			GameObject.Find ("ClassTextPlace").GetComponent<Text>().text = classCha.getClass();
 			GameObject.Find ("LevelTextPlace").GetComponent<Text>().text = classCha.getLvl()+ "";
 			
-			GameObject.Find ("STRTextPlace").GetComponent<Text>().text = stats.getSTR() + "";
-			GameObject.Find ("DEXTextPlace").GetComponent<Text>().text = stats.getDEX() + "";
-			GameObject.Find ("CONTextPlace").GetComponent<Text>().text = stats.getCON() + "";
-			GameObject.Find ("INTTextPlace").GetComponent<Text>().text = stats.getINT() + "";
-			GameObject.Find ("WISTextPlace").GetComponent<Text>().text = stats.getWIS() + "";
-			GameObject.Find ("CHATextPlace").GetComponent<Text>().text = stats.getCHA() + "";
+			GameObject.Find ("STRTextPlace").GetComponent<Text>().text = STRSUM + "";
+			GameObject.Find ("DEXTextPlace").GetComponent<Text>().text = DEXSUM + "";
+			GameObject.Find ("CONTextPlace").GetComponent<Text>().text = CONSUM + "";
+			GameObject.Find ("INTTextPlace").GetComponent<Text>().text = INTSUM + "";
+			GameObject.Find ("WISTextPlace").GetComponent<Text>().text = WISSUM + "";
+			GameObject.Find ("CHATextPlace").GetComponent<Text>().text = CHASUM + "";
 			
 
 			ShowMenu(menu);
 			onRank1Click ();
+		
 			
 		} else {
 			//print(GameObject.Find ("NameTAG"). GetComponent<InputField>().textComponent.text);
