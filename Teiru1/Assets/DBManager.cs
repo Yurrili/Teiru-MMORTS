@@ -38,7 +38,7 @@ public class DBManager : MonoBehaviour {
 		form.AddField ("chest", "chesto");
 		form.AddField ("sword", "tiesto");
 		form.AddField ("boot", "franczesto");
-		form.AddField ("avatar", "av1"); //CreatorCharacter.Avatar);
+		form.AddField ("avatar", CreatorCharacter.Avatar);
 		form.AddField ("skills", CreatorCharacter.classCha.getSkillName(CreatorCharacter.aA, CreatorCharacter.bB) );
 		WWW w = new WWW("http://f12-preview.awardspace.net/teiru.ac.dx/charCreate.php",form);
 		StartCoroutine(createChar(w));
