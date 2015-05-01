@@ -34,11 +34,10 @@ public class DBManager : MonoBehaviour {
 		form.AddField ("int",CreatorCharacter.stats.getINT ());
 		form.AddField ("wis",CreatorCharacter.stats.getWIS());
 		form.AddField ("cha",CreatorCharacter.stats.getCHA());
-		form.AddField ("helm", "helmo");
-		form.AddField ("chest", "chesto");
-		form.AddField ("sword", "tiesto");
-		form.AddField ("boot", "franczesto");
-		form.AddField ("avatar", CreatorCharacter.Avatar);
+		form.AddField ("helm", CreatorCharacter.Equ[0].itemDD);
+		form.AddField ("chest", CreatorCharacter.Equ[1].itemDD);
+		form.AddField ("boot", CreatorCharacter.Equ[2].itemDD);
+		form.AddField ("sword", CreatorCharacter.Equ[3].itemDD);
 		form.AddField ("avatar", CreatorCharacter.Avatar);
 		form.AddField ("skills", CreatorCharacter.classCha.getSkillName(CreatorCharacter.aA, CreatorCharacter.bB) );
 		WWW w = new WWW("http://f12-preview.awardspace.net/teiru.ac.dx/charCreate.php",form);

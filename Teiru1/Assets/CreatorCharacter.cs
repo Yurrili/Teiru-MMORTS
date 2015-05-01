@@ -8,7 +8,7 @@ public class CreatorCharacter : MonoBehaviour {
 	
 	bool [,] Ranks = new bool[5, 5];
 
-	Item [] Equ = new Item[4];
+	public static Item [] Equ = new Item[4];
 
 	public GameObject toggleGroup1;
 	public GameObject toggleGroup2;

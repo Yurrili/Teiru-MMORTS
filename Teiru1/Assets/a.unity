@@ -24459,7 +24459,7 @@ GameObject:
   - 222: {fileID: 1009772924}
   - 114: {fileID: 1009772923}
   m_Layer: 5
-  m_Name: txtLoginMessage
+  m_Name: ErrorTextCreateCharater
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29568,6 +29568,12 @@ MonoBehaviour:
   rank3: []
   rank4: []
   rank5: []
+  STRSUM: 0
+  DEXSUM: 0
+  CONSUM: 0
+  INTSUM: 0
+  WISSUM: 0
+  CHASUM: 0
 --- !u!114 &1196794942
 MonoBehaviour:
   m_ObjectHideFlags: 0
