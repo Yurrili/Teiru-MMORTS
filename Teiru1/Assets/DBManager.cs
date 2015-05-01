@@ -49,11 +49,12 @@ public class DBManager : MonoBehaviour {
 		yield return w;
 		if (w.error == null) 
 		{
-			print("Successfully created character");
+			GameObject.Find ("ErrorTextCreateCharater").GetComponentInChildren<Text>().text = "Successfully created character";
 		}
 		else
 		{
-			print("Registration failed");
+			GameObject.Find ("ErrorTextCreateCharater").GetComponentInChildren<Text>().text = "Successfully created character";
+
 			
 		}
 	}
