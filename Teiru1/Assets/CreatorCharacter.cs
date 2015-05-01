@@ -8,7 +8,8 @@ public class CreatorCharacter : MonoBehaviour {
 	
 	bool [,] Ranks = new bool[5, 5];
 
-	
+	Item [] Equ = new Item[4];
+
 	public GameObject toggleGroup1;
 	public GameObject toggleGroup2;
 	public GameObject toggleGroup3;
@@ -44,7 +45,16 @@ public class CreatorCharacter : MonoBehaviour {
 	public Text CHA;
 	public Text PTS;//summary points
 	public Text ClassYou;
+
+	public Toggle[] ChesttoggleGroup;
+	public Toggle[] HelmettoggleGroup;
+	public Toggle[] BootstoggleGroup;
+	public Toggle[] WeapontoggleGroup;
 	//
+
+	public Text Gold;
+	
+	private int GoldDD;
 
 	public Toggle[] rank1; 
 	public Toggle[] rank2;
@@ -63,6 +73,18 @@ public class CreatorCharacter : MonoBehaviour {
 
 	void Start () 
 	{
+
+		GoldDD = 40;
+		Gold.text = GoldDD + "";
+
+		//Elementary Equ
+		Equ [0] = new Helmet(0);
+		Equ [1] = new Chest (0);
+		Equ [2] = new Boots(0);
+		Equ [3] = new Weapon(0);
+
+
+
 		PTS.text = stats.getPTS().ToString();
 		STR.text = stats.getSTR().ToString();
 		CHA.text = stats.getCHA().ToString();
@@ -91,8 +113,27 @@ public class CreatorCharacter : MonoBehaviour {
 		Rank3But = GameObject.Find ("Rank3Button");
 		Rank4But = GameObject.Find ("Rank4Button");
 		Rank5But = GameObject.Find ("Rank5Button");
-	}
+
+		g = GameObject.Find ("ItemsToggleGroup");
+		HelmettoggleGroup = g.GetComponentsInChildren<Toggle> ();
+		
+		g = GameObject.Find ("ItemsToggleGroup2");
+		ChesttoggleGroup = g.GetComponentsInChildren<Toggle> ();
+		
+		g = GameObject.Find ("ItemsToggleGroup3");
+		BootstoggleGroup = g.GetComponentsInChildren<Toggle> ();
+		
+		g = GameObject.Find ("ItemsToggleGroup4");
+		WeapontoggleGroup = g.GetComponentsInChildren<Toggle> ();
+
+		onPartofBodyClick ();
 	
+	}
+
+	public void RefreshGold(){
+		Gold.text = GoldDD + "";
+		BlockItems ();
+	}
 	// Update is called once per frame
 	void Update () {
 		
@@ -1013,4 +1054,268 @@ public class CreatorCharacter : MonoBehaviour {
 		weapons.SetActive (true);
 		
 	}
+
+
+
+	//Interaction with equ elements
+
+	public void BlockItems(){
+		int i;
+		if (GoldDD > 40) {
+			for(i = 0; i < HelmettoggleGroup.Length; i++){
+				HelmettoggleGroup[i].interactable = true;
+			}
+			
+			for(i = 0; i < HelmettoggleGroup.Length; i++){
+				ChesttoggleGroup[i].interactable = true;
+			}
+			
+			for( i = 0; i < HelmettoggleGroup.Length; i++){
+				BootstoggleGroup[i].interactable = true;
+			}
+			
+			for(i = 0; i < HelmettoggleGroup.Length; i++){
+				WeapontoggleGroup[i].interactable = true;
+			}
+		} 
+
+		if (GoldDD > 20 && GoldDD <= 40) {
+			HelmettoggleGroup[1].interactable = true;
+			HelmettoggleGroup[4].interactable = true;
+			HelmettoggleGroup[2].interactable = false;
+			HelmettoggleGroup[5].interactable = false;
+
+			ChesttoggleGroup[1].interactable = true;
+			ChesttoggleGroup[4].interactable = true;
+			ChesttoggleGroup[2].interactable = false;
+			ChesttoggleGroup[5].interactable = false;
+
+			BootstoggleGroup[1].interactable = true;
+			BootstoggleGroup[4].interactable = true;
+			BootstoggleGroup[2].interactable = false;
+			BootstoggleGroup[5].interactable = false;
+
+			WeapontoggleGroup[1].interactable = true;
+			WeapontoggleGroup[4].interactable = true;
+			WeapontoggleGroup[2].interactable = false;
+			WeapontoggleGroup[5].interactable = false;
+		}
+
+		if (GoldDD > 0 && GoldDD <= 20) {
+			HelmettoggleGroup[1].interactable = false;
+			HelmettoggleGroup[4].interactable = false;
+			HelmettoggleGroup[2].interactable = false;
+			HelmettoggleGroup[5].interactable = false;
+			
+			ChesttoggleGroup[2].interactable = false;
+			ChesttoggleGroup[5].interactable = false;
+			ChesttoggleGroup[1].interactable = false;
+			ChesttoggleGroup[4].interactable = false;
+			
+			BootstoggleGroup[2].interactable = false;
+			BootstoggleGroup[5].interactable = false;
+			BootstoggleGroup[1].interactable = false;
+			BootstoggleGroup[4].interactable = false;
+			
+			WeapontoggleGroup[2].interactable = false;
+			WeapontoggleGroup[5].interactable = false;
+			WeapontoggleGroup[1].interactable = false;
+			WeapontoggleGroup[4].interactable = false;
+		}
+
+		if (GoldDD == 0) {
+
+			for(i = 0; i < HelmettoggleGroup.Length; i++){
+				HelmettoggleGroup[i].interactable = false;
+			}
+
+			for(i = 0; i < HelmettoggleGroup.Length; i++){
+				ChesttoggleGroup[i].interactable = false;
+			}
+
+			for(i = 0; i < HelmettoggleGroup.Length; i++){
+				BootstoggleGroup[i].interactable = false;
+			}
+
+			for(i = 0; i < HelmettoggleGroup.Length; i++){
+				WeapontoggleGroup[i].interactable = false;
+			}
+
+		}
+
+		HelmettoggleGroup[Equ[0].itemDD].interactable = true;
+		ChesttoggleGroup[Equ[1].itemDD].interactable = true;
+		BootstoggleGroup[Equ[2].itemDD].interactable = true;
+		WeapontoggleGroup[Equ[3].itemDD].interactable = true;
+	}
+	//Chest
+
+	public void tryEqu1(Item a, int index){
+	
+		if(Equ[index] != null ){
+			if (Equ [index].getName () == a.getName ()) {
+				GoldDD += Equ[index].getCost();
+				Equ[index] = null;
+			} else {
+				GoldDD += Equ[index].getCost() - a.getCost();
+				Equ[index] = a;
+			}
+		} else {
+			Equ[index] = a;
+			GoldDD -= a.getCost();
+		}
+
+		RefreshGold ();
+	}
+	
+	public void onToggleChest1()
+	{
+		Chest a = new Chest (0);
+		tryEqu1 (a, 1);
+	}
+	
+	public void onToggleChest2()
+	{
+		Chest a = new Chest (1);
+		tryEqu1 (a , 1);
+	}
+	
+	public void onToggleChest3()
+	{
+		Chest a = new Chest (2);
+		tryEqu1 (a, 1);
+	}
+	
+	public void onToggleChest4()
+	{
+		Chest a = new Chest (3);
+		tryEqu1 (a ,1);
+	}
+	
+	public void onToggleChest5()
+	{
+		Chest a = new Chest (4);
+		tryEqu1 (a ,1);
+	}
+	
+	
+	public void onToggleChest6()
+	{
+		Chest a = new Chest (5);
+		tryEqu1 (a, 1);
+	}
+//BOoots
+	public void onToggleBoots1()
+	{
+		Boots a = new Boots (0);
+		tryEqu1 (a, 2);
+	}
+	
+	public void onToggleBoots2()
+	{
+		Boots a = new Boots (1);
+		tryEqu1 (a, 2);
+	}
+	
+	public void onToggleBoots3()
+	{
+		Boots a = new Boots (2);
+		tryEqu1 (a, 2);
+	}
+	
+	public void onToggleBoots4()
+	{
+		Boots a = new Boots (3);
+		tryEqu1 (a, 2);
+	}
+	
+	public void onToggleBoots5()
+	{
+		Boots a = new Boots (4);
+		tryEqu1 (a, 2);
+	}
+	
+	
+	public void onToggleBoots6()
+	{
+		Boots a = new Boots (5);
+		tryEqu1 (a, 2);
+	}
+
+	//Helmet
+	public void onToggleHelmet1()
+	{
+		Helmet a = new Helmet (0);
+		tryEqu1 (a, 0);
+	}
+	
+	public void onToggleHelmet2()
+	{
+		Helmet a = new Helmet (1);
+		tryEqu1 (a, 0);
+	}
+	
+	public void onToggleHelmet3()
+	{
+		Helmet a = new Helmet (2);
+		tryEqu1 (a, 0);
+	}
+	
+	public void onToggleHelmet4()
+	{
+		Helmet a = new Helmet (3);
+		tryEqu1 (a, 0);
+	}
+	
+	public void onToggleHelmet5()
+	{
+		Helmet a = new Helmet (4);
+		tryEqu1 (a, 0);
+	}
+	
+	
+	public void onToggleHelmet6()
+	{
+		Helmet a = new Helmet (5);
+		tryEqu1 (a, 0);
+	}
+
+	//	Weapon
+	public void onToggleWeapont1()
+	{
+		Weapon a = new Weapon (0);
+		tryEqu1 (a, 3);
+	}
+	
+	public void onToggleWeapon2()
+	{
+		Weapon a = new Weapon (1);
+		tryEqu1 (a, 3);
+	}
+	
+	public void onToggleWeapon3()
+	{
+		Weapon a = new Weapon (2);
+		tryEqu1 (a, 3);
+	}
+	
+	public void onToggleWeapon4()
+	{
+		Weapon a = new Weapon (3);
+		tryEqu1 (a, 3);
+	}
+	
+	public void onToggleWeapon5()
+	{
+		Weapon a = new Weapon (4);
+		tryEqu1 (a, 3);
+	}
+	
+	
+	public void onToggleWeapon6()
+	{
+		Weapon a = new Weapon (5);
+		tryEqu1 (a, 3);
+	}
+
 }
