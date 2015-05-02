@@ -25415,7 +25415,7 @@ GameObject:
   - 114: {fileID: 1039027375}
   - 95: {fileID: 1039027374}
   m_Layer: 5
-  m_Name: Button
+  m_Name: CharacterButton2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30961,7 +30961,7 @@ GameObject:
   - 114: {fileID: 1247832907}
   - 95: {fileID: 1247832906}
   m_Layer: 5
-  m_Name: Button
+  m_Name: CharacterButton3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34683,7 +34683,7 @@ GameObject:
   - 114: {fileID: 1401506265}
   - 95: {fileID: 1401506264}
   m_Layer: 5
-  m_Name: Button
+  m_Name: CharacterButton4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -48893,6 +48893,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1196794940}
+        m_MethodName: getCharacters
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 2023987875}
+          m_ObjectArgumentAssemblyTypeName: Menu, Assembly-CSharp, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &2008828117
@@ -51648,7 +51660,7 @@ GameObject:
   - 114: {fileID: 2116094016}
   - 95: {fileID: 2116094015}
   m_Layer: 5
-  m_Name: Button
+  m_Name: CharacterButton1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
