@@ -39,8 +39,8 @@ public class DBManager : MonoBehaviour {
 			GameObject [] charButtons = new GameObject[5];
 			for (int i = 0; i < numrows; i++)
 			{
-				charButtons[0] = GameObject.Find ("CharacterButton" + (i+1));
-				charButtons[0].GetComponentInChildren<Text>().text = values[i+1];
+				charButtons[0] = GameObject.Find ("CharacterButton" + (i+1 ));
+				charButtons[0].GetComponentInChildren<Text>().text = values[1 + 15*i];
 			}
 			
 		}
