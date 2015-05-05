@@ -20,6 +20,32 @@ public class DBManager : MonoBehaviour {
 	
 	}
 
+	public void getCharacters(Menu menu)
+	{
+		WWWForm form = new WWWForm();
+		form.AddField ("username",loggedInUser);
+		WWW w = new WWW("http://f12-preview.awardspace.net/teiru.ac.dx/getAllUsersCharacter.php",form);
+		StartCoroutine(getChars(w));
+	}
+
+	IEnumerator getChars(WWW w)
+	{
+		yield return w;
+		if (w.error == null) 
+		{
+			string data = w.text;
+			string[] values= data.Split(","[0]);  
+			int numrows = int.Parse(values[0]);
+			GameObject [] charButtons = new GameObject[5];
+			for (int i = 0; i < numrows; i++)
+			{
+				charButtons[0] = GameObject.Find ("CharacterButton" + (i+1 ));
+				charButtons[0].GetComponentInChildren<Text>().text = values[1 + 15*i];
+			}
+			
+		}
+	}
+
 	public void createnewCharacter(Menu menu)
 	{
 		WWWForm form = new WWWForm();
