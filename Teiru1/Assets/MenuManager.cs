@@ -158,15 +158,20 @@ public class MenuManager : MonoBehaviour {
 
 	public void ShowMenuCharacter2(Menu menu){
 		
-		if( GameObject.Find ("CharacterButton3").GetComponentInChildren<Text>().text != "Character name" )
+		if(GameObject.Find ("CharacterButton3").GetComponentInChildren<Text>().text=="Character name")
 		{
+			print ("1");
 			ShowMenu(menu);
+		}
+		else
+		{
+			print ("2");
 		}
 	}
 
 	public void ShowMenuCharacter3(Menu menu){
 		
-		if( DBManager.charButtons[3].GetComponentInChildren<Text>().text != "Character name" )
+		if( GameObject.Find ("CharacterButton4").GetComponentInChildren<Text>().text != "Character name" )
 		{
 			ShowMenu(menu);
 		}
@@ -197,9 +202,8 @@ public class MenuManager : MonoBehaviour {
 	}
 
 	public void ShowMenuCreator3(Menu menu){
-
-
-		if( DBManager.charButtons[3].GetComponentInChildren<Text>().text == "Character name" )
+		
+		if( GameObject.Find ("CharacterButton4").GetComponentInChildren<Text>().text == "Character name" )
 		{
 			ShowMenu(menu);
 		}
