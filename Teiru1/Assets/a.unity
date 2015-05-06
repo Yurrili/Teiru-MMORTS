@@ -22821,7 +22821,7 @@ GameObject:
   - 222: {fileID: 784950358}
   - 114: {fileID: 784950357}
   m_Layer: 5
-  m_Name: LevelTextPlace
+  m_Name: LevelText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25832,11 +25832,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ead998a825ad2c489e521da641bea57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpellButton1: {fileID: 1430811331}
-  SpellButton2: {fileID: 227411681}
-  SpellButton3: {fileID: 1907079619}
-  SpellButton4: {fileID: 2035294322}
-  SpellButton5: {fileID: 1652661750}
 --- !u!1 &900339899
 GameObject:
   m_ObjectHideFlags: 0
@@ -31494,7 +31489,7 @@ GameObject:
   - 222: {fileID: 1077032325}
   - 114: {fileID: 1077032324}
   m_Layer: 5
-  m_Name: ClassTextPlace
+  m_Name: ClassText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35689,6 +35684,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initialMenu: {fileID: 2023987875}
   loginButton: {fileID: 297186454}
+  values: []
 --- !u!95 &1196794938
 Animator:
   serializedVersion: 3
@@ -35736,7 +35732,6 @@ MonoBehaviour:
   txtLoginMessage: {fileID: 2035374782}
   LogedMenu: {fileID: 229318431}
   MainMenu: {fileID: 2023987875}
-  loggedInUser: 
 --- !u!114 &1196794941
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -47465,7 +47460,7 @@ GameObject:
   - 222: {fileID: 1537787120}
   - 114: {fileID: 1537787119}
   m_Layer: 5
-  m_Name: NameTextPlace
+  m_Name: NameText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

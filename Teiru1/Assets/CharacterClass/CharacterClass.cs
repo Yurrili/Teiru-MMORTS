@@ -120,4 +120,5 @@ public class CharacterClass {
 		return className;
 	}
 
+
 }
