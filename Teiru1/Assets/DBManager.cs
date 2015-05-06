@@ -9,6 +9,7 @@ public class DBManager : MonoBehaviour {
 	public Text errorText,txtLoginMessage;
 	public Menu LogedMenu, MainMenu;
 	public string loggedInUser;
+	public static GameObject [] charButtons;
 	
 	void Start () 
 	{
@@ -37,7 +38,7 @@ public class DBManager : MonoBehaviour {
 			string[] values= data.Split(","[0]);  
 			int numrows = int.Parse(values[0]);
 
-			GameObject [] charButtons = new GameObject[5];
+			charButtons = new GameObject[5];
 
 			for (int i = 0; i < numrows; i++)
 			{
@@ -197,7 +198,6 @@ public class DBManager : MonoBehaviour {
 		MenuManager.setCurrentMenu(menu);
 		MenuManager.setCurrentMenuOpenTrue ();
 	}
-
 
 
 }

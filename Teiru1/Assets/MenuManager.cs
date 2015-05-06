@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 
+
 public class MenuManager : MonoBehaviour {
 
 	public static Menu CurrentMenu;
@@ -13,6 +14,7 @@ public class MenuManager : MonoBehaviour {
 	public static GameObject registrationButton;
 	public static GameObject backButton;
 	public GameObject loginButton;
+
 
 	public static void setCurrentMenu(Menu menu)
 	{
@@ -137,7 +139,71 @@ public class MenuManager : MonoBehaviour {
 		
 	}
 
+	
+	public void ShowMenuCharacter(Menu menu){
 
+		if( GameObject.Find ("CharacterButton1").GetComponentInChildren<Text>().text != "Character name" )
+		{
+			ShowMenu(menu);
+		}
+	}
+
+	public void ShowMenuCharacter1(Menu menu){
+		
+		if( GameObject.Find ("CharacterButton2").GetComponentInChildren<Text>().text != "Character name" )
+		{
+			ShowMenu(menu);
+		}
+	}
+
+	public void ShowMenuCharacter2(Menu menu){
+		
+		if( GameObject.Find ("CharacterButton3").GetComponentInChildren<Text>().text != "Character name" )
+		{
+			ShowMenu(menu);
+		}
+	}
+
+	public void ShowMenuCharacter3(Menu menu){
+		
+		if( DBManager.charButtons[3].GetComponentInChildren<Text>().text != "Character name" )
+		{
+			ShowMenu(menu);
+		}
+	}
+	
+	public void ShowMenuCreator(Menu menu){
+
+		if( GameObject.Find ("CharacterButton1").GetComponentInChildren<Text>().text == "Character name" )
+		{
+			ShowMenu(menu);
+		}
+	}
+
+	public void ShowMenuCreator1(Menu menu){
+		
+		if( GameObject.Find ("CharacterButton2").GetComponentInChildren<Text>().text == "Character name" )
+		{
+			ShowMenu(menu);
+		}
+	}
+
+	public void ShowMenuCreator2(Menu menu){
+		
+		if( GameObject.Find ("CharacterButton3").GetComponentInChildren<Text>().text == "Character name" )
+		{
+			ShowMenu(menu);
+		}
+	}
+
+	public void ShowMenuCreator3(Menu menu){
+
+
+		if( DBManager.charButtons[3].GetComponentInChildren<Text>().text == "Character name" )
+		{
+			ShowMenu(menu);
+		}
+	}
 	
 }
 

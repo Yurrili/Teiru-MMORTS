@@ -30291,10 +30291,22 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1196794937}
-        m_MethodName: ShowMenu
+        m_MethodName: ShowMenuCreator1
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1868971874}
+          m_ObjectArgumentAssemblyTypeName: Menu, Assembly-CSharp, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1196794937}
+        m_MethodName: ShowMenuCharacter1
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 897626783}
           m_ObjectArgumentAssemblyTypeName: Menu, Assembly-CSharp, Version=0.0.0.0,
             Culture=neutral, PublicKeyToken=null
           m_IntArgument: 0
@@ -37379,10 +37391,22 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1196794937}
-        m_MethodName: ShowMenu
+        m_MethodName: ShowMenuCreator2
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1868971874}
+          m_ObjectArgumentAssemblyTypeName: Menu, Assembly-CSharp, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1196794937}
+        m_MethodName: ShowMenuCharacter2
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 897626783}
           m_ObjectArgumentAssemblyTypeName: Menu, Assembly-CSharp, Version=0.0.0.0,
             Culture=neutral, PublicKeyToken=null
           m_IntArgument: 0
@@ -42398,10 +42422,22 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1196794937}
-        m_MethodName: ShowMenu
+        m_MethodName: ShowMenuCreator3
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1868971874}
+          m_ObjectArgumentAssemblyTypeName: Menu, Assembly-CSharp, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1196794937}
+        m_MethodName: ShowMenuCharacter3
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 897626783}
           m_ObjectArgumentAssemblyTypeName: Menu, Assembly-CSharp, Version=0.0.0.0,
             Culture=neutral, PublicKeyToken=null
           m_IntArgument: 0
@@ -63511,7 +63547,19 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1196794937}
-        m_MethodName: ShowMenu
+        m_MethodName: ShowMenuCharacter
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 897626783}
+          m_ObjectArgumentAssemblyTypeName: Menu, Assembly-CSharp, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1196794937}
+        m_MethodName: ShowMenuCreator
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1868971874}
