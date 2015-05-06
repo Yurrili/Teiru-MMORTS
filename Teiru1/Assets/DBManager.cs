@@ -8,7 +8,7 @@ public class DBManager : MonoBehaviour {
 	public InputField loginUsername, loginPassword;
 	public Text errorText,txtLoginMessage;
 	public Menu LogedMenu, MainMenu;
-	public string loggedInUser;
+	public static string loggedInUser;
 	public static GameObject [] charButtons;
 	
 	void Start () 
