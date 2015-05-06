@@ -36,7 +36,9 @@ public class DBManager : MonoBehaviour {
 			string data = w.text;
 			string[] values= data.Split(","[0]);  
 			int numrows = int.Parse(values[0]);
+
 			GameObject [] charButtons = new GameObject[5];
+
 			for (int i = 0; i < numrows; i++)
 			{
 				charButtons[0] = GameObject.Find ("CharacterButton" + (i+1 ));
