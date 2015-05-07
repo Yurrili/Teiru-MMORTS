@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class CharacterClass {
 
@@ -12,7 +13,9 @@ public class CharacterClass {
 	private int lvl;
 
 	private int[] Arts;//amount of skills in every lvl of Ranger Arts
-	private Skill[,] SkillList;
+	public Skill[,] SkillList;
+
+	public List<Skill> AvaibleSkills = new List<Skill>();
 
 	public CharacterClass(int BAB, int FORT, int REF, int WILL, int HP, string className){
 		this.BAB = BAB;
@@ -42,12 +45,13 @@ public class CharacterClass {
 			}
 
 	}
+
+
 	
 	public string getSkillDescription(int Rank, int skill){
-		//if (Rank == 0)
+
 			return getSkillListEle(Rank ,skill).getDescription();
-		//else
-	//		return "";
+
 	}
 
 	public int getArts(int a){

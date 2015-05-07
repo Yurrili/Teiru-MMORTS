@@ -5,7 +5,7 @@ public class CharacterClass_Mystiq : CharacterClass {
 	
 
 	public CharacterClass_Mystiq(int CON_)
-		:base(0,2,0,2,6+CON_, "Mage")//6+CON modyficator z CON
+		:base(0,2,0,2,6+CON_, "Mystiq")//6+CON modyficator z CON
 	{
 
 		CreateSkillList ();
@@ -48,10 +48,22 @@ public class CharacterClass_Mystiq : CharacterClass {
 
 
 	public void setLvl(int a) {
-		for( base.getLvl(); base.getLvl() == a; LVLup() );
+		for( base.getLvl(); base.getLvl() < a; LVLup() );
 	}
 
-
+	
+	public void setSkill(string name){
+		
+		for (int i = 0; i < 5; i++) {
+			for(int j = 0; j < 5; j++){
+				if( base.getSkillListEle(i,j) != null){
+					if( base.getSkillListEle(i,j).getSkillName() == name)
+						AvaibleSkills.Add (base.getSkillListEle(i,j));
+				}
+			}
+		}
+		
+	}
 
 	public void CreateSkillList(){
 		
