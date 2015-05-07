@@ -17502,7 +17502,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Character  name
+  m_Text: Character name
 --- !u!222 &607151624
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -25359,7 +25359,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Character  name
+  m_Text: Character name
 --- !u!222 &886652002
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -33235,7 +33235,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Character  name
+  m_Text: Character name
 --- !u!222 &1112521244
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -35448,6 +35448,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initialMenu: {fileID: 2023987875}
   loginButton: {fileID: 297186454}
+  values: []
 --- !u!95 &1196794938
 Animator:
   serializedVersion: 3
@@ -35495,7 +35496,6 @@ MonoBehaviour:
   txtLoginMessage: {fileID: 2035374782}
   LogedMenu: {fileID: 229318431}
   MainMenu: {fileID: 2023987875}
-  loggedInUser: 
 --- !u!114 &1196794941
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -51308,7 +51308,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Character  name
+  m_Text: Character name
 --- !u!222 &1701375006
 CanvasRenderer:
   m_ObjectHideFlags: 0
