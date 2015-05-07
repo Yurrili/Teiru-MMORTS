@@ -16,6 +16,8 @@ public class MenuManager : MonoBehaviour {
 	public GameObject loginButton;
 	public string [] values ;
 
+	public static PlayersCharacter _Character_;
+
 
 	public static void setCurrentMenu(Menu menu)
 	{
@@ -174,6 +176,7 @@ public class MenuManager : MonoBehaviour {
 		{
 			GetCharInformation(GameObject.Find ("CharacterButton4").GetComponentInChildren<Text>().text);
 			ShowMenu(menu);
+
 		}
 	}
 	
@@ -217,6 +220,8 @@ public class MenuManager : MonoBehaviour {
 		form.AddField ("name",charName);
 		WWW w = new WWW("http://f12-preview.awardspace.net/teiru.ac.dx/getCharacterInfo.php",form);
 		StartCoroutine(getChars(w));
+
+
 	}
 
 	IEnumerator getChars(WWW w)
@@ -226,8 +231,12 @@ public class MenuManager : MonoBehaviour {
 		{
 			string data = w.text;
 			this.values = data.Split(","[0]);  
+
 			//$row['name'] . "," . $row['class'] . "," . $row['level'] . "," . $row['str'] . "," . $row['dex'] . "," . $row['con'] . "," . $row['int'] . "," . $row['wis'] . "," . $row['cha'] . "," . $row['helm'] . "," . $row['chest'] . "," . $row['sword'] . "," . $row['boot'] . "," . $row['avatar'] . "," . $row['skills'] . ",";
+			_Character_ = new PlayersCharacter (DBManager.loggedInUser, values [0], int.Parse(values [1]), int.Parse(values [3]), int.Parse(values [4]), int.Parse(values [5]), int.Parse(values [6]), int.Parse(values [7]), int.Parse(values [8]), int.Parse(values [2]));
+			ShowACharacter.DoSth();
 		}
+
 	}
 
 }
