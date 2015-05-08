@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 
+
 public class MenuManager : MonoBehaviour {
 
 	public static Menu CurrentMenu;
@@ -13,6 +14,10 @@ public class MenuManager : MonoBehaviour {
 	public static GameObject registrationButton;
 	public static GameObject backButton;
 	public GameObject loginButton;
+	public string [] values ;
+
+	public static PlayersCharacter _Character_;
+
 
 	public static void setCurrentMenu(Menu menu)
 	{
@@ -137,7 +142,102 @@ public class MenuManager : MonoBehaviour {
 		
 	}
 
-
 	
+	public void ShowMenuCharacter(Menu menu){
+
+		if( GameObject.Find ("CharacterButton1").GetComponentInChildren<Text>().text != "Character name" )
+		{
+			GetCharInformation(GameObject.Find ("CharacterButton1").GetComponentInChildren<Text>().text);
+			ShowMenu(menu);
+		}
+	}
+
+	public void ShowMenuCharacter1(Menu menu){
+		
+		if( GameObject.Find ("CharacterButton2").GetComponentInChildren<Text>().text != "Character name" )
+		{
+			GetCharInformation(GameObject.Find ("CharacterButton2").GetComponentInChildren<Text>().text);
+			ShowMenu(menu);
+		}
+	}
+
+	public void ShowMenuCharacter2(Menu menu){
+		
+		if( GameObject.Find ("CharacterButton3").GetComponentInChildren<Text>().text != "Character name" )
+		{
+			GetCharInformation(GameObject.Find ("CharacterButton3").GetComponentInChildren<Text>().text);
+			ShowMenu(menu);
+		}
+	}
+
+	public void ShowMenuCharacter3(Menu menu){
+		
+		if(GameObject.Find ("CharacterButton4").GetComponentInChildren<Text>().text!= "Character name" )
+		{
+			GetCharInformation(GameObject.Find ("CharacterButton4").GetComponentInChildren<Text>().text);
+			ShowMenu(menu);
+
+		}
+	}
+	
+	public void ShowMenuCreator(Menu menu){
+
+		if( GameObject.Find ("CharacterButton1").GetComponentInChildren<Text>().text == "Character name" )
+		{
+			ShowMenu(menu);
+		}
+	}
+
+	public void ShowMenuCreator1(Menu menu){
+		
+		if( GameObject.Find ("CharacterButton2").GetComponentInChildren<Text>().text == "Character name" )
+		{
+			ShowMenu(menu);
+		}
+	}
+
+	public void ShowMenuCreator2(Menu menu){
+		
+		if( GameObject.Find ("CharacterButton3").GetComponentInChildren<Text>().text == "Character name" )
+		{
+			ShowMenu(menu);
+		}
+	}
+
+	public void ShowMenuCreator3(Menu menu){
+
+
+		if( GameObject.Find ("CharacterButton3").GetComponentInChildren<Text>().text == "Character name" )
+		{
+			ShowMenu(menu);
+		}
+	}
+
+	public void GetCharInformation(string charName)
+	{
+		WWWForm form = new WWWForm();
+		form.AddField ("username",DBManager.loggedInUser);
+		form.AddField ("name",charName);
+		WWW w = new WWW("http://f12-preview.awardspace.net/teiru.ac.dx/getCharacterInfo.php",form);
+		StartCoroutine(getChars(w));
+
+
+	}
+
+	IEnumerator getChars(WWW w)
+	{
+		yield return w;
+		if (w.error == null) 
+		{
+			string data = w.text;
+			this.values = data.Split(","[0]);  
+
+			//$row['name'] . "," . $row['class'] . "," . $row['level'] . "," . $row['str'] . "," . $row['dex'] . "," . $row['con'] . "," . $row['int'] . "," . $row['wis'] . "," . $row['cha'] . "," . $row['helm'] . "," . $row['chest'] . "," . $row['sword'] . "," . $row['boot'] . "," . $row['avatar'] . "," . $row['skills'] . ",";
+			_Character_ = new PlayersCharacter (DBManager.loggedInUser, values [0], int.Parse(values [1]), int.Parse(values [3]), int.Parse(values [4]), int.Parse(values [5]), int.Parse(values [6]), int.Parse(values [7]), int.Parse(values [8]), int.Parse(values [2]), int.Parse(values [9]), int.Parse(values [10]), int.Parse(values [11]), int.Parse(values [12]), values[13], values[14]);
+			ShowACharacter.DoSth();
+		}
+
+	}
+
 }
 

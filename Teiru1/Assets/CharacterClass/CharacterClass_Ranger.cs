@@ -39,6 +39,24 @@ public class CharacterClass_Ranger : CharacterClass {
 		}
 	}
 
+	
+	public void setLvl(int a) {
+		for( base.getLvl(); base.getLvl() < a; LVLup() );
+	}
+
+	
+	public void setSkill(string name){
+		
+		for (int i = 0; i < 5; i++) {
+			for(int j = 0; j < 5; j++){
+				if( base.getSkillListEle(i,j) != null){
+					if( base.getSkillListEle(i,j).getSkillName() == name)
+						AvaibleSkills.Add (base.getSkillListEle(i,j));
+				}
+			}
+		}
+		
+	}
 
 	public void CreateSkillList(){
 		

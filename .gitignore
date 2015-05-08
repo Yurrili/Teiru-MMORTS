@@ -1,10 +1,24 @@
-*.userprefs
-Teiru1/Library/metadata/ad/ad87d354fc39612409ae13dbb0dfef5a
-*.sln
-*.csproj
+Teiru1/Library/metadata/
+Teiru1/Temp/
+Teiru1/Assembly-CSharp-vs.csproj
+Teiru1/Assembly-CSharp.csproj
+Teiru1/Library/CurrentMaximizeLayout.dwlt
+Teiru1/Library/ScriptAssemblies/Assembly-CSharp.dll
+Teiru1/Library/ScriptAssemblies/Assembly-CSharp.dll.mdb
 Teiru1/Teiru1-csharp.sln
-*.sln
-Teiru1/Teiru1-csharp.sln
-Teiru1/Teiru1-csharp.sln
-Teiru1/Temp/UnityLockfile
-Teiru1/Temp/UnityTempFile-9f9fd86b796d9374086653ee2085ed22
+Teiru1/Teiru1.sln
+Teiru1/Teiru1.userprefs
+Teiru1/Library/CurrentLayout.dwlt
+<<<<<<< HEAD
+Teiru1/Library/assetDatabase3
+Teiru1/Library/guidmapper
+=======
+>>>>>>> Equ
+Teiru1/Assets/Tiled2Unity/Meshes/total_map.obj
+Teiru1/Library/ScriptAssemblies/Assembly-CSharp-Editor.dll
+Teiru1/Library/shadercompiler-1.log
+Teiru1/Assets/Tiled2Unity.meta
+Teiru1/Assets/Tiled2Unity/Meshes.meta
+Teiru1/Assets/Tiled2Unity/Meshes/total_map.obj.meta
+Teiru1/a_Data/
+Teiru1/a.exe

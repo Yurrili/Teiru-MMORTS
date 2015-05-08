@@ -8,6 +8,8 @@ public class DBManager : MonoBehaviour {
 	public InputField loginUsername, loginPassword;
 	public Text errorText,txtLoginMessage;
 	public Menu LogedMenu, MainMenu;
+	public static string loggedInUser;
+	public static GameObject [] charButtons;
 	
 	void Start () 
 	{
@@ -19,10 +21,78 @@ public class DBManager : MonoBehaviour {
 	
 	}
 
-	public void LoginButtonClicked(Menu menu)
+	public void getCharacters(Menu menu)
 	{
 		WWWForm form = new WWWForm();
-		form.AddField("username", loginUsername.text.ToString());
+		form.AddField ("username",loggedInUser);
+		WWW w = new WWW("http://f12-preview.awardspace.net/teiru.ac.dx/getAllUsersCharacter.php",form);
+		StartCoroutine(getChars(w));
+	}
+
+	IEnumerator getChars(WWW w)
+	{
+		yield return w;
+		if (w.error == null) 
+		{
+			string data = w.text;
+			string[] values= data.Split(","[0]);  
+			int numrows = int.Parse(values[0]);
+
+			charButtons = new GameObject[5];
+
+			for (int i = 0; i < numrows; i++)
+			{
+				charButtons[0] = GameObject.Find ("CharacterButton" + (i+1 ));
+				charButtons[0].GetComponentInChildren<Text>().text = values[1 + 15*i];
+			}
+			
+		}
+	}
+
+	public void createnewCharacter(Menu menu)
+	{
+		WWWForm form = new WWWForm();
+		form.AddField ("username",loggedInUser);
+		print (loggedInUser);
+		form.AddField ("name",GameObject.Find ("NameTAG").GetComponent<InputField>().textComponent.text);
+		form.AddField ("class", CreatorCharacter.Characterchooseclass);
+		form.AddField ("level", 1);
+		form.AddField ("str",CreatorCharacter.stats.getSTR());
+		form.AddField ("dex",CreatorCharacter.stats.getDEX());
+		form.AddField ("con",CreatorCharacter.stats.getCON());
+		form.AddField ("int",CreatorCharacter.stats.getINT ());
+		form.AddField ("wis",CreatorCharacter.stats.getWIS());
+		form.AddField ("cha",CreatorCharacter.stats.getCHA());
+		form.AddField ("helm", CreatorCharacter.Equ[0].itemDD);
+		form.AddField ("chest", CreatorCharacter.Equ[1].itemDD);
+		form.AddField ("boot", CreatorCharacter.Equ[2].itemDD);
+		form.AddField ("sword", CreatorCharacter.Equ[3].itemDD);
+		form.AddField ("avatar", CreatorCharacter.Avatar);
+		form.AddField ("skills", CreatorCharacter.classCha.getSkillName(CreatorCharacter.aA, CreatorCharacter.bB) );
+		WWW w = new WWW("http://f12-preview.awardspace.net/teiru.ac.dx/charCreate.php",form);
+		StartCoroutine(createChar(w));
+	}
+
+	IEnumerator createChar(WWW w)
+	{
+		yield return w;
+		if (w.error == null) 
+		{
+			GameObject.Find ("ErrorTextCreateCharater").GetComponentInChildren<Text>().text = "Successfully created character";
+		}
+		else
+		{
+			GameObject.Find ("ErrorTextCreateCharater").GetComponentInChildren<Text>().text = "Successfully created character";
+
+			
+		}
+	}
+
+	public void LoginButtonClicked(Menu menu)
+	{
+		loggedInUser = loginUsername.text.ToString ();
+		WWWForm form = new WWWForm();
+		form.AddField("username", loggedInUser);
 		form.AddField("password",loginPassword.text.ToString());
 		WWW w = new WWW("http://f12-preview.awardspace.net/teiru.ac.dx/login.php",form);
 		StartCoroutine(login (w, LogedMenu));
@@ -128,7 +198,6 @@ public class DBManager : MonoBehaviour {
 		MenuManager.setCurrentMenu(menu);
 		MenuManager.setCurrentMenuOpenTrue ();
 	}
-
 
 
 }

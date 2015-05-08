@@ -23,6 +23,29 @@ public class CharacterStats {
 
 	}
 
+	public string getDescription(){
+		string a = "";
+		if (STR != 0)
+			a += "Strenght : +" + STR + "\n";
+
+		if (DEX != 0)
+			a += "Dexterity : +"  + DEX + "\n" ;
+
+		if (CON != 0)
+			a += "Condition : +"  + CON + "\n" ;
+
+		if (INT != 0)
+			a += "Inteligent : +" + INT + "\n" ;
+
+		if (WIS != 0)
+			a += "Wisdom : +"     + WIS + "\n" ;
+
+		if (CHA != 0)
+			a += "Charisma : +"   + CHA + "\n" ;
+					
+		return a;
+	}
+
 	public int getPTS(){
 		return PTS;
 	}
@@ -44,6 +67,25 @@ public class CharacterStats {
 	}
 	public int getCHA(){
 		return CHA;
+	}
+
+	public void setSTR(int s){
+		STR = s;
+	}
+	public void setDEX(int a){
+		DEX = a;
+	}
+	public void setCON(int a){
+		CON = a;
+	}
+	public void setINT(int a){
+		INT = a;
+	}
+	public void setWIS(int a){
+		WIS = a;
+	}
+	public void setCHA(int a){
+		CHA = a; 
 	}
 
 	public int increase(int actualPoints){
