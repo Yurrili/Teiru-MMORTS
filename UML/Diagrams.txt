@@ -1,9 +1,0 @@
-﻿diagram przypadków użycia (ze scenariuszami)                 - UseCase Doagram - 4 - DONE
-diagram klas (wraz ze specyfikacją ograniczeń w języku OCL)  - Class Diagram - IN PROGRESS
-diagramy sekwencji                                           - Sequence Diagram
-diagramy komunikacji(współdziałania/współpracy/kooperacji)   - Communication Diagram
-diagramy stanów i czynności                                  - State Diagram  -DONE
-diagram komponentów i wdrożeń                                - Component Diagram, Deployment Diagram
-
-P.S. diagramy sekwencji, komunikacji i stanów i czynności 
-tylko w odniesieniu do najważniejszych/kluczowych funkcjonalności aplikacji
