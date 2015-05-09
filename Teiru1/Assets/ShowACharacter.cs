@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using System;
 
 public class ShowACharacter : MonoBehaviour {
 
@@ -15,10 +16,11 @@ public class ShowACharacter : MonoBehaviour {
 	static public GameObject Rank3But;
 	static public GameObject Rank4But;
 	static public GameObject Rank5But;
-
+	static public GameObject helmets;
 	static private PlayersCharacter a;
 
-	static private GameObject[] RanksButtons;
+	private static Sprite[] sprites;
+
 
 	static private CharacterClass ActiveCharacter = new CharacterClass_Ranger(8);
 
@@ -34,6 +36,9 @@ public class ShowACharacter : MonoBehaviour {
 		Rank3But = GameObject.Find ("Rank3");
 		Rank4But = GameObject.Find ("Rank4");
 		Rank5But = GameObject.Find ("Rank5");
+
+		helmets = GameObject.Find ("HelmToggleGroup");
+		sprites = Resources.LoadAll<Sprite>("avatars"); 
 	}
 	
 	// Update is called once per frame
@@ -45,6 +50,34 @@ public class ShowACharacter : MonoBehaviour {
 		a = MenuManager._Character_;
 		setData ();
 		ShowonRankButtons ();
+		ShowEqu ();
+
+		ChangeAvatar ();
+		SetSkill ();
+			
+	}
+
+	static public void SetSkill(){
+		Skill[] d = a.Class_.AvaibleSkills.ToArray ();
+
+		try
+		{
+			SpellButton1.text = d [0].getSkillName ();
+		}
+		catch (Exception e){
+			SpellButton1.text = "";
+		}
+		SpellButton2.text = "";
+		SpellButton3.text = "";
+		SpellButton4.text = "";
+		SpellButton5.text = "";
+	}
+
+	static public void ChangeAvatar(){
+		char d = a.Avatar.ToCharArray () [2];
+		int number = int.Parse(d+"");
+
+		GameObject.Find ("A1").GetComponent<Image> ().sprite = sprites[number];
 	}
 
 	static public void setData(){
@@ -56,16 +89,115 @@ public class ShowACharacter : MonoBehaviour {
 		GameObject.Find ("CHAStats").GetComponentInChildren<Text>().text = a.Statistics.getCHA()+"";
 		GameObject.Find ("NameText").GetComponentInChildren<Text> ().text = a.DName;
 		GameObject.Find ("ClassText").GetComponentInChildren<Text> ().text = a.Class_.getClass ();
-		GameObject.Find ("LevelText").GetComponentInChildren<Text> ().text = a.Class_.getLvl ()+"";
+		GameObject.Find ("LevelText").GetComponentInChildren<Text> ().text = a.Class_.getLvl()+"";
+	}
+
+	static public void ShowEqu(){
+
+		if (a.Equ [0].itemDD != 0) {
+			GameObject.Find ("h1").SetActive (false);
+		}
+
+		if (a.Equ [0].itemDD != 1) {
+			GameObject.Find ("h2").SetActive (false);
+		}
+
+		if (a.Equ [0].itemDD != 2) {
+			GameObject.Find ("h3").SetActive (false);
+		}
+
+		if (a.Equ [0].itemDD != 3) {
+			GameObject.Find ("h4").SetActive (false);
+		}
+
+		if (a.Equ [0].itemDD != 4) {
+			GameObject.Find ("h5").SetActive (false);
+		}
+
+		if (a.Equ [0].itemDD != 5) {
+			GameObject.Find ("h6").SetActive (false);
+		}
+
+		if (a.Equ [1].itemDD != 0) {
+			GameObject.Find ("c1").SetActive (false);
+		}
+
+		if (a.Equ [1].itemDD != 1) {
+			GameObject.Find ("c2").SetActive (false);
+		}
+
+		if (a.Equ [1].itemDD != 2) {
+			GameObject.Find ("c3").SetActive (false);
+		}
+
+		if (a.Equ [1].itemDD != 3) {
+			GameObject.Find ("c4").SetActive (false);
+		}
+
+		if (a.Equ [1].itemDD != 4) {
+			GameObject.Find ("c5").SetActive (false);
+		}
+
+		if (a.Equ [1].itemDD != 5) {
+			GameObject.Find ("c6").SetActive (false);
+		}
+
+		if (a.Equ [2].itemDD != 0) {
+			GameObject.Find ("b1").SetActive (false);
+		}
+
+		if (a.Equ [2].itemDD != 1) {
+			GameObject.Find ("b2").SetActive (false);
+		}
+		
+		if (a.Equ [2].itemDD != 2) {
+			GameObject.Find ("b3").SetActive (false);
+		}
+
+		if (a.Equ [2].itemDD != 3) {
+			GameObject.Find ("b4").SetActive (false);
+		}
+
+		if (a.Equ [2].itemDD != 4) {
+			GameObject.Find ("b5").SetActive (false);
+		}
+
+		if (a.Equ [2].itemDD != 5) {
+			GameObject.Find ("b6").SetActive (false);
+		}
+
+		if (a.Equ [3].itemDD != 0) {
+			GameObject.Find ("w1").SetActive (false);
+		}
+
+		if (a.Equ [3].itemDD != 1) {
+			GameObject.Find ("w2").SetActive (false);
+		}
+
+		if (a.Equ [3].itemDD != 2) {
+			GameObject.Find ("w3").SetActive (false);
+		}
+
+		if (a.Equ [3].itemDD != 3) {
+			GameObject.Find ("w4").SetActive (false);
+		}
+
+		if (a.Equ [3].itemDD != 4) {
+			GameObject.Find ("w5").SetActive (false);
+		}
+
+		if (a.Equ [3].itemDD != 5) {
+			GameObject.Find ("w6").SetActive (false);
+		}
 	}
 
 
 	static public void ShowonRankButtons(){
 		
-		Rank2But.SetActive (false);
-		Rank3But.SetActive (false);
-		Rank4But.SetActive (false);
-		Rank5But.SetActive (false);
+		Rank2But.GetComponent<Button> ().interactable = false;
+		Rank3But.GetComponent<Button> ().interactable = false;
+		Rank4But.GetComponent<Button> ().interactable = false;
+		Rank5But.GetComponent<Button> ().interactable = false;
 
 	}
 

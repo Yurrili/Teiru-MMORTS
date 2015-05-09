@@ -207,7 +207,7 @@ public class MenuManager : MonoBehaviour {
 	public void ShowMenuCreator3(Menu menu){
 
 
-		if( DBManager.charButtons[3].GetComponentInChildren<Text>().text == "Character name" )
+		if( GameObject.Find ("CharacterButton3").GetComponentInChildren<Text>().text == "Character name" )
 		{
 			ShowMenu(menu);
 		}
@@ -233,7 +233,7 @@ public class MenuManager : MonoBehaviour {
 			this.values = data.Split(","[0]);  
 
 			//$row['name'] . "," . $row['class'] . "," . $row['level'] . "," . $row['str'] . "," . $row['dex'] . "," . $row['con'] . "," . $row['int'] . "," . $row['wis'] . "," . $row['cha'] . "," . $row['helm'] . "," . $row['chest'] . "," . $row['sword'] . "," . $row['boot'] . "," . $row['avatar'] . "," . $row['skills'] . ",";
-			_Character_ = new PlayersCharacter (DBManager.loggedInUser, values [0], int.Parse(values [1]), int.Parse(values [3]), int.Parse(values [4]), int.Parse(values [5]), int.Parse(values [6]), int.Parse(values [7]), int.Parse(values [8]), int.Parse(values [2]));
+			_Character_ = new PlayersCharacter (DBManager.loggedInUser, values [0], int.Parse(values [1]), int.Parse(values [3]), int.Parse(values [4]), int.Parse(values [5]), int.Parse(values [6]), int.Parse(values [7]), int.Parse(values [8]), int.Parse(values [2]), int.Parse(values [9]), int.Parse(values [10]), int.Parse(values [11]), int.Parse(values [12]), values[13], values[14]);
 			ShowACharacter.DoSth();
 		}
 

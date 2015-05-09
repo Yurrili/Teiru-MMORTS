@@ -1,6 +1,0 @@
-Processor: Intel Celeron Dual Core 1,2GHz
-RAM: 256MB or more
-Graphics Card: Any with 256 or more RAM that can use DirectX 9.0c
-HDD: around 1GB
-Other: constant internet connection (for MP), keyboard, mouse, hands, eyes
-Optional: brain
