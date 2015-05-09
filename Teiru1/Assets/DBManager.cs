@@ -21,6 +21,26 @@ public class DBManager : MonoBehaviour {
 	
 	}
 
+	public void deleteCharacter(Menu menu)
+	{
+		WWWForm form = new WWWForm();
+		form.AddField ("username",loggedInUser);
+		form.AddField ("name", GameObject.Find ("NameText").GetComponentInChildren<Text>().text);
+		WWW w = new WWW("http://f12-preview.awardspace.net/teiru.ac.dx/deleteChar.php",form);
+		StartCoroutine(delChar(w));
+	}
+
+	IEnumerator delChar(WWW w)
+	{
+		yield return w;
+		if (w.error == null) 
+		{
+
+			
+		}
+	}
+
+
 	public void getCharacters(Menu menu)
 	{
 		WWWForm form = new WWWForm();
