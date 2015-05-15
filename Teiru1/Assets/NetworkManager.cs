@@ -5,25 +5,30 @@ public class NetworkManager : MonoBehaviour {
 	
 	
 	private const string typeName = "UniqueGameName";
-	private const string gameName = "RoomName";
+	private const string gameName = "Baboon";
 	private const int maxPlayers = 10;
 	private const int PORT = 55555;
 	private HostData[] hostList;
 	public GameObject playerPrefab;
+	public static GameObject p;
 	
 	void OnServerInitialized()
 	{
 		SpawnPlayer();
+		print ("OnServerInitialized");
 	}
 	
 	void OnConnectedToServer()
 	{
 		SpawnPlayer();
+		print ("OnConnectedInitialized");
 	}
-	
+
+
 	private void SpawnPlayer()
 	{
-		Network.Instantiate(playerPrefab, new Vector3(0f, 5f, 0f), Quaternion.identity, 0);
+		p  = Network.Instantiate(playerPrefab, new Vector3(0f, 5f, 0f), Quaternion.identity, 0) as GameObject;
+		print ("SpawnPlayer" + p.name);
 	}
 	
 	
