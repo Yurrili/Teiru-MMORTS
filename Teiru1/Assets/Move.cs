@@ -4,13 +4,62 @@ using System.Collections;
 public class Move : MonoBehaviour {
 	
 	float speed = 450.0f;
+	private float lastSynchronizationTime = 0f;
+	private float syncDelay = 0f;
+	private float syncTime = 0f;
+	private Vector3 syncStartPosition = Vector3.zero;
+	private Vector3 syncEndPosition = Vector3.zero;
 	
-	void Update() {
+	void Update() 
+	{
+		if (networkView.isMine)
+		{
+			InputMovement();
+		}
+		else
+		{
+			SyncedMovement();
+		}
+	}
 
-		var move = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
-		transform.position += move * speed * Time.deltaTime;
-		int DistanceAway = 310;
-		Vector3 PlayerPOS = GameObject.Find("Player").transform.transform.position;
-		GameObject.Find("Main Camera").transform.position = new Vector3(PlayerPOS.x, PlayerPOS.y, PlayerPOS.z - DistanceAway);
+	void InputMovement()
+	{
+		if (Input.GetKey (KeyCode.W) || Input.GetKey (KeyCode.S) || Input.GetKey (KeyCode.D) || Input.GetKey (KeyCode.A) || Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow))
+		{
+			print ("s");
+			var move = new Vector3 (Input.GetAxis ("Horizontal"), Input.GetAxis ("Vertical"), 0);
+			transform.position += move * speed * Time.deltaTime;
+			rigidbody.MovePosition (rigidbody.position + move * speed * Time.deltaTime);
+			int DistanceAway = 310;
+			Vector3 PlayerPOS = GameObject.Find ("Player").rigidbody.position;
+			GameObject.Find ("Main Camera").transform.position = new Vector3 (PlayerPOS.x, PlayerPOS.y, PlayerPOS.z - DistanceAway);
+		}
+	}
+
+	private void SyncedMovement()
+	{
+		syncTime += Time.deltaTime;
+		rigidbody.position = Vector3.Lerp(syncStartPosition, syncEndPosition, syncTime / syncDelay);
+	}
+
+	void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info)
+	{
+		Vector3 syncPosition = Vector3.zero;
+		if (stream.isWriting)
+		{
+			syncPosition = rigidbody.position;
+			stream.Serialize(ref syncPosition);
+		}
+		else
+		{
+			stream.Serialize(ref syncPosition);
+			
+			syncTime = 0f;
+			syncDelay = Time.time - lastSynchronizationTime;
+			lastSynchronizationTime = Time.time;
+			
+			syncStartPosition = rigidbody.position;
+			syncEndPosition = syncPosition;
+		}
 	}
 }

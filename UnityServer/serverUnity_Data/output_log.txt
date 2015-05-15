@@ -1,0 +1,30 @@
+Initialize engine version: 4.6.0f3 (30840d631a27)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: NVIDIA GeForce GT 555M  (ID=0xdeb)
+    Vendor:   NVIDIA
+    VRAM:     1994 MB
+Begin MonoManager ReloadAssembly
+Platform assembly: E:\GitHub\Teiru-MMORTS\UnityServer\serverUnity_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading E:\GitHub\Teiru-MMORTS\UnityServer\serverUnity_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: E:\GitHub\Teiru-MMORTS\UnityServer\serverUnity_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading E:\GitHub\Teiru-MMORTS\UnityServer\serverUnity_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: E:\GitHub\Teiru-MMORTS\UnityServer\serverUnity_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading E:\GitHub\Teiru-MMORTS\UnityServer\serverUnity_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+- Completed reload, in  0.050 seconds
+desktop: 1366x768 60Hz; virtual: 1366x768 at 0,0
+<RI> Initializing input.
+<RI> Input initialized.
+Platform assembly: E:\GitHub\Teiru-MMORTS\UnityServer\serverUnity_Data\Managed\System.Core.dll (this message is harmless)
+NullReferenceException
+  at (wrapper managed-to-native) UnityEngine.Network:INTERNAL_CALL_Instantiate (UnityEngine.Object,UnityEngine.Vector3&,UnityEngine.Quaternion&,int)
+  at UnityEngine.Network.Instantiate (UnityEngine.Object prefab, Vector3 position, Quaternion rotation, Int32 group) [0x00000] in <filename unknown>:0 
+  at NetworkManager.SpawnPlayer () [0x00000] in <filename unknown>:0 
+  at NetworkManager.OnServerInitialized () [0x00000] in <filename unknown>:0 
+UnityEngine.Network:InitializeServer(Int32, Int32, Boolean)
+NetworkManager:StartServer()
+NetworkManager:OnGUI()
+ 
+(Filename:  Line: -1)
+
