@@ -4,13 +4,13 @@ using System.Collections;
 public class NetworkManager : MonoBehaviour {
 	
 	
-	private const string typeName = "UniqueGameName";
+	private const string typeName = "Teiru";
 	private const string gameName = "Baboon";
 	private const int maxPlayers = 10;
-	private const int PORT = 55555;
 	private HostData[] hostList;
 	public GameObject playerPrefab;
 	public static GameObject p;
+
 	
 	void OnServerInitialized()
 	{
@@ -34,7 +34,7 @@ public class NetworkManager : MonoBehaviour {
 	
 	void StartServer()
 	{
-		Network.InitializeServer(maxPlayers, PORT, !Network.HavePublicAddress());
+		Network.InitializeServer(maxPlayers, 22222, true);
 		MasterServer.RegisterHost(typeName, gameName);
 	}
 
@@ -78,6 +78,7 @@ public class NetworkManager : MonoBehaviour {
 	private void JoinServer(HostData hostData)
 	{
 		Debug.Log("Server Joined");
+		HostData hs = hostData;
 		Network.Connect(hostData);
 	}
 	
