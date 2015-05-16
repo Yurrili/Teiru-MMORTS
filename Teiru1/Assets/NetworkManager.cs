@@ -10,10 +10,12 @@ public class NetworkManager : MonoBehaviour {
 	private HostData[] hostList;
 	public GameObject playerPrefab;
 	public static GameObject p;
+	public NetworkPlayer np1;
 
 	
 	void OnServerInitialized()
 	{
+		np1 = Network.player;
 		SpawnPlayer();
 		print ("OnServerInitialized");
 	}
@@ -22,6 +24,46 @@ public class NetworkManager : MonoBehaviour {
 	{
 		SpawnPlayer();
 		print ("OnConnectedInitialized");
+	}
+
+	void OnDisconnectedFromServer(NetworkDisconnection info) {
+		if (Network.isServer)
+		{
+			Debug.Log("Local server connection disconnected");
+			//Network.RemoveRPCs(np1);
+			//Network.DestroyPlayerObjects(np1);
+		}
+		else
+			if (info == NetworkDisconnection.LostConnection)
+			{
+				Debug.Log("Lost connection to the server");
+			}
+			else
+			{
+			Debug.Log("Successfully diconnected from the server");
+			Network.RemoveRPCs(Network.player);
+			Network.DestroyPlayerObjects(Network.player);
+			}
+	}
+
+	void OnApplicationQuit() {
+		Debug.Log("OnApplicationQuit");
+		Network.RemoveRPCs(Network.player);
+		Network.DestroyPlayerObjects(Network.player);
+
+	}
+
+	void OnFailedToConnect(NetworkConnectionError error) {
+		Debug.Log("Could not connect to server: " + error);
+		Network.RemoveRPCs(Network.player);
+		Network.DestroyPlayerObjects(Network.player);
+	}
+
+	void OnPlayerDisconnected(NetworkPlayer np)
+	{
+		Debug.Log("OnPlayerDisconnected");
+		Network.RemoveRPCs(np);
+		Network.DestroyPlayerObjects(np);
 	}
 
 
@@ -51,10 +93,9 @@ public class NetworkManager : MonoBehaviour {
 			
 			if (hostList != null)
 			{
-				Debug.Log("49");
 				for (int i = 0; i < hostList.Length; i++)
 				{
-					Debug.Log("51");
+
 					if (GUI.Button(new Rect(400, 100 + (110 * i), 300, 100), hostList[i].gameName))
 						JoinServer(hostList[i]);
 				}
