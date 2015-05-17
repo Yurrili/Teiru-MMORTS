@@ -4,10 +4,10 @@ using System.Collections;
 public class NetworkManager : MonoBehaviour {
 	
 	
-	private const string typeName = "UniqueGameName";
+	private const string typeName = "Teiru";
 	private const string gameName = "Baboon";
 	private const int maxPlayers = 10;
-	private const int PORT = 55555;
+	private const int PORT = 22222;
 	private HostData[] hostList;
 	public GameObject playerPrefab;
 	public static GameObject p;
@@ -27,7 +27,7 @@ public class NetworkManager : MonoBehaviour {
 
 	private void SpawnPlayer()
 	{
-		p  = Network.Instantiate(playerPrefab, new Vector3(0f, 5f, 0f), Quaternion.identity, 0) as GameObject;
+		p  = Network.Instantiate(playerPrefab, new Vector3(0f, 5f, 0f), Quaternion.identity, 1) as GameObject;
 		print ("SpawnPlayer" + p.name);
 	}
 	
@@ -80,6 +80,7 @@ public class NetworkManager : MonoBehaviour {
 		Debug.Log("Server Joined");
 		Network.Connect(hostData);
 	}
+
 	
 	/*void OnConnectedToServer()
 	{

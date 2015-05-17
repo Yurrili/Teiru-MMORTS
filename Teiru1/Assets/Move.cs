@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Move : MonoBehaviour {
 	
-	float speed = 450.0f;
+	float speed = 10.0f;
 	private float lastSynchronizationTime = 0f;
 	private float syncDelay = 0f;
 	private float syncTime = 0f;
@@ -20,20 +20,35 @@ public class Move : MonoBehaviour {
 		{
 			SyncedMovement();
 		}
+		Vector3 PlayerPOS = NetworkManager.p.transform.transform.position;
+		GameObject.Find ("Main Camera").transform.position = new Vector3 (PlayerPOS.x, PlayerPOS.y, PlayerPOS.z - 310);
 	}
 
 	void InputMovement()
 	{
 		if (Input.GetKey (KeyCode.W) || Input.GetKey (KeyCode.S) || Input.GetKey (KeyCode.D) || Input.GetKey (KeyCode.A) || Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow))
 		{
-			print ("s");
 			var move = new Vector3 (Input.GetAxis ("Horizontal"), Input.GetAxis ("Vertical"), 0);
 			transform.position += move * speed * Time.deltaTime;
-			rigidbody.MovePosition (rigidbody.position + move * speed * Time.deltaTime);
+			rigidbody.MovePosition (rigidbody.position + move * speed);
 			int DistanceAway = 310;
 			Vector3 PlayerPOS = NetworkManager.p.transform.transform.position;
 			GameObject.Find ("Main Camera").transform.position = new Vector3 (PlayerPOS.x, PlayerPOS.y, PlayerPOS.z - DistanceAway);
 		}
+		else
+		{
+			rigidbody.velocity = new Vector3(0,0,0);
+		}
+	}
+
+	void OnTriggerEnter(Collider other)
+	{
+		this.rigidbody.velocity = Vector3.zero;
+	}
+
+	void OnCollisionEnter(Collision c)
+	{
+		this.rigidbody.velocity = Vector3.zero;
 	}
 
 	private void SyncedMovement()
