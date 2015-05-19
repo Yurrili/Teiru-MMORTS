@@ -7,8 +7,8 @@ public class Move : MonoBehaviour {
 	private float lastSynchronizationTime = 0f;
 	private float syncDelay = 0f;
 	private float syncTime = 0f;
-	private Vector3 syncStartPosition = Vector3.zero;
-	private Vector3 syncEndPosition = Vector3.zero;
+	private Vector3 syncStartPosition = Vector2.zero;
+	private Vector3 syncEndPosition = Vector2.zero;
 	
 	void Update() 
 	{
@@ -26,29 +26,43 @@ public class Move : MonoBehaviour {
 	{
 		if (Input.GetKey (KeyCode.W) || Input.GetKey (KeyCode.S) || Input.GetKey (KeyCode.D) || Input.GetKey (KeyCode.A) || Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow))
 		{
-			print ("s");
-			var move = new Vector3 (Input.GetAxis ("Horizontal"), Input.GetAxis ("Vertical"), 0);
-			transform.position += move * speed * Time.deltaTime;
-			rigidbody.MovePosition (rigidbody.position + move * speed * Time.deltaTime);
+			//print ("s");
+			var move = new Vector2 (Input.GetAxis ("Horizontal"), Input.GetAxis ("Vertical"));
+			//transform.position += move * speed * Time.deltaTime;
+			//rigidbody.MovePosition (rigidbody.position + move * speed * Time.deltaTime);
+			rigidbody2D.MovePosition (rigidbody2D.position + move * speed * Time.deltaTime);
 			int DistanceAway = 310;
-			Vector3 PlayerPOS = NetworkManager.p.transform.transform.position;
-			GameObject.Find ("Main Camera").transform.position = new Vector3 (PlayerPOS.x, PlayerPOS.y, PlayerPOS.z - DistanceAway);
+			Vector2 PlayerPOS = NetworkManager.p.transform.transform.position;
+			GameObject.Find ("Main Camera").transform.position = new Vector3 (PlayerPOS.x, PlayerPOS.y,-310);
 		}
 	}
+
+
+	void OnCollisionEnter2D(Collision2D coll)
+	{
+		string pe = coll.gameObject.name;
+		if (coll.gameObject.name.Contains("(Clone)"))
+		{
+			Debug.Log("fff");
+			Physics2D.IgnoreCollision(coll.collider, NetworkManager.p.collider2D);
+		}
+	}
+
 
 	private void SyncedMovement()
 	{
 		syncTime += Time.deltaTime;
-		rigidbody.position = Vector3.Lerp(syncStartPosition, syncEndPosition, syncTime / syncDelay);
+		rigidbody2D.position = Vector2.Lerp(syncStartPosition, syncEndPosition, syncTime / syncDelay);
 	}
 
 	void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info)
 	{
-		Vector3 syncPosition = Vector3.zero;
+		Vector3 syncPosition = Vector2.zero;
 		if (stream.isWriting)
 		{
-			syncPosition = rigidbody.position;
+			syncPosition = rigidbody2D.position;
 			stream.Serialize(ref syncPosition);
+
 		}
 		else
 		{
@@ -58,7 +72,7 @@ public class Move : MonoBehaviour {
 			syncDelay = Time.time - lastSynchronizationTime;
 			lastSynchronizationTime = Time.time;
 			
-			syncStartPosition = rigidbody.position;
+			syncStartPosition = rigidbody2D.position;
 			syncEndPosition = syncPosition;
 		}
 	}

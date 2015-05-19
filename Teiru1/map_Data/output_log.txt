@@ -14,18 +14,54 @@ Platform assembly: E:\GitHub\Teiru-MMORTS\Teiru1\map_Data\Managed\UnityEngine.UI
 Loading E:\GitHub\Teiru-MMORTS\Teiru1\map_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
 Platform assembly: E:\GitHub\Teiru-MMORTS\Teiru1\map_Data\Managed\ogclient-framework.dll (this message is harmless)
 Loading E:\GitHub\Teiru-MMORTS\Teiru1\map_Data\Managed\ogclient-framework.dll into Unity Child Domain
-- Completed reload, in  0.116 seconds
+- Completed reload, in  0.094 seconds
 desktop: 1366x768 60Hz; virtual: 1366x768 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
 Platform assembly: E:\GitHub\Teiru-MMORTS\Teiru1\map_Data\Managed\System.Core.dll (this message is harmless)
-SpawnPlayerPlayer(Clone)
+SpawnPlayer(Clone)
  
 (Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
 
 OnServerInitialized
  
 (Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+fff
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+fff
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+fff
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+fff
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+fff
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+fff
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+fff
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+OnPlayerDisconnected
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+No objects for the given player ID were deleted 1
+ 
+(Filename:  Line: 1373)
 
 OnApplicationQuit
  

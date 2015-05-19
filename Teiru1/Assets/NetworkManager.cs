@@ -12,7 +12,7 @@ public class NetworkManager : MonoBehaviour {
 	public static GameObject p;
 	public NetworkPlayer np1;
 
-	
+
 	void OnServerInitialized()
 	{
 		np1 = Network.player;
@@ -22,6 +22,7 @@ public class NetworkManager : MonoBehaviour {
 	
 	void OnConnectedToServer()
 	{
+		//playerPrefab.rigidbody2D.gravityScale = 0.1f;
 		SpawnPlayer();
 		print ("OnConnectedInitialized");
 	}
@@ -53,6 +54,7 @@ public class NetworkManager : MonoBehaviour {
 
 	}
 
+
 	void OnFailedToConnect(NetworkConnectionError error) {
 		Debug.Log("Could not connect to server: " + error);
 		Network.RemoveRPCs(Network.player);
@@ -69,7 +71,10 @@ public class NetworkManager : MonoBehaviour {
 
 	private void SpawnPlayer()
 	{
-		p  = Network.Instantiate(playerPrefab, new Vector3(0f, 5f, 0f), Quaternion.identity, 0) as GameObject;
+		playerPrefab.name = DBManager.loggedInUser;
+		//playerPrefab.rigidbody2D.gravityScale = 0.01f;
+		p  = Network.Instantiate(playerPrefab, new Vector3(0f, 0f, 0f), Quaternion.identity, 0) as GameObject;
+		p.rigidbody2D.gravityScale = 0;
 		print ("SpawnPlayer" + p.name);
 	}
 	
@@ -78,6 +83,22 @@ public class NetworkManager : MonoBehaviour {
 	{
 		Network.InitializeServer(maxPlayers, 22222, true);
 		MasterServer.RegisterHost(typeName, gameName);
+	}
+
+	
+	void OnTriggerEnter2D(Collider2D other)
+	{
+		print("Ssas");
+	}
+	
+	void OnCollisionEnter2D(Collision2D coll)
+	{
+		string pe = coll.gameObject.name;
+		if (coll.gameObject.name.Contains("(Clone)"))
+		{
+			Debug.Log("fff");
+			Physics2D.IgnoreCollision(coll.collider, p.collider2D);
+		}
 	}
 
 	
