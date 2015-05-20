@@ -3,7 +3,10 @@ using System.Collections;
 
 public class NetworkManager : MonoBehaviour {
 	
-	
+	public Texture2D buttonsA;
+	public Texture2D buttonsB;
+	public Texture2D inputField;
+	public Texture panel;
 	private const string typeName = "Teiru";
 	private const string gameName = "Baboon";
 	private const int maxPlayers = 10;
@@ -104,20 +107,51 @@ public class NetworkManager : MonoBehaviour {
 	
 	void OnGUI()
 	{
+
+		GUIStyle a = new GUIStyle ();
+		a.alignment = TextAnchor.MiddleCenter;
+		a.normal.background = buttonsA;
+		a.onNormal.background = buttonsA;
+		a.onHover.background = buttonsB;
+		a.hover.background = buttonsB;
+		
+		a.normal.textColor = Color.yellow;
+		a.onNormal.textColor = Color.yellow;
+		a.hover.textColor = Color.yellow;
+		a.onHover.textColor = Color.yellow;
+
+		GUIStyle cStyl = new GUIStyle ();
+		cStyl.normal.background = inputField;
+		a.normal.textColor = Color.yellow;
+
 		if (!Network.isClient && !Network.isServer)
 		{
-			if (GUI.Button(new Rect(100, 100, 250, 100), "Start Server"))
+
+			GUIStyle c = new GUIStyle();
+			c.normal.textColor = Color.yellow;
+
+			GUI.DrawTexture(new Rect(Screen.width/2 - 197, 140, 400, 200), panel, ScaleMode.ScaleToFit);
+
+			GUI.TextArea(new Rect(Screen.width/2 - 120, 180, 250, 50),"Server name", 80, cStyl);
+
+
+			if (GUI.Button(new Rect(Screen.width/2 - 120, 220, 250, 50), "Start Server", a)){
 				StartServer();
-			
-			if (GUI.Button(new Rect(100, 250, 250, 100), "Refresh Hosts"))
+			}
+				
+			GUI.DrawTexture(new Rect(Screen.width/2 - 197, 280, 400, 400), panel, ScaleMode.ScaleToFit);
+
+			if (GUI.Button(new Rect(Screen.width/2 - 120, 310, 250, 50), "Refresh Hosts", a))
 				RefreshHostList();
+
+			GUI.Label(new Rect(Screen.width/2 - 100, 367, 250, 50), "Avaible servers: ", c);
 			
 			if (hostList != null)
 			{
 				for (int i = 0; i < hostList.Length; i++)
 				{
 
-					if (GUI.Button(new Rect(400, 100 + (110 * i), 300, 100), hostList[i].gameName))
+					if (GUI.Button(new Rect(Screen.width/2 - 120, 390 + (60 * i), 250, 50), hostList[i].gameName, a))
 						JoinServer(hostList[i]);
 				}
 			}
