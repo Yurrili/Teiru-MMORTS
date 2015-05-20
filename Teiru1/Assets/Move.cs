@@ -31,9 +31,9 @@ public class Move : MonoBehaviour {
 			//transform.position += move * speed * Time.deltaTime;
 			//rigidbody.MovePosition (rigidbody.position + move * speed * Time.deltaTime);
 			rigidbody2D.MovePosition (rigidbody2D.position + move * speed * Time.deltaTime);
-			int DistanceAway = 310;
+			int DistanceAway = 600;
 			Vector2 PlayerPOS = NetworkManager.p.transform.transform.position;
-			GameObject.Find ("Main Camera").transform.position = new Vector3 (PlayerPOS.x, PlayerPOS.y,-310);
+			GameObject.Find ("Main Camera").transform.position = new Vector3 (PlayerPOS.x, PlayerPOS.y,-600);
 		}
 	}
 
