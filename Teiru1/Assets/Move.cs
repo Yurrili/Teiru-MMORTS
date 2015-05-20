@@ -3,12 +3,19 @@ using System.Collections;
 
 public class Move : MonoBehaviour {
 	
-	float speed = 450.0f;
+	public float speed = 450.0f;
 	private float lastSynchronizationTime = 0f;
 	private float syncDelay = 0f;
 	private float syncTime = 0f;
 	private Vector3 syncStartPosition = Vector2.zero;
 	private Vector3 syncEndPosition = Vector2.zero;
+	private Animator animator;
+
+
+	void Start()
+	{
+		animator = this.GetComponent<Animator> ();
+	}
 	
 	void Update() 
 	{
@@ -28,12 +35,33 @@ public class Move : MonoBehaviour {
 		{
 			//print ("s");
 			var move = new Vector2 (Input.GetAxis ("Horizontal"), Input.GetAxis ("Vertical"));
+			
+			if (move.y > 0)
+			{
+				animator.SetInteger("Direction", 2);
+			}
+			else if (move.y < 0)
+			{
+				animator.SetInteger("Direction", 0);
+			}
+			else if (move.x > 0)
+			{
+				animator.SetInteger("Direction", 3);
+			}
+			else if (move.x < 0)
+			{
+				animator.SetInteger("Direction", 1);
+			}
+			else
+			{
+				animator.SetInteger("Direction", 0);
+			}
 			//transform.position += move * speed * Time.deltaTime;
 			//rigidbody.MovePosition (rigidbody.position + move * speed * Time.deltaTime);
 			rigidbody2D.MovePosition (rigidbody2D.position + move * speed * Time.deltaTime);
 			int DistanceAway = 600;
 			Vector2 PlayerPOS = NetworkManager.p.transform.transform.position;
-			GameObject.Find ("Main Camera").transform.position = new Vector3 (PlayerPOS.x, PlayerPOS.y,-600);
+			GameObject.Find ("Main Camera").transform.position = new Vector3 (PlayerPOS.x, PlayerPOS.y,-60);
 		}
 	}
 
