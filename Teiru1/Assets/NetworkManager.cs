@@ -73,7 +73,7 @@ public class NetworkManager : MonoBehaviour {
 	{
 		playerPrefab.name = DBManager.loggedInUser;
 		//playerPrefab.rigidbody2D.gravityScale = 0.01f;
-		p  = Network.Instantiate(playerPrefab, new Vector3(0f, 0f, 0f), Quaternion.identity, 0) as GameObject;
+		p  = Network.Instantiate(playerPrefab, new Vector3(-8168f, -9298f, 0f), Quaternion.identity, 0) as GameObject;
 		p.rigidbody2D.gravityScale = 0;
 		print ("SpawnPlayer" + p.name);
 	}
