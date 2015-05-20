@@ -35,7 +35,7 @@ public class Move : MonoBehaviour {
 		{
 			//print ("s");
 			var move = new Vector2 (Input.GetAxis ("Horizontal"), Input.GetAxis ("Vertical"));
-			
+			print (move);
 			if (move.y > 0)
 			{
 				animator.SetInteger("Direction", 2);
@@ -52,16 +52,34 @@ public class Move : MonoBehaviour {
 			{
 				animator.SetInteger("Direction", 1);
 			}
-			else
-			{
-				animator.SetInteger("Direction", 0);
-			}
+
 			//transform.position += move * speed * Time.deltaTime;
 			//rigidbody.MovePosition (rigidbody.position + move * speed * Time.deltaTime);
 			rigidbody2D.MovePosition (rigidbody2D.position + move * speed * Time.deltaTime);
 			int DistanceAway = 600;
 			Vector2 PlayerPOS = NetworkManager.p.transform.transform.position;
 			GameObject.Find ("Main Camera").transform.position = new Vector3 (PlayerPOS.x, PlayerPOS.y,-60);
+		}
+		else
+		{
+			switch(animator.GetInteger("Direction"))
+			{
+			case 0:
+				animator.SetInteger("Direction", 4);
+				break;
+			case 1:
+				animator.SetInteger("Direction", 5);
+				break;
+			case 2:
+				animator.SetInteger("Direction", 6);
+				break;
+			case 3:
+				animator.SetInteger("Direction", 7);
+				break;
+			default:
+				animator.SetInteger("Direction", 4);
+				break;
+			}
 		}
 	}
 

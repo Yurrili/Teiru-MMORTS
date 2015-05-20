@@ -68,7 +68,7 @@ Animator:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 49ac4c42e94ffbd4ebb677d1f85b865e, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -85,6 +85,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1850d257f544cda4e980d115bf6b6b3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 450
 --- !u!148 &14800000
 NetworkView:
   m_ObjectHideFlags: 1
