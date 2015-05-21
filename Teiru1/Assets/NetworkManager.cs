@@ -8,8 +8,9 @@ public class NetworkManager : MonoBehaviour {
 	public Texture2D inputField;
 	public Texture panel;
 	private const string typeName = "Teiru";
-	private const string gameName = "Baboon";
+	private string gameName = "Baboon";
 	private const int maxPlayers = 10;
+
 	private HostData[] hostList;
 	public GameObject playerPrefab;
 	public static GameObject p;
@@ -122,7 +123,8 @@ public class NetworkManager : MonoBehaviour {
 
 		GUIStyle cStyl = new GUIStyle ();
 		cStyl.normal.background = inputField;
-		a.normal.textColor = Color.yellow;
+		cStyl.alignment = TextAnchor.MiddleCenter;
+		cStyl.normal.textColor = Color.yellow;
 
 		if (!Network.isClient && !Network.isServer)
 		{
@@ -130,12 +132,13 @@ public class NetworkManager : MonoBehaviour {
 			GUIStyle c = new GUIStyle();
 			c.normal.textColor = Color.yellow;
 
-			GUI.DrawTexture(new Rect(Screen.width/2 - 197, 140, 400, 200), panel, ScaleMode.ScaleToFit);
-
-			GUI.TextArea(new Rect(Screen.width/2 - 120, 180, 250, 50),"Server name", 80, cStyl);
+			GUI.DrawTexture(new Rect(Screen.width/2 - 168, 140, 340, 130), panel, ScaleMode.StretchToFill);
 
 
-			if (GUI.Button(new Rect(Screen.width/2 - 120, 220, 250, 50), "Start Server", a)){
+			gameName = GUI.TextArea(new Rect(Screen.width/2 - 120, 160, 250, 50), gameName, 40, cStyl);
+
+
+			if (GUI.Button(new Rect(Screen.width/2 - 120, 210, 250, 50), "Start Server", a)){
 				StartServer();
 			}
 				
