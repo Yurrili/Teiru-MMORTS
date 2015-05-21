@@ -9,7 +9,7 @@ public class OnScreen : MonoBehaviour {
 	public Texture2D buttonsA;
 	public Texture2D buttonsB;
 
-	public static float Rect_range_Width = Screen.width - 187;
+	public static float Rect_range_Width = Screen.width*2 - 167;
 	public static float Rect_range_hight = 187;
 
 	void OnGUI()
@@ -36,9 +36,11 @@ public class OnScreen : MonoBehaviour {
 		}
 		//-8168f, -9298f
 
-		GUI.DrawTexture(new Rect(Screen.width-205, 5, 200, 200), aTexture, ScaleMode.ScaleToFit);
-		GUI.DrawTexture(new Rect(Rect_range_Width, Rect_range_hight, 15, 15), range, ScaleMode.ScaleToFit);
-
+		if (Network.isClient || Network.isServer)
+		{
+			GUI.DrawTexture(new Rect(Screen.width-205, 5, 200, 200), aTexture, ScaleMode.ScaleToFit);
+			GUI.DrawTexture(new Rect(Rect_range_Width, Rect_range_hight, 15, 15), range, ScaleMode.ScaleToFit);
+		}
 
 	}
 
