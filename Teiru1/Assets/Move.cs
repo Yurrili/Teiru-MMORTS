@@ -9,7 +9,14 @@ public class Move : MonoBehaviour {
 	private float syncTime = 0f;
 	private Vector3 syncStartPosition = Vector2.zero;
 	private Vector3 syncEndPosition = Vector2.zero;
+	private Animator animator;
 
+
+
+	void Start()
+	{
+		animator = this.GetComponent<Animator> ();
+	}
 	
 	void Update() 
 	{
@@ -44,6 +51,43 @@ public class Move : MonoBehaviour {
 			}
 			//print ("s");
 			var move = new Vector2 (Input.GetAxis ("Horizontal"), Input.GetAxis ("Vertical"));
+			if (move.y > 0)
+			{
+				animator.SetInteger("Direction", 2);
+			}
+			else if (move.y < 0)
+			{
+				animator.SetInteger("Direction", 0);
+			}
+			else if (move.x > 0)
+			{
+				animator.SetInteger("Direction", 3);
+			}
+			else if (move.x < 0)
+			{
+				animator.SetInteger("Direction", 1);
+			}
+			else
+			{
+				switch(animator.GetInteger("Direction"))
+				{
+				case 0:
+					animator.SetInteger("Direction", 4);
+					break;
+				case 1:
+					animator.SetInteger("Direction", 5);
+					break;
+				case 2:
+					animator.SetInteger("Direction", 6);
+					break;
+				case 3:
+					animator.SetInteger("Direction", 7);
+					break;
+				default:
+					animator.SetInteger("Direction", 4);
+					break;
+				}
+			}
 			//transform.position += move * speed * Time.deltaTime;
 			//rigidbody.MovePosition (rigidbody.position + move * speed * Time.deltaTime);
 			rigidbody2D.MovePosition (rigidbody2D.position + move * speed * Time.deltaTime);
