@@ -3477,7 +3477,7 @@ MonoBehaviour:
   buttonsB: {fileID: 2800000, guid: 18b7db4fd2161004ebbb02873803defa, type: 3}
   inputField: {fileID: 2800000, guid: a7aadc20a34bfd44e893868add5e9c4f, type: 3}
   panel: {fileID: 2800000, guid: 91eacd2f42b3b3940ab72f21b2af9ae7, type: 3}
-  playerPrefab: {fileID: 100000, guid: cabf5553329406649b2d37e150853205, type: 2}
+  playerPrefab: {fileID: 100000, guid: a72aa5d56f934b8458bbd56909253c49, type: 2}
 --- !u!114 &861252647
 MonoBehaviour:
   m_ObjectHideFlags: 0

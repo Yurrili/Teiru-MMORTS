@@ -15,6 +15,7 @@ public class NetworkManager : MonoBehaviour {
 	public GameObject playerPrefab;
 	public static GameObject p;
 	public NetworkPlayer np1;
+	public static ArrayList playerList;
 
 
 	void OnServerInitialized()
@@ -31,7 +32,8 @@ public class NetworkManager : MonoBehaviour {
 		print ("OnConnectedInitialized");
 	}
 
-	void OnDisconnectedFromServer(NetworkDisconnection info) {
+	void OnDisconnectedFromServer(NetworkDisconnection info) 
+	{
 		if (Network.isServer)
 		{
 			Debug.Log("Local server connection disconnected");
@@ -51,7 +53,8 @@ public class NetworkManager : MonoBehaviour {
 			}
 	}
 
-	void OnApplicationQuit() {
+	void OnApplicationQuit() 
+	{
 		Debug.Log("OnApplicationQuit");
 		Network.RemoveRPCs(Network.player);
 		Network.DestroyPlayerObjects(Network.player);
@@ -59,7 +62,9 @@ public class NetworkManager : MonoBehaviour {
 	}
 
 
-	void OnFailedToConnect(NetworkConnectionError error) {
+
+	void OnFailedToConnect(NetworkConnectionError error) 
+	{
 		Debug.Log("Could not connect to server: " + error);
 		Network.RemoveRPCs(Network.player);
 		Network.DestroyPlayerObjects(Network.player);
@@ -79,12 +84,15 @@ public class NetworkManager : MonoBehaviour {
 		//playerPrefab.rigidbody2D.gravityScale = 0.01f;
 		p  = Network.Instantiate(playerPrefab, new Vector3(-8168f, -9298f, 0f), Quaternion.identity, 0) as GameObject;
 		p.rigidbody2D.gravityScale = 0;
+		playerList.Add (p);
 		print ("SpawnPlayer" + p.name);
 	}
-	
+
+
 	
 	void StartServer()
 	{
+		playerList = new ArrayList ();
 		Network.InitializeServer(maxPlayers, 22222, true);
 		MasterServer.RegisterHost(typeName, gameName);
 	}
@@ -138,7 +146,8 @@ public class NetworkManager : MonoBehaviour {
 			gameName = GUI.TextArea(new Rect(Screen.width/2 - 120, 160, 250, 50), gameName, 40, cStyl);
 
 
-			if (GUI.Button(new Rect(Screen.width/2 - 120, 210, 250, 50), "Start Server", a)){
+			if (GUI.Button(new Rect(Screen.width/2 - 120, 210, 250, 50), "Start Server", a))
+			{
 				StartServer();
 			}
 				

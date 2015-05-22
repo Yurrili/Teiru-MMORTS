@@ -2,19 +2,197 @@ Initialize engine version: 4.6.0f3 (30840d631a27)
 GfxDevice: creating device client; threaded=1
 Direct3D:
     Version:  Direct3D 11.0 [level 11.0]
-    Renderer: NVIDIA GeForce 840M              (ID=0x1341)
+    Renderer: NVIDIA GeForce GT 555M  (ID=0xdeb)
     Vendor:   NVIDIA
-    VRAM:     1993 MB
+    VRAM:     1994 MB
 Begin MonoManager ReloadAssembly
-Platform assembly: C:\Users\Kedam\Documents\Teiru-MMORTS\Teiru1\map_Data\Managed\UnityEngine.dll (this message is harmless)
-Loading C:\Users\Kedam\Documents\Teiru-MMORTS\Teiru1\map_Data\Managed\UnityEngine.dll into Unity Child Domain
-Platform assembly: C:\Users\Kedam\Documents\Teiru-MMORTS\Teiru1\map_Data\Managed\Assembly-CSharp.dll (this message is harmless)
-Loading C:\Users\Kedam\Documents\Teiru-MMORTS\Teiru1\map_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
-Platform assembly: C:\Users\Kedam\Documents\Teiru-MMORTS\Teiru1\map_Data\Managed\UnityEngine.UI.dll (this message is harmless)
-Loading C:\Users\Kedam\Documents\Teiru-MMORTS\Teiru1\map_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
-Platform assembly: C:\Users\Kedam\Documents\Teiru-MMORTS\Teiru1\map_Data\Managed\ogclient-framework.dll (this message is harmless)
-Loading C:\Users\Kedam\Documents\Teiru-MMORTS\Teiru1\map_Data\Managed\ogclient-framework.dll into Unity Child Domain
-- Completed reload, in  0.108 seconds
-desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
+Platform assembly: E:\GitHub\Teiru-MMORTS\Teiru1\map_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading E:\GitHub\Teiru-MMORTS\Teiru1\map_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: E:\GitHub\Teiru-MMORTS\Teiru1\map_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading E:\GitHub\Teiru-MMORTS\Teiru1\map_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: E:\GitHub\Teiru-MMORTS\Teiru1\map_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading E:\GitHub\Teiru-MMORTS\Teiru1\map_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: E:\GitHub\Teiru-MMORTS\Teiru1\map_Data\Managed\ogclient-framework.dll (this message is harmless)
+Loading E:\GitHub\Teiru-MMORTS\Teiru1\map_Data\Managed\ogclient-framework.dll into Unity Child Domain
+- Completed reload, in  0.093 seconds
+desktop: 1366x768 60Hz; virtual: 1366x768 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
+Initialize engine version: 4.6.0f3 (30840d631a27)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: NVIDIA GeForce GT 555M  (ID=0xdeb)
+    Vendor:   NVIDIA
+    VRAM:     1994 MB
+Begin MonoManager ReloadAssembly
+Platform assembly: E:\GitHub\Teiru-MMORTS\Teiru1\map_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading E:\GitHub\Teiru-MMORTS\Teiru1\map_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: E:\GitHub\Teiru-MMORTS\Teiru1\map_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading E:\GitHub\Teiru-MMORTS\Teiru1\map_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: E:\GitHub\Teiru-MMORTS\Teiru1\map_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading E:\GitHub\Teiru-MMORTS\Teiru1\map_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: E:\GitHub\Teiru-MMORTS\Teiru1\map_Data\Managed\ogclient-framework.dll (this message is harmless)
+Loading E:\GitHub\Teiru-MMORTS\Teiru1\map_Data\Managed\ogclient-framework.dll into Unity Child Domain
+- Completed reload, in  0.053 seconds
+desktop: 1366x768 60Hz; virtual: 1366x768 at 0,0
+<RI> Initializing input.
+<RI> Input initialized.
+Platform assembly: E:\GitHub\Teiru-MMORTS\Teiru1\map_Data\Managed\System.Core.dll (this message is harmless)
+The referenced script on this Behaviour is missing!
+ 
+(Filename:  Line: 1788)
+
+Platform assembly: E:\GitHub\Teiru-MMORTS\Teiru1\map_Data\Managed\System.Core.dll (this message is harmless)
+The referenced script on this Behaviour is missing!
+ 
+(Filename:  Line: 1788)
+
+Platform assembly: E:\GitHub\Teiru-MMORTS\Teiru1\map_Data\Managed\System.dll (this message is harmless)
+SpawnPlayer(Clone)
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+OnServerInitialized
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+Platform assembly: E:\GitHub\Teiru-MMORTS\Teiru1\map_Data\Managed\System.dll (this message is harmless)
+Server Joined
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at NetworkManager.SpawnPlayer () [0x00000] in <filename unknown>:0 
+  at NetworkManager.OnConnectedToServer () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+Sending RPC failed because 'showList' parameter 1 was null
+ 
+(Filename:  Line: 380)
+
+Sending RPC failed because 'showList' parameter 1 (System.Collections.ArrayList) is not supported.
+ 
+(Filename:  Line: 470)
+
+Sending RPC failed because 'showList' parameter 1 (System.Collections.ArrayList) is not supported.
+ 
+(Filename:  Line: 470)
+
+Sending RPC failed because 'showList' parameter 1 (System.Collections.ArrayList) is not supported.
+ 
+(Filename:  Line: 470)
+
+Sending RPC failed because 'showList' parameter 1 (System.Collections.ArrayList) is not supported.
+ 
+(Filename:  Line: 470)
+
+Sending RPC failed because 'showList' parameter 1 (System.Collections.ArrayList) is not supported.
+ 
+(Filename:  Line: 470)
+
+Sending RPC failed because 'showList' parameter 1 (System.Collections.ArrayList) is not supported.
+ 
+(Filename:  Line: 470)
+
+Sending RPC failed because 'showList' parameter 1 (System.Collections.ArrayList) is not supported.
+ 
+(Filename:  Line: 470)
+
+Sending RPC failed because 'showList' parameter 1 (System.Collections.ArrayList) is not supported.
+ 
+(Filename:  Line: 470)
+
+Sending RPC failed because 'showList' parameter 1 (System.Collections.ArrayList) is not supported.
+ 
+(Filename:  Line: 470)
+
+Sending RPC failed because 'showList' parameter 1 (System.Collections.ArrayList) is not supported.
+ 
+(Filename:  Line: 470)
+
+Sending RPC failed because 'showList' parameter 1 (System.Collections.ArrayList) is not supported.
+ 
+(Filename:  Line: 470)
+
+Sending RPC failed because 'showList' parameter 1 (System.Collections.ArrayList) is not supported.
+ 
+(Filename:  Line: 470)
+
+Sending RPC failed because 'showList' parameter 1 (System.Collections.ArrayList) is not supported.
+ 
+(Filename:  Line: 470)
+
+Sending RPC failed because 'showList' parameter 1 (System.Collections.ArrayList) is not supported.
+ 
+(Filename:  Line: 470)
+
+Sending RPC failed because 'showList' parameter 1 (System.Collections.ArrayList) is not supported.
+ 
+(Filename:  Line: 470)
+
+Sending RPC failed because 'showList' parameter 1 (System.Collections.ArrayList) is not supported.
+ 
+(Filename:  Line: 470)
+
+Sending RPC failed because 'showList' parameter 1 (System.Collections.ArrayList) is not supported.
+ 
+(Filename:  Line: 470)
+
+Sending RPC failed because 'showList' parameter 1 (System.Collections.ArrayList) is not supported.
+ 
+(Filename:  Line: 470)
+
+Sending RPC failed because 'showList' parameter 1 was null
+ 
+(Filename:  Line: 380)
+
+Sending RPC failed because 'showList' parameter 1 was null
+ 
+(Filename:  Line: 380)
+
+Sending RPC failed because 'showList' parameter 1 was null
+ 
+(Filename:  Line: 380)
+
+Sending RPC failed because 'showList' parameter 1 was null
+ 
+(Filename:  Line: 380)
+
+Sending RPC failed because 'showList' parameter 1 was null
+ 
+(Filename:  Line: 380)
+
+OnApplicationQuit
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+Successfully diconnected from the server
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerOten/UnltyyerDEscgineDceedug.c
+ 
+(Fil:en9am
+e
+: CF/BuleldAgent/work/d6v3dfc6s c5190b6mmand /aotifa ns/Storn
+ 
+(Filename:  Linet: 2463)
+
+ngNo objug.cpp cts Line: 49)
+
+en player ID were deleted 1
+ 
+(Filename:  Line: 1373)
+
+No objects for the given player ID were deleted 1
+ 
+(Filename:  Line: 1373)
+
+OnApplicationQuit
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+Local server connection disconnected
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+

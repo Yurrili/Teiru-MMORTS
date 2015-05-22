@@ -10,7 +10,12 @@ public class Move : MonoBehaviour {
 	private Vector3 syncStartPosition = Vector2.zero;
 	private Vector3 syncEndPosition = Vector2.zero;
 	private Animator animator;
-
+	public Texture2D buttonsA;
+	public Texture2D buttonsB;
+	public Texture panel;
+	private bool fight = false;
+	private bool might = false;
+	private ArrayList l;
 
 
 	void Start()
@@ -91,7 +96,6 @@ public class Move : MonoBehaviour {
 			//transform.position += move * speed * Time.deltaTime;
 			//rigidbody.MovePosition (rigidbody.position + move * speed * Time.deltaTime);
 			rigidbody2D.MovePosition (rigidbody2D.position + move * speed * Time.deltaTime);
-			int DistanceAway = 600;
 			Vector2 PlayerPOS = NetworkManager.p.transform.transform.position;
 			GameObject.Find ("Main Camera").transform.position = new Vector3 (PlayerPOS.x, PlayerPOS.y,-600);
 		}
@@ -100,11 +104,16 @@ public class Move : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D coll)
 	{
-		string pe = coll.gameObject.name;
-		if (coll.gameObject.name.Contains("(Clone)"))
+		if (coll.gameObject.name.Contains ("(Clone)"))
 		{
-			Debug.Log("fff");
-			Physics2D.IgnoreCollision(coll.collider, NetworkManager.p.collider2D);
+			Physics2D.IgnoreCollision (coll.collider, NetworkManager.p.collider2D);
+		//		foreach (NetworkPlayer player in Network.connections) 
+		//		{
+		//			if (player.ipAddress == networkView.owner.ipAddress) 
+		//			{
+		//			networkView.RPC ("startBattle", player, NetworkManager.p.name);
+		//			}
+	//			} 
 		}
 	}
 
@@ -134,6 +143,63 @@ public class Move : MonoBehaviour {
 			
 			syncStartPosition = rigidbody2D.position;
 			syncEndPosition = syncPosition;
+		}
+	}
+
+
+	[RPC]
+	public void startBattle(string name)
+	{
+		fight = true;
+	}
+
+	[RPC]
+	public void showList(string name, ArrayList list)
+	{
+		might = true;
+		l = list;
+	}
+
+	[RPC]
+	public void getList(string name)
+	{
+		networkView.RPC ("showList", RPCMode.Others, new object[] {name, NetworkManager.playerList});
+	}
+
+	void OnGUI()
+	{
+
+		GUIStyle a = new GUIStyle ();
+		a.alignment = TextAnchor.MiddleCenter;
+		a.normal.background = buttonsA;
+		a.onNormal.background = buttonsA;
+		a.onHover.background = buttonsB;
+		a.hover.background = buttonsB;
+		
+		a.normal.textColor = Color.yellow;
+		a.onNormal.textColor = Color.yellow;
+		a.hover.textColor = Color.yellow;
+		a.onHover.textColor = Color.yellow;
+
+		if (GUI.Button (new Rect (Screen.width / 2 - 120, 210, 250, 50), "Wann` fight m8",a)) {
+			networkView.RPC("getList", RPCMode.Server, NetworkManager.p.name);
+		}
+		if (fight) {
+						GUI.DrawTexture(new Rect(Screen.width/2 - 168, 120, 340, 130), panel, ScaleMode.StretchToFill);
+						if (GUI.Button (new Rect (Screen.width / 2 - 120, 210, 250, 50), "Start fight",a)) {
+								print ("asdad");
+						}
+				}
+
+		if (might) {
+			GUI.DrawTexture(new Rect(Screen.width/2 - 197, 280, 400, 400), panel, ScaleMode.ScaleToFit);
+			//ArrayList list = 
+				//for (int i = 0; i < ; i++)
+				{
+					
+					if (GUI.Button(new Rect(Screen.width/2 - 120, 390 + (60 ), 250, 50),"s", a))
+					print ("df");
+				}
 		}
 	}
 }
