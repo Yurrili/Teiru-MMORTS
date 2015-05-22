@@ -61,11 +61,11 @@ public class Move : MonoBehaviour {
 			}
 			else if (move.x > 0)
 			{
-				animator.SetInteger("Direction", 1);
+				animator.SetInteger("Direction", 3);
 			}
 			else if (move.x < 0)
 			{
-				animator.SetInteger("Direction", 3);
+				animator.SetInteger("Direction", 1);
 			}
 			else
 			{

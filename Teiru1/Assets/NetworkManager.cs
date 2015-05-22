@@ -159,6 +159,10 @@ public class NetworkManager : MonoBehaviour {
 				}
 			}
 		}
+
+		if (Network.isClient || Network.isServer) {		
+			GUI.TextArea(new Rect(Screen.width-210,200,209,20),	gameName,40,cStyl);	
+		}
 	}
 	
 	

@@ -9,7 +9,7 @@ public class OnScreen : MonoBehaviour {
 	public Texture2D buttonsA;
 	public Texture2D buttonsB;
 
-	public static float Rect_range_Width = Screen.width*2 - 167;
+	public static float Rect_range_Width = Screen.width - 167;
 	public static float Rect_range_hight = 187;
 
 	void OnGUI()
