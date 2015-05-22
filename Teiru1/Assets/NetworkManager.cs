@@ -10,7 +10,7 @@ public class NetworkManager : MonoBehaviour {
 	private const string typeName = "Teiru";
 	private string gameName = "Baboon";
 	private const int maxPlayers = 10;
-
+	public static string ServerName;
 	private HostData[] hostList;
 	public GameObject playerPrefab;
 	public static GameObject p;
@@ -138,6 +138,7 @@ public class NetworkManager : MonoBehaviour {
 
 			gameName = GUI.TextArea(new Rect(Screen.width/2 - 120, 160, 250, 50), gameName, 40, cStyl);
 
+			ServerName = gameName;
 
 			if (GUI.Button(new Rect(Screen.width/2 - 120, 210, 250, 50), "Start Server", a)){
 				StartServer();
@@ -162,7 +163,9 @@ public class NetworkManager : MonoBehaviour {
 		}
 
 		if (Network.isClient || Network.isServer) {		
-			GUI.TextArea(new Rect(Screen.width-210,200,209,20),	gameName,40,cStyl);	
+			GUI.Label(new Rect(Screen.width-210,200,209,20),	gameName,cStyl);
+			int number_players = Network.connections.Length + 1;
+			GUI.Label(new Rect(Screen.width-210,220,209,20), "Players in game : " +  number_players,cStyl);	
 		}
 	}
 	

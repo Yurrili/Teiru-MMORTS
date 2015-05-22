@@ -8,7 +8,7 @@ public class Chat : MonoBehaviour
 	static public bool show = false;
 	static HostData data;
 	public Vector2 v = new Vector2(0, (Screen.height/2) - (Screen.height/8));
-
+	private bool not_yet = false;
 
 
 	void Update()
@@ -16,7 +16,7 @@ public class Chat : MonoBehaviour
 		//if (show) {
 		if(InputString.Contains("\n"))
 		{
-			SendMessage (InputString, "MyName");
+			SendMessage (InputString, "Me");
 			InputString = "";
 		}
 		//}				
@@ -26,7 +26,7 @@ public class Chat : MonoBehaviour
 	{
 		if (show) 
 		{
-			GUILayout.BeginArea(new Rect(0, Screen.height/3 * 2, (Screen.width/3), (Screen.height/4)));
+			GUILayout.BeginArea(new Rect(5, Screen.height/3 * 2, (Screen.width/3), (Screen.height/4)));
 			v = GUILayout.BeginScrollView(v, "box", GUILayout.Width(Screen.width/3), GUILayout.Height(Screen.height/4));
 			foreach(ChatMessage m in messages)
 			{
@@ -34,8 +34,14 @@ public class Chat : MonoBehaviour
 			}
 			GUILayout.EndScrollView ();
 			GUILayout.EndArea();
-			InputString = GUI.TextArea(new Rect(0, (Screen.height/16 * 15), Screen.width/3, Screen.height/16), InputString);
+			InputString = GUI.TextArea(new Rect(5, (Screen.height/16 * 15), Screen.width/3, Screen.height/16), InputString);
 
+
+			if(not_yet == false){
+				string cd = "You've been connected to server: " + NetworkManager.ServerName;
+				SendMessage ( cd , "Server");
+				not_yet = true;
+			}
 		}                             
 	}
 
