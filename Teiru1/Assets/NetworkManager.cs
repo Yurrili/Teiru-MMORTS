@@ -80,6 +80,7 @@ public class NetworkManager : MonoBehaviour {
 		p  = Network.Instantiate(playerPrefab, new Vector3(-8168f, -9298f, 0f), Quaternion.identity, 0) as GameObject;
 		p.rigidbody2D.gravityScale = 0;
 		print ("SpawnPlayer" + p.name);
+		Chat.show = true;
 	}
 	
 	
@@ -183,6 +184,7 @@ public class NetworkManager : MonoBehaviour {
 		Debug.Log("Server Joined");
 		HostData hs = hostData;
 		Network.Connect(hostData);
+		Chat.ReceiveData (hs);
 	}
 	
 	/*void OnConnectedToServer()
