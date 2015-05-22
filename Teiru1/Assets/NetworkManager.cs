@@ -183,6 +183,8 @@ public class NetworkManager : MonoBehaviour {
 		Debug.Log("Server Joined");
 		HostData hs = hostData;
 		Network.Connect(hostData);
+		Chat.ReceiveData (hs);
+		Chat.Show ();
 	}
 	
 	/*void OnConnectedToServer()
