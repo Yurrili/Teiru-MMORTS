@@ -6,6 +6,7 @@ public class NetworkManager : MonoBehaviour {
 	public Texture2D buttonsA;
 	public Texture2D buttonsB;
 	public Texture2D inputField;
+	public Texture2D HP;
 	public Texture panel;
 	private const string typeName = "Teiru";
 	private string gameName = "Baboon";
@@ -127,6 +128,10 @@ public class NetworkManager : MonoBehaviour {
 		cStyl.alignment = TextAnchor.MiddleCenter;
 		cStyl.normal.textColor = Color.yellow;
 
+		GUIStyle hp = new GUIStyle ();
+		hp.normal.background = HP;
+		hp.normal.textColor = Color.yellow;
+
 		if (!Network.isClient && !Network.isServer)
 		{
 
@@ -166,6 +171,10 @@ public class NetworkManager : MonoBehaviour {
 			GUI.Label(new Rect(Screen.width-210,200,209,20),	gameName,cStyl);
 			int number_players = Network.connections.Length + 1;
 			GUI.Label(new Rect(Screen.width-210,220,209,20), "Players in game : " +  number_players,cStyl);	
+			//HealthBar
+
+			GUI.Box(new Rect(400, 10,100,  5), "HP");
+			GUI.Box(new Rect(400, 10,80,  5), "LVL 1", hp);
 		}
 	}
 	
