@@ -1,5 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Xml.Serialization; 
+using System.Collections.Generic;
+using System.IO;
+using System;
+using System.Runtime.Serialization.Formatters.Binary;
 
 public class Move : MonoBehaviour {
 	
@@ -14,14 +19,43 @@ public class Move : MonoBehaviour {
 	public Texture2D buttonsB;
 	public Texture panel;
 	private bool fight = false;
-	private bool might = false;
-	private ArrayList l;
+	public static bool might = false;
+	public static List<NetworkViewID> l;
 
 
 	void Start()
 	{
 		animator = this.GetComponent<Animator> ();
+		l = new  List<NetworkViewID> ();
+		if (Network.isClient)
+		{
+			networkView.RPC("addPlayer",RPCMode.Server, networkView.viewID);
+		}
+		else
+		{
+			l.Add (networkView.viewID);
+		}
 	}
+
+	[RPC]
+	public void addPlayer(NetworkViewID p)
+	{
+		l.Add (p);
+	}
+
+	[RPC]
+	public void retList(int i)
+	{
+		networkView.RPC("getList", RPCMode.Others, l[i]);
+	}
+	
+	[RPC]
+	public void getList(NetworkViewID id)
+	{
+		l.Add (id);
+		might = true;
+	}
+
 	
 	void Update() 
 	{
@@ -102,6 +136,7 @@ public class Move : MonoBehaviour {
 	}
 
 
+
 	void OnCollisionEnter2D(Collision2D coll)
 	{
 		if (coll.gameObject.name.Contains ("(Clone)"))
@@ -154,17 +189,12 @@ public class Move : MonoBehaviour {
 	}
 
 	[RPC]
-	public void showList(string name, ArrayList list)
+	public void showList(string name, string h)
 	{
-		might = true;
-		l = list;
+
 	}
 
-	[RPC]
-	public void getList(string name)
-	{
-		networkView.RPC ("showList", RPCMode.Others, new object[] {name, NetworkManager.playerList});
-	}
+
 
 	void OnGUI()
 	{
@@ -181,24 +211,42 @@ public class Move : MonoBehaviour {
 		a.hover.textColor = Color.yellow;
 		a.onHover.textColor = Color.yellow;
 
-		if (GUI.Button (new Rect (Screen.width / 2 - 120, 210, 250, 50), "Wann` fight m8",a)) {
-			networkView.RPC("getList", RPCMode.Server, NetworkManager.p.name);
+	
+		if (fight) 
+		{
+			GUI.DrawTexture(new Rect(Screen.width/2 - 168, 120, 340, 130), panel, ScaleMode.StretchToFill);
+			if (GUI.Button (new Rect (Screen.width / 4 - 120, 210, 250, 50), "Start fight",a)) 
+			{
+				print ("asdad");
+			}
 		}
-		if (fight) {
-						GUI.DrawTexture(new Rect(Screen.width/2 - 168, 120, 340, 130), panel, ScaleMode.StretchToFill);
-						if (GUI.Button (new Rect (Screen.width / 2 - 120, 210, 250, 50), "Start fight",a)) {
-								print ("asdad");
-						}
-				}
 
-		if (might) {
-			GUI.DrawTexture(new Rect(Screen.width/2 - 197, 280, 400, 400), panel, ScaleMode.ScaleToFit);
-			//ArrayList list = 
-				//for (int i = 0; i < ; i++)
+		if (Network.isClient || Network.isServer) {		
+			if (GUI.Button (new Rect (Screen.width / 2 - 120, 210, 250, 50), "Wann` fight m8",a)) 
+			{
+				if (Network.isClient)
 				{
-					
-					if (GUI.Button(new Rect(Screen.width/2 - 120, 390 + (60 ), 250, 50),"s", a))
+					for (int i =0;i<Network.connections.Length;i++)
+					{
+						networkView.RPC ("retList", RPCMode.Server,i);
+					}
+				}
+				else
+				{
+					might = true;
+				}
+			}
+		}
+
+		if (might) 
+		{
+			GUI.DrawTexture(new Rect(Screen.width/4 - 197, 280, 400, 400), panel, ScaleMode.ScaleToFit);
+				for (int i = 0; i < l.Count ; i++)
+				{
+				if (GUI.Button(new Rect(Screen.width/4 - 120, 390 + (60 * i), 250, 50), NetworkView.Find(l[i]).gameObject.name , a))
+					{
 					print ("df");
+					}
 				}
 		}
 	}
