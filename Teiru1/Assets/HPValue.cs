@@ -25,6 +25,14 @@ public class HPValue {
 	public void setHPmod(int mod){
 		HPmod = mod;	
 	}
+
+	public int getMAXHP(){
+		return MAXHP;
+	}
+
+	public int getCurrentHP(){
+		return CurrentHP;
+	}
 	
 	public void setMaxHP(int max){
 		int temp = MAXHP - max;
@@ -37,22 +45,22 @@ public class HPValue {
 		CalculateHP ();
 	}
 
-	private string getState(){
+	public string getState(){
 
 		if (CurrentHP > 0) {
-			return " alive :" + CurrentHP + " HP ";		
+			return " alive ";	
 		} else {
 
 			if(CurrentHP == 0){
-				return " wounded :" + CurrentHP + " HP "; //W każdej turze postać może wykonać tylko jedną akcję ruchu lub akcję standardową 
+				return " wounded"; //W każdej turze postać może wykonać tylko jedną akcję ruchu lub akcję standardową 
 									//(ale nie obie i nie ma prawa do akcji Po zakończeniu działania postać otrzymuje jedną ranę.
 			}	else {
 
 				if(CurrentHP < 0 && CurrentHP >= -9){
-					return " dying :" + CurrentHP + " HP "; // Umierający bohater natychmiast traci przytomność i nie może wykonywać żadnych 		akcji.
+					return " dying"; // Umierający bohater natychmiast traci przytomność i nie może wykonywać żadnych 		akcji.
 										//Umierający bohater w każdej rundzie traci 1 punkt wytrzymałości,
 				}	else {
-					return " dead :" + CurrentHP + " HP "; // Kiedy aktualne punkty wytrzymałości bohatera spadną do wartości –10 , umiera. 
+					return " dead "; // Kiedy aktualne punkty wytrzymałości bohatera spadną do wartości –10 , umiera. 
 									//I przestaje brać udział w pojedynku, nie może zostać już uleczony.
 				}
 

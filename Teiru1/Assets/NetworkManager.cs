@@ -13,14 +13,23 @@ public class NetworkManager : MonoBehaviour {
 	private const string typeName = "Teiru";
 	private string gameName = "Baboon";
 	private const int maxPlayers = 10;
+	public static string ServerName;
 
 	private HostData[] hostList;
 	public GameObject playerPrefab;
 	public static GameObject p;
 	public NetworkPlayer np1;
 	public static List<NetworkViewID> playerList;
+<<<<<<< HEAD
 	string name2 = "";
 	public static List<string> playerName;
+=======
+
+	public static string skak = "";
+
+	public static List<string> khg = new List<string>();
+
+>>>>>>> GodCalledTheLightDay
 
 	void OnServerInitialized()
 	{
@@ -31,7 +40,6 @@ public class NetworkManager : MonoBehaviour {
 	
 	void OnConnectedToServer()
 	{
-		//playerPrefab.rigidbody2D.gravityScale = 0.1f;
 		SpawnPlayer();
 		print ("OnConnectedInitialized");
 	}
@@ -87,6 +95,7 @@ public class NetworkManager : MonoBehaviour {
 		playerList.Add (p);
 	}
 
+<<<<<<< HEAD
 
 	private void SpawnPlayer()
 	{
@@ -97,6 +106,22 @@ public class NetworkManager : MonoBehaviour {
 		p  = Network.Instantiate(playerPrefab, new Vector3(-8168f, -9298f, 0f), Quaternion.identity, 0) as GameObject;
 		p.rigidbody2D.gravityScale = 0;
 	//	p.name = MenuManager._Character_.DName;
+=======
+	[RPC]
+	public void asd(string h)
+	{
+		skak = h;
+		khg.Add (h);
+	}
+
+
+	private void SpawnPlayer()
+	{
+		//playerPrefab.rigidbody2D.gravityScale = 0.01f;
+		p  = Network.Instantiate(playerPrefab, new Vector3(-8168f, -9298f, 0f), Quaternion.identity, 0) as GameObject;
+		p.rigidbody2D.gravityScale = 0;
+		networkView.RPC ("asd", RPCMode.AllBuffered,MenuManager._Character_.DName );
+>>>>>>> GodCalledTheLightDay
 	/*	if (Network.isClient)
 		{
 			networkView.RPC("addPlayer",RPCMode.Server, Move.getId());
@@ -140,6 +165,7 @@ public class NetworkManager : MonoBehaviour {
 	void OnGUI()
 	{
 
+
 		GUIStyle a = new GUIStyle ();
 		a.alignment = TextAnchor.MiddleCenter;
 		a.normal.background = buttonsA;
@@ -167,7 +193,7 @@ public class NetworkManager : MonoBehaviour {
 
 
 			gameName = GUI.TextArea(new Rect(Screen.width/2 - 120, 160, 250, 50), gameName, 40, cStyl);
-
+			ServerName = gameName;
 
 			if (GUI.Button(new Rect(Screen.width/2 - 120, 210, 250, 50), "Start Server", a))
 			{
@@ -199,7 +225,11 @@ public class NetworkManager : MonoBehaviour {
 		}
 
 		if (Network.isClient || Network.isServer) {		
-			GUI.TextArea(new Rect(Screen.width-210,200,209,20),	gameName,40,cStyl);	
+			GUI.Label(new Rect(Screen.width-210,200,209,20), gameName, cStyl);
+			int number_players = Network.connections.Length + 1;
+			GUI.Label(new Rect(Screen.width-210,220,209,20), "Players in game : " +  number_players,cStyl);	
+
+		}
 		/*	if (GUI.Button (new Rect (Screen.width / 2 - 120, 210, 250, 50), "Wann` fight m8",a)) 
 			{
 				if (Network.isClient)
@@ -215,7 +245,7 @@ public class NetworkManager : MonoBehaviour {
 					Move.might = true;
 				}
 			}*/
-		}
+		
 	}
 
 	/*[RPC]

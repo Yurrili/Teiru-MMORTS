@@ -15,12 +15,19 @@ public class Move : MonoBehaviour {
 	private Vector3 syncStartPosition = Vector2.zero;
 	private Vector3 syncEndPosition = Vector2.zero;
 	private Animator animator;
+	private bool hide = true;
+	private bool hide1 = true;
+
 	public Texture2D buttonsA;
 	public Texture2D buttonsB;
-	public Texture panel;
+	public Texture2D inputField;
+
+	public Texture2D panel;
+
 	private bool fight = false;
 	public static bool might = false;
 	public static List<NetworkViewID> l = new  List<NetworkViewID> ();
+<<<<<<< HEAD
 	int counter =0;
 	bool got = false;
 	string hhhh= "";
@@ -35,12 +42,30 @@ public class Move : MonoBehaviour {
 		animator = this.GetComponent<Animator> ();
 		
 		if (Network.isClient)
+=======
+	bool got = false;
+	public int counter = 0;
+
+	void Start()
+	{
+		//NetworkManager.p.name = MenuManager._Character_.DName;
+		NetworkView.Find(networkView.viewID).gameObject.name= NetworkManager.skak;
+		if (NetworkView.Find(networkView.viewID).gameObject.name!="Main camera"  && got == false)
+>>>>>>> GodCalledTheLightDay
 		{
-			networkView.RPC("addPlayer",RPCMode.Server, networkView.viewID);
+			animator = this.GetComponent<Animator> ();			
+			if (Network.isClient)
+			{
+				networkView.RPC("addPlayer",RPCMode.Server, networkView.viewID);
+			}
+			else
+			{
+				l.Add (networkView.viewID);
+			}
 		}
 		else
 		{
-			l.Add (networkView.viewID);
+			got = false;
 		}
 		}
 		else
@@ -54,8 +79,13 @@ public class Move : MonoBehaviour {
 	{
 		if (!l.Contains(p))
 		{
+<<<<<<< HEAD
 		got = true;
 		l.Add (p);
+=======
+			got = true;
+			l.Add (p);
+>>>>>>> GodCalledTheLightDay
 		}
 	}
 
@@ -69,13 +99,27 @@ public class Move : MonoBehaviour {
 	public void getList(NetworkViewID id)
 	{
 		l.Add (id);
+<<<<<<< HEAD
 	//	might = true;
 	}
 
+=======
+	}
+	
+>>>>>>> GodCalledTheLightDay
 	[RPC]
 	public void getCount()
 	{
 		networkView.RPC("setCount", RPCMode.Others,l.Count);
+<<<<<<< HEAD
+=======
+	}
+	
+	[RPC]
+	public void setCount(int i)
+	{
+		counter = i;
+>>>>>>> GodCalledTheLightDay
 	}
 
 	[RPC]
@@ -166,16 +210,12 @@ public class Move : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D coll)
 	{
-		if (coll.gameObject.name.Contains ("(Clone)"))
+		//map_final
+		if (coll.gameObject.name != "map_final")
 		{
+			string j = coll.gameObject.name;
+			string h = NetworkManager.p.name;
 			Physics2D.IgnoreCollision (coll.collider, NetworkManager.p.collider2D);
-		//		foreach (NetworkPlayer player in Network.connections) 
-		//		{
-		//			if (player.ipAddress == networkView.owner.ipAddress) 
-		//			{
-		//			networkView.RPC ("startBattle", player, NetworkManager.p.name);
-		//			}
-	//			} 
 		}
 	}
 
@@ -214,8 +254,15 @@ public class Move : MonoBehaviour {
 	{
 		might = false;
 		fight = true;
+		might = false;
 	}
 
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> GodCalledTheLightDay
 
 	void OnGUI()
 	{
@@ -233,8 +280,15 @@ public class Move : MonoBehaviour {
 		a.onHover.textColor = Color.yellow;
 
 	
+		GUIStyle cStyl = new GUIStyle ();
+		cStyl.normal.background = inputField;
+		cStyl.alignment = TextAnchor.MiddleCenter;
+		cStyl.normal.textColor = Color.yellow;
+
+
 		if (fight) 
 		{
+<<<<<<< HEAD
 			GUI.DrawTexture(new Rect(Screen.width/2 - 168, 120, 340, 130), panel, ScaleMode.StretchToFill);
 			if (GUI.Button (new Rect (Screen.width / 4 - 120, 210, 250, 50),hhhh + "wants to fight",a)) 
 			{
@@ -245,10 +299,33 @@ public class Move : MonoBehaviour {
 		if (Network.isClient || Network.isServer)
 		{		
 			if (GUI.Button (new Rect (Screen.width / 2 - 120, 210, 250, 50), "Wann` fight m8",a)) 
+=======
+
+
+				GUI.DrawTexture(new Rect(Screen.width/2 - 168, 120, 340, 130), panel, ScaleMode.StretchToFill);
+				if (GUI.Button (new Rect (Screen.width / 2 - 160, 100, 250, 50), "Start fight",a)) 
+				{
+					print ("asdad");
+				}
+
+		}
+
+		if (Network.isClient || Network.isServer) 
+		{		
+			if (GUI.Button (new Rect (228 , 5, 120, 40), "Fight",a)) 
+>>>>>>> GodCalledTheLightDay
 			{
 				networkView.RPC("getCount",RPCMode.Server);
 				if (Network.isClient)
 				{
+<<<<<<< HEAD
+=======
+				l = new  List<NetworkViewID>();
+				}
+				networkView.RPC("getCount",RPCMode.Server);
+				if (Network.isClient)
+				{
+>>>>>>> GodCalledTheLightDay
 					for (int i =0;i<counter;i++)
 					{
 						networkView.RPC ("retList", RPCMode.Server,i);
@@ -258,21 +335,52 @@ public class Move : MonoBehaviour {
 				else
 				{
 					might = true;
+					hide1 = true;
+					hide = true;
 				}
 			}
 		}
 
 		if (might) 
+<<<<<<< HEAD
 		{
 
 			GUI.DrawTexture(new Rect(Screen.width/4 - 197, 280, 400, 400), panel, ScaleMode.ScaleToFit);
 				for (int i = 0; i < l.Count ; i++)
+=======
+		{		
+				if(hide1 == true)
+>>>>>>> GodCalledTheLightDay
 				{
-				if (GUI.Button(new Rect(Screen.width/4 - 120, 390 + (60 * i), 250, 50), NetworkView.Find(l[i]).gameObject.name , a))
-					{
-					networkView.RPC ("startBattle", NetworkView.Find(l[i]).owner,NetworkView.Find(l[i]).gameObject.name );
-					}
+					GUI.DrawTexture(new Rect(20, 120, 200, 300), panel, ScaleMode.StretchToFill);
+					GUI.Label(new Rect(18, 120, 205, 20), "Available users : ", cStyl);
 				}
+
+		
+				if( hide == true )
+				{
+					for (int i = 0; i < l.Count ; i++)
+					{
+<<<<<<< HEAD
+					networkView.RPC ("startBattle", NetworkView.Find(l[i]).owner,NetworkView.Find(l[i]).gameObject.name );
+=======
+						if (GUI.Button(new Rect(30 , 140 + (60 * i), 180, 40), NetworkManager.khg[l.Count-i-1] , a))
+						{
+						networkView.RPC ("startBattle", NetworkView.Find(l[i]).owner,NetworkManager.khg[i] );
+						}	
+>>>>>>> GodCalledTheLightDay
+					}
+
+					if (GUI.Button(new Rect(195, 120, 20, 20), "X" , a))
+					{
+						hide1 = false;
+						hide = false;
+					}
+
+				}
+
+
+
 		}
 	}
 }
