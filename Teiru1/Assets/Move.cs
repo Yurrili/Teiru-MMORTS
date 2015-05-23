@@ -22,12 +22,15 @@ public class Move : MonoBehaviour {
 	public static bool might = false;
 	public static List<NetworkViewID> l = new  List<NetworkViewID> ();
 	int counter =0;
+	bool got = false;
+	string hhhh= "";
 
 
 	void Start()
 	{
+		NetworkManager.p.name = MenuManager._Character_.DName;
 		string p = NetworkView.Find (networkView.viewID).gameObject.name;
-		if (NetworkView.Find(networkView.viewID).gameObject.name!="Main camera")
+		if (NetworkView.Find(networkView.viewID).gameObject.name!="Main camera"  && got == false)
 		{
 		animator = this.GetComponent<Animator> ();
 		
@@ -40,6 +43,10 @@ public class Move : MonoBehaviour {
 			l.Add (networkView.viewID);
 		}
 		}
+		else
+		{
+			got = false;
+		}
 	}
 
 	[RPC]
@@ -47,6 +54,7 @@ public class Move : MonoBehaviour {
 	{
 		if (!l.Contains(p))
 		{
+		got = true;
 		l.Add (p);
 		}
 	}
@@ -61,7 +69,7 @@ public class Move : MonoBehaviour {
 	public void getList(NetworkViewID id)
 	{
 		l.Add (id);
-		might = true;
+	//	might = true;
 	}
 
 	[RPC]
@@ -204,6 +212,7 @@ public class Move : MonoBehaviour {
 	[RPC]
 	public void startBattle(string name)
 	{
+		might = false;
 		fight = true;
 	}
 
@@ -227,7 +236,7 @@ public class Move : MonoBehaviour {
 		if (fight) 
 		{
 			GUI.DrawTexture(new Rect(Screen.width/2 - 168, 120, 340, 130), panel, ScaleMode.StretchToFill);
-			if (GUI.Button (new Rect (Screen.width / 4 - 120, 210, 250, 50), "Start fight",a)) 
+			if (GUI.Button (new Rect (Screen.width / 4 - 120, 210, 250, 50),hhhh + "wants to fight",a)) 
 			{
 				print ("asdad");
 			}
@@ -240,10 +249,11 @@ public class Move : MonoBehaviour {
 				networkView.RPC("getCount",RPCMode.Server);
 				if (Network.isClient)
 				{
-					for (int i =0;i<Network.connections.Length;i++)
+					for (int i =0;i<counter;i++)
 					{
 						networkView.RPC ("retList", RPCMode.Server,i);
 					}
+					might = true;
 				}
 				else
 				{
@@ -256,11 +266,11 @@ public class Move : MonoBehaviour {
 		{
 
 			GUI.DrawTexture(new Rect(Screen.width/4 - 197, 280, 400, 400), panel, ScaleMode.ScaleToFit);
-				for (int i = 0; i < counter ; i++)
+				for (int i = 0; i < l.Count ; i++)
 				{
 				if (GUI.Button(new Rect(Screen.width/4 - 120, 390 + (60 * i), 250, 50), NetworkView.Find(l[i]).gameObject.name , a))
 					{
-					print ("df");
+					networkView.RPC ("startBattle", NetworkView.Find(l[i]).owner,NetworkView.Find(l[i]).gameObject.name );
 					}
 				}
 		}

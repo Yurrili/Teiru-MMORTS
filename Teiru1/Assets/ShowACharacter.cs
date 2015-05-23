@@ -17,7 +17,7 @@ public class ShowACharacter : MonoBehaviour {
 	static public GameObject Rank4But;
 	static public GameObject Rank5But;
 	static public GameObject helmets;
-	static private PlayersCharacter a;
+	static public PlayersCharacter a;
 
 	private static Sprite[] sprites;
 
