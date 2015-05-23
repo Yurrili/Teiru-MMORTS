@@ -15,7 +15,7 @@ GameObject:
   - 61: {fileID: 6100000}
   - 50: {fileID: 5000000}
   m_Layer: 0
-  m_Name: 
+  m_Name: Player1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -85,9 +85,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1850d257f544cda4e980d115bf6b6b3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buttonsA: {fileID: 2800000, guid: 4a914c6eeb8470b4aa5f2147cb6e84ef, type: 3}
-  buttonsB: {fileID: 2800000, guid: 18b7db4fd2161004ebbb02873803defa, type: 3}
-  panel: {fileID: 2800000, guid: 91eacd2f42b3b3940ab72f21b2af9ae7, type: 3}
+  buttonsA: {fileID: 0}
+  buttonsB: {fileID: 0}
+  panel: {fileID: 0}
 --- !u!148 &14800000
 NetworkView:
   m_ObjectHideFlags: 1
