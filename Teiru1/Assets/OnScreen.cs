@@ -31,8 +31,11 @@ public class OnScreen : MonoBehaviour {
 		}
 			//StartServer();
 		
-		if (GUI.Button (new Rect (80, 5, 160, 40), "Return to menu", a)) {
-						//RefreshHostList();
+		
+		if (GUI.Button (new Rect (80, 5, 160, 40), "Return to menu", a)) 
+		{
+				Application.LoadLevel("a");
+
 		}
 		//-8168f, -9298f
 

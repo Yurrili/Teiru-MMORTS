@@ -1,21 +1,24 @@
 using UnityEngine;
 using System.Collections;
-
+using System.Collections.Generic;
+using System.IO;
+using System;
+using System.Runtime.Serialization.Formatters.Binary;
 public class NetworkManager : MonoBehaviour {
 	
 	public Texture2D buttonsA;
 	public Texture2D buttonsB;
 	public Texture2D inputField;
-	public Texture2D HP;
 	public Texture panel;
 	private const string typeName = "Teiru";
 	private string gameName = "Baboon";
 	private const int maxPlayers = 10;
-	public static string ServerName;
+
 	private HostData[] hostList;
 	public GameObject playerPrefab;
 	public static GameObject p;
 	public NetworkPlayer np1;
+	public static List<NetworkViewID> playerList;
 
 
 	void OnServerInitialized()
@@ -32,7 +35,8 @@ public class NetworkManager : MonoBehaviour {
 		print ("OnConnectedInitialized");
 	}
 
-	void OnDisconnectedFromServer(NetworkDisconnection info) {
+	void OnDisconnectedFromServer(NetworkDisconnection info) 
+	{
 		if (Network.isServer)
 		{
 			Debug.Log("Local server connection disconnected");
@@ -52,7 +56,8 @@ public class NetworkManager : MonoBehaviour {
 			}
 	}
 
-	void OnApplicationQuit() {
+	void OnApplicationQuit() 
+	{
 		Debug.Log("OnApplicationQuit");
 		Network.RemoveRPCs(Network.player);
 		Network.DestroyPlayerObjects(Network.player);
@@ -60,7 +65,9 @@ public class NetworkManager : MonoBehaviour {
 	}
 
 
-	void OnFailedToConnect(NetworkConnectionError error) {
+
+	void OnFailedToConnect(NetworkConnectionError error) 
+	{
 		Debug.Log("Could not connect to server: " + error);
 		Network.RemoveRPCs(Network.player);
 		Network.DestroyPlayerObjects(Network.player);
@@ -73,6 +80,11 @@ public class NetworkManager : MonoBehaviour {
 		Network.DestroyPlayerObjects(np);
 	}
 
+	[RPC]
+	public void addPlayer(NetworkViewID p)
+	{
+		playerList.Add (p);
+	}
 
 	private void SpawnPlayer()
 	{
@@ -80,22 +92,28 @@ public class NetworkManager : MonoBehaviour {
 		//playerPrefab.rigidbody2D.gravityScale = 0.01f;
 		p  = Network.Instantiate(playerPrefab, new Vector3(-8168f, -9298f, 0f), Quaternion.identity, 0) as GameObject;
 		p.rigidbody2D.gravityScale = 0;
-		print ("SpawnPlayer" + p.name);
-		Chat.show = true;
+	/*	if (Network.isClient)
+		{
+			networkView.RPC("addPlayer",RPCMode.Server, Move.getId());
+		}
+		else
+		{
+			playerList.Add (Move.getId());
+		}
+		//camera.transform.parent = p;
+		print ("SpawnPlayer" + p.name);*/
 	}
-	
+
+
 	
 	void StartServer()
 	{
+		playerList = new List<NetworkViewID> ();
 		Network.InitializeServer(maxPlayers, 22222, true);
 		MasterServer.RegisterHost(typeName, gameName);
 	}
 
-	
-	void OnTriggerEnter2D(Collider2D other)
-	{
-		print("Ssas");
-	}
+
 	
 	void OnCollisionEnter2D(Collision2D coll)
 	{
@@ -128,10 +146,6 @@ public class NetworkManager : MonoBehaviour {
 		cStyl.alignment = TextAnchor.MiddleCenter;
 		cStyl.normal.textColor = Color.yellow;
 
-		GUIStyle hp = new GUIStyle ();
-		hp.normal.background = HP;
-		hp.normal.textColor = Color.yellow;
-
 		if (!Network.isClient && !Network.isServer)
 		{
 
@@ -143,9 +157,9 @@ public class NetworkManager : MonoBehaviour {
 
 			gameName = GUI.TextArea(new Rect(Screen.width/2 - 120, 160, 250, 50), gameName, 40, cStyl);
 
-			ServerName = gameName;
 
-			if (GUI.Button(new Rect(Screen.width/2 - 120, 210, 250, 50), "Start Server", a)){
+			if (GUI.Button(new Rect(Screen.width/2 - 120, 210, 250, 50), "Start Server", a))
+			{
 				StartServer();
 			}
 				
@@ -154,7 +168,7 @@ public class NetworkManager : MonoBehaviour {
 			if (GUI.Button(new Rect(Screen.width/2 - 120, 310, 250, 50), "Refresh Hosts", a))
 				RefreshHostList();
 
-			GUI.Label(new Rect(Screen.width/2 - 100, 367, 250, 50), "Avaible servers: ", c);
+			GUI.Label(new Rect(Screen.width/2 - 100, 367, 250, 50), "Available servers: ", c);
 			
 			if (hostList != null)
 			{
@@ -168,17 +182,38 @@ public class NetworkManager : MonoBehaviour {
 		}
 
 		if (Network.isClient || Network.isServer) {		
-			GUI.Label(new Rect(Screen.width-210,200,209,20),	gameName,cStyl);
-			int number_players = Network.connections.Length + 1;
-			GUI.Label(new Rect(Screen.width-210,220,209,20), "Players in game : " +  number_players,cStyl);	
-			//HealthBar
-
-			GUI.Box(new Rect(400, 10,100,  5), "HP");
-			GUI.Box(new Rect(400, 10,80,  5), "LVL 1", hp);
+			GUI.TextArea(new Rect(Screen.width-210,200,209,20),	gameName,40,cStyl);	
+		/*	if (GUI.Button (new Rect (Screen.width / 2 - 120, 210, 250, 50), "Wann` fight m8",a)) 
+			{
+				if (Network.isClient)
+				{
+					for (int i =0;i<Network.connections.Length;i++)
+					{
+					networkView.RPC ("retList", RPCMode.Server,i);
+					}
+				}
+				else
+				{
+					Move.l = playerList;
+					Move.might = true;
+				}
+			}*/
 		}
 	}
+
+	/*[RPC]
+	public void retList(int i)
+	{
+		networkView.RPC("getList", RPCMode.Others, playerList[i]);
+	}
 	
-	
+	[RPC]
+	public void getList(NetworkViewID id)
+	{
+		Move.l.Add (id);
+		Move.might = true;
+		//networkView.RPC ("showList", RPCMode.Others, new object[] {name, h});
+	}*/
 
 	private void RefreshHostList()
 	{
@@ -196,7 +231,6 @@ public class NetworkManager : MonoBehaviour {
 		Debug.Log("Server Joined");
 		HostData hs = hostData;
 		Network.Connect(hostData);
-		Chat.ReceiveData (hs);
 	}
 	
 	/*void OnConnectedToServer()
