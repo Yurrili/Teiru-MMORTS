@@ -20,13 +20,17 @@ public class Move : MonoBehaviour {
 	public Texture panel;
 	private bool fight = false;
 	public static bool might = false;
-	public static List<NetworkViewID> l;
+	public static List<NetworkViewID> l = new  List<NetworkViewID> ();
+	int counter =0;
 
 
 	void Start()
 	{
+		string p = NetworkView.Find (networkView.viewID).gameObject.name;
+		if (NetworkView.Find(networkView.viewID).gameObject.name!="Main camera")
+		{
 		animator = this.GetComponent<Animator> ();
-		l = new  List<NetworkViewID> ();
+		
 		if (Network.isClient)
 		{
 			networkView.RPC("addPlayer",RPCMode.Server, networkView.viewID);
@@ -35,12 +39,16 @@ public class Move : MonoBehaviour {
 		{
 			l.Add (networkView.viewID);
 		}
+		}
 	}
 
 	[RPC]
 	public void addPlayer(NetworkViewID p)
 	{
+		if (!l.Contains(p))
+		{
 		l.Add (p);
+		}
 	}
 
 	[RPC]
@@ -56,6 +64,17 @@ public class Move : MonoBehaviour {
 		might = true;
 	}
 
+	[RPC]
+	public void getCount()
+	{
+		networkView.RPC("setCount", RPCMode.Others,l.Count);
+	}
+
+	[RPC]
+	public void setCount(int i)
+	{
+		counter = i;
+	}
 	
 	void Update() 
 	{
@@ -188,13 +207,6 @@ public class Move : MonoBehaviour {
 		fight = true;
 	}
 
-	[RPC]
-	public void showList(string name, string h)
-	{
-
-	}
-
-
 
 	void OnGUI()
 	{
@@ -221,9 +233,11 @@ public class Move : MonoBehaviour {
 			}
 		}
 
-		if (Network.isClient || Network.isServer) {		
+		if (Network.isClient || Network.isServer)
+		{		
 			if (GUI.Button (new Rect (Screen.width / 2 - 120, 210, 250, 50), "Wann` fight m8",a)) 
 			{
+				networkView.RPC("getCount",RPCMode.Server);
 				if (Network.isClient)
 				{
 					for (int i =0;i<Network.connections.Length;i++)
@@ -240,8 +254,9 @@ public class Move : MonoBehaviour {
 
 		if (might) 
 		{
+
 			GUI.DrawTexture(new Rect(Screen.width/4 - 197, 280, 400, 400), panel, ScaleMode.ScaleToFit);
-				for (int i = 0; i < l.Count ; i++)
+				for (int i = 0; i < counter ; i++)
 				{
 				if (GUI.Button(new Rect(Screen.width/4 - 120, 390 + (60 * i), 250, 50), NetworkView.Find(l[i]).gameObject.name , a))
 					{
