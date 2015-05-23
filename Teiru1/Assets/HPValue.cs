@@ -48,7 +48,7 @@ public class HPValue {
 	public string getState(){
 
 		if (CurrentHP > 0) {
-			return " alive ;		
+			return " alive ";	
 		} else {
 
 			if(CurrentHP == 0){
