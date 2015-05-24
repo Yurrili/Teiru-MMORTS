@@ -22,6 +22,7 @@ public class Move : MonoBehaviour {
 	public Texture2D buttonsA;
 	public Texture2D buttonsB;
 	public Texture2D inputField;
+	public Texture2D atk;
 
 	public Texture2D panel;
 	private PlayersCharacter MyCharacter = ShowACharacter.a;
@@ -30,8 +31,10 @@ public class Move : MonoBehaviour {
 	public static List<NetworkViewID> l = new  List<NetworkViewID> ();
 	bool got = false;
 	public int counter = 0;
-	private int theChoosenOne;
+	private int theChoosenOne = 0;
+
 	private bool TrueFight = false;
+	private bool SendAccept = false;
 
 	//Enemy HP_Bars
 	private static int MAXHP_Enemy = 8;
@@ -39,6 +42,8 @@ public class Move : MonoBehaviour {
 	private float maxHealth_EN = (float)(MAXHP_Enemy*100);
 	private float lenghtMaxHP_EN = (float)((MAXHP_Enemy/MAXHP_Enemy)*100);
 	private float curHealth_EN = (float) ((CurrentHP_Enemy/MAXHP_Enemy)*100);
+
+	private int av_EN = 0;
 
 	void Start()
 	{
@@ -96,6 +101,7 @@ public class Move : MonoBehaviour {
 		counter = i;
 	}
 
+
 	//TUTAJ PROBOWALAM COS NAPISAC
 	[RPC]
 	public void getHP(NetworkPlayer play)
@@ -117,6 +123,37 @@ public class Move : MonoBehaviour {
 		//CurrentHP_Enemy = hp;
 		TrueFight = true;
 		fight = false;
+	}
+
+	//AVATARS
+
+	[RPC]
+	public void getAV(NetworkPlayer play)
+	{
+		char d = ShowACharacter.a.Avatar.ToCharArray ()[2];
+		
+		int number = int.Parse(d+"");
+
+		networkView.RPC ("setAv", play, number);
+		//wysyłamy "requesta" do innego kompa i on wywoluje funckję która zwróci nam hp
+	}
+
+
+	[RPC]
+	public void setAv(int av)
+	{
+		av_EN = av;
+	}
+
+
+	[RPC]
+	public void sendAv(int av)
+	{
+		// wyslalismy Hp i mamy tą wartość na innym kompie w hp
+		//CurrentHP_Enemy = hp;
+		av_EN = av;
+		hide1 = false;
+		hide = false;
 	}
 
 	void Update() 
@@ -243,10 +280,36 @@ public class Move : MonoBehaviour {
 	[RPC]
 	public void startBattle(string name)
 	{
+		for (int i = 0; i < l.Count ; i++)
+		{
+			if(NetworkManager.khg[i] == name){
+				
+				theChoosenOne = i;
+				
+			}
+			
+		}
 		fight = true;
 		might = false;
+
 	}
 
+	[RPC]
+	public void sendAccept(string name)
+	{
+		for (int i = 0; i < l.Count ; i++)
+		{
+			if(NetworkManager.khg[i] == name){
+				
+				theChoosenOne = i;
+				
+			}
+			
+		}
+
+		fight = false;
+		TrueFight = true;
+	}
 
 	void OnGUI()
 	{
@@ -266,6 +329,10 @@ public class Move : MonoBehaviour {
 		GUIStyle hp = new GUIStyle ();
 		hp.normal.background = HP;
 		hp.normal.textColor = Color.yellow;
+
+		GUIStyle attack = new GUIStyle ();
+		attack.normal.background = HP;
+
 	
 		GUIStyle cStyl = new GUIStyle ();
 		cStyl.normal.background = buttonsA;
@@ -288,36 +355,38 @@ public class Move : MonoBehaviour {
 					print ("Fight");
 					TrueFight = true;
 					fight = false;
-
+					SendAccept = true;
 					
 				}
 
 		}
 
 		if (Network.isClient || Network.isServer) 
-		{		
-			if (GUI.Button (new Rect (228 , 5, 120, 40), "Fight",a)) 
-			{
-				if (Network.isClient)
+		{	
+			if(TrueFight == false){
+				if (GUI.Button (new Rect (228 , 5, 120, 40), "Fight",a)) 
 				{
-					l = new  List<NetworkViewID>();
-				}
-
-				networkView.RPC("getCount",RPCMode.Server);
-
-				if (Network.isClient)
-				{
-					for (int i =0;i<counter;i++)
+					if (Network.isClient)
 					{
-						networkView.RPC ("retList", RPCMode.Server,i);
+						l = new  List<NetworkViewID>();
 					}
-					might = true;
-				}
-				else
-				{
-					might = true;
-					hide1 = true;
-					hide = true;
+
+					networkView.RPC("getCount",RPCMode.Server);
+
+					if (Network.isClient)
+					{
+						for (int i =0;i<counter;i++)
+						{
+							networkView.RPC ("retList", RPCMode.Server,i);
+						}
+						might = true;
+					}
+					else
+					{
+						might = true;
+						hide1 = true;
+						hide = true;
+					}
 				}
 			}
 		}
@@ -340,9 +409,10 @@ public class Move : MonoBehaviour {
 
 							if (GUI.Button(new Rect(30 , 140 + (50 * i), 180, 40), NetworkManager.khg[l.Count-i-1] , a))
 							{
-								networkView.RPC ("startBattle", NetworkView.Find(l[i]).owner, NetworkManager.khg[i] );
-			
+
+								networkView.RPC ("startBattle", NetworkView.Find(l[i]).owner, ShowACharacter.a.DName );
 								theChoosenOne = i;
+								
 							}
 						}
 
@@ -359,9 +429,10 @@ public class Move : MonoBehaviour {
 		}
 
 		if (TrueFight) {
-	
-			networkView.RPC ("getHp", NetworkView.Find(l[theChoosenOne]).owner , Network.player);
-			networkView.RPC ("sendHp", NetworkView.Find(l[theChoosenOne]).owner , ShowACharacter.a.Class_.getHPValue().getCurrentHP ());
+			hide = false;
+			hide1 = false;
+			//networkView.RPC ("getHp", NetworkView.Find(l[theChoosenOne]).owner , Network.player);
+			//networkView.RPC ("sendHp", NetworkView.Find(l[theChoosenOne]).owner , ShowACharacter.a.Class_.getHPValue().getCurrentHP ());
 			
 			//char d = ShowACharacter.a.Avatar.ToCharArray ()[2];
 			//int number = int.Parse(d+"");
@@ -369,14 +440,44 @@ public class Move : MonoBehaviour {
 
 			//TUTAJ TEGO MI TRZEBA
 			GUI.Box(new Rect(Screen.width - 395, 35, 190, 90),"", cStyl);
-			GUI.DrawTexture(new Rect( Screen.width - 380, 60, 40, 40), HP_Bar.sprites[3], ScaleMode.ScaleToFit);
+			GUI.DrawTexture(new Rect( Screen.width - 380, 60, 40, 40), HP_Bar.sprites[av_EN], ScaleMode.ScaleToFit);
 			string nameLabel = "Name : " + NetworkManager.khg[theChoosenOne];
 			GUI.Label(new Rect(Screen.width - 325, 50, 80,  5), nameLabel, c);
 			GUI.Box(new Rect(Screen.width - 327, 72, lenghtMaxHP_EN,  5), "HP");
 			GUI.Box(new Rect(Screen.width - 327, 72, curHealth_EN,  5), "LVL 1", hp);
 			
 			string state = "State :" + ShowACharacter.a.Class_.getHPValue().getState();
-			GUI.Label(new Rect(Screen.width -327, 90,100,  5), state, c);
+			GUI.Label(new Rect(Screen.width - 327, 90,100,  5), state, c);
+
+			//SKills
+			GUI.DrawTexture(new Rect(10, Screen.height/4 , 60, 130), panel, ScaleMode.StretchToFill);
+			GUI.Label(new Rect(10, Screen.height/4, 60, 20), "Skills : ", cStyl);
+
+			Skill[] d = ShowACharacter.a.Class_.AvaibleSkills.ToArray ();
+
+			if(GUI.Button( new Rect(15,Screen.height/4 + 20,50,50), "Auto", a)){
+
+			}
+
+			if(GUI.Button( new Rect(15,Screen.height/4 + 70,50,50), d[0].getSkillName(), a)) {
+				ShowACharacter.a.Class_.
+			}
+
+		}
+
+		if (SendAccept) {
+			char d = ShowACharacter.a.Avatar.ToCharArray ()[2];
+			
+			int number_ = int.Parse(d+"");
+
+			networkView.RPC ("sendAccept", NetworkView.Find(l[theChoosenOne]).owner, ShowACharacter.a.DName );
+			networkView.RPC ("getAv", NetworkView.Find(l[theChoosenOne]).owner , Network.player);
+			networkView.RPC ("sendAv", NetworkView.Find(l[theChoosenOne]).owner , number_ );
+
+			SendAccept = false;
+			hide1 = false;
+			hide = false;
+
 		}
 	}
 }
