@@ -14,23 +14,21 @@ public class NetworkManager : MonoBehaviour {
 	private string gameName = "Baboon";
 	private const int maxPlayers = 10;
 	public static string ServerName;
-
+	
 	private HostData[] hostList;
 	public GameObject playerPrefab;
 	public static GameObject p;
 	public NetworkPlayer np1;
 	public static List<NetworkViewID> playerList;
-<<<<<<< HEAD
 	string name2 = "";
 	public static List<string> playerName;
-=======
-
+	
+	
 	public static string skak = "";
-
+	
 	public static List<string> khg = new List<string>();
-
->>>>>>> GodCalledTheLightDay
-
+	
+	
 	void OnServerInitialized()
 	{
 		np1 = Network.player;
@@ -43,7 +41,7 @@ public class NetworkManager : MonoBehaviour {
 		SpawnPlayer();
 		print ("OnConnectedInitialized");
 	}
-
+	
 	void OnDisconnectedFromServer(NetworkDisconnection info) 
 	{
 		if (Network.isServer)
@@ -54,87 +52,65 @@ public class NetworkManager : MonoBehaviour {
 		}
 		else
 			if (info == NetworkDisconnection.LostConnection)
-			{
-				Debug.Log("Lost connection to the server");
-			}
-			else
-			{
+		{
+			Debug.Log("Lost connection to the server");
+		}
+		else
+		{
 			Debug.Log("Successfully diconnected from the server");
 			Network.RemoveRPCs(Network.player);
 			Network.DestroyPlayerObjects(Network.player);
-			}
+		}
 	}
-
+	
 	void OnApplicationQuit() 
 	{
 		Debug.Log("OnApplicationQuit");
 		Network.RemoveRPCs(Network.player);
 		Network.DestroyPlayerObjects(Network.player);
-
+		
 	}
-
-
-
+	
+	
+	
 	void OnFailedToConnect(NetworkConnectionError error) 
 	{
 		Debug.Log("Could not connect to server: " + error);
 		Network.RemoveRPCs(Network.player);
 		Network.DestroyPlayerObjects(Network.player);
 	}
-
+	
 	void OnPlayerDisconnected(NetworkPlayer np)
 	{
 		Debug.Log("OnPlayerDisconnected");
 		Network.RemoveRPCs(np);
 		Network.DestroyPlayerObjects(np);
 	}
-
+	
 	[RPC]
 	public void addPlayer(NetworkViewID p)
 	{
 		playerList.Add (p);
 	}
-
-<<<<<<< HEAD
-
-	private void SpawnPlayer()
-	{
-		//GameObject kl = new GameObject (playerPrefab);
-	//	networkView.RPC ("sendName" , RPCMode.All, MenuManager._Character_.DName);
-		//playerPrefab.name = MenuManager._Character_.DName;
-		//playerPrefab.rigidbody2D.gravityScale = 0.01f;
-		p  = Network.Instantiate(playerPrefab, new Vector3(-8168f, -9298f, 0f), Quaternion.identity, 0) as GameObject;
-		p.rigidbody2D.gravityScale = 0;
-	//	p.name = MenuManager._Character_.DName;
-=======
+	
 	[RPC]
 	public void asd(string h)
 	{
 		skak = h;
 		khg.Add (h);
 	}
-
-
+	
+	
 	private void SpawnPlayer()
 	{
 		//playerPrefab.rigidbody2D.gravityScale = 0.01f;
 		p  = Network.Instantiate(playerPrefab, new Vector3(-8168f, -9298f, 0f), Quaternion.identity, 0) as GameObject;
 		p.rigidbody2D.gravityScale = 0;
 		networkView.RPC ("asd", RPCMode.AllBuffered,MenuManager._Character_.DName );
->>>>>>> GodCalledTheLightDay
-	/*	if (Network.isClient)
-		{
-			networkView.RPC("addPlayer",RPCMode.Server, Move.getId());
-		}
-		else
-		{
-			playerList.Add (Move.getId());
-		}
-		//camera.transform.parent = p;
-		print ("SpawnPlayer" + p.name);*/
+		
 	}
-
-
+	
+	
 	
 	void StartServer()
 	{
@@ -142,8 +118,8 @@ public class NetworkManager : MonoBehaviour {
 		Network.InitializeServer(maxPlayers, 22222, true);
 		MasterServer.RegisterHost(typeName, gameName);
 	}
-
-
+	
+	
 	
 	void OnCollisionEnter2D(Collision2D coll)
 	{
@@ -154,18 +130,18 @@ public class NetworkManager : MonoBehaviour {
 			Physics2D.IgnoreCollision(coll.collider, p.collider2D);
 		}
 	}
-
+	
 	[RPC]
 	public void sendName(string name1)
 	{
 		name2 = name1;
 	}
-
+	
 	
 	void OnGUI()
 	{
-
-
+		
+		
 		GUIStyle a = new GUIStyle ();
 		a.alignment = TextAnchor.MiddleCenter;
 		a.normal.background = buttonsA;
@@ -177,58 +153,58 @@ public class NetworkManager : MonoBehaviour {
 		a.onNormal.textColor = Color.yellow;
 		a.hover.textColor = Color.yellow;
 		a.onHover.textColor = Color.yellow;
-
+		
 		GUIStyle cStyl = new GUIStyle ();
 		cStyl.normal.background = inputField;
 		cStyl.alignment = TextAnchor.MiddleCenter;
 		cStyl.normal.textColor = Color.yellow;
-
+		
 		if (!Network.isClient && !Network.isServer)
 		{
-
+			
 			GUIStyle c = new GUIStyle();
 			c.normal.textColor = Color.yellow;
-
+			
 			GUI.DrawTexture(new Rect(Screen.width/2 - 168, 140, 340, 130), panel, ScaleMode.StretchToFill);
-
-
+			
+			
 			gameName = GUI.TextArea(new Rect(Screen.width/2 - 120, 160, 250, 50), gameName, 40, cStyl);
 			ServerName = gameName;
-
+			
 			if (GUI.Button(new Rect(Screen.width/2 - 120, 210, 250, 50), "Start Server", a))
 			{
-			//	string h = MenuManager._Character_.DName;
+				//	string h = MenuManager._Character_.DName;
 				StartServer();
-			//	networkView.RPC ("sendName" , RPCMode.Server, MenuManager._Character_.DName);
-
-			}
+				//	networkView.RPC ("sendName" , RPCMode.Server, MenuManager._Character_.DName);
 				
+			}
+			
 			GUI.DrawTexture(new Rect(Screen.width/2 - 197, 280, 400, 400), panel, ScaleMode.ScaleToFit);
-
+			
 			if (GUI.Button(new Rect(Screen.width/2 - 120, 310, 250, 50), "Refresh Hosts", a))
 				RefreshHostList();
-
+			
 			GUI.Label(new Rect(Screen.width/2 - 100, 367, 250, 50), "Available servers: ", c);
 			
 			if (hostList != null)
 			{
 				for (int i = 0; i < hostList.Length; i++)
 				{
-
+					
 					if (GUI.Button(new Rect(Screen.width/2 - 120, 390 + (60 * i), 250, 50), hostList[i].gameName, a))
 					{
 						JoinServer(hostList[i]);
-					//	networkView.RPC ("sendName" , RPCMode.All, MenuManager._Character_.DName);
+						//	networkView.RPC ("sendName" , RPCMode.All, MenuManager._Character_.DName);
 					}
 				}
 			}
 		}
-
+		
 		if (Network.isClient || Network.isServer) {		
 			GUI.Label(new Rect(Screen.width-210,200,209,20), gameName, cStyl);
 			int number_players = Network.connections.Length + 1;
 			GUI.Label(new Rect(Screen.width-210,220,209,20), "Players in game : " +  number_players,cStyl);	
-
+			
 		}
 		/*	if (GUI.Button (new Rect (Screen.width / 2 - 120, 210, 250, 50), "Wann` fight m8",a)) 
 			{
@@ -247,7 +223,7 @@ public class NetworkManager : MonoBehaviour {
 			}*/
 		
 	}
-
+	
 	/*[RPC]
 	public void retList(int i)
 	{
@@ -261,7 +237,7 @@ public class NetworkManager : MonoBehaviour {
 		Move.might = true;
 		//networkView.RPC ("showList", RPCMode.Others, new object[] {name, h});
 	}*/
-
+	
 	private void RefreshHostList()
 	{
 		MasterServer.RequestHostList(typeName);
