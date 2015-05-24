@@ -6,6 +6,7 @@ public class MChat : MonoBehaviour
 	public Texture panel;
 	private Rect windowRect = new Rect(200, 200, 300, 300);
 	private string messBox = "", messageToSend = "", user = "";
+	private Vector2 scrollvector = new Vector2(0,0);
 	
 	private void OnGUI()
 	{
@@ -17,11 +18,21 @@ public class MChat : MonoBehaviour
 	
 	private void windowFunc(int id)
 	{
-		GUILayout.Box(messBox , GUILayout.Height(200));
+		GUI.BeginGroup(new Rect(0,10,300,200));
+		scrollvector = GUILayout.BeginScrollView( scrollvector, GUILayout.Width(300), GUILayout.Height(200));
+		GUILayout.Box(messBox);
+		GUILayout.EndScrollView();
+		GUI.EndGroup ();
+
+
+
+		//GUI.BeginGroup(new Rect(20,230,400,400));
 		GUIStyle myStyle = new GUIStyle(GUI.skin.textField);
 		myStyle.alignment = TextAnchor.MiddleLeft;
 		GUILayout.BeginHorizontal();
 		messageToSend = GUILayout.TextField(messageToSend ,myStyle);
+
+
 		if (GUILayout.Button("Send" , GUILayout.Width(75)))
 		{
 			networkView.RPC("sendMessage", RPCMode.All, user + ": " + messageToSend + "\n");
@@ -34,6 +45,8 @@ public class MChat : MonoBehaviour
 		user = GUILayout.TextField(user);
 		
 		GUILayout.EndHorizontal();
+
+		//GUI.EndGroup ();
 		
 		GUI.DragWindow(new Rect(0, 0, Screen.width, Screen.height));
 	}

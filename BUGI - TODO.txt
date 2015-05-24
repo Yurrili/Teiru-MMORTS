@@ -1,0 +1,7 @@
+1. przy wyborze skilli nie przesuwa sie licznik skilli, uniemozliwia stworzenie postaci
+2. okno wyboru walki sie nie zamyka, jakis focus czy cos
+3. w opcjach nic nie dziala, idk czemu sounds jest tam
+4. loading screen? (niekoniecznie)
+5. przy hoscie, wlaczenie okna walki blokuje controlsy na zawsze, przy kliencie nigdy
+6. male poprawki przy kolizji lewej strony mapy, wystrzelilo mnie za mape
+7. w prelude, przejscie z about fights do about statistics nic nie robi
