@@ -49,6 +49,12 @@ public class Move : MonoBehaviour {
 	public int myEnemyInitiativ;
 
 	public bool myTurn = false;
+	private NetworkPlayer ps;
+	private GUIStyle a;
+	private GUIStyle cStyl;
+	private GUIStyle hp;
+	private GUIStyle c;
+	private GUIStyle attack;
 
 	void Start()
 	{
@@ -70,7 +76,41 @@ public class Move : MonoBehaviour {
 		{
 			got = false;
 		}
+
+		styles ();
 	}
+
+	public void styles () {
+		a = new GUIStyle ();
+		a.alignment = TextAnchor.MiddleCenter;
+		a.normal.background = buttonsA;
+		a.onNormal.background = buttonsA;
+		a.onHover.background = buttonsB;
+		a.hover.background = buttonsB;
+		
+		a.normal.textColor = Color.yellow;
+		a.onNormal.textColor = Color.yellow;
+		a.hover.textColor = Color.yellow;
+		a.onHover.textColor = Color.yellow;
+		
+		hp = new GUIStyle ();
+		hp.normal.background = HP;
+		hp.normal.textColor = Color.yellow;
+		
+		attack = new GUIStyle ();
+		attack.normal.background = HP;
+		
+		
+		cStyl = new GUIStyle ();
+		cStyl.normal.background = buttonsA;
+		cStyl.alignment = TextAnchor.MiddleCenter;
+		cStyl.normal.textColor = Color.yellow;
+		
+		c = new GUIStyle();
+		c.normal.textColor = Color.yellow;
+	}
+
+	//RPC
 
 	[RPC]
 	public void addPlayer(NetworkViewID p)
@@ -133,13 +173,10 @@ public class Move : MonoBehaviour {
 	//AVATARS
 
 	[RPC]
-	public void getAV(NetworkPlayer play)
+	public void getAv(NetworkPlayer play)
 	{
 		char d = ShowACharacter.a.Avatar.ToCharArray ()[2];
-		
-		int number = int.Parse(d+"");
-
-		networkView.RPC ("setAv", play, number);
+		networkView.RPC ("setAv", play, int.Parse(d+""));
 		//wysyłamy "requesta" do innego kompa i on wywoluje funckję która zwróci nam hp
 	}
 
@@ -159,7 +196,8 @@ public class Move : MonoBehaviour {
 		av_EN = av;
 		hide1 = false;
 		hide = false;
-		InitiativeRoll(ShowACharacter.a.Statistics.getDEX());
+		calculateInit (ShowACharacter.a.Statistics.getDEX ());
+		//InitiativeRoll(ShowACharacter.a.Statistics.getDEX());
 	}
 
 	//inicjatywa
@@ -173,10 +211,22 @@ public class Move : MonoBehaviour {
 	}
 
 	[RPC]
-	public void setIniciative(int av)
+	public void setIniciative(int init)
 	{
-		myEnemyInitiativ = av;
+		//zwraca inicjatywe przeciwnika
+		myEnemyInitiativ = init;
 		AboutWiner (myEnemyInitiativ, myInitiativ);
+	}
+
+	[RPC]
+	public void sendIniciative(int init)
+	{
+		//wyslalismy inicjatywe przeciwnikowi
+		av_EN = init;
+		hide1 = false;
+		hide = false;
+		calculateInit (ShowACharacter.a.Statistics.getDEX ());
+		//InitiativeRoll(ShowACharacter.a.Statistics.getDEX());
 	}
 
 	public void AboutWiner(int a, int b) {
@@ -365,137 +415,119 @@ public class Move : MonoBehaviour {
 		for (int i = 0; i < l.Count ; i++)
 		{
 			if(NetworkManager.khg[i] == name){
-				
 				theChoosenOne = i;
 				
-			}
-			
+			}	
 		}
 
 		fight = false;
 		TrueFight = true;
 	}
 
+
+
 	void OnGUI()
 	{
 
-		GUIStyle a = new GUIStyle ();
-		a.alignment = TextAnchor.MiddleCenter;
-		a.normal.background = buttonsA;
-		a.onNormal.background = buttonsA;
-		a.onHover.background = buttonsB;
-		a.hover.background = buttonsB;
-		
-		a.normal.textColor = Color.yellow;
-		a.onNormal.textColor = Color.yellow;
-		a.hover.textColor = Color.yellow;
-		a.onHover.textColor = Color.yellow;
+	if (Network.isClient || Network.isServer) 
+	{	
+		if (might) 
+		{		
+			if(hide1 == true)
+			{
+				GUI.DrawTexture(new Rect(20, 120, 200, 300), panel, ScaleMode.StretchToFill);
+				GUI.Label(new Rect(18, 120, 205, 20), "Available users : ", cStyl);
+			}
 
-		GUIStyle hp = new GUIStyle ();
-		hp.normal.background = HP;
-		hp.normal.textColor = Color.yellow;
-
-		GUIStyle attack = new GUIStyle ();
-		attack.normal.background = HP;
-
-	
-		GUIStyle cStyl = new GUIStyle ();
-		cStyl.normal.background = buttonsA;
-		cStyl.alignment = TextAnchor.MiddleCenter;
-		cStyl.normal.textColor = Color.yellow;
-
-		GUIStyle c = new GUIStyle();
-		c.normal.textColor = Color.yellow;
-
-		if (fight) 
-		{
-
-				GUI.DrawTexture(new Rect(Screen.width/2 - 168, 100, 300, 200), panel, ScaleMode.StretchToFill);
-				string quote = "Do you wanna fight with : " +  NetworkManager.khg[theChoosenOne];
-				GUI.Label(new Rect (Screen.width/2 - 130, 150,180,50), quote ,c);
+			if( hide == true )
+			{
 				
-				if (GUI.Button (new Rect (Screen.width / 2 - 145, 200, 250, 50), "Start fight", a)) 
+				for (int i = 0; i < l.Count ; i++)
 				{
-					//FIGHT
-					print ("Fight");
-					TrueFight = true;
-					fight = false;
-					SendAccept = true;
-					
-				}
-
-		}
-
-		if (Network.isClient || Network.isServer) 
-		{	
-
-
-			if(TrueFight == false){
-				if (GUI.Button (new Rect (228 , 5, 120, 40), "Fight",a)) 
-				{
-					if (Network.isClient)
-					{
-						l = new  List<NetworkViewID>();
-					}
-
-					networkView.RPC("getCount",RPCMode.Server);
-
-					if (Network.isClient)
-					{
-						for (int i =0;i<counter;i++)
-						{
-							networkView.RPC ("retList", RPCMode.Server,i);
+					if(NetworkManager.khg[l.Count-i-1] != ShowACharacter.a.DName){
+						
+						if (GUI.Button(new Rect(30 , 140 + (50 * i), 180, 40), NetworkManager.khg[l.Count-i-1] , a))
+						{	
+							//wyzwanie na pojedynek
+								if (Network.isServer)
+								{
+									networkView.RPC ("startBattle", NetworkView.Find(l[l.Count-i-1]).owner, ShowACharacter.a.DName );
+									theChoosenOne = l.Count-i-1;
+								}
+								else
+								{
+									networkView.RPC ("startBattle", NetworkView.Find(l[i]).owner, ShowACharacter.a.DName );
+									theChoosenOne = i;
+								}
 						}
-						might = true;
-					}
-					else
-					{
-						might = true;
-						hide1 = true;
-						hide = true;
 					}
 				}
+				
+				if (GUI.Button(new Rect(195, 120, 20, 20), "X" , a))
+				{
+					hide1 = false;
+					hide = false;
+				}	
 			}
 		}
 
-		if (might) 
-		{		
-				if(hide1 == true)
-				{
-					GUI.DrawTexture(new Rect(20, 120, 200, 300), panel, ScaleMode.StretchToFill);
-					GUI.Label(new Rect(18, 120, 205, 20), "Available users : ", cStyl);
-				}
-
-		
-				if( hide == true )
-				{
-					
-					for (int i = 0; i < l.Count ; i++)
-					{
-						if(NetworkManager.khg[l.Count-i-1] != ShowACharacter.a.DName){
-
-							if (GUI.Button(new Rect(30 , 140 + (50 * i), 180, 40), NetworkManager.khg[l.Count-i-1] , a))
-							{
-
-								networkView.RPC ("startBattle", NetworkView.Find(l[i]).owner, ShowACharacter.a.DName );
-								theChoosenOne = i;
-								
-							}
-						}
-
-					}
-
-					if (GUI.Button(new Rect(195, 120, 20, 20), "X" , a))
-					{
-						hide1 = false;
-						hide = false;
-					}
-
-				}
-
+		if (fight) 
+		{
+			GUI.DrawTexture(new Rect(Screen.width/2 - 168, 100, 300, 200), panel, ScaleMode.StretchToFill);
+			string quote = "Do you wanna fight with : " +  NetworkManager.khg[theChoosenOne];
+			GUI.Label(new Rect (Screen.width/2 - 130, 150,180,50), quote ,c);
+				
+			if (GUI.Button (new Rect (Screen.width / 2 - 145, 200, 250, 50), "Start fight", a)) 
+			{
+				//FIGHT
+				print ("Fight");
+				TrueFight = true;
+				fight = false;
+				SendAccept = true;
+			}
 		}
 
-		if (TrueFight) {
+		if (SendAccept) {
+
+			char d = ShowACharacter.a.Avatar.ToCharArray ()[2];
+
+			networkView.RPC ("sendAccept", NetworkView.Find(l[theChoosenOne]).owner, ShowACharacter.a.DName );
+			networkView.RPC ("getAv", NetworkView.Find(l[theChoosenOne]).owner , Network.player);
+			networkView.RPC ("sendAv", NetworkView.Find(l[theChoosenOne]).owner , int.Parse(d+""));
+				
+			InitiativeRoll(ShowACharacter.a.Statistics.getDEX());
+			SendAccept = false;
+			hide1 = false;
+			hide = false;
+				
+		}
+
+		if(TrueFight == false){
+
+			if (GUI.Button (new Rect (228 , 5, 120, 40), "Fight", a)) 
+			{
+				if (Network.isClient)
+				{
+					l = new  List<NetworkViewID>();
+				}
+
+				networkView.RPC("getCount",RPCMode.Server);
+
+				if (Network.isClient)
+				{
+					for (int i =0;i<counter;i++)
+					{
+						networkView.RPC ("retList", RPCMode.Server,i);
+					}
+					might = true;
+				} else {
+					might = true;
+					hide1 = true;
+					hide = true;
+				}
+			}
+		} else { // MOMENT WALKI
+
 			hide = false;
 			hide1 = false;
 			//networkView.RPC ("getHp", NetworkView.Find(l[theChoosenOne]).owner , Network.player);
@@ -507,16 +539,16 @@ public class Move : MonoBehaviour {
 			//int number = int.Parse(d+"");
 			GUI.Label (new Rect (Screen.width / 2 - 195, 5, 250, 50), "FIGHT", a);
 
-			//TUTAJ TEGO MI TRZEBA
-			GUI.Box(new Rect(Screen.width - 675, 85, 190, 90),"", cStyl);
-			GUI.DrawTexture(new Rect( Screen.width - 660, 110, 40, 40), HP_Bar.sprites[av_EN], ScaleMode.ScaleToFit);
+			//ENEMY HP BAR
+			GUI.Box(new Rect(Screen.width - 685, 85, 190, 90),"", cStyl);
+			GUI.DrawTexture(new Rect( Screen.width - 670, 110, 40, 40), HP_Bar.sprites[av_EN], ScaleMode.ScaleToFit);
 			string nameLabel = "Name : " + NetworkManager.khg[theChoosenOne];
-			GUI.Label(new Rect(Screen.width - 605, 100, 80,  5), nameLabel, c);
-			GUI.Box(new Rect(Screen.width - 607, 122, lenghtMaxHP_EN,  5), "HP");
-			GUI.Box(new Rect(Screen.width - 607, 122, curHealth_EN,  5), "LVL 1", hp);
+			GUI.Label(new Rect(Screen.width - 615, 100, 80,  5), nameLabel, c);
+			GUI.Box(new Rect(Screen.width - 617, 122, lenghtMaxHP_EN,  5), "HP");
+			GUI.Box(new Rect(Screen.width - 617, 122, curHealth_EN,  5), "LVL 1", hp);
 			
 			string state = "State :" + ShowACharacter.a.Class_.getHPValue().getState();
-			GUI.Label(new Rect(Screen.width - 607, 140,100,  5), state, c);
+			GUI.Label(new Rect(Screen.width - 617, 140,100,  5), state, c);
 
 			//SKills
 			if(myTurn){
@@ -538,21 +570,40 @@ public class Move : MonoBehaviour {
 		}
 
 
-		if (SendAccept) {
-			char d = ShowACharacter.a.Avatar.ToCharArray ()[2];
-			
-			int number_ = int.Parse(d+"");
 
-			networkView.RPC ("sendAccept", NetworkView.Find(l[theChoosenOne]).owner, ShowACharacter.a.DName );
-			networkView.RPC ("getAv", NetworkView.Find(l[theChoosenOne]).owner , Network.player);
-			networkView.RPC ("sendAv", NetworkView.Find(l[theChoosenOne]).owner , number_ );
+	}
+	}
 
-			InitiativeRoll(ShowACharacter.a.Statistics.getDEX());
-			SendAccept = false;
-			hide1 = false;
-			hide = false;
-
-		}
+	private void calculateInit(int dex) {
+		Dice dd = new Dice ();
+		int[] roll = dd.Roll (1, 20);
+		myInitiativ = roll [0] + dex;
+		
+		if(dex > 0)
+			MChat.roll ("Initiative : " + dd.getSimpleAnswer ()+ "+"+ dex + "(DEX mod)");
+		
+		if(dex == 0 )
+			MChat.roll ("Initiative : " + dd.getSimpleAnswer ());
+		
+		if(dex < 0 )
+			MChat.roll ("Initiative : " + dd.getSimpleAnswer () + dex + "(DEX mod)");
+	}
+	
+	private void InitiativeRoll(int dex){
+		Dice dd = new Dice ();
+		int[] roll = dd.Roll (1, 20);
+		myInitiativ = roll [0] + dex;
+		
+		if(dex > 0)
+			MChat.roll ("Initiative : " + dd.getSimpleAnswer ()+ "+"+ dex + "(DEX mod)");
+		
+		if(dex == 0 )
+			MChat.roll ("Initiative : " + dd.getSimpleAnswer ());
+		
+		if(dex < 0 )
+			MChat.roll ("Initiative : " + dd.getSimpleAnswer () + dex + "(DEX mod)");
+		
+		networkView.RPC ("getIniciative", NetworkView.Find(l[theChoosenOne]).owner , Network.player);
 	}
 
 	private int getMod(int a){
@@ -595,20 +646,5 @@ public class Move : MonoBehaviour {
 		}
 	}
 
-	private void InitiativeRoll(int dex){
-		Dice dd = new Dice ();
-		int[] roll = dd.Roll (1, 20);
-		myInitiativ = roll [0] + dex;
 
-		if(dex > 0)
-			MChat.roll ("Initiative : " + dd.getSimpleAnswer ()+ "+"+ dex + "(DEX mod)");
-
-		if(dex == 0 )
-			MChat.roll ("Initiative : " + dd.getSimpleAnswer ());
-
-		if(dex < 0 )
-			MChat.roll ("Initiative : " + dd.getSimpleAnswer () + dex + "(DEX mod)");
-
-		networkView.RPC ("getIniciative", NetworkView.Find(l[theChoosenOne]).owner , Network.player);
-	}
 }
