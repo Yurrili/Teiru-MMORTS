@@ -14,41 +14,16 @@ Platform assembly: E:\GitHub\Teiru-MMORTS\Teiru1\map_Data\Managed\UnityEngine.UI
 Loading E:\GitHub\Teiru-MMORTS\Teiru1\map_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
 Platform assembly: E:\GitHub\Teiru-MMORTS\Teiru1\map_Data\Managed\ogclient-framework.dll (this message is harmless)
 Loading E:\GitHub\Teiru-MMORTS\Teiru1\map_Data\Managed\ogclient-framework.dll into Unity Child Domain
-- Completed reload, in  0.111 seconds
+- Completed reload, in  0.133 seconds
 desktop: 1366x768 60Hz; virtual: 1366x768 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
 Platform assembly: E:\GitHub\Teiru-MMORTS\Teiru1\map_Data\Managed\System.Core.dll (this message is harmless)
-Platform assembly: E:\GitHub\Teiru-MMORTS\Teiru1\map_Data\Managed\System.dll (this message is harmless)
-Server Joined
- 
-(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
-
-OnConnectedInitialized
- 
-(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
-
-Receiving state for an object whose network view exists but the observed object no longer exists
- 
-(Filename:  Line: 315)
-
-df
- 
-(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
-
 OnApplicationQuit
  
 (Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
 
-Successfully diconnected from the server
- 
-(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
-
-Failed to send remove RPCs command to network
- 
-(Filename:  Line: 2463)
-
-No objects for the given player ID were deleted 1
+No objects for the given player ID were deleted -1
  
 (Filename:  Line: 1373)
 
