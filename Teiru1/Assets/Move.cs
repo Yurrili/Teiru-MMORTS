@@ -30,7 +30,7 @@ public class Move : MonoBehaviour {
 	public static List<NetworkViewID> l = new  List<NetworkViewID> ();
 	bool got = false;
 	public int counter = 0;
-	private int theChoosenOne = 0;
+	private int theChoosenOne;
 	private bool TrueFight = false;
 
 	//Enemy HP_Bars
@@ -100,7 +100,7 @@ public class Move : MonoBehaviour {
 	[RPC]
 	public void getHP(NetworkPlayer play)
 	{
-		networkView.RPC ("setHP", play, HP_Bar.Health.getCurrentHP ());
+		networkView.RPC ("setHP", play, ShowACharacter.a.Class_.getHPValue().getCurrentHP ());
 		//wysyłamy "requesta" do innego kompa i on wywoluje funckję która zwróci nam hp
 	}
 	
@@ -361,21 +361,21 @@ public class Move : MonoBehaviour {
 		if (TrueFight) {
 	
 			networkView.RPC ("getHp", NetworkView.Find(l[theChoosenOne]).owner , Network.player);
-			networkView.RPC ("sendHp", NetworkView.Find(l[theChoosenOne]).owner , HP_Bar.Health.getCurrentHP ());
+			networkView.RPC ("sendHp", NetworkView.Find(l[theChoosenOne]).owner , ShowACharacter.a.Class_.getHPValue().getCurrentHP ());
 			
 			//char d = ShowACharacter.a.Avatar.ToCharArray ()[2];
 			//int number = int.Parse(d+"");
 			GUI.Label (new Rect (Screen.width / 2 - 185, 5, 250, 50), "FIGHT", a);
 
 			//TUTAJ TEGO MI TRZEBA
-			GUI.Box(new Rect(Screen.width - 355, 35, 190, 90),"", cStyl);
+			GUI.Box(new Rect(Screen.width - 395, 35, 190, 90),"", cStyl);
 			GUI.DrawTexture(new Rect( Screen.width - 380, 60, 40, 40), HP_Bar.sprites[3], ScaleMode.ScaleToFit);
 			string nameLabel = "Name : " + NetworkManager.khg[theChoosenOne];
 			GUI.Label(new Rect(Screen.width - 325, 50, 80,  5), nameLabel, c);
 			GUI.Box(new Rect(Screen.width - 327, 72, lenghtMaxHP_EN,  5), "HP");
 			GUI.Box(new Rect(Screen.width - 327, 72, curHealth_EN,  5), "LVL 1", hp);
 			
-			string state = "State :" + HP_Bar.Health.getState();
+			string state = "State :" + ShowACharacter.a.Class_.getHPValue().getState();
 			GUI.Label(new Rect(Screen.width -327, 90,100,  5), state, c);
 		}
 	}

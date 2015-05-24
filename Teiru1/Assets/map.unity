@@ -3540,8 +3540,6 @@ MonoBehaviour:
   HP: {fileID: 2800000, guid: 57247a84b8ab58440985ef47fb7b2b8e, type: 3}
   Labels: {fileID: 2800000, guid: 18b7db4fd2161004ebbb02873803defa, type: 3}
   av: {fileID: 0}
-  bgImage: {fileID: 0}
-  fgImage: {fileID: 0}
 --- !u!1 &891253193
 GameObject:
   m_ObjectHideFlags: 0
