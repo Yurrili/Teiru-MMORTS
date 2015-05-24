@@ -5,14 +5,11 @@ public class HP_Bar : MonoBehaviour {
 
 	public Texture2D HP ;
 	public Texture2D Labels ;
-	public Texture2D av;
 	public static Texture2D[] sprites;
 
-	private int number = 0;
-
-	private static float maxHealth = (float)(ShowACharacter.a.Class_.getHPValue().getMAXHP()*100);
-	private static float lenghtMaxHP = (float)((ShowACharacter.a.Class_.getHPValue().getMAXHP()/ShowACharacter.a.Class_.getHPValue().getMAXHP())*100);
-	private static float curHealth = (float)((ShowACharacter.a.Class_.getHPValue().getCurrentHP()/ShowACharacter.a.Class_.getHPValue().getMAXHP())*100);
+	//public static float maxHealth;
+	public static float lenghtMaxHP;
+	public static float curHealth;
 		
 
 	// Use this for initialization
@@ -21,10 +18,7 @@ public class HP_Bar : MonoBehaviour {
 		
 	}
 		
-	// Update is called once per frame
-	void Update () {
 
-	}
 		
 	void OnGUI () {
 
@@ -43,18 +37,20 @@ public class HP_Bar : MonoBehaviour {
 			if (Network.isClient || Network.isServer) {
 
 				//HealthBar
-				if(ShowACharacter.a != null ){
+				if(ShowACharacter.a != null && Move.TrueFight == false){
+
+
 					
 					char d = ShowACharacter.a.Avatar.ToCharArray ()[2];
 					
-					number = int.Parse(d+"");
+			
 
-					maxHealth = (float)(ShowACharacter.a.Class_.getHPValue().getMAXHP()*100);
+					//maxHealth = (float)(ShowACharacter.a.Class_.getHPValue().getMAXHP()*100);
 					lenghtMaxHP = (float)((ShowACharacter.a.Class_.getHPValue().getMAXHP()/ShowACharacter.a.Class_.getHPValue().getMAXHP())*100);
 					curHealth = (float)((ShowACharacter.a.Class_.getHPValue().getCurrentHP()/ShowACharacter.a.Class_.getHPValue().getMAXHP())*100);
 
 					GUI.Box(new Rect(5, 35, 190, 90),"", cStyl);
-					GUI.DrawTexture(new Rect(23, 60, 40, 40), sprites[number], ScaleMode.ScaleToFit);
+				GUI.DrawTexture(new Rect(23, 60, 40, 40), sprites[int.Parse(d+"")], ScaleMode.ScaleToFit);
 					
 					string nameLabel = "Name : " + NetworkManager.khg[0];
 					
@@ -67,6 +63,30 @@ public class HP_Bar : MonoBehaviour {
 					GUI.Label(new Rect(77, 90,100,  5), state, c);
 
 				}
+
+			if(Move.TrueFight == true ) {
+				
+				char d = ShowACharacter.a.Avatar.ToCharArray ()[2];
+				
+				
+				
+				//maxHealth = (float)(ShowACharacter.a.Class_.getHPValue().getMAXHP()*100);
+				lenghtMaxHP = (float)((ShowACharacter.a.Class_.getHPValue().getMAXHP()/ShowACharacter.a.Class_.getHPValue().getMAXHP())*100);
+				curHealth = (float)((ShowACharacter.a.Class_.getHPValue().getCurrentHP()/ShowACharacter.a.Class_.getHPValue().getMAXHP())*100);
+				
+				GUI.Box(new Rect(455, 85, 190, 90),"", cStyl);
+				GUI.DrawTexture(new Rect(463, 110, 40, 40), sprites[int.Parse(d+"")], ScaleMode.ScaleToFit);
+				
+				string nameLabel = "Name : " + NetworkManager.khg[0];
+				
+				GUI.Label(new Rect(515, 100, 80,  5), nameLabel, c);
+				GUI.Box(new Rect(517, 122, lenghtMaxHP,  5), "HP");
+				GUI.Box(new Rect(517, 122, curHealth,  5), "LVL 1", hp);
+				
+				string state = "State :" + ShowACharacter.a.Class_.getHPValue().getState();
+				
+				GUI.Label(new Rect(517, 140,100,  5), state, c);
+			}
 
 			}
 		

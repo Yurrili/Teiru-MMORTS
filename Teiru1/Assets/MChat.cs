@@ -5,7 +5,7 @@ public class MChat : MonoBehaviour
 {
 	public Texture panel;
 	private Rect windowRect = new Rect(200, 200, 300, 300);
-	private string messBox = "", messageToSend = "", user = "";
+	private static string messBox = "", messageToSend = "", user = "";
 	
 	private void OnGUI()
 	{
@@ -39,8 +39,13 @@ public class MChat : MonoBehaviour
 	}
 	
 	[RPC]
-	public void sendMessage(string mess)
+	public static void sendMessage(string mess)
 	{
 		messBox += mess;
+	}
+
+	public static void roll(string m) 
+	{
+		sendMessage (m);
 	}
 }

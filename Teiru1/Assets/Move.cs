@@ -33,17 +33,22 @@ public class Move : MonoBehaviour {
 	public int counter = 0;
 	private int theChoosenOne = 0;
 
-	private bool TrueFight = false;
+	public static bool TrueFight = false;
 	private bool SendAccept = false;
 
 	//Enemy HP_Bars
 	private static int MAXHP_Enemy = 8;
 	private static int CurrentHP_Enemy = 8;
-	private float maxHealth_EN = (float)(MAXHP_Enemy*100);
+	//private float maxHealth_EN = (float)(MAXHP_Enemy*100);
 	private float lenghtMaxHP_EN = (float)((MAXHP_Enemy/MAXHP_Enemy)*100);
 	private float curHealth_EN = (float) ((CurrentHP_Enemy/MAXHP_Enemy)*100);
 
 	private int av_EN = 0;
+
+	public int myInitiativ;
+	public int myEnemyInitiativ;
+
+	public bool myTurn = false;
 
 	void Start()
 	{
@@ -154,6 +159,66 @@ public class Move : MonoBehaviour {
 		av_EN = av;
 		hide1 = false;
 		hide = false;
+		InitiativeRoll(ShowACharacter.a.Statistics.getDEX());
+	}
+
+	//inicjatywa
+
+	[RPC]
+	public void getIniciative(NetworkPlayer play)
+	{
+		
+		networkView.RPC ("setIniciative", play, myInitiativ);
+		//wysyłamy "requesta" do innego kompa i on wywoluje funckję która zwróci nam hp
+	}
+
+	[RPC]
+	public void setIniciative(int av)
+	{
+		myEnemyInitiativ = av;
+		AboutWiner (myEnemyInitiativ, myInitiativ);
+	}
+
+	public void AboutWiner(int a, int b) {
+		if (a > b) {
+			MChat.sendMessage("Winer : " + NetworkManager.khg[theChoosenOne]);
+			networkView.RPC ("aboutWiner", NetworkView.Find(l[theChoosenOne]).owner ,true);
+			myTurn = false;
+		}else {
+			MChat.sendMessage("Winer : " + ShowACharacter.a.DName);
+			networkView.RPC ("aboutWiner", NetworkView.Find(l[theChoosenOne]).owner ,false);
+			MChat.sendMessage("\nYour turn : )");
+			myTurn = true;
+		}
+	}
+
+	[RPC]
+	public void aboutWiner(bool av)
+	{
+		// wyslalismy Hp i mamy tą wartość na innym kompie w hp
+		//CurrentHP_Enemy = hp;
+		if (av == true) {
+			MChat.sendMessage("Winer : " + ShowACharacter.a.DName);
+			MChat.sendMessage("\nYour turn : )");
+			myTurn = true;
+		}else {
+			MChat.sendMessage("Winer : " + NetworkManager.khg[theChoosenOne]);
+			MChat.sendMessage("\nWait for your opponent");
+			myTurn = false;
+		}
+	}
+
+	[RPC]
+	public void Turn(bool av)
+	{
+		myTurn = true;
+		MChat.sendMessage("\nYour turn : )");
+	}
+
+	public void ChangeTurn() {
+		myTurn = false;
+		networkView.RPC ("Turn", NetworkView.Find(l[theChoosenOne]).owner ,true);
+		MChat.sendMessage("\nWait for your opponent");
 	}
 
 	void Update() 
@@ -363,6 +428,8 @@ public class Move : MonoBehaviour {
 
 		if (Network.isClient || Network.isServer) 
 		{	
+
+
 			if(TrueFight == false){
 				if (GUI.Button (new Rect (228 , 5, 120, 40), "Fight",a)) 
 				{
@@ -433,41 +500,43 @@ public class Move : MonoBehaviour {
 			hide1 = false;
 			//networkView.RPC ("getHp", NetworkView.Find(l[theChoosenOne]).owner , Network.player);
 			//networkView.RPC ("sendHp", NetworkView.Find(l[theChoosenOne]).owner , ShowACharacter.a.Class_.getHPValue().getCurrentHP ());
-			
+
+			GUI.DrawTexture(new Rect(Screen.width/4, Screen.height/16 , 750, 600), panel, ScaleMode.StretchToFill);
+
 			//char d = ShowACharacter.a.Avatar.ToCharArray ()[2];
 			//int number = int.Parse(d+"");
-			GUI.Label (new Rect (Screen.width / 2 - 185, 5, 250, 50), "FIGHT", a);
+			GUI.Label (new Rect (Screen.width / 2 - 195, 5, 250, 50), "FIGHT", a);
 
 			//TUTAJ TEGO MI TRZEBA
-			GUI.Box(new Rect(Screen.width - 395, 35, 190, 90),"", cStyl);
-			GUI.DrawTexture(new Rect( Screen.width - 380, 60, 40, 40), HP_Bar.sprites[av_EN], ScaleMode.ScaleToFit);
+			GUI.Box(new Rect(Screen.width - 675, 85, 190, 90),"", cStyl);
+			GUI.DrawTexture(new Rect( Screen.width - 660, 110, 40, 40), HP_Bar.sprites[av_EN], ScaleMode.ScaleToFit);
 			string nameLabel = "Name : " + NetworkManager.khg[theChoosenOne];
-			GUI.Label(new Rect(Screen.width - 325, 50, 80,  5), nameLabel, c);
-			GUI.Box(new Rect(Screen.width - 327, 72, lenghtMaxHP_EN,  5), "HP");
-			GUI.Box(new Rect(Screen.width - 327, 72, curHealth_EN,  5), "LVL 1", hp);
+			GUI.Label(new Rect(Screen.width - 605, 100, 80,  5), nameLabel, c);
+			GUI.Box(new Rect(Screen.width - 607, 122, lenghtMaxHP_EN,  5), "HP");
+			GUI.Box(new Rect(Screen.width - 607, 122, curHealth_EN,  5), "LVL 1", hp);
 			
 			string state = "State :" + ShowACharacter.a.Class_.getHPValue().getState();
-			GUI.Label(new Rect(Screen.width - 327, 90,100,  5), state, c);
+			GUI.Label(new Rect(Screen.width - 607, 140,100,  5), state, c);
 
 			//SKills
-			GUI.DrawTexture(new Rect(10, Screen.height/4 , 60, 130), panel, ScaleMode.StretchToFill);
-			GUI.Label(new Rect(10, Screen.height/4, 60, 20), "Skills : ", cStyl);
+			if(myTurn){
+				GUI.DrawTexture(new Rect(555, 165, 150, 130), panel, ScaleMode.StretchToFill);
+				GUI.Label(new Rect(555, 165, 150, 20), "Skills : ", cStyl);
 
-			Skill[] d = ShowACharacter.a.Class_.AvaibleSkills.ToArray ();
+				Skill[] d = ShowACharacter.a.Class_.AvaibleSkills.ToArray ();
 
-			if(GUI.Button( new Rect(15,Screen.height/4 + 20,50,50), "Auto", a)){
+				if(GUI.Button( new Rect(555, 165  + 20,150,40), "Auto", a)){
+					ChangeTurn();
+				}
+
+				if(GUI.Button( new Rect(555, 165  + 50,150,40), d[0].getSkillName(), a)) {
+					ChangeTurn();
+				}
 
 			}
-
-			if(GUI.Button( new Rect(15,Screen.height/4 + 70,50,50), d[0].getSkillName(), a)) {
-
-			}
-
-
 
 		}
 
-		GUI.DrawTexture(new Rect(400, 499 , 600, 400), panel, ScaleMode.StretchToFill);
 
 		if (SendAccept) {
 			char d = ShowACharacter.a.Avatar.ToCharArray ()[2];
@@ -478,10 +547,68 @@ public class Move : MonoBehaviour {
 			networkView.RPC ("getAv", NetworkView.Find(l[theChoosenOne]).owner , Network.player);
 			networkView.RPC ("sendAv", NetworkView.Find(l[theChoosenOne]).owner , number_ );
 
+			InitiativeRoll(ShowACharacter.a.Statistics.getDEX());
 			SendAccept = false;
 			hide1 = false;
 			hide = false;
 
 		}
+	}
+
+	private int getMod(int a){
+		if( a < 10){
+			return -1;
+		} else {
+			if( a < 12 ) {
+				return 0;
+			}else {
+				if( a < 14 ) {
+					return 1;
+				} else {
+					if ( a < 16 ) {
+						return 2;
+					} else {
+						if( a <18 ) {
+							return 3;
+						} else {
+							if( a < 20 ) {
+								return 4 ;
+							} else {
+								if( a < 22 ) {
+									return 5;
+								} else {
+									if( a < 24 ) {
+										return 6;
+									} else {
+										if( a < 26 ){
+											return 7;
+										} else {
+											return 9;
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	private void InitiativeRoll(int dex){
+		Dice dd = new Dice ();
+		int[] roll = dd.Roll (1, 20);
+		myInitiativ = roll [0] + dex;
+
+		if(dex > 0)
+			MChat.roll ("Initiative : " + dd.getSimpleAnswer ()+ "+"+ dex + "(DEX mod)");
+
+		if(dex == 0 )
+			MChat.roll ("Initiative : " + dd.getSimpleAnswer ());
+
+		if(dex < 0 )
+			MChat.roll ("Initiative : " + dd.getSimpleAnswer () + dex + "(DEX mod)");
+
+		networkView.RPC ("getIniciative", NetworkView.Find(l[theChoosenOne]).owner , Network.player);
 	}
 }
