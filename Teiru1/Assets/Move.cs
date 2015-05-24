@@ -18,6 +18,7 @@ public class Move : MonoBehaviour {
 	private bool hide = true;
 	private bool hide1 = true;
 
+	public Texture2D HP ;
 	public Texture2D buttonsA;
 	public Texture2D buttonsB;
 	public Texture2D inputField;
@@ -31,6 +32,13 @@ public class Move : MonoBehaviour {
 	public int counter = 0;
 	private int theChoosenOne = 0;
 	private bool TrueFight = false;
+
+	//Enemy HP_Bars
+	private static int MAXHP_Enemy = 8;
+	private static int CurrentHP_Enemy = 8;
+	private float maxHealth_EN = (float)(MAXHP_Enemy*100);
+	private float lenghtMaxHP_EN = (float)((MAXHP_Enemy/MAXHP_Enemy)*100);
+	private float curHealth_EN = (float) ((CurrentHP_Enemy/MAXHP_Enemy)*100);
 
 	void Start()
 	{
@@ -89,11 +97,27 @@ public class Move : MonoBehaviour {
 	}
 
 	//TUTAJ PROBOWALAM COS NAPISAC
-	//[RPC]
-	//public void getCharacterEnemy()
-	//{
-	//	networkView.RPC("setCharacterEnemy", RPCMode.Others, l.Count);
-	//}
+	[RPC]
+	public void getHP(NetworkPlayer play)
+	{
+		networkView.RPC ("setHP", play, HP_Bar.Health.getCurrentHP ());
+		//wysyłamy "requesta" do innego kompa i on wywoluje funckję która zwróci nam hp
+	}
+	
+	[RPC]
+	public void setHP(int hp)
+	{
+		//CurrentHP_Enemy = hp;
+	}
+	
+	[RPC]
+	public void sendHP(int hp)
+	{
+		// wyslalismy Hp i mamy tą wartość na innym kompie w hp
+		//CurrentHP_Enemy = hp;
+		TrueFight = true;
+		fight = false;
+	}
 
 	void Update() 
 	{
@@ -239,19 +263,24 @@ public class Move : MonoBehaviour {
 		a.hover.textColor = Color.yellow;
 		a.onHover.textColor = Color.yellow;
 
+		GUIStyle hp = new GUIStyle ();
+		hp.normal.background = HP;
+		hp.normal.textColor = Color.yellow;
 	
 		GUIStyle cStyl = new GUIStyle ();
-		cStyl.normal.background = inputField;
+		cStyl.normal.background = buttonsA;
 		cStyl.alignment = TextAnchor.MiddleCenter;
 		cStyl.normal.textColor = Color.yellow;
 
+		GUIStyle c = new GUIStyle();
+		c.normal.textColor = Color.yellow;
 
 		if (fight) 
 		{
 
 				GUI.DrawTexture(new Rect(Screen.width/2 - 168, 100, 300, 200), panel, ScaleMode.StretchToFill);
 				string quote = "Do you wanna fight with : " +  NetworkManager.khg[theChoosenOne];
-				GUI.Label(new Rect (Screen.width/2 - 150, 150,200,50), quote ,cStyl);
+				GUI.Label(new Rect (Screen.width/2 - 130, 150,180,50), quote ,c);
 				
 				if (GUI.Button (new Rect (Screen.width / 2 - 145, 200, 250, 50), "Start fight", a)) 
 				{
@@ -260,18 +289,7 @@ public class Move : MonoBehaviour {
 					TrueFight = true;
 					fight = false;
 
-					char d = ShowACharacter.a.Avatar.ToCharArray ()[2];
-					int number = int.Parse(d+"");
-				//TUTAJ TEGO MI TRZEBA
-					//GUI.Box(new Rect(5, 35, 190, 90),"", cStyl);
-					//GUI.DrawTexture(new Rect(23, 60, 40, 40), sprites[number], ScaleMode.ScaleToFit);
-					//string nameLabel = "Name : " + NetworkManager.khg[0];
-					//GUI.Label(new Rect(75, 50, 80,  5), nameLabel, c);
-					//GUI.Box(new Rect(77, 72, lenghtMaxHP,  5), "HP");
-					//GUI.Box(new Rect(77, 72, curHealth,  5), "LVL 1", hp);
 					
-					//string state = "State :" + Health.getState();
-					//GUI.Label(new Rect(77, 90,100,  5), state, c);
 				}
 
 		}
@@ -318,13 +336,15 @@ public class Move : MonoBehaviour {
 					
 					for (int i = 0; i < l.Count ; i++)
 					{
-						
+						if(NetworkManager.khg[l.Count-i-1] != ShowACharacter.a.DName){
+
 							if (GUI.Button(new Rect(30 , 140 + (50 * i), 180, 40), NetworkManager.khg[l.Count-i-1] , a))
 							{
 								networkView.RPC ("startBattle", NetworkView.Find(l[i]).owner, NetworkManager.khg[i] );
-
+			
 								theChoosenOne = i;
 							}
+						}
 
 					}
 
@@ -339,7 +359,24 @@ public class Move : MonoBehaviour {
 		}
 
 		if (TrueFight) {
+	
+			networkView.RPC ("getHp", NetworkView.Find(l[theChoosenOne]).owner , Network.player);
+			networkView.RPC ("sendHp", NetworkView.Find(l[theChoosenOne]).owner , HP_Bar.Health.getCurrentHP ());
+			
+			//char d = ShowACharacter.a.Avatar.ToCharArray ()[2];
+			//int number = int.Parse(d+"");
 			GUI.Label (new Rect (Screen.width / 2 - 185, 5, 250, 50), "FIGHT", a);
+
+			//TUTAJ TEGO MI TRZEBA
+			GUI.Box(new Rect(Screen.width - 355, 35, 190, 90),"", cStyl);
+			GUI.DrawTexture(new Rect( Screen.width - 380, 60, 40, 40), HP_Bar.sprites[3], ScaleMode.ScaleToFit);
+			string nameLabel = "Name : " + NetworkManager.khg[theChoosenOne];
+			GUI.Label(new Rect(Screen.width - 325, 50, 80,  5), nameLabel, c);
+			GUI.Box(new Rect(Screen.width - 327, 72, lenghtMaxHP_EN,  5), "HP");
+			GUI.Box(new Rect(Screen.width - 327, 72, curHealth_EN,  5), "LVL 1", hp);
+			
+			string state = "State :" + HP_Bar.Health.getState();
+			GUI.Label(new Rect(Screen.width -327, 90,100,  5), state, c);
 		}
 	}
 }
