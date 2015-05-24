@@ -20,7 +20,8 @@ public class NetworkManager : MonoBehaviour {
 	public static GameObject p;
 	public NetworkPlayer np1;
 	public static List<NetworkViewID> playerList;
-
+	string name2 = "";
+	public static List<string> playerName;
 
 	void OnServerInitialized()
 	{
@@ -87,12 +88,16 @@ public class NetworkManager : MonoBehaviour {
 		playerList.Add (p);
 	}
 
+
 	private void SpawnPlayer()
 	{
-		playerPrefab.name = DBManager.loggedInUser;
+		//GameObject kl = new GameObject (playerPrefab);
+	//	networkView.RPC ("sendName" , RPCMode.All, MenuManager._Character_.DName);
+		//playerPrefab.name = MenuManager._Character_.DName;
 		//playerPrefab.rigidbody2D.gravityScale = 0.01f;
 		p  = Network.Instantiate(playerPrefab, new Vector3(-8168f, -9298f, 0f), Quaternion.identity, 0) as GameObject;
 		p.rigidbody2D.gravityScale = 0;
+	//	p.name = MenuManager._Character_.DName;
 	/*	if (Network.isClient)
 		{
 			networkView.RPC("addPlayer",RPCMode.Server, Move.getId());
@@ -124,6 +129,12 @@ public class NetworkManager : MonoBehaviour {
 			Debug.Log("fff");
 			Physics2D.IgnoreCollision(coll.collider, p.collider2D);
 		}
+	}
+
+	[RPC]
+	public void sendName(string name1)
+	{
+		name2 = name1;
 	}
 
 	
@@ -162,7 +173,10 @@ public class NetworkManager : MonoBehaviour {
 
 			if (GUI.Button(new Rect(Screen.width/2 - 120, 210, 250, 50), "Start Server", a))
 			{
+			//	string h = MenuManager._Character_.DName;
 				StartServer();
+			//	networkView.RPC ("sendName" , RPCMode.Server, MenuManager._Character_.DName);
+
 			}
 				
 			GUI.DrawTexture(new Rect(Screen.width/2 - 197, 280, 400, 400), panel, ScaleMode.ScaleToFit);
@@ -178,7 +192,10 @@ public class NetworkManager : MonoBehaviour {
 				{
 
 					if (GUI.Button(new Rect(Screen.width/2 - 120, 390 + (60 * i), 250, 50), hostList[i].gameName, a))
+					{
 						JoinServer(hostList[i]);
+					//	networkView.RPC ("sendName" , RPCMode.All, MenuManager._Character_.DName);
+					}
 				}
 			}
 		}

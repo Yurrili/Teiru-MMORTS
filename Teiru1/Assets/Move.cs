@@ -15,24 +15,25 @@ public class Move : MonoBehaviour {
 	private Vector3 syncStartPosition = Vector2.zero;
 	private Vector3 syncEndPosition = Vector2.zero;
 	private Animator animator;
-	private bool hide = true;
-	private bool hide1 = true;
-
 	public Texture2D buttonsA;
 	public Texture2D buttonsB;
-	public Texture2D inputField;
-
-	public Texture2D panel;
-
+	public Texture panel;
 	private bool fight = false;
 	public static bool might = false;
-	public static List<NetworkViewID> l;
+	public static List<NetworkViewID> l = new  List<NetworkViewID> ();
+	int counter =0;
+	bool got = false;
+	string hhhh= "";
 
 
 	void Start()
 	{
+		NetworkManager.p.name = MenuManager._Character_.DName;
+		string p = NetworkView.Find (networkView.viewID).gameObject.name;
+		if (NetworkView.Find(networkView.viewID).gameObject.name!="Main camera"  && got == false)
+		{
 		animator = this.GetComponent<Animator> ();
-		l = new  List<NetworkViewID> ();
+		
 		if (Network.isClient)
 		{
 			networkView.RPC("addPlayer",RPCMode.Server, networkView.viewID);
@@ -41,12 +42,21 @@ public class Move : MonoBehaviour {
 		{
 			l.Add (networkView.viewID);
 		}
+		}
+		else
+		{
+			got = false;
+		}
 	}
 
 	[RPC]
 	public void addPlayer(NetworkViewID p)
 	{
+		if (!l.Contains(p))
+		{
+		got = true;
 		l.Add (p);
+		}
 	}
 
 	[RPC]
@@ -59,9 +69,20 @@ public class Move : MonoBehaviour {
 	public void getList(NetworkViewID id)
 	{
 		l.Add (id);
-		might = true;
+	//	might = true;
 	}
 
+	[RPC]
+	public void getCount()
+	{
+		networkView.RPC("setCount", RPCMode.Others,l.Count);
+	}
+
+	[RPC]
+	public void setCount(int i)
+	{
+		counter = i;
+	}
 	
 	void Update() 
 	{
@@ -191,15 +212,9 @@ public class Move : MonoBehaviour {
 	[RPC]
 	public void startBattle(string name)
 	{
+		might = false;
 		fight = true;
 	}
-
-	[RPC]
-	public void showList(string name, string h)
-	{
-
-	}
-
 
 
 	void OnGUI()
@@ -218,71 +233,46 @@ public class Move : MonoBehaviour {
 		a.onHover.textColor = Color.yellow;
 
 	
-		GUIStyle cStyl = new GUIStyle ();
-		cStyl.normal.background = inputField;
-		cStyl.alignment = TextAnchor.MiddleCenter;
-		cStyl.normal.textColor = Color.yellow;
-
-
 		if (fight) 
 		{
-
-
-				GUI.DrawTexture(new Rect(Screen.width/2 - 168, 120, 340, 130), panel, ScaleMode.StretchToFill);
-				if (GUI.Button (new Rect (Screen.width / 4 - 120, 210, 250, 50), "Start fight",a)) 
-				{
-					print ("asdad");
-				}
-
+			GUI.DrawTexture(new Rect(Screen.width/2 - 168, 120, 340, 130), panel, ScaleMode.StretchToFill);
+			if (GUI.Button (new Rect (Screen.width / 4 - 120, 210, 250, 50),hhhh + "wants to fight",a)) 
+			{
+				print ("asdad");
+			}
 		}
 
-		if (Network.isClient || Network.isServer) {		
-			if (GUI.Button (new Rect (228 , 5, 120, 40), "Fight",a)) 
+		if (Network.isClient || Network.isServer)
+		{		
+			if (GUI.Button (new Rect (Screen.width / 2 - 120, 210, 250, 50), "Wann` fight m8",a)) 
 			{
+				networkView.RPC("getCount",RPCMode.Server);
 				if (Network.isClient)
 				{
-					for (int i =0;i<Network.connections.Length;i++)
+					for (int i =0;i<counter;i++)
 					{
 						networkView.RPC ("retList", RPCMode.Server,i);
 					}
+					might = true;
 				}
 				else
 				{
 					might = true;
-					hide1 = true;
-					hide = true;
 				}
 			}
 		}
 
 		if (might) 
-		{		
-				if(hide1 == true){
-					GUI.DrawTexture(new Rect(20, 120, 200, 300), panel, ScaleMode.StretchToFill);
-					GUI.Label(new Rect(18, 120, 205, 20), "Avaible users : ", cStyl);
-				}
+		{
 
-		
-				if( hide == true ){
-				//GUI.DrawTexture(new Rect(Screen.width/4 - 197, 280, 400, 400), panel, ScaleMode.ScaleToFit);
-					for (int i = 0; i < l.Count ; i++)
+			GUI.DrawTexture(new Rect(Screen.width/4 - 197, 280, 400, 400), panel, ScaleMode.ScaleToFit);
+				for (int i = 0; i < l.Count ; i++)
+				{
+				if (GUI.Button(new Rect(Screen.width/4 - 120, 390 + (60 * i), 250, 50), NetworkView.Find(l[i]).gameObject.name , a))
 					{
-					if (GUI.Button(new Rect(30, 140 + (60 * i), 180, 40), NetworkView.Find(l[i]).gameObject.name , a))
-						{
-							print ("df");
-						}
+					networkView.RPC ("startBattle", NetworkView.Find(l[i]).owner,NetworkView.Find(l[i]).gameObject.name );
 					}
-
-					if (GUI.Button(new Rect(195, 120, 20, 20), "X" , a))
-					{
-						hide1 = false;
-						hide = false;
-					}
-
 				}
-
-
-
 		}
 	}
 }
