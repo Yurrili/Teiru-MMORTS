@@ -23,12 +23,14 @@ public class Move : MonoBehaviour {
 	public Texture2D inputField;
 
 	public Texture2D panel;
-
+	private PlayersCharacter MyCharacter = ShowACharacter.a;
 	private bool fight = false;
 	public static bool might = false;
 	public static List<NetworkViewID> l = new  List<NetworkViewID> ();
 	bool got = false;
 	public int counter = 0;
+	private int theChoosenOne = 0;
+	private bool TrueFight = false;
 
 	void Start()
 	{
@@ -77,7 +79,7 @@ public class Move : MonoBehaviour {
 	[RPC]
 	public void getCount()
 	{
-		networkView.RPC("setCount", RPCMode.Others,l.Count);
+		networkView.RPC("setCount", RPCMode.Others, l.Count);
 	}
 	
 	[RPC]
@@ -86,7 +88,13 @@ public class Move : MonoBehaviour {
 		counter = i;
 	}
 
-	
+	//TUTAJ PROBOWALAM COS NAPISAC
+	//[RPC]
+	//public void getCharacterEnemy()
+	//{
+	//	networkView.RPC("setCharacterEnemy", RPCMode.Others, l.Count);
+	//}
+
 	void Update() 
 	{
 		if (networkView.isMine)
@@ -216,9 +224,6 @@ public class Move : MonoBehaviour {
 	}
 
 
-
-
-
 	void OnGUI()
 	{
 
@@ -244,11 +249,29 @@ public class Move : MonoBehaviour {
 		if (fight) 
 		{
 
-
-				GUI.DrawTexture(new Rect(Screen.width/2 - 168, 120, 340, 130), panel, ScaleMode.StretchToFill);
-				if (GUI.Button (new Rect (Screen.width / 2 - 160, 100, 250, 50), "Start fight",a)) 
+				GUI.DrawTexture(new Rect(Screen.width/2 - 168, 100, 300, 200), panel, ScaleMode.StretchToFill);
+				string quote = "Do you wanna fight with : " +  NetworkManager.khg[theChoosenOne];
+				GUI.Label(new Rect (Screen.width/2 - 150, 150,200,50), quote ,cStyl);
+				
+				if (GUI.Button (new Rect (Screen.width / 2 - 145, 200, 250, 50), "Start fight", a)) 
 				{
-					print ("asdad");
+					//FIGHT
+					print ("Fight");
+					TrueFight = true;
+					fight = false;
+
+					char d = ShowACharacter.a.Avatar.ToCharArray ()[2];
+					int number = int.Parse(d+"");
+				//TUTAJ TEGO MI TRZEBA
+					//GUI.Box(new Rect(5, 35, 190, 90),"", cStyl);
+					//GUI.DrawTexture(new Rect(23, 60, 40, 40), sprites[number], ScaleMode.ScaleToFit);
+					//string nameLabel = "Name : " + NetworkManager.khg[0];
+					//GUI.Label(new Rect(75, 50, 80,  5), nameLabel, c);
+					//GUI.Box(new Rect(77, 72, lenghtMaxHP,  5), "HP");
+					//GUI.Box(new Rect(77, 72, curHealth,  5), "LVL 1", hp);
+					
+					//string state = "State :" + Health.getState();
+					//GUI.Label(new Rect(77, 90,100,  5), state, c);
 				}
 
 		}
@@ -259,9 +282,11 @@ public class Move : MonoBehaviour {
 			{
 				if (Network.isClient)
 				{
-				l = new  List<NetworkViewID>();
+					l = new  List<NetworkViewID>();
 				}
+
 				networkView.RPC("getCount",RPCMode.Server);
+
 				if (Network.isClient)
 				{
 					for (int i =0;i<counter;i++)
@@ -290,12 +315,17 @@ public class Move : MonoBehaviour {
 		
 				if( hide == true )
 				{
+					
 					for (int i = 0; i < l.Count ; i++)
 					{
-						if (GUI.Button(new Rect(30 , 140 + (60 * i), 180, 40), NetworkManager.khg[l.Count-i-1] , a))
-						{
-						networkView.RPC ("startBattle", NetworkView.Find(l[i]).owner,NetworkManager.khg[i] );
-						}	
+						
+							if (GUI.Button(new Rect(30 , 140 + (50 * i), 180, 40), NetworkManager.khg[l.Count-i-1] , a))
+							{
+								networkView.RPC ("startBattle", NetworkView.Find(l[i]).owner, NetworkManager.khg[i] );
+
+								theChoosenOne = i;
+							}
+
 					}
 
 					if (GUI.Button(new Rect(195, 120, 20, 20), "X" , a))
@@ -306,8 +336,10 @@ public class Move : MonoBehaviour {
 
 				}
 
+		}
 
-
+		if (TrueFight) {
+			GUI.Label (new Rect (Screen.width / 2 - 185, 5, 250, 50), "FIGHT", a);
 		}
 	}
 }

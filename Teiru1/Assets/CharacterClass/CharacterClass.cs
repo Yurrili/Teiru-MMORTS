@@ -54,6 +54,10 @@ public class CharacterClass {
 
 	}
 
+	public HPValue getHPValue(){
+		return HP;
+	}
+
 	public int getArts(int a){
 				return Arts[a];
 	}

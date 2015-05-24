@@ -7,16 +7,13 @@ public class HP_Bar : MonoBehaviour {
 		public Texture2D HP ;
 		public Texture2D Labels ;
 		public Texture2D av;
-		public static HPValue Health = new HPValue(8);
+		public static HPValue Health = ShowACharacter.a.Class_.getHPValue();
 	
 		private  static float maxHealth = (float)(Health.getMAXHP()*100);
 		private static float lenghtMaxHP = (float)((Health.getMAXHP()/Health.getMAXHP())*100);
 		private  static float curHealth = (float)((Health.getCurrentHP()/Health.getMAXHP())*100);
 
-		public Texture2D bgImage; 
-		public Texture2D fgImage; 
-		
-		
+	public static Texture2D[] sprites;
 		// Use this for initialization
 		void Start () {   
 		}
@@ -36,7 +33,7 @@ public class HP_Bar : MonoBehaviour {
 			cStyl.normal.textColor = Color.white;
 			cStyl.alignment = TextAnchor.MiddleCenter;
 
-			Texture2D[] sprites;
+			
 			sprites = Resources.LoadAll<Texture2D>("avatars"); 
 			
 		GUIStyle c = new GUIStyle();
@@ -45,9 +42,12 @@ public class HP_Bar : MonoBehaviour {
 			if (Network.isClient || Network.isServer) {
 
 				//HealthBar
+
+			char d = ShowACharacter.a.Avatar.ToCharArray ()[2];
+			int number = int.Parse(d+"");
 			GUI.Box(new Rect(5, 35, 190, 90),"", cStyl);
-			GUI.DrawTexture(new Rect(23, 60, 40, 40), sprites[3], ScaleMode.ScaleToFit);
-			string nameLabel = "Name : " + "Me";
+			GUI.DrawTexture(new Rect(23, 60, 40, 40), sprites[number], ScaleMode.ScaleToFit);
+			string nameLabel = "Name : " + NetworkManager.khg[0];
 			GUI.Label(new Rect(75, 50, 80,  5), nameLabel, c);
 			GUI.Box(new Rect(77, 72, lenghtMaxHP,  5), "HP");
 			GUI.Box(new Rect(77, 72, curHealth,  5), "LVL 1", hp);
