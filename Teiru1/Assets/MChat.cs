@@ -18,9 +18,9 @@ public class MChat : MonoBehaviour
 	
 	private void windowFunc(int id)
 	{
-		GUI.BeginGroup(new Rect(0,10,300,200));
-		scrollvector = GUILayout.BeginScrollView( scrollvector, GUILayout.Width(300), GUILayout.Height(200));
-		GUILayout.Box(messBox);
+		GUI.BeginGroup(new Rect(20,0,250,200));
+		scrollvector = GUILayout.BeginScrollView( scrollvector, GUILayout.Width(250), GUILayout.Height(200));
+		GUILayout.Box(messBox, GUILayout.Width(250), GUILayout.ExpandHeight(true));
 		GUILayout.EndScrollView();
 		GUI.EndGroup ();
 
