@@ -460,10 +460,14 @@ public class Move : MonoBehaviour {
 			}
 
 			if(GUI.Button( new Rect(15,Screen.height/4 + 70,50,50), d[0].getSkillName(), a)) {
-				ShowACharacter.a.Class_.
+
 			}
 
+
+
 		}
+
+		GUI.DrawTexture(new Rect(400, 499 , 600, 400), panel, ScaleMode.StretchToFill);
 
 		if (SendAccept) {
 			char d = ShowACharacter.a.Avatar.ToCharArray ()[2];
