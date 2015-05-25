@@ -17,9 +17,7 @@ public class HP_Bar : MonoBehaviour {
 		sprites = Resources.LoadAll<Texture2D>("avatars"); 
 		
 	}
-		
 
-		
 	void OnGUI () {
 
 	GUIStyle hp = new GUIStyle ();
@@ -38,25 +36,17 @@ public class HP_Bar : MonoBehaviour {
 
 				//HealthBar
 				if(ShowACharacter.a != null && Move.TrueFight == false){
-
-
 					
 					char d = ShowACharacter.a.Avatar.ToCharArray ()[2];
-					
-			
-
-					//maxHealth = (float)(ShowACharacter.a.Class_.getHPValue().getMAXHP()*100);
-					lenghtMaxHP = (float)((ShowACharacter.a.Class_.getHPValue().getMAXHP()/ShowACharacter.a.Class_.getHPValue().getMAXHP())*100);
-					curHealth = (float)((ShowACharacter.a.Class_.getHPValue().getCurrentHP()/ShowACharacter.a.Class_.getHPValue().getMAXHP())*100);
 
 					GUI.Box(new Rect(5, 35, 190, 90),"", cStyl);
-				GUI.DrawTexture(new Rect(23, 60, 40, 40), sprites[int.Parse(d+"")], ScaleMode.ScaleToFit);
+					GUI.DrawTexture(new Rect(23, 60, 40, 40), sprites[int.Parse(d+"")], ScaleMode.ScaleToFit);
 					
 					string nameLabel = "Name : " + NetworkManager.khg[0];
 					
 					GUI.Label(new Rect(75, 50, 80,  5), nameLabel, c);
-					GUI.Box(new Rect(77, 72, lenghtMaxHP,  5), "HP");
-					GUI.Box(new Rect(77, 72, curHealth,  5), "LVL 1", hp);
+					GUI.Box(new Rect(77, 72, 100,  5), "HP");
+					GUI.Box(new Rect(77, 72, 100,  5), "LVL 1", hp);
 					
 					string state = "State :" + ShowACharacter.a.Class_.getHPValue().getState();
 					
@@ -80,14 +70,14 @@ public class HP_Bar : MonoBehaviour {
 				string nameLabel = "Name : " + NetworkManager.khg[0];
 				
 				GUI.Label(new Rect(515, 100, 80,  5), nameLabel, c);
-				GUI.Box(new Rect(517, 122, lenghtMaxHP,  5), "HP");
-				GUI.Box(new Rect(517, 122, curHealth,  5), HP_label, hp);
+				GUI.Box(new Rect(517, 122, 100,  5), "HP");
+				GUI.Box(new Rect(517, 122, 100,  5), HP_label, hp);
 				
 				string state = "State :" + ShowACharacter.a.Class_.getHPValue().getState();
 				
 				GUI.Label(new Rect(517, 140,100,  5), state, c);
 
-				GUI.Box(new Rect(Screen.width - 517,170,150,150), ShowACharacter.a.Statistics.getDescription());
+				GUI.Box(new Rect(Screen.width/2 + 150,170,150,150), ShowACharacter.a.Statistics.getDescription());
 			}
 
 			}

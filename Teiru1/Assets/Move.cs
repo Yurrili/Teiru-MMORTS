@@ -733,7 +733,7 @@ public class Move : MonoBehaviour {
 				
 				int x = AttackRoll (ShowACharacter.a.Statistics.getSTR ());
 				if (x < 5) {
-					sendTOEter ("Failed roll, Sorry : " + a  + "\n");
+					sendTOEter ("Failed roll, Sorry : " + x  + "\n");
 				}else {
 					if ( x == 20 ) {
 						sendTOEter ( " Threat a possibility to take a critical Shot \n Dice will be rolled to confirm \n");
