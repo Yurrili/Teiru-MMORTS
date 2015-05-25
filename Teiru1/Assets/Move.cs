@@ -609,42 +609,42 @@ public class Move : MonoBehaviour {
 				norm.alignment = TextAnchor.MiddleCenter;
 
 				//ENEMY HP BAR
-				GUI.Box(new Rect(Screen.width - 685, 85, 190, 90),"", cStyl);
-				GUI.DrawTexture(new Rect( Screen.width - 670, 110, 40, 40), HP_Bar.sprites[av_EN], ScaleMode.ScaleToFit);
+				GUI.Box(new Rect(720, 85, 190, 90),"", cStyl);
+				GUI.DrawTexture(new Rect( 735, 110, 40, 40), HP_Bar.sprites[av_EN], ScaleMode.ScaleToFit);
 				string p =  NetworkManager.khg[theChoosenOneReversed];
 				string h = NetworkManager.khg[theChoosenOne];
 				string nameLabel = "Name : " + NetworkManager.khg[theChoosenOne];
-				GUI.Label(new Rect(Screen.width - 615, 100, 80,  5), nameLabel, c);
-				GUI.Box(new Rect(Screen.width - 617, 122, lenghtMaxHP_EN,  5), "HP");
+				GUI.Label(new Rect(780, 100, 80,  5), nameLabel, c);
+				GUI.Box(new Rect(790, 122, lenghtMaxHP_EN,  5), "HP");
 				string hp_label  = CurrentHP_Enemy + "/" + MAXHP_Enemy;
-				GUI.Box(new Rect(Screen.width - 617, 122, curHealth_EN,  5), hp_label, hp);
+				GUI.Box(new Rect(790, 122, curHealth_EN,  5), hp_label, hp);
 				
 				string state = "State :" + ShowACharacter.a.Class_.getHPValue().getState();
-				GUI.Label(new Rect(Screen.width - 617, 140,100,  5), state, c);
+				GUI.Label(new Rect(790, 140,100,  5), state, c);
 
-				GUI.Label(new Rect(Screen.width/4, 170, 750, 20), "About Character : ", cStyl);
+				GUI.Label(new Rect(330, 170, 750, 20), "About Character : ", cStyl);
 
-				GUI.Box(new Rect(Screen.width/2 +150,200,150,20), "Class : " + Enemy_info[0], norm);
-				GUI.Box(new Rect(Screen.width/2 + 150,220,150,20), "Lvl : 1" , norm);
-				GUI.Box(new Rect(Screen.width/2 + 150,260,150,20), "BAB : " + Enemy_info[1], norm);
-				GUI.Box(new Rect(Screen.width/2 + 150,280,150,20), "FORT : " + Enemy_info[2], norm);
-				GUI.Box(new Rect(Screen.width/2 + 150,300,150,20), "REF : " + Enemy_info[3], norm);
-				GUI.Box(new Rect(Screen.width/2 + 150,320,150,20), "WILL : " + Enemy_info[4], norm);
+				GUI.Box(new Rect(670 + 150,200,150,20), "Class : " + Enemy_info[0], norm);
+				GUI.Box(new Rect(670 + 150,220,150,20), "Lvl : 1" , norm);
+				GUI.Box(new Rect(670 + 150,260,150,20), "BAB : " + Enemy_info[1], norm);
+				GUI.Box(new Rect(670 + 150,280,150,20), "FORT : " + Enemy_info[2], norm);
+				GUI.Box(new Rect(670 + 150,300,150,20), "REF : " + Enemy_info[3], norm);
+				GUI.Box(new Rect(670 + 150,320,150,20), "WILL : " + Enemy_info[4], norm);
 
-				GUI.Label(new Rect(Screen.width/4, 370, 750, 20), "Statistics : ", cStyl);
+				GUI.Label(new Rect(330, 370, 750, 20), "Statistics : ", cStyl);
 
 
 
-				GUI.Box(new Rect(Screen.width/2 + 150,390,150,150), EN_Stats, norm);
+				GUI.Box(new Rect(670 + 150,390,150,150), EN_Stats, norm);
 
 				//SKills
 				if(myTurn){
-					GUI.DrawTexture(new Rect(Screen.width/4, Screen.height - 350, 750, 100), panel, ScaleMode.StretchToFill);
-					GUI.Label(new Rect(Screen.width/4, Screen.height - 350, 750, 20), "Skills : ", cStyl);
+					GUI.DrawTexture(new Rect(320 , 550, 750, 100), panel, ScaleMode.StretchToFill);
+					GUI.Label(new Rect(300, 550, 750, 20), "Skills : ", cStyl);
 					
 					Skill[] d = ShowACharacter.a.Class_.AvaibleSkills.ToArray ();
 					
-					if(GUI.Button( new Rect(Screen.width/4 + 60, Screen.height - 320, 90,50), "Auto", a)){
+					if(GUI.Button( new Rect(320 + 60, 580, 90,50), "Auto", a)){
 						TakeDamage(new Skill("Auto Attack", 0, "","",1,6,"" ));
 						ChangeTurn();
 					}
@@ -652,26 +652,26 @@ public class Move : MonoBehaviour {
 					string [] brr = (d[0].getSkillName()).Split(' ');
 					name = brr[0] + "\n" + brr[1];
 
-					if(GUI.Button( new Rect(Screen.width/4 + 150, Screen.height - 320, 90, 50), name, a)) {
+					if(GUI.Button( new Rect(320 + 150, 580, 90, 50), name, a)) {
 
 						TakeDamage(d[0]);
 						ChangeTurn();
 					}
 
-					if(GUI.Button( new Rect(Screen.width/4 + 240, Screen.height - 320, 90, 50), "NaN", a)) {
+					if(GUI.Button( new Rect(320 + 240, 580, 90, 50), "NaN", a)) {
 
 					}
 
-					if(GUI.Button( new Rect(Screen.width/4 + 330, Screen.height - 320, 90, 50), "NaN", a)) {
+					if(GUI.Button( new Rect(320 + 330, 580, 90, 50), "NaN", a)) {
 						
 					}
-					if(GUI.Button( new Rect(Screen.width/4 + 420, Screen.height - 320, 90, 50), "NaN", a)) {
+					if(GUI.Button( new Rect(320 + 420, 580, 90, 50), "NaN", a)) {
 						
 					}
-					if(GUI.Button( new Rect(Screen.width/4 + 510,Screen.height - 320, 90, 50), "NaN", a)) {
+					if(GUI.Button( new Rect(320 + 510,580, 90, 50), "NaN", a)) {
 						
 					}
-					if(GUI.Button( new Rect(Screen.width/4 +  600, Screen.height - 320, 90, 50), "NaN", a)) {
+					if(GUI.Button( new Rect(320 +  600, 580, 90, 50), "NaN", a)) {
 						
 					}
 

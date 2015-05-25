@@ -68,28 +68,28 @@ public class HP_Bar : MonoBehaviour {
 				curHealth = (float)((ShowACharacter.a.Class_.getHPValue().getCurrentHP()/ShowACharacter.a.Class_.getHPValue().getMAXHP())*100);
 				
 				GUI.Box(new Rect(455, 85, 190, 90),"", cStyl);
-				GUI.DrawTexture(new Rect(463, 110, 40, 40), sprites[int.Parse(d+"")], ScaleMode.ScaleToFit);
+				GUI.DrawTexture(new Rect(470, 110, 40, 40), sprites[int.Parse(d+"")], ScaleMode.ScaleToFit);
 				
 				string nameLabel = "Name : " + NetworkManager.khg[0];
 				
-				GUI.Label(new Rect(515, 100, 80,  5), nameLabel, c);
-				GUI.Box(new Rect(517, 122, 100,  5), "HP");
-				GUI.Box(new Rect(517, 122, 100,  5), HP_label, hp);
+				GUI.Label(new Rect(527, 100, 80,  5), nameLabel, c);
+				GUI.Box(new Rect(527, 122, 100,  5), "HP");
+				GUI.Box(new Rect(527, 122, 100,  5), HP_label, hp);
 				
 				string state = "State :" + ShowACharacter.a.Class_.getHPValue().getState();
 				
-				GUI.Label(new Rect(517, 140,100,  5), state, c);
+				GUI.Label(new Rect(527, 140,100,  5), state, c);
 
 			//my character
 				
-				GUI.Box(new Rect(Screen.width/4 + 40,200,150,20), "Class : " + ShowACharacter.a.Class_.getClass(), norm);
-				GUI.Box(new Rect(Screen.width/4 + 40,220,150,20), "Lvl : " + ShowACharacter.a.Class_.getLvl(), norm);
-				GUI.Box(new Rect(Screen.width/4 + 40,260,150,20), "BAB : " + ShowACharacter.a.Class_.getBAB(), norm);
-				GUI.Box(new Rect(Screen.width/4 + 40,280,150,20), "FORT : " + ShowACharacter.a.Class_.getFORT(), norm);
-				GUI.Box(new Rect(Screen.width/4 + 40,300,150,20), "REF : " + ShowACharacter.a.Class_.getREF(), norm);
-				GUI.Box(new Rect(Screen.width/4 + 40,320,150,20), "WILL : " + ShowACharacter.a.Class_.getWILL(), norm);
+				GUI.Box(new Rect(400 + 40,200,150,20), "Class : " + ShowACharacter.a.Class_.getClass(), norm);
+				GUI.Box(new Rect(400 + 40,220,150,20), "Lvl : " + ShowACharacter.a.Class_.getLvl(), norm);
+				GUI.Box(new Rect(400 + 40,260,150,20), "BAB : " + ShowACharacter.a.Class_.getBAB(), norm);
+				GUI.Box(new Rect(400 + 40,280,150,20), "FORT : " + ShowACharacter.a.Class_.getFORT(), norm);
+				GUI.Box(new Rect(400 + 40,300,150,20), "REF : " + ShowACharacter.a.Class_.getREF(), norm);
+				GUI.Box(new Rect(400 + 40,320,150,20), "WILL : " + ShowACharacter.a.Class_.getWILL(), norm);
 
-				GUI.Box(new Rect(Screen.width/4 + 40,390,150,150), ShowACharacter.a.Statistics.getDescription(), norm);
+				GUI.Box(new Rect(400 + 40,390,150,150), ShowACharacter.a.Statistics.getDescription(), norm);
 			}
 
 			}
