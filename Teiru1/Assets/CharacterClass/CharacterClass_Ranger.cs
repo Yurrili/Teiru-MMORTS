@@ -60,7 +60,7 @@ public class CharacterClass_Ranger : CharacterClass {
 
 	public void CreateSkillList(){
 		
-		base.setSkillListEle(0,0, new Skill ("Endure Elements", 1, "standard", "standard action, Resistance 5 ( + 5 HP ) to all elements \n until absorbed 5 dmg or encounter ends)", 5, 0, "HP"));
+		base.setSkillListEle(0,0, new Skill ("Endure Elements", 1, "standard", "standard action, Resistance 5 ( + 5 HP ) to all elements \n until absorbed 5 dmg or encounter ends)", 0, 5, "HP"));
 		base.setSkillListEle(0,1, new Skill ("Wind's Blessing", 1, "buff", " swift, you gain extra round ", 0, 0, ""));
 		base.setSkillListEle(0,2, new Skill ("Sniper's Shot", 1, "attack", " standard action, one shot from a bow that \nthreatens double damage", 2, 6, ""));
 		base.setSkillListEle(0,3, new Skill ("Blades of Elements", 1, "attack", " swift, melee weapons deal +1d6 fire or acid \n damage until next round ", 1, 6, ""));

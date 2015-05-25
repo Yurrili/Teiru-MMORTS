@@ -3,9 +3,8 @@ using System.Collections;
 
 public class MChat : MonoBehaviour 
 {
-	public Texture panel;
-	private Rect windowRect = new Rect(200, 200, 300, 300);
-	private static string messBox = "", messageToSend = "", user = "";
+	public Rect windowRect = new Rect(200, 200, 300, 300);
+	public static string messBox = "", messageToSend = "", user = "";
 	
 	private void OnGUI()
 	{
@@ -24,14 +23,14 @@ public class MChat : MonoBehaviour
 		messageToSend = GUILayout.TextField(messageToSend ,myStyle);
 		if (GUILayout.Button("Send" , GUILayout.Width(75)))
 		{
-			networkView.RPC("sendMessage", RPCMode.All, user + ": " + messageToSend + "\n");
+			networkView.RPC("sendMessage", RPCMode.All, ShowACharacter.a.DName + ": " + messageToSend + "\n");
 			messageToSend = "";
 		}
 		GUILayout.EndHorizontal();
 		
 		GUILayout.BeginHorizontal();
 		GUILayout.Label("User:");
-		user = GUILayout.TextField(user);
+		user = ShowACharacter.a.DName;
 		
 		GUILayout.EndHorizontal();
 		
@@ -39,13 +38,13 @@ public class MChat : MonoBehaviour
 	}
 	
 	[RPC]
-	public static void sendMessage(string mess)
+	public void sendMessage(string mess)
 	{
 		messBox += mess;
 	}
 
 	public static void roll(string m) 
 	{
-		sendMessage (m);
+		messBox += m;
 	}
 }

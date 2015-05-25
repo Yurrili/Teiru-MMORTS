@@ -67,8 +67,8 @@ public class CharacterClass_Knight : CharacterClass {
 
 	public void CreateSkillList(){
 		
-		base.setSkillListEle(0,0, new Skill ("Leading Strike", 1, "buff", "sStandard, Melee attack. \nIf hits, all allies get +4 to hit against\n that enemy until next round.", 0, 0, "ALL"));
-		base.setSkillListEle(0,1, new Skill ("Mage Armor", 1, "buff", " standard action, An invisible but tangible field \nof force surrounds the subject of a mage armor spell, \nproviding a +4 armor bonus to AC(KP).", 1, 4, "AC"));
+		base.setSkillListEle(0,0, new Skill ("Leading Strike", 1, "Attack", "Standard, Melee attack. \nIf hits,enemy get 1d4 \n.", 1, 4, ""));
+		base.setSkillListEle(0,1, new Skill ("Mage Armor", 1, "buff", " standard action, An invisible but tangible field \nof force surrounds the subject of a mage armor spell, \nproviding a +4 armor bonus to AC(KP).", 0, 4, "AC"));
 		base.setSkillListEle(0,2, new Skill ("Chill Touch", 1, "attack", " standard actiob, Each touch channels \nnegative energy that deals 1d6 points of damage.", 1, 6, ""));
 		base.setSkillListEle(0,3, new Skill ("Rooting Strike", 1, "attack", "standard, single melee attack,\n +1d6 points of damage. ", 1, 6, ""));
 

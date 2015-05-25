@@ -69,11 +69,11 @@ public class CharacterClass_Mage : CharacterClass {
 
 	public void CreateSkillList(){
 		
-		base.setSkillListEle(0,0, new Skill ("Grease", 1, "buff", "standard action, A grease spell covers a solid surface \nwith a layer of slippery grease. \nAny creature in the area when the spell is cast must \nmake a successful Reflex save or fall. \nThis save is repeated on your turn each round \n that the creature remains within the area.", 1, 6, "REF"));
-		base.setSkillListEle(0,1, new Skill ("Mage Armor", 1, "buff", " standard action, An invisible but tangible field \nof force surrounds the subject of a mage armor spell, \nproviding a +4 armor bonus to AC(KP).", 1, 4, "AC"));
+		base.setSkillListEle(0,0, new Skill ("Grease", 1, "buff", "standard action, A grease spell covers a solid surface \nwith a layer of slippery grease. \nAny creature in the area when the spell is cast must \nmake a successful Reflex save or fall.", 1, 6, ""));
+		base.setSkillListEle(0,1, new Skill ("Mage Armor", 1, "buff", " standard action, An invisible but tangible field \nof force surrounds the subject of a mage armor spell, \nproviding a +4 armor bonus to AC(KP).", 0, 4, "AC"));
 		base.setSkillListEle(0,2, new Skill ("Chill Touch", 1, "attack", " standard actiob, Each touch channels \nnegative energy that deals 1d6 points of damage.", 1, 6, ""));
-		base.setSkillListEle(0,3, new Skill ("Magic Weapon", 1, "attack", "standart action, during time: 10 round/level.\n Magic weapon gives a weapon a +1d4 bonus on attack .", 1, 4, ""));
-		base.setSkillListEle(0,4, new Skill ("Cat’s Grace",2, "buff", "standard action, \nSubject gains +4 to Dex for 10 rounds. ", 1,4, "DEX"));
+		base.setSkillListEle(0,3, new Skill ("Magic Weapon", 1, "attack", "standart action, Magic weapon gives a weapon a +1d4 bonus on attack .", 1, 4, "B"));
+		base.setSkillListEle(0,4, new Skill ("Cat’s Grace",2, "buff", "standard action, \nSubject gains attack bonus. ", 1,4, "B"));
 
 		base.setSkillListEle(1,0, new Skill ("Scorching Ray",2,"attack","sstandart action, range: 25ft, hit and deals 4d6\npoints of fire damage",4,6,""));
 		base.setSkillListEle(1,1, new Skill ("Gust of Wind",2,"attack","standart action, duration: 1 round, creatures are unable to move forward against the force of the wind", 0,0,"STUN"));

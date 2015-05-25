@@ -68,8 +68,8 @@ public class CharacterClass_Mystiq : CharacterClass {
 	public void CreateSkillList(){
 		
 		
-		base.setSkillListEle(0,0, new Skill ("Cure Light Wounds", 1, "heal", "When laying your hand upon a living creature,you channel positive energy that cures 1d8 points of damage +1 point per caster level(maximum +5).", 1, 8, ""));
-		base.setSkillListEle(0,1, new Skill ("Shield of Faith", 1, "buff", " standard action, An invisible but tangible field \nof force surrounds the subject of a mage armor spell, \nproviding a +4 armor bonus to AC(KP).", 1, 4, "AC"));
+		base.setSkillListEle(0,0, new Skill ("Cure Light Wounds", 1, "heal", "When laying your hand upon a living creature,you channel positive energy that cures 1d8 points of damage +1 point per caster level(maximum +5).", 1, 8, "HP"));
+		base.setSkillListEle(0,1, new Skill ("Shield of Faith", 1, "buff", " standard action, An invisible but tangible field \nof force surrounds the subject of a mage armor spell, \nproviding a +4 armor bonus to AC(KP).", 0, 4, "AC"));
 		base.setSkillListEle(0,2, new Skill ("Chilly Touch", 1, "attack", " standard actiob, Each touch channels \nnegative energy that deals 1d6 points of damage.", 1, 6, ""));
 		base.setSkillListEle(0,3, new Skill ("Produce Flame", 1, "attack", "standard, You can strike an opponent \nwith a melee touch attack, dealing fire damage equal to d6 +1 point per\n caster level (maximum +5). ", 1, 6, ""));
 		

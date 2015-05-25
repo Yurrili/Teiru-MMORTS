@@ -69,7 +69,7 @@ public class HP_Bar : MonoBehaviour {
 				char d = ShowACharacter.a.Avatar.ToCharArray ()[2];
 				
 				
-				
+				string HP_label = ShowACharacter.a.Class_.getHPValue().getCurrentHP()+ "/" + ShowACharacter.a.Class_.getHPValue().getMAXHP();
 				//maxHealth = (float)(ShowACharacter.a.Class_.getHPValue().getMAXHP()*100);
 				lenghtMaxHP = (float)((ShowACharacter.a.Class_.getHPValue().getMAXHP()/ShowACharacter.a.Class_.getHPValue().getMAXHP())*100);
 				curHealth = (float)((ShowACharacter.a.Class_.getHPValue().getCurrentHP()/ShowACharacter.a.Class_.getHPValue().getMAXHP())*100);
@@ -81,7 +81,7 @@ public class HP_Bar : MonoBehaviour {
 				
 				GUI.Label(new Rect(515, 100, 80,  5), nameLabel, c);
 				GUI.Box(new Rect(517, 122, lenghtMaxHP,  5), "HP");
-				GUI.Box(new Rect(517, 122, curHealth,  5), "LVL 1", hp);
+				GUI.Box(new Rect(517, 122, curHealth,  5), HP_label, hp);
 				
 				string state = "State :" + ShowACharacter.a.Class_.getHPValue().getState();
 				
