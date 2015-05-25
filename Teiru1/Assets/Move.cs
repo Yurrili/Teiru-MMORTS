@@ -60,6 +60,8 @@ public class Move : MonoBehaviour {
 	private GUIStyle attack;
 
 	public int tempo = 0;
+
+	public static bool GameOver = false;
 	
 	void Start()
 	{
@@ -179,9 +181,28 @@ public class Move : MonoBehaviour {
 	public void send_getDamage(int dmg)
 	{
 		// wyslalismy Hp i mamy tą wartość na innym kompie w hp
-		ShowACharacter.a.Class_.setCurrentHP(dmg);
+		if( dmg < 0 ) {
+
+			ShowACharacter.a.Class_.getHPValue().Hit(dmg*(-1));
+
+			if(ShowACharacter.a.Class_.getHPValue() <= 0 ){
+				//Game Over
+				TrueFight = false;
+				GameOver = true;
+			}
+		} else {
+			ShowACharacter.a.Class_.getHPValue().Heal(dmg);
+		}
 		TrueFight = true;
 		fight = false;
+	}
+
+	[RPC]
+	public void sendGameOver(bool game)
+	{
+		// wyslalismy Hp i mamy tą wartość na innym kompie w hp
+		TrueFight = false;
+		GameOver = true;
 	}
 
 	[RPC]
@@ -266,7 +287,7 @@ public class Move : MonoBehaviour {
 	
 	public void AboutWiner(int a, int b) {
 		if (a > b) {
-			MChat.roll("Winer : " + NetworkManager.khg[theChoosenOneReversed]);
+			MChat.roll("Winer : " + NetworkManager.khg[theChoosenOne]);
 			networkView.RPC ("aboutWiner", NetworkView.Find(l[theChoosenOneReversed]).owner ,true);
 			myTurn = false;
 		}else {
@@ -640,6 +661,21 @@ public class Move : MonoBehaviour {
 				
 			}
 
+			if(GameOver) {
+
+				sendTOEter ( "\nThe Winner is  :: " + NetworkManager.khg[theChoosenOne] + "\n");
+				if (Network.isClient)
+				{
+					networkView.RPC ("sendGameOver", NetworkView.Find(l[theChoosenOneReversed]).owner , true );
+				}
+				else
+				{
+					networkView.RPC ("sendGameOver", NetworkView.Find(l[theChoosenOne]).owner , true );
+				}
+
+
+			}
+
 		}
 	}
 	
@@ -679,39 +715,60 @@ public class Move : MonoBehaviour {
 
 	private void TakeDamage(Skill spell ){
 		if (spell.getMod () == "HP") {
-			MChat.roll ( "Get " + spell.getSidesOfDice() + " bonus HP " );
-
+			sendTOEter ( "Get " + spell.getSidesOfDice() + " bonus HP " );
+			if (Network.isClient)
+			{
+				networkView.RPC ("send_getDamage", NetworkView.Find(l[theChoosenOneReversed]).owner , 2 );
+			}
+			else
+			{
+				networkView.RPC ("send_getDamage", NetworkView.Find(l[theChoosenOne]).owner , 2 );
+			}
 			//Heal
 		} else {
 			if(spell.getMod () == "AC"){
 				//BUFF
-				MChat.roll ( "Get " + spell.getSidesOfDice() + " bonus AC " );
+				sendTOEter ( "Get " + spell.getSidesOfDice() + " bonus AC " );
 			} else {
 				
 				int x = AttackRoll (ShowACharacter.a.Statistics.getSTR ());
-				if (x == 0) {
-					MChat.roll ("Failed roll, Sorry : " + a  + "\n");
+				if (x < 5) {
+					sendTOEter ("Failed roll, Sorry : " + a  + "\n");
 				}else {
 					if ( x == 20 ) {
-						MChat.roll ( " Threat a possibility to take a critical Shot \n Dice will be rolled to confirm \n");
+						sendTOEter ( " Threat a possibility to take a critical Shot \n Dice will be rolled to confirm \n");
 						int b = AttackRoll (ShowACharacter.a.Statistics.getSTR ());
 						if( b == 20 ) {
-							MChat.roll ( " Roll a critical hit " );
-							MChat.roll ( ShowACharacter.a.DName + " attacks enemy with :: \n" +  spell.getSkillName());
-							int g = RollADamage(spell) + 5;
-							networkView.RPC ("send_getDamage",NetworkView.Find(l[theChoosenOne]).owner , g+ "");
-
+							sendTOEter ( " Roll a critical hit " );
+							sendTOEter ( ShowACharacter.a.DName + " attacks enemy with :: \n" +  spell.getSkillName());
+							int g = (RollADamage(spell) + 5)*(-1);
+							
+							if (Network.isClient)
+							{
+								networkView.RPC ("send_getDamage", NetworkView.Find(l[theChoosenOneReversed]).owner ,g );
+							}
+							else
+							{
+								networkView.RPC ("send_getDamage", NetworkView.Find(l[theChoosenOne]).owner ,g );
+							}
 						} else {
-							MChat.roll ( " Failed " );
+							sendTOEter ( " Failed " );
 
 						}
 						
 					}else {
 						//attack
-						MChat.roll ( ShowACharacter.a.DName + " attacks enemy with :: \n" +  spell.getSkillName());
-						int g = RollADamage(spell);
-						networkView.RPC ("send_getDamage",NetworkView.Find(l[theChoosenOne]).owner , g + "");
+						sendTOEter ( ShowACharacter.a.DName + " attacks enemy with :: \n" +  spell.getSkillName());
+						int g = RollADamage(spell)*(-1);
 
+						if (Network.isClient)
+						{
+							networkView.RPC ("send_getDamage", NetworkView.Find(l[theChoosenOneReversed]).owner ,g );
+						}
+						else
+						{
+							networkView.RPC ("send_getDamage", NetworkView.Find(l[theChoosenOne]).owner ,g );
+						}
 					}
 				}
 			}
@@ -726,16 +783,16 @@ public class Move : MonoBehaviour {
 			int sum = roll[0];
 			roll = dd.Roll(1,6);
 			sum +=roll[0];
-			MChat.roll ( " Dmg : " + sum + " ( " + c.getAmountOfDice() + "k" + c.getSidesOfDice() + " + 1d6 ) ");
+			sendTOEter( " Dmg : " + sum + " ( " + c.getAmountOfDice() + "k" + c.getSidesOfDice() + " + 1d6 ) ");
 			return sum;
 			
 		} else {
 			if (c.getAmountOfDice() == 0) {
-				MChat.roll ( " Dmg : " + c.getSidesOfDice() );
+				sendTOEter ( " Dmg : " + c.getSidesOfDice() );
 				return c.getSidesOfDice();
 			} else {
 				int[] roll = dd.Roll (c.getAmountOfDice(), c.getSidesOfDice());
-				MChat.roll ( " Dmg : " + roll[0] + " ( " + c.getAmountOfDice() + "k" + c.getSidesOfDice() + ")" );
+				sendTOEter ( " Dmg : " + roll[0] + " ( " + c.getAmountOfDice() + "k" + c.getSidesOfDice() + ")" );
 				return roll[0];
 			}
 		}

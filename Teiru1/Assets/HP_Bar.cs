@@ -86,6 +86,8 @@ public class HP_Bar : MonoBehaviour {
 				string state = "State :" + ShowACharacter.a.Class_.getHPValue().getState();
 				
 				GUI.Label(new Rect(517, 140,100,  5), state, c);
+
+				GUI.Box(new Rect(Screen.width - 517,170,150,150), ShowACharacter.a.Statistics.getDescription());
 			}
 
 			}
