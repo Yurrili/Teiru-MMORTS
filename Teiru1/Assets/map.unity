@@ -3440,13 +3440,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c02e368263502a4eb5f405c297bdecd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  panel: {fileID: 2800000, guid: 91eacd2f42b3b3940ab72f21b2af9ae7, type: 3}
-  windowRect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 0
-    height: 0
+  myskin: {fileID: 0}
 --- !u!1 &891253193
 GameObject:
   m_ObjectHideFlags: 0

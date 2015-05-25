@@ -39,11 +39,11 @@ public class Move : MonoBehaviour {
 	public static bool SendAccept = false;
 	
 	//Enemy HP_Bars
-	private static int MAXHP_Enemy = 8;
-	private static int CurrentHP_Enemy = 8;
+	public static int MAXHP_Enemy = 8;
+	public static int CurrentHP_Enemy = 8;
 	//private float maxHealth_EN = (float)(MAXHP_Enemy*100);
-	public static float lenghtMaxHP_EN = (float)((MAXHP_Enemy/MAXHP_Enemy)*100);
-	public static float curHealth_EN = (float) ((CurrentHP_Enemy/MAXHP_Enemy)*100);
+	public static float lenghtMaxHP_EN = (100);
+	public static float curHealth_EN = (100);
 	
 	public static int av_EN = 0;
 	
@@ -154,27 +154,57 @@ public class Move : MonoBehaviour {
 	
 	//TUTAJ PROBOWALAM COS NAPISAC
 	[RPC]
-	public void getHP(NetworkPlayer play)
+	public void getCurHP(NetworkPlayer play)
 	{
-		networkView.RPC ("setHP", play, ShowACharacter.a.Class_.getHPValue().getCurrentHP ());
+		networkView.RPC ("setCurHP", play, ShowACharacter.a.Class_.getHPValue().getCurrentHP ());
 		//wysyłamy "requesta" do innego kompa i on wywoluje funckję która zwróci nam hp
 	}
 	
 	[RPC]
-	public void setHP(int hp)
+	public void setCurHP(int hp)
 	{
-		//CurrentHP_Enemy = hp;
+		CurrentHP_Enemy = hp;
 	}
 	
 	[RPC]
-	public void sendHP(int hp)
+	public void sendCurHP(int hp)
 	{
 		// wyslalismy Hp i mamy tą wartość na innym kompie w hp
-		//CurrentHP_Enemy = hp;
+		CurrentHP_Enemy = hp;
 		TrueFight = true;
 		fight = false;
 	}
+
+	[RPC]
+	public void send_getDamage(int dmg)
+	{
+		// wyslalismy Hp i mamy tą wartość na innym kompie w hp
+		ShowACharacter.a.Class_.setCurrentHP(dmg);
+		TrueFight = true;
+		fight = false;
+	}
+
+	[RPC]
+	public void getMaxHP(NetworkPlayer play)
+	{
+		networkView.RPC ("setMaxHP", play, ShowACharacter.a.Class_.getHPValue().getMAXHP ());
+		//wysyłamy "requesta" do innego kompa i on wywoluje funckję która zwróci nam hp
+	}
 	
+	[RPC]
+	public void setMaxHP(int hp)
+	{
+		MAXHP_Enemy = hp;
+	}
+	
+	[RPC]
+	public void sendMaxHP(int hp)
+	{
+		// wyslalismy Hp i mamy tą wartość na innym kompie w hp
+		MAXHP_Enemy = hp;
+		TrueFight = true;
+		fight = false;
+	}
 	//AVATARS
 	
 	[RPC]
@@ -236,13 +266,13 @@ public class Move : MonoBehaviour {
 	
 	public void AboutWiner(int a, int b) {
 		if (a > b) {
-			MChat.roll("Winer : " + NetworkManager.khg[theChoosenOne]);
-			networkView.RPC ("aboutWiner", NetworkView.Find(l[theChoosenOne]).owner ,true);
+			MChat.roll("Winer : " + NetworkManager.khg[theChoosenOneReversed]);
+			networkView.RPC ("aboutWiner", NetworkView.Find(l[theChoosenOneReversed]).owner ,true);
 			myTurn = false;
 		}else {
-			MChat.roll("Winer : " + ShowACharacter.a.DName);
-			networkView.RPC ("aboutWiner", NetworkView.Find(l[theChoosenOne]).owner ,false);
-			MChat.roll("\nYour turn : )");
+			MChat.roll("\nWiner : " + ShowACharacter.a.DName);
+			networkView.RPC ("aboutWiner", NetworkView.Find(l[theChoosenOneReversed]).owner ,false);
+			MChat.roll("\nYour turn : )\n");
 			myTurn = true;
 		}
 	}
@@ -253,12 +283,12 @@ public class Move : MonoBehaviour {
 		// wyslalismy Hp i mamy tą wartość na innym kompie w hp
 		//CurrentHP_Enemy = hp;
 		if (av == true) {
-			MChat.roll("Winer : " + ShowACharacter.a.DName);
-			MChat.roll("\nYour turn : )");
+			MChat.roll("\nWiner : " + ShowACharacter.a.DName);
+			MChat.roll("\nYour turn : )\n");
 			myTurn = true;
 		}else {
-			MChat.roll("Winer : " + NetworkManager.khg[theChoosenOne]);
-			MChat.roll("\nWait for your opponent");
+			MChat.roll("\nWiner : " + NetworkManager.khg[theChoosenOne]);
+			MChat.roll("\nWait for your opponent\n");
 			myTurn = false;
 		}
 	}
@@ -267,13 +297,21 @@ public class Move : MonoBehaviour {
 	public void Turn(bool av)
 	{
 		myTurn = true;
-		MChat.roll("\nYour turn : )");
+		MChat.roll("\nYour turn : )\n");
 	}
 	
 	public void ChangeTurn() {
 		myTurn = false;
-		networkView.RPC ("Turn", NetworkView.Find(l[theChoosenOne]).owner ,true);
-		MChat.roll("\nWait for your opponent");
+		
+		if (Network.isClient)
+		{
+			networkView.RPC ("Turn", NetworkView.Find(l[theChoosenOneReversed]).owner ,true);
+		}
+		else
+		{
+			networkView.RPC ("Turn", NetworkView.Find(l[theChoosenOne]).owner ,true);
+		}
+		MChat.roll("\nWait for your opponent\n");
 	}
 	
 	void Update() 
@@ -475,9 +513,17 @@ public class Move : MonoBehaviour {
 				
 				hide = false;
 				hide1 = false;
-				//networkView.RPC ("getHp", NetworkView.Find(l[theChoosenOne]).owner , Network.player);
-				//networkView.RPC ("sendHp", NetworkView.Find(l[theChoosenOne]).owner , ShowACharacter.a.Class_.getHPValue().getCurrentHP ());
+
+				NetworkPlayer f = NetworkView.Find(l[theChoosenOneReversed]).owner;
+
+				networkView.RPC ("getCurHP", NetworkView.Find(l[theChoosenOne]).owner , Network.player);
+				networkView.RPC ("sendCurHP",NetworkView.Find(l[theChoosenOne]).owner , ShowACharacter.a.Class_.getHPValue().getCurrentHP ());
+
+
 				
+				networkView.RPC ("getMaxHP", NetworkView.Find(l[theChoosenOne]).owner , Network.player);
+				networkView.RPC ("sendMaxHP",NetworkView.Find(l[theChoosenOne]).owner , ShowACharacter.a.Class_.getHPValue().getMAXHP());
+
 				GUI.DrawTexture(new Rect(Screen.width/4, Screen.height/16 , 750, 600), panel, ScaleMode.StretchToFill);
 				
 				//char d = ShowACharacter.a.Avatar.ToCharArray ()[2];
@@ -506,10 +552,12 @@ public class Move : MonoBehaviour {
 					Skill[] d = ShowACharacter.a.Class_.AvaibleSkills.ToArray ();
 					
 					if(GUI.Button( new Rect(555, 165  + 20,150,40), "Auto", a)){
+						TakeDamage(new Skill("Auto Attack", 0, "","",1,6,"" ));
 						ChangeTurn();
 					}
 					
 					if(GUI.Button( new Rect(555, 165  + 50,150,40), d[0].getSkillName(), a)) {
+						TakeDamage(d[0]);
 						ChangeTurn();
 					}
 					
@@ -583,7 +631,7 @@ public class Move : MonoBehaviour {
 				networkView.RPC ("getAv", f , Network.player);
 				networkView.RPC ("sendAv", f , int.Parse(d+""));
 
-				calculateInit (ShowACharacter.a.Statistics.getDEX ());
+				//calculateInit (ShowACharacter.a.Statistics.getDEX ());
 				InitiativeRoll(ShowACharacter.a.Statistics.getDEX());
 				//InitiativeRoll(ShowACharacter.a.Statistics.getDEX());
 				SendAccept = false;
@@ -602,13 +650,13 @@ public class Move : MonoBehaviour {
 		myInitiativ = roll [0] + dex;
 		
 		if(dex > 0)
-			MChat.roll ("Initiative : " + dd.getSimpleAnswer ()+ "+"+ dex + "(DEX mod)");
+			MChat.roll ("Initiative : " + dd.getSimpleAnswer ()+ "+"+ dex + "(DEX mod)\n");
 		
 		if(dex == 0 )
-			MChat.roll ("Initiative : " + dd.getSimpleAnswer ());
+			MChat.roll ("Initiative : " + dd.getSimpleAnswer ()  + "\n");
 		
 		if(dex < 0 )
-			MChat.roll ("Initiative : " + dd.getSimpleAnswer () + dex + "(DEX mod)");
+			MChat.roll ("Initiative : " + dd.getSimpleAnswer () + dex + "(DEX mod)\n");
 	}
 	
 	private void InitiativeRoll(int dex){
@@ -618,13 +666,13 @@ public class Move : MonoBehaviour {
 		myInitiativ = roll [0] + dex;
 		
 		if(dex > 0)
-			MChat.roll ("Initiative : " + dd.getSimpleAnswer ()+ "+"+ dex + "(DEX mod)");
+			MChat.roll ("Initiative : " + dd.getSimpleAnswer ()+ "+"+ dex + "(DEX mod)  \n");
 		
 		if(dex == 0 )
-			MChat.roll ("Initiative : " + dd.getSimpleAnswer ());
+			MChat.roll ("Initiative : " + dd.getSimpleAnswer () + "\n" );
 		
 		if(dex < 0 )
-			MChat.roll ("Initiative : " + dd.getSimpleAnswer () + dex + "(DEX mod)");
+			MChat.roll ("Initiative : " + dd.getSimpleAnswer () + dex + "(DEX mod)\n");
 		
 		networkView.RPC ("getIniciative", NetworkView.Find(l[theChoosenOneReversed]).owner , Network.player);
 	}
@@ -632,6 +680,7 @@ public class Move : MonoBehaviour {
 	private void TakeDamage(Skill spell ){
 		if (spell.getMod () == "HP") {
 			MChat.roll ( "Get " + spell.getSidesOfDice() + " bonus HP " );
+
 			//Heal
 		} else {
 			if(spell.getMod () == "AC"){
@@ -649,15 +698,20 @@ public class Move : MonoBehaviour {
 						if( b == 20 ) {
 							MChat.roll ( " Roll a critical hit " );
 							MChat.roll ( ShowACharacter.a.DName + " attacks enemy with :: \n" +  spell.getSkillName());
-							
+							int g = RollADamage(spell) + 5;
+							networkView.RPC ("send_getDamage",NetworkView.Find(l[theChoosenOne]).owner , g+ "");
+
 						} else {
 							MChat.roll ( " Failed " );
-							
+
 						}
 						
 					}else {
 						//attack
-						RollADamage(spell);
+						MChat.roll ( ShowACharacter.a.DName + " attacks enemy with :: \n" +  spell.getSkillName());
+						int g = RollADamage(spell);
+						networkView.RPC ("send_getDamage",NetworkView.Find(l[theChoosenOne]).owner , g + "");
+
 					}
 				}
 			}
@@ -681,7 +735,7 @@ public class Move : MonoBehaviour {
 				return c.getSidesOfDice();
 			} else {
 				int[] roll = dd.Roll (c.getAmountOfDice(), c.getSidesOfDice());
-				MChat.roll ( " Dmg : " + roll[0] + " ( " + c.getAmountOfDice() + "k" + c.getSidesOfDice() );
+				MChat.roll ( " Dmg : " + roll[0] + " ( " + c.getAmountOfDice() + "k" + c.getSidesOfDice() + ")" );
 				return roll[0];
 			}
 		}
@@ -694,13 +748,13 @@ public class Move : MonoBehaviour {
 		int myAttack = roll [0] + str;
 		
 		if(str > 0)
-			MChat.roll ("Initiative : " + dd.getSimpleAnswer ()+ "+"+ str + "(DEX mod)");
+			rollToEter ( ShowACharacter.a.DName +  " Attack Roll : " + dd.getSimpleAnswer ()+ "+"+ str + "(DEX mod)\n");
 		
 		if(str == 0 )
-			MChat.roll ("Initiative : " + dd.getSimpleAnswer ());
+			rollToEter (ShowACharacter.a.DName + " Attack Roll : " + dd.getSimpleAnswer () + "\n");
 		
 		if(str < 0 )
-			MChat.roll ("Initiative : " + dd.getSimpleAnswer () + str + "(DEX mod)");
+			rollToEter (ShowACharacter.a.DName + " Attack Roll : " + dd.getSimpleAnswer () + str + "(DEX mod)\n");
 		
 		return myAttack;
 	}
@@ -745,6 +799,15 @@ public class Move : MonoBehaviour {
 			}
 		}
 	}
-	
+
+	public void sendTOEter(string messageToSe){
+		networkView.RPC("rollToEter", RPCMode.All, ShowACharacter.a.DName + ": " + messageToSe + "\n");
+	}
+
+	[RPC]
+	public void rollToEter(string mess){
+		MChat.roll(mess);
+	}
+
 	
 }

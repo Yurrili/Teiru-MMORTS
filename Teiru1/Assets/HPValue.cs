@@ -80,8 +80,8 @@ public class HPValue {
 		}
 	}
 
-	public string Hit(int damage){
+	public void Hit(int damage){
 		CurrentHP -= damage;
-			return getState ();
+			
 	}
 }
