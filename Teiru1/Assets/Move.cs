@@ -185,7 +185,7 @@ public class Move : MonoBehaviour {
 
 			ShowACharacter.a.Class_.getHPValue().Hit(dmg*(-1));
 
-			if(ShowACharacter.a.Class_.getHPValue() <= 0 ){
+			if(ShowACharacter.a.Class_.getHPValue().getCurrentHP() <= 0 ){
 				//Game Over
 				TrueFight = false;
 				GameOver = true;
