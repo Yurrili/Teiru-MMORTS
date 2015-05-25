@@ -62,6 +62,7 @@ public class Move : MonoBehaviour {
 	public int tempo = 0;
 
 	public static bool GameOver = false;
+	public static bool TrueGameOver = false;
 	
 	void Start()
 	{
@@ -234,6 +235,8 @@ public class Move : MonoBehaviour {
 				//Game Over
 				TrueFight = false;
 				GameOver = true;
+				TrueGameOver = true;
+				gameOver();
 			}
 		} else {
 			ShowACharacter.a.Class_.getHPValue().Heal(dmg);
@@ -247,7 +250,23 @@ public class Move : MonoBehaviour {
 	{
 		// wyslalismy Hp i mamy tą wartość na innym kompie w hp
 		TrueFight = false;
+		fight = false;
 		GameOver = true;
+		TrueGameOver = true;
+	}
+
+	public void gameOver()
+	{
+		if (Network.isClient)
+		{
+			networkView.RPC ("sendGameOver", NetworkView.Find(l[theChoosenOneReversed]).owner , true );
+			GameOver = false;
+		}
+		else
+		{
+			networkView.RPC ("sendGameOver", NetworkView.Find(l[theChoosenOne]).owner , true );
+			GameOver = false;
+		}
 	}
 
 	[RPC]
@@ -576,7 +595,8 @@ public class Move : MonoBehaviour {
 					}
 				}
 			} else { // MOMENT WALKI
-				
+
+				if( TrueGameOver != true){
 				hide = false;
 				hide1 = false;
 
@@ -674,8 +694,10 @@ public class Move : MonoBehaviour {
 					if(GUI.Button( new Rect(320 +  600, 580, 90, 50), "NaN", a)) {
 						
 					}
+					}
 
 				}
+
 				
 			}
 			
@@ -757,16 +779,11 @@ public class Move : MonoBehaviour {
 			if(GameOver) {
 
 				sendTOEter ( "\nThe Winner is  :: " + NetworkManager.khg[theChoosenOne] + "\n");
-				if (Network.isClient)
-				{
-					networkView.RPC ("sendGameOver", NetworkView.Find(l[theChoosenOneReversed]).owner , true );
-				}
-				else
-				{
-					networkView.RPC ("sendGameOver", NetworkView.Find(l[theChoosenOne]).owner , true );
-				}
-
-
+				TrueGameOver = true;
+				GameOver = false;
+				TrueFight = false;
+				fight = false;
+				TrueFight = false;
 			}
 
 		}

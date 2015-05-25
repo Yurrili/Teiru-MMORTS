@@ -5,9 +5,10 @@ public class MChat : MonoBehaviour
 {
 	public GUISkin myskin;
 	
-	private Rect windowRect = new Rect(200, 200, 300, 450);
+	private Rect windowRect = new Rect(10, 400, 300, 300);
 	public static string messBox = "", messageToSend = "", user = "";
 	private Vector2 scrollvector = new Vector2(0,0);
+
 	private void OnGUI()
 	{
 		GUI.skin = myskin;
@@ -17,35 +18,36 @@ public class MChat : MonoBehaviour
 	
 	private void windowFunc(int id)
 	{
+
+
 		GUI.BeginGroup(new Rect(20,0,250,200));
-		scrollvector = GUILayout.BeginScrollView( scrollvector, GUILayout.Width(250), GUILayout.Height(300));
+		scrollvector = GUILayout.BeginScrollView( scrollvector, GUILayout.Width(250), GUILayout.Height(200));
 		GUILayout.Box(messBox, GUILayout.Width(250), GUILayout.ExpandHeight(true));
 		GUILayout.EndScrollView();
 		GUI.EndGroup ();
-		
-		
-		
-		//GUI.BeginGroup(new Rect(20,230,400,400));
+
 		GUIStyle myStyle = new GUIStyle(GUI.skin.textField);
 		myStyle.alignment = TextAnchor.MiddleLeft;
 		GUILayout.BeginHorizontal();
 		messageToSend = GUILayout.TextField(messageToSend ,myStyle);
+
+		//GUILayout.Box(messBox, GUILayout.Height(350));
 		
-		
+		//GUILayout.BeginHorizontal();
+		//messageToSend = GUILayout.TextField(messageToSend);
 		if (GUILayout.Button("Send" , GUILayout.Width(75)))
 		{
-			networkView.RPC("sendMessage", RPCMode.All, user + ": " + messageToSend + "\n");
+			networkView.RPC("SendMessage", RPCMode.All, user + ": " + messageToSend + "\n");
 			messageToSend = "";
 		}
 		GUILayout.EndHorizontal();
 		
 		GUILayout.BeginHorizontal();
 		GUILayout.Label("User:");
+		user = ShowACharacter.a.DName;
 		user = GUILayout.TextField(user);
 		
 		GUILayout.EndHorizontal();
-		
-		//GUI.EndGroup ();
 		
 		GUI.DragWindow(new Rect(0, 0, Screen.width, Screen.height));
 	}

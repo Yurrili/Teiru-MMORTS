@@ -51,12 +51,12 @@ public class HPValue {
 			return " alive ";	
 		} else {
 
-			if(CurrentHP == 0){
+			if(CurrentHP < 8){
 				return " wounded"; //W każdej turze postać może wykonać tylko jedną akcję ruchu lub akcję standardową 
 									//(ale nie obie i nie ma prawa do akcji Po zakończeniu działania postać otrzymuje jedną ranę.
 			}	else {
 
-				if(CurrentHP < 0 && CurrentHP >= -9){
+				if(CurrentHP < 4 && CurrentHP >= 0){
 					return " dying"; // Umierający bohater natychmiast traci przytomność i nie może wykonywać żadnych 		akcji.
 										//Umierający bohater w każdej rundzie traci 1 punkt wytrzymałości,
 				}	else {

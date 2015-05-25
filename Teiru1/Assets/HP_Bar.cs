@@ -57,7 +57,7 @@ public class HP_Bar : MonoBehaviour {
 
 				}
 
-			if(Move.TrueFight == true ) {
+			if(Move.TrueFight == true  && Move.TrueGameOver !=true) {
 				
 				char d = ShowACharacter.a.Avatar.ToCharArray ()[2];
 				
