@@ -32,6 +32,9 @@ public class HP_Bar : MonoBehaviour {
 	GUIStyle c = new GUIStyle();
 		c.normal.textColor = Color.yellow;
 
+		GUIStyle norm = new GUIStyle ();
+		norm.alignment = TextAnchor.MiddleCenter;
+
 			if (Network.isClient || Network.isServer) {
 
 				//HealthBar
@@ -77,7 +80,16 @@ public class HP_Bar : MonoBehaviour {
 				
 				GUI.Label(new Rect(517, 140,100,  5), state, c);
 
-				GUI.Box(new Rect(Screen.width/2 + 150,170,150,150), ShowACharacter.a.Statistics.getDescription());
+			//my character
+				
+				GUI.Box(new Rect(Screen.width/4 + 40,200,150,20), "Class : " + ShowACharacter.a.Class_.getClass(), norm);
+				GUI.Box(new Rect(Screen.width/4 + 40,220,150,20), "Lvl : " + ShowACharacter.a.Class_.getLvl(), norm);
+				GUI.Box(new Rect(Screen.width/4 + 40,260,150,20), "BAB : " + ShowACharacter.a.Class_.getBAB(), norm);
+				GUI.Box(new Rect(Screen.width/4 + 40,280,150,20), "FORT : " + ShowACharacter.a.Class_.getFORT(), norm);
+				GUI.Box(new Rect(Screen.width/4 + 40,300,150,20), "REF : " + ShowACharacter.a.Class_.getREF(), norm);
+				GUI.Box(new Rect(Screen.width/4 + 40,320,150,20), "WILL : " + ShowACharacter.a.Class_.getWILL(), norm);
+
+				GUI.Box(new Rect(Screen.width/4 + 40,390,150,150), ShowACharacter.a.Statistics.getDescription(), norm);
 			}
 
 			}

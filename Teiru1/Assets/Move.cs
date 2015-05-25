@@ -44,9 +44,9 @@ public class Move : MonoBehaviour {
 	//private float maxHealth_EN = (float)(MAXHP_Enemy*100);
 	public static float lenghtMaxHP_EN = (100);
 	public static float curHealth_EN = (100);
-	
+	public static string[] Enemy_info;
 	public static int av_EN = 0;
-	
+	public static string EN_Stats;
 	public int myInitiativ;
 	public int myEnemyInitiativ;
 	
@@ -175,6 +175,51 @@ public class Move : MonoBehaviour {
 		CurrentHP_Enemy = hp;
 		TrueFight = true;
 		fight = false;
+	}
+
+	//Statistics
+	[RPC]
+	public void getStats(NetworkPlayer play)
+	{
+		networkView.RPC ("setStats", play, ShowACharacter.a.Statistics.getDescription());
+		//wysyłamy "requesta" do innego kompa i on wywoluje funckję która zwróci nam hp
+	}
+	
+	[RPC]
+	public void setStats(string stats)
+	{
+		EN_Stats = stats;
+	}
+	
+	[RPC]
+	public void sendStats(string stats)
+	{
+		// wyslalismy Hp i mamy tą wartość na innym kompie w hp
+		EN_Stats = stats;
+	}
+
+	//Klasa
+	//Enemy_info
+	[RPC]
+	public void getInfo(NetworkPlayer play)
+	{
+		string respond = ShowACharacter.a.Class_.getClass () + ";" + ShowACharacter.a.Class_.getBAB () + ";" + ShowACharacter.a.Class_.getFORT () + ";" + ShowACharacter.a.Class_.getREF () + ";" + ShowACharacter.a.Class_.getWILL();
+
+		networkView.RPC ("setInfo", play, respond);
+		//wysyłamy "requesta" do innego kompa i on wywoluje funckję która zwróci nam hp
+	}
+	
+	[RPC]
+	public void setInfo(string stats)
+	{
+		Enemy_info = stats.Split (';');
+	}
+	
+	[RPC]
+	public void sendInfo(string stats)
+	{
+		// wyslalismy Hp i mamy tą wartość na innym kompie w hp
+		Enemy_info = stats.Split (';');
 	}
 
 	[RPC]
@@ -545,12 +590,24 @@ public class Move : MonoBehaviour {
 				networkView.RPC ("getMaxHP", NetworkView.Find(l[theChoosenOne]).owner , Network.player);
 				networkView.RPC ("sendMaxHP",NetworkView.Find(l[theChoosenOne]).owner , ShowACharacter.a.Class_.getHPValue().getMAXHP());
 
+				networkView.RPC ("getStats", NetworkView.Find(l[theChoosenOne]).owner , Network.player);
+				networkView.RPC ("sendStats",NetworkView.Find(l[theChoosenOne]).owner , ShowACharacter.a.Statistics.getDescription());
+
+				string respond = ShowACharacter.a.Class_.getClass () + ";" + ShowACharacter.a.Class_.getBAB () + ";" + ShowACharacter.a.Class_.getFORT () + ";" + ShowACharacter.a.Class_.getREF () + ";" + ShowACharacter.a.Class_.getWILL();
+
+				networkView.RPC ("getInfo", NetworkView.Find(l[theChoosenOne]).owner , Network.player);
+				networkView.RPC ("sendInfo",NetworkView.Find(l[theChoosenOne]).owner , respond);
+
+
 				GUI.DrawTexture(new Rect(Screen.width/4, Screen.height/16 , 750, 600), panel, ScaleMode.StretchToFill);
 				
 				//char d = ShowACharacter.a.Avatar.ToCharArray ()[2];
 				//int number = int.Parse(d+"");
 				GUI.Label (new Rect (Screen.width / 2 - 195, 5, 250, 50), "FIGHT", a);
-				
+
+				GUIStyle norm = new GUIStyle ();
+				norm.alignment = TextAnchor.MiddleCenter;
+
 				//ENEMY HP BAR
 				GUI.Box(new Rect(Screen.width - 685, 85, 190, 90),"", cStyl);
 				GUI.DrawTexture(new Rect( Screen.width - 670, 110, 40, 40), HP_Bar.sprites[av_EN], ScaleMode.ScaleToFit);
@@ -564,24 +621,60 @@ public class Move : MonoBehaviour {
 				
 				string state = "State :" + ShowACharacter.a.Class_.getHPValue().getState();
 				GUI.Label(new Rect(Screen.width - 617, 140,100,  5), state, c);
-				
+
+				GUI.Label(new Rect(Screen.width/4, 170, 750, 20), "About Character : ", cStyl);
+
+				GUI.Box(new Rect(Screen.width/2 +150,200,150,20), "Class : " + Enemy_info[0], norm);
+				GUI.Box(new Rect(Screen.width/2 + 150,220,150,20), "Lvl : 1" , norm);
+				GUI.Box(new Rect(Screen.width/2 + 150,260,150,20), "BAB : " + Enemy_info[1], norm);
+				GUI.Box(new Rect(Screen.width/2 + 150,280,150,20), "FORT : " + Enemy_info[2], norm);
+				GUI.Box(new Rect(Screen.width/2 + 150,300,150,20), "REF : " + Enemy_info[3], norm);
+				GUI.Box(new Rect(Screen.width/2 + 150,320,150,20), "WILL : " + Enemy_info[4], norm);
+
+				GUI.Label(new Rect(Screen.width/4, 370, 750, 20), "Statistics : ", cStyl);
+
+
+
+				GUI.Box(new Rect(Screen.width/2 + 150,390,150,150), EN_Stats, norm);
+
 				//SKills
 				if(myTurn){
-					GUI.DrawTexture(new Rect(555, 165, 150, 130), panel, ScaleMode.StretchToFill);
-					GUI.Label(new Rect(555, 165, 150, 20), "Skills : ", cStyl);
+					GUI.DrawTexture(new Rect(Screen.width/4, Screen.height - 350, 750, 100), panel, ScaleMode.StretchToFill);
+					GUI.Label(new Rect(Screen.width/4, Screen.height - 350, 750, 20), "Skills : ", cStyl);
 					
 					Skill[] d = ShowACharacter.a.Class_.AvaibleSkills.ToArray ();
 					
-					if(GUI.Button( new Rect(555, 165  + 20,150,40), "Auto", a)){
+					if(GUI.Button( new Rect(Screen.width/4 + 60, Screen.height - 320, 90,50), "Auto", a)){
 						TakeDamage(new Skill("Auto Attack", 0, "","",1,6,"" ));
 						ChangeTurn();
 					}
-					
-					if(GUI.Button( new Rect(555, 165  + 50,150,40), d[0].getSkillName(), a)) {
+
+					string [] brr = (d[0].getSkillName()).Split(' ');
+					name = brr[0] + "\n" + brr[1];
+
+					if(GUI.Button( new Rect(Screen.width/4 + 150, Screen.height - 320, 90, 50), name, a)) {
+
 						TakeDamage(d[0]);
 						ChangeTurn();
 					}
-					
+
+					if(GUI.Button( new Rect(Screen.width/4 + 240, Screen.height - 320, 90, 50), "NaN", a)) {
+
+					}
+
+					if(GUI.Button( new Rect(Screen.width/4 + 330, Screen.height - 320, 90, 50), "NaN", a)) {
+						
+					}
+					if(GUI.Button( new Rect(Screen.width/4 + 420, Screen.height - 320, 90, 50), "NaN", a)) {
+						
+					}
+					if(GUI.Button( new Rect(Screen.width/4 + 510,Screen.height - 320, 90, 50), "NaN", a)) {
+						
+					}
+					if(GUI.Button( new Rect(Screen.width/4 +  600, Screen.height - 320, 90, 50), "NaN", a)) {
+						
+					}
+
 				}
 				
 			}
