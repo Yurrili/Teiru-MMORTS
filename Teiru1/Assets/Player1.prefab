@@ -85,9 +85,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1850d257f544cda4e980d115bf6b6b3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HP: {fileID: 2800000, guid: 57247a84b8ab58440985ef47fb7b2b8e, type: 3}
   buttonsA: {fileID: 2800000, guid: 18b7db4fd2161004ebbb02873803defa, type: 3}
   buttonsB: {fileID: 2800000, guid: 4a914c6eeb8470b4aa5f2147cb6e84ef, type: 3}
-  inputField: {fileID: 0}
+  inputField: {fileID: 2800000, guid: a7aadc20a34bfd44e893868add5e9c4f, type: 3}
   panel: {fileID: 2800000, guid: 91eacd2f42b3b3940ab72f21b2af9ae7, type: 3}
   counter: 0
 --- !u!148 &14800000

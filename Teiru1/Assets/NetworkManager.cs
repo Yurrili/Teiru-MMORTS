@@ -120,8 +120,12 @@ public class NetworkManager : MonoBehaviour {
 		//playerPrefab.rigidbody2D.gravityScale = 0.01f;
 		p  = Network.Instantiate(playerPrefab, new Vector3(-8168f, -9298f, 0f), Quaternion.identity, 0) as GameObject;
 		p.rigidbody2D.gravityScale = 0;
+<<<<<<< HEAD
 		networkView.RPC ("asd", RPCMode.AllBuffered,MenuManager._Character_.DName );
 >>>>>>> GodCalledTheLightDay
+=======
+		networkView.RPC ("asd", RPCMode.AllBuffered, MenuManager._Character_.DName );
+>>>>>>> Boniedzialaloboktosmicommitowal
 	/*	if (Network.isClient)
 		{
 			networkView.RPC("addPlayer",RPCMode.Server, Move.getId());

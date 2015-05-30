@@ -14,16 +14,43 @@ Platform assembly: E:\GitHub\Teiru-MMORTS\Teiru1\map_Data\Managed\UnityEngine.UI
 Loading E:\GitHub\Teiru-MMORTS\Teiru1\map_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
 Platform assembly: E:\GitHub\Teiru-MMORTS\Teiru1\map_Data\Managed\ogclient-framework.dll (this message is harmless)
 Loading E:\GitHub\Teiru-MMORTS\Teiru1\map_Data\Managed\ogclient-framework.dll into Unity Child Domain
+<<<<<<< HEAD
 - Completed reload, in  0.133 seconds
+=======
+- Completed reload, in  0.109 seconds
+>>>>>>> Boniedzialaloboktosmicommitowal
 desktop: 1366x768 60Hz; virtual: 1366x768 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
 Platform assembly: E:\GitHub\Teiru-MMORTS\Teiru1\map_Data\Managed\System.Core.dll (this message is harmless)
+<<<<<<< HEAD
+=======
+The referenced script on this Behaviour is missing!
+ 
+(Filename:  Line: 1788)
+
+Platform assembly: E:\GitHub\Teiru-MMORTS\Teiru1\map_Data\Managed\System.dll (this message is harmless)
+NullReferenceException: Object reference not set to an instance of an object
+  at NetworkManager.SpawnPlayer () [0x00000] in <filename unknown>:0 
+  at NetworkManager.OnServerInitialized () [0x00000] in <filename unknown>:0 
+UnityEngine.Network:InitializeServer(Int32, Int32, Boolean)
+NetworkManager:StartServer()
+NetworkManager:OnGUI()
+ 
+(Filename:  Line: -1)
+
+>>>>>>> Boniedzialaloboktosmicommitowal
 OnApplicationQuit
  
 (Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
 
+<<<<<<< HEAD
 No objects for the given player ID were deleted -1
  
 (Filename:  Line: 1373)
+=======
+Local server connection disconnected
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+>>>>>>> Boniedzialaloboktosmicommitowal
 

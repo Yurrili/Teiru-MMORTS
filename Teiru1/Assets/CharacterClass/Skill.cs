@@ -3,17 +3,18 @@ using System.Collections;
 
 public class Skill {
 
-	private bool Available;
+	public bool Available;
 
-	private string SkillName;
-	private int Rank;
-	private string Type;
-	private string Description;
-	private bool Used;
+	public string SkillName;
+	public int Rank;
+	public string Type;
+	public string Description;
+	public bool Used;
+
 	//dice
-	private int AmountOfDice;
-	private int SidesOfDice;
-	private string Mod;
+	public int AmountOfDice;
+	public int SidesOfDice;
+	public string Mod;
 
 	public Skill(){
 	}
@@ -36,5 +37,17 @@ public class Skill {
 
 	public string getDescription(){
 		return Description;
+	}
+
+	public int getAmountOfDice(){
+		return AmountOfDice;
+	}
+
+	public int getSidesOfDice(){
+		return SidesOfDice;
+	}
+
+	public string getMod(){
+		return this.Mod;
 	}
 }

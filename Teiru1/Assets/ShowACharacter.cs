@@ -17,12 +17,15 @@ public class ShowACharacter : MonoBehaviour {
 	static public GameObject Rank4But;
 	static public GameObject Rank5But;
 	static public GameObject helmets;
+<<<<<<< HEAD
+	static public PlayersCharacter a;
+=======
+>>>>>>> Boniedzialaloboktosmicommitowal
+
 	static public PlayersCharacter a;
 
 	private static Sprite[] sprites;
 
-
-	static private CharacterClass ActiveCharacter = new CharacterClass_Ranger(8);
 
 	// Use this for initialization
 	void Start () {

@@ -54,6 +54,10 @@ public class CharacterClass {
 
 	}
 
+	public HPValue getHPValue(){
+		return HP;
+	}
+
 	public int getArts(int a){
 				return Arts[a];
 	}
@@ -106,8 +110,8 @@ public class CharacterClass {
 		return BAB;
 	}
 
-	public string takeDamage(int damage){
-		return HP.Hit (damage);
+	public void takeDamage(int damage){
+		HP.Hit (damage);
 	}
 
 	public int getLvl(){
@@ -122,6 +126,10 @@ public class CharacterClass {
 
 	public string getClass(){
 		return className;
+	}
+
+	public void setCurrentHP(int dmg){
+		HP.Hit (dmg);
 	}
 
 

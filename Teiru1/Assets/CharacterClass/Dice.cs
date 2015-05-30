@@ -4,6 +4,7 @@ using System.Collections;
 public class Dice {//kostki
 
 	private string Answer;
+	private string Simple;
 	
 		public int[] Roll(int numberOfDice, int numberOfSides)
 		{
@@ -21,16 +22,18 @@ public class Dice {//kostki
 			int total = 0;
 
 			// opis rzutów można wyświetlać dalej w oknie informacji
-
+			Answer += numberOfDice + "k" + numberOfSides;
+			Simple += numberOfDice + "k" + numberOfSides;
 			for (int i = 0; i < roll.Length; i++)
 			{
 				
 				total += roll[i];
-				Answer += " Dice k" + numberOfSides + " - " + (i + 1) + " : " + roll[i] + "\n" ;
+				Answer +=  " : " + roll[i] + " " ;
+				Simple +=  " : " + roll[i] + " " ;
 				
 			}
 			
-				Answer += "Summary : " + total + "\n";
+				Answer += "\nSummary : " + total + "\n";
 
 			
 			return roll;
@@ -41,4 +44,7 @@ public class Dice {//kostki
 		return Answer;
 	}
 
+	public string getSimpleAnswer(){
+		return Simple;
+	}
 }
