@@ -24,30 +24,14 @@ public class Move : MonoBehaviour {
 	public Texture2D inputField;
 	public Texture2D atk;	
 	public Texture2D panel;
-
+	
 	public static bool fight = false;
 	public static bool might = false;
-
+	
 	public static List<NetworkViewID> l = new  List<NetworkViewID> ();
-<<<<<<< HEAD
-	int counter =0;
-	bool got = false;
-	string hhhh= "";
-
-
-	void Start()
-	{
-		NetworkManager.p.name = MenuManager._Character_.DName;
-		string p = NetworkView.Find (networkView.viewID).gameObject.name;
-		if (NetworkView.Find(networkView.viewID).gameObject.name!="Main camera"  && got == false)
-		{
-		animator = this.GetComponent<Animator> ();
-		
-		if (Network.isClient)
-=======
 	bool got = false;
 	public int counter = 0;
-
+	
 	public static int theChoosenOne = 0;
 	public static int theChoosenOneReversed = 0; 
 	
@@ -68,15 +52,15 @@ public class Move : MonoBehaviour {
 	
 	public static bool myTurn = false;
 	private NetworkPlayer ps;
-
+	
 	private GUIStyle a;
 	private GUIStyle cStyl;
 	private GUIStyle hp;
 	private GUIStyle c;
 	private GUIStyle attack;
-
+	
 	public int tempo = 0;
-
+	
 	public static bool GameOver = false;
 	public static bool TrueGameOver = false;
 	
@@ -85,7 +69,6 @@ public class Move : MonoBehaviour {
 		//NetworkManager.p.name = MenuManager._Character_.DName;
 		NetworkView.Find(networkView.viewID).gameObject.name= NetworkManager.skak;
 		if (NetworkView.Find(networkView.viewID).gameObject.name!="Main camera"  && got == false)
->>>>>>> GodCalledTheLightDay
 		{
 			animator = this.GetComponent<Animator> ();			
 			if (Network.isClient)
@@ -101,16 +84,8 @@ public class Move : MonoBehaviour {
 		{
 			got = false;
 		}
-<<<<<<< HEAD
-		}
-		else
-		{
-			got = false;
-		}
-=======
 		
 		styles ();
->>>>>>> Boniedzialaloboktosmicommitowal
 	}
 	
 	public void styles () {
@@ -150,13 +125,8 @@ public class Move : MonoBehaviour {
 	{
 		if (!l.Contains(p))
 		{
-<<<<<<< HEAD
-		got = true;
-		l.Add (p);
-=======
 			got = true;
 			l.Add (p);
->>>>>>> GodCalledTheLightDay
 		}
 	}
 	
@@ -170,31 +140,18 @@ public class Move : MonoBehaviour {
 	public void getList(NetworkViewID id)
 	{
 		l.Add (id);
-<<<<<<< HEAD
-	//	might = true;
-	}
-
-=======
 	}
 	
->>>>>>> GodCalledTheLightDay
 	[RPC]
 	public void getCount()
 	{
-<<<<<<< HEAD
-		networkView.RPC("setCount", RPCMode.Others,l.Count);
-<<<<<<< HEAD
-=======
-=======
 		networkView.RPC("setCount", RPCMode.Others, l.Count);
->>>>>>> Boniedzialaloboktosmicommitowal
 	}
 	
 	[RPC]
 	public void setCount(int i)
 	{
 		counter = i;
->>>>>>> GodCalledTheLightDay
 	}
 	
 	
@@ -220,7 +177,7 @@ public class Move : MonoBehaviour {
 		TrueFight = true;
 		fight = false;
 	}
-
+	
 	//Statistics
 	[RPC]
 	public void getStats(NetworkPlayer play)
@@ -241,14 +198,14 @@ public class Move : MonoBehaviour {
 		// wyslalismy Hp i mamy tą wartość na innym kompie w hp
 		EN_Stats = stats;
 	}
-
+	
 	//Klasa
 	//Enemy_info
 	[RPC]
 	public void getInfo(NetworkPlayer play)
 	{
 		string respond = ShowACharacter.a.Class_.getClass () + ";" + ShowACharacter.a.Class_.getBAB () + ";" + ShowACharacter.a.Class_.getFORT () + ";" + ShowACharacter.a.Class_.getREF () + ";" + ShowACharacter.a.Class_.getWILL();
-
+		
 		networkView.RPC ("setInfo", play, respond);
 		//wysyłamy "requesta" do innego kompa i on wywoluje funckję która zwróci nam hp
 	}
@@ -265,15 +222,15 @@ public class Move : MonoBehaviour {
 		// wyslalismy Hp i mamy tą wartość na innym kompie w hp
 		Enemy_info = stats.Split (';');
 	}
-
+	
 	[RPC]
 	public void send_getDamage(int dmg)
 	{
 		// wyslalismy Hp i mamy tą wartość na innym kompie w hp
 		if( dmg < 0 ) {
-
+			
 			ShowACharacter.a.Class_.getHPValue().Hit(dmg*(-1));
-
+			
 			if(ShowACharacter.a.Class_.getHPValue().getCurrentHP() <= 0 ){
 				//Game Over
 				TrueFight = false;
@@ -287,7 +244,7 @@ public class Move : MonoBehaviour {
 		TrueFight = true;
 		fight = false;
 	}
-
+	
 	[RPC]
 	public void sendGameOver(bool game)
 	{
@@ -297,13 +254,7 @@ public class Move : MonoBehaviour {
 		GameOver = true;
 		TrueGameOver = true;
 	}
-
-<<<<<<< HEAD
-	[RPC]
-	public void setCount(int i)
-	{
-		counter = i;
-=======
+	
 	public void gameOver()
 	{
 		if (Network.isClient)
@@ -317,7 +268,7 @@ public class Move : MonoBehaviour {
 			GameOver = false;
 		}
 	}
-
+	
 	[RPC]
 	public void getMaxHP(NetworkPlayer play)
 	{
@@ -446,7 +397,6 @@ public class Move : MonoBehaviour {
 			networkView.RPC ("Turn", NetworkView.Find(l[theChoosenOne]).owner ,true);
 		}
 		MChat.roll("\nWait for your opponent\n");
->>>>>>> Boniedzialaloboktosmicommitowal
 	}
 	
 	void Update() 
@@ -573,9 +523,6 @@ public class Move : MonoBehaviour {
 	[RPC]
 	public void startBattle(string name)
 	{
-<<<<<<< HEAD
-		might = false;
-=======
 		for (int i = 0; i < NetworkManager.khg.Count ; i++)
 		{
 			if(NetworkManager.khg[i] == name){
@@ -586,7 +533,6 @@ public class Move : MonoBehaviour {
 			}
 			
 		}
->>>>>>> Boniedzialaloboktosmicommitowal
 		fight = true;
 		might = false;
 		networkView.RPC("getCount",RPCMode.Server);
@@ -649,172 +595,115 @@ public class Move : MonoBehaviour {
 					}
 				}
 			} else { // MOMENT WALKI
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
+				
 				if( TrueGameOver != true){
-				hide = false;
-				hide1 = false;
->>>>>>> Boniedzialaloboktosmicommitowal
-
-				NetworkPlayer f = NetworkView.Find(l[theChoosenOneReversed]).owner;
-
-				networkView.RPC ("getCurHP", NetworkView.Find(l[theChoosenOne]).owner , Network.player);
-				networkView.RPC ("sendCurHP",NetworkView.Find(l[theChoosenOne]).owner , ShowACharacter.a.Class_.getHPValue().getCurrentHP ());
-
->>>>>>> GodCalledTheLightDay
-
-				
-				networkView.RPC ("getMaxHP", NetworkView.Find(l[theChoosenOne]).owner , Network.player);
-				networkView.RPC ("sendMaxHP",NetworkView.Find(l[theChoosenOne]).owner , ShowACharacter.a.Class_.getHPValue().getMAXHP());
-
-				networkView.RPC ("getStats", NetworkView.Find(l[theChoosenOne]).owner , Network.player);
-				networkView.RPC ("sendStats",NetworkView.Find(l[theChoosenOne]).owner , ShowACharacter.a.Statistics.getDescription());
-
-				string respond = ShowACharacter.a.Class_.getClass () + ";" + ShowACharacter.a.Class_.getBAB () + ";" + ShowACharacter.a.Class_.getFORT () + ";" + ShowACharacter.a.Class_.getREF () + ";" + ShowACharacter.a.Class_.getWILL();
-
-				networkView.RPC ("getInfo", NetworkView.Find(l[theChoosenOne]).owner , Network.player);
-				networkView.RPC ("sendInfo",NetworkView.Find(l[theChoosenOne]).owner , respond);
-
-<<<<<<< HEAD
-		if (fight) 
-		{
-<<<<<<< HEAD
-			GUI.DrawTexture(new Rect(Screen.width/2 - 168, 120, 340, 130), panel, ScaleMode.StretchToFill);
-			if (GUI.Button (new Rect (Screen.width / 4 - 120, 210, 250, 50),hhhh + "wants to fight",a)) 
-			{
-				print ("asdad");
-			}
-		}
-
-		if (Network.isClient || Network.isServer)
-		{		
-			if (GUI.Button (new Rect (Screen.width / 2 - 120, 210, 250, 50), "Wann` fight m8",a)) 
-=======
-=======
->>>>>>> Boniedzialaloboktosmicommitowal
-
-				GUI.DrawTexture(new Rect(Screen.width/4, Screen.height/16 , 750, 600), panel, ScaleMode.StretchToFill);
-				
-				//char d = ShowACharacter.a.Avatar.ToCharArray ()[2];
-				//int number = int.Parse(d+"");
-				GUI.Label (new Rect (Screen.width / 2 - 195, 5, 250, 50), "FIGHT", a);
-
-				GUIStyle norm = new GUIStyle ();
-				norm.alignment = TextAnchor.MiddleCenter;
-
-				//ENEMY HP BAR
-				GUI.Box(new Rect(720, 85, 190, 90),"", cStyl);
-				GUI.DrawTexture(new Rect( 735, 110, 40, 40), HP_Bar.sprites[av_EN], ScaleMode.ScaleToFit);
-				string p =  NetworkManager.khg[theChoosenOneReversed];
-				string h = NetworkManager.khg[theChoosenOne];
-				string nameLabel = "Name : " + NetworkManager.khg[theChoosenOne];
-				GUI.Label(new Rect(780, 100, 80,  5), nameLabel, c);
-				GUI.Box(new Rect(790, 122, lenghtMaxHP_EN,  5), "HP");
-				string hp_label  = CurrentHP_Enemy + "/" + MAXHP_Enemy;
-				GUI.Box(new Rect(790, 122, curHealth_EN,  5), hp_label, hp);
-				
-				string state = "State :" + ShowACharacter.a.Class_.getHPValue().getState();
-				GUI.Label(new Rect(790, 140,100,  5), state, c);
-
-<<<<<<< HEAD
-		if (Network.isClient || Network.isServer) 
-		{		
-			if (GUI.Button (new Rect (228 , 5, 120, 40), "Fight",a)) 
->>>>>>> GodCalledTheLightDay
-			{
-				networkView.RPC("getCount",RPCMode.Server);
-				if (Network.isClient)
-				{
-<<<<<<< HEAD
-=======
-				l = new  List<NetworkViewID>();
-				}
-				networkView.RPC("getCount",RPCMode.Server);
-				if (Network.isClient)
-				{
->>>>>>> GodCalledTheLightDay
-					for (int i =0;i<counter;i++)
-					{
-						networkView.RPC ("retList", RPCMode.Server,i);
-=======
-				GUI.Label(new Rect(330, 170, 750, 20), "About Character : ", cStyl);
-
-				GUI.Box(new Rect(670 + 150,200,150,20), "Class : " + Enemy_info[0], norm);
-				GUI.Box(new Rect(670 + 150,220,150,20), "Lvl : 1" , norm);
-				GUI.Box(new Rect(670 + 150,260,150,20), "BAB : " + Enemy_info[1], norm);
-				GUI.Box(new Rect(670 + 150,280,150,20), "FORT : " + Enemy_info[2], norm);
-				GUI.Box(new Rect(670 + 150,300,150,20), "REF : " + Enemy_info[3], norm);
-				GUI.Box(new Rect(670 + 150,320,150,20), "WILL : " + Enemy_info[4], norm);
-
-				GUI.Label(new Rect(330, 370, 750, 20), "Statistics : ", cStyl);
-
-
-
-				GUI.Box(new Rect(670 + 150,390,150,150), EN_Stats, norm);
-
-				//SKills
-				if(myTurn){
-					GUI.DrawTexture(new Rect(320 , 550, 750, 100), panel, ScaleMode.StretchToFill);
-					GUI.Label(new Rect(300, 550, 750, 20), "Skills : ", cStyl);
+					hide = false;
+					hide1 = false;
 					
-					Skill[] d = ShowACharacter.a.Class_.AvaibleSkills.ToArray ();
+					NetworkPlayer f = NetworkView.Find(l[theChoosenOneReversed]).owner;
 					
-					if(GUI.Button( new Rect(320 + 60, 580, 90,50), "Auto", a)){
-						TakeDamage(new Skill("Auto Attack", 0, "","",1,6,"" ));
-						ChangeTurn();
->>>>>>> Boniedzialaloboktosmicommitowal
-					}
-
-					string [] brr = (d[0].getSkillName()).Split(' ');
-					name = brr[0] + "\n" + brr[1];
-
-					if(GUI.Button( new Rect(320 + 150, 580, 90, 50), name, a)) {
-
-						TakeDamage(d[0]);
-						ChangeTurn();
-					}
-
-					if(GUI.Button( new Rect(320 + 240, 580, 90, 50), "NaN", a)) {
-
-					}
-
-					if(GUI.Button( new Rect(320 + 330, 580, 90, 50), "NaN", a)) {
+					networkView.RPC ("getCurHP", NetworkView.Find(l[theChoosenOne]).owner , Network.player);
+					networkView.RPC ("sendCurHP",NetworkView.Find(l[theChoosenOne]).owner , ShowACharacter.a.Class_.getHPValue().getCurrentHP ());
+					
+					
+					
+					networkView.RPC ("getMaxHP", NetworkView.Find(l[theChoosenOne]).owner , Network.player);
+					networkView.RPC ("sendMaxHP",NetworkView.Find(l[theChoosenOne]).owner , ShowACharacter.a.Class_.getHPValue().getMAXHP());
+					
+					networkView.RPC ("getStats", NetworkView.Find(l[theChoosenOne]).owner , Network.player);
+					networkView.RPC ("sendStats",NetworkView.Find(l[theChoosenOne]).owner , ShowACharacter.a.Statistics.getDescription());
+					
+					string respond = ShowACharacter.a.Class_.getClass () + ";" + ShowACharacter.a.Class_.getBAB () + ";" + ShowACharacter.a.Class_.getFORT () + ";" + ShowACharacter.a.Class_.getREF () + ";" + ShowACharacter.a.Class_.getWILL();
+					
+					networkView.RPC ("getInfo", NetworkView.Find(l[theChoosenOne]).owner , Network.player);
+					networkView.RPC ("sendInfo",NetworkView.Find(l[theChoosenOne]).owner , respond);
+					
+					
+					GUI.DrawTexture(new Rect(Screen.width/4, Screen.height/16 , 750, 600), panel, ScaleMode.StretchToFill);
+					
+					//char d = ShowACharacter.a.Avatar.ToCharArray ()[2];
+					//int number = int.Parse(d+"");
+					GUI.Label (new Rect (Screen.width / 2 - 195, 5, 250, 50), "FIGHT", a);
+					
+					GUIStyle norm = new GUIStyle ();
+					norm.alignment = TextAnchor.MiddleCenter;
+					
+					//ENEMY HP BAR
+					GUI.Box(new Rect(720, 85, 190, 90),"", cStyl);
+					GUI.DrawTexture(new Rect( 735, 110, 40, 40), HP_Bar.sprites[av_EN], ScaleMode.ScaleToFit);
+					string p =  NetworkManager.khg[theChoosenOneReversed];
+					string h = NetworkManager.khg[theChoosenOne];
+					string nameLabel = "Name : " + NetworkManager.khg[theChoosenOne];
+					GUI.Label(new Rect(780, 100, 80,  5), nameLabel, c);
+					GUI.Box(new Rect(790, 122, lenghtMaxHP_EN,  5), "HP");
+					string hp_label  = CurrentHP_Enemy + "/" + MAXHP_Enemy;
+					GUI.Box(new Rect(790, 122, curHealth_EN,  5), hp_label, hp);
+					
+					string state = "State :" + ShowACharacter.a.Class_.getHPValue().getState();
+					GUI.Label(new Rect(790, 140,100,  5), state, c);
+					
+					GUI.Label(new Rect(330, 170, 750, 20), "About Character : ", cStyl);
+					
+					GUI.Box(new Rect(670 + 150,200,150,20), "Class : " + Enemy_info[0], norm);
+					GUI.Box(new Rect(670 + 150,220,150,20), "Lvl : 1" , norm);
+					GUI.Box(new Rect(670 + 150,260,150,20), "BAB : " + Enemy_info[1], norm);
+					GUI.Box(new Rect(670 + 150,280,150,20), "FORT : " + Enemy_info[2], norm);
+					GUI.Box(new Rect(670 + 150,300,150,20), "REF : " + Enemy_info[3], norm);
+					GUI.Box(new Rect(670 + 150,320,150,20), "WILL : " + Enemy_info[4], norm);
+					
+					GUI.Label(new Rect(330, 370, 750, 20), "Statistics : ", cStyl);
+					
+					
+					
+					GUI.Box(new Rect(670 + 150,390,150,150), EN_Stats, norm);
+					
+					//SKills
+					if(myTurn){
+						GUI.DrawTexture(new Rect(320 , 550, 750, 100), panel, ScaleMode.StretchToFill);
+						GUI.Label(new Rect(300, 550, 750, 20), "Skills : ", cStyl);
 						
-					}
-					if(GUI.Button( new Rect(320 + 420, 580, 90, 50), "NaN", a)) {
+						Skill[] d = ShowACharacter.a.Class_.AvaibleSkills.ToArray ();
 						
-					}
-					if(GUI.Button( new Rect(320 + 510,580, 90, 50), "NaN", a)) {
+						if(GUI.Button( new Rect(320 + 60, 580, 90,50), "Auto", a)){
+							TakeDamage(new Skill("Auto Attack", 0, "","",1,6,"" ));
+							ChangeTurn();
+						}
 						
-					}
-					if(GUI.Button( new Rect(320 +  600, 580, 90, 50), "NaN", a)) {
+						string [] brr = (d[0].getSkillName()).Split(' ');
+						name = brr[0] + "\n" + brr[1];
 						
+						if(GUI.Button( new Rect(320 + 150, 580, 90, 50), name, a)) {
+							
+							TakeDamage(d[0]);
+							ChangeTurn();
+						}
+						
+						if(GUI.Button( new Rect(320 + 240, 580, 90, 50), "NaN", a)) {
+							
+						}
+						
+						if(GUI.Button( new Rect(320 + 330, 580, 90, 50), "NaN", a)) {
+							
+						}
+						if(GUI.Button( new Rect(320 + 420, 580, 90, 50), "NaN", a)) {
+							
+						}
+						if(GUI.Button( new Rect(320 + 510,580, 90, 50), "NaN", a)) {
+							
+						}
+						if(GUI.Button( new Rect(320 +  600, 580, 90, 50), "NaN", a)) {
+							
+						}
 					}
-					}
-
+					
 				}
-
-<<<<<<< HEAD
-		if (might) 
-<<<<<<< HEAD
-		{
-
-			GUI.DrawTexture(new Rect(Screen.width/4 - 197, 280, 400, 400), panel, ScaleMode.ScaleToFit);
-				for (int i = 0; i < l.Count ; i++)
-=======
-		{		
-=======
+				
 				
 			}
 			
 			if (might) 
 			{		
->>>>>>> Boniedzialaloboktosmicommitowal
 				if(hide1 == true)
->>>>>>> GodCalledTheLightDay
 				{
 					GUI.DrawTexture(new Rect(20, 120, 200, 300), panel, ScaleMode.StretchToFill);
 					GUI.Label(new Rect(18, 120, 205, 20), "Available users : ", cStyl);
@@ -825,16 +714,6 @@ public class Move : MonoBehaviour {
 					
 					for (int i = 0; i < l.Count ; i++)
 					{
-<<<<<<< HEAD
-<<<<<<< HEAD
-					networkView.RPC ("startBattle", NetworkView.Find(l[i]).owner,NetworkView.Find(l[i]).gameObject.name );
-=======
-						if (GUI.Button(new Rect(30 , 140 + (60 * i), 180, 40), NetworkManager.khg[l.Count-i-1] , a))
-						{
-						networkView.RPC ("startBattle", NetworkView.Find(l[i]).owner,NetworkManager.khg[i] );
-						}	
->>>>>>> GodCalledTheLightDay
-=======
 						if(NetworkManager.khg[l.Count-i-1] != ShowACharacter.a.DName){
 							
 							if (GUI.Button(new Rect(30 , 140 + (50 * i), 180, 40), NetworkManager.khg[l.Count-i-1] , a))
@@ -854,7 +733,6 @@ public class Move : MonoBehaviour {
 								}
 							}
 						}
->>>>>>> Boniedzialaloboktosmicommitowal
 					}
 					
 					if (GUI.Button(new Rect(195, 120, 20, 20), "X" , a))
@@ -888,7 +766,7 @@ public class Move : MonoBehaviour {
 				networkView.RPC ("sendAccept", f, ShowACharacter.a.DName );
 				networkView.RPC ("getAv", f , Network.player);
 				networkView.RPC ("sendAv", f , int.Parse(d+""));
-
+				
 				//calculateInit (ShowACharacter.a.Statistics.getDEX ());
 				InitiativeRoll(ShowACharacter.a.Statistics.getDEX());
 				//InitiativeRoll(ShowACharacter.a.Statistics.getDEX());
@@ -897,9 +775,9 @@ public class Move : MonoBehaviour {
 				hide = false;
 				
 			}
-
+			
 			if(GameOver) {
-
+				
 				sendTOEter ( "\nThe Winner is  :: " + NetworkManager.khg[theChoosenOne] + "\n");
 				TrueGameOver = true;
 				GameOver = false;
@@ -907,7 +785,7 @@ public class Move : MonoBehaviour {
 				fight = false;
 				TrueFight = false;
 			}
-
+			
 		}
 	}
 	
@@ -944,7 +822,7 @@ public class Move : MonoBehaviour {
 		
 		networkView.RPC ("getIniciative", NetworkView.Find(l[theChoosenOneReversed]).owner , Network.player);
 	}
-
+	
 	private void TakeDamage(Skill spell ){
 		if (spell.getMod () == "HP") {
 			sendTOEter ( "Get " + spell.getSidesOfDice() + " bonus HP " );
@@ -985,14 +863,14 @@ public class Move : MonoBehaviour {
 							}
 						} else {
 							sendTOEter ( " Failed " );
-
+							
 						}
 						
 					}else {
 						//attack
 						sendTOEter ( ShowACharacter.a.DName + " attacks enemy with :: \n" +  spell.getSkillName());
 						int g = RollADamage(spell)*(-1);
-
+						
 						if (Network.isClient)
 						{
 							networkView.RPC ("send_getDamage", NetworkView.Find(l[theChoosenOneReversed]).owner ,g );
@@ -1047,7 +925,7 @@ public class Move : MonoBehaviour {
 		
 		return myAttack;
 	}
-
+	
 	
 	private int getMod(int a){
 		if( a < 10){
@@ -1088,15 +966,15 @@ public class Move : MonoBehaviour {
 			}
 		}
 	}
-
+	
 	public void sendTOEter(string messageToSe){
 		networkView.RPC("rollToEter", RPCMode.All, ShowACharacter.a.DName + ": " + messageToSe + "\n");
 	}
-
+	
 	[RPC]
 	public void rollToEter(string mess){
 		MChat.roll(mess);
 	}
-
+	
 	
 }

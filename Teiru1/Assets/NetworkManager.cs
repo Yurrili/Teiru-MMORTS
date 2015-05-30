@@ -20,16 +20,15 @@ public class NetworkManager : MonoBehaviour {
 	public static GameObject p;
 	public NetworkPlayer np1;
 	public static List<NetworkViewID> playerList;
-<<<<<<< HEAD
+
 	string name2 = "";
 	public static List<string> playerName;
-=======
+
 
 	public static string skak = "";
 
 	public static List<string> khg = new List<string>();
 
->>>>>>> GodCalledTheLightDay
 
 	void OnServerInitialized()
 	{
@@ -95,18 +94,8 @@ public class NetworkManager : MonoBehaviour {
 		playerList.Add (p);
 	}
 
-<<<<<<< HEAD
 
-	private void SpawnPlayer()
-	{
-		//GameObject kl = new GameObject (playerPrefab);
-	//	networkView.RPC ("sendName" , RPCMode.All, MenuManager._Character_.DName);
-		//playerPrefab.name = MenuManager._Character_.DName;
-		//playerPrefab.rigidbody2D.gravityScale = 0.01f;
-		p  = Network.Instantiate(playerPrefab, new Vector3(-8168f, -9298f, 0f), Quaternion.identity, 0) as GameObject;
-		p.rigidbody2D.gravityScale = 0;
-	//	p.name = MenuManager._Character_.DName;
-=======
+
 	[RPC]
 	public void asd(string h)
 	{
@@ -120,12 +109,8 @@ public class NetworkManager : MonoBehaviour {
 		//playerPrefab.rigidbody2D.gravityScale = 0.01f;
 		p  = Network.Instantiate(playerPrefab, new Vector3(-8168f, -9298f, 0f), Quaternion.identity, 0) as GameObject;
 		p.rigidbody2D.gravityScale = 0;
-<<<<<<< HEAD
-		networkView.RPC ("asd", RPCMode.AllBuffered,MenuManager._Character_.DName );
->>>>>>> GodCalledTheLightDay
-=======
+	
 		networkView.RPC ("asd", RPCMode.AllBuffered, MenuManager._Character_.DName );
->>>>>>> Boniedzialaloboktosmicommitowal
 	/*	if (Network.isClient)
 		{
 			networkView.RPC("addPlayer",RPCMode.Server, Move.getId());

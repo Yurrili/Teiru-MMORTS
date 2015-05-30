@@ -17,10 +17,6 @@ public class ShowACharacter : MonoBehaviour {
 	static public GameObject Rank4But;
 	static public GameObject Rank5But;
 	static public GameObject helmets;
-<<<<<<< HEAD
-	static public PlayersCharacter a;
-=======
->>>>>>> Boniedzialaloboktosmicommitowal
 
 	static public PlayersCharacter a;
 
