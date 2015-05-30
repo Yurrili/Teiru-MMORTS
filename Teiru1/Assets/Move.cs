@@ -63,6 +63,7 @@ public class Move : MonoBehaviour {
 
 	public static bool GameOver = false;
 	public static bool TrueGameOver = false;
+	public static bool serverStarted = true;
 	
 	void Start()
 	{
@@ -257,14 +258,14 @@ public class Move : MonoBehaviour {
 
 	public void gameOver()
 	{
-		if (Network.isClient)
+		if (serverStarted)
 		{
-			networkView.RPC ("sendGameOver", NetworkView.Find(l[theChoosenOneReversed]).owner , true );
+			networkView.RPC ("sendGameOver", NetworkView.Find(l[theChoosenOne]).owner , true );
 			GameOver = false;
 		}
 		else
 		{
-			networkView.RPC ("sendGameOver", NetworkView.Find(l[theChoosenOne]).owner , true );
+			networkView.RPC ("sendGameOver", NetworkView.Find(l[theChoosenOneReversed]).owner , true );
 			GameOver = false;
 		}
 	}
@@ -351,17 +352,36 @@ public class Move : MonoBehaviour {
 	
 	public void AboutWiner(int a, int b) {
 		if (a > b) {
+			if (Network.isServer)
+			{
+			MChat.roll("Winer : " + NetworkManager.khg[theChoosenOneReversed]);
+			networkView.RPC ("aboutWiner", NetworkView.Find(l[theChoosenOne]).owner ,true);
+			myTurn = false;
+			}
+			else
+			{
 			MChat.roll("Winer : " + NetworkManager.khg[theChoosenOne]);
 			networkView.RPC ("aboutWiner", NetworkView.Find(l[theChoosenOneReversed]).owner ,true);
 			myTurn = false;
+			}
 		}else {
+			if (Network.isServer)
+			{
 			MChat.roll("\nWiner : " + ShowACharacter.a.DName);
-			networkView.RPC ("aboutWiner", NetworkView.Find(l[theChoosenOneReversed]).owner ,false);
+			networkView.RPC ("aboutWiner", NetworkView.Find(l[theChoosenOne]).owner ,false);
 			MChat.roll("\nYour turn : )\n");
 			myTurn = true;
+			}
+			else
+			{
+				MChat.roll("\nWiner : " + ShowACharacter.a.DName);
+				networkView.RPC ("aboutWiner", NetworkView.Find(l[theChoosenOneReversed]).owner ,false);
+				MChat.roll("\nYour turn : )\n");
+				myTurn = true;
+			}
 		}
 	}
-	
+
 	[RPC]
 	public void aboutWiner(bool av)
 	{
@@ -388,9 +408,16 @@ public class Move : MonoBehaviour {
 	public void ChangeTurn() {
 		myTurn = false;
 		
-		if (Network.isClient)
+		if (!serverStarted)
 		{
-			networkView.RPC ("Turn", NetworkView.Find(l[theChoosenOneReversed]).owner ,true);
+			if (Network.isClient)
+			{
+				networkView.RPC ("Turn", NetworkView.Find(l[theChoosenOneReversed]).owner ,true);
+			}
+			else
+			{
+				networkView.RPC ("Turn", NetworkView.Find(l[theChoosenOne]).owner ,true);
+			}
 		}
 		else
 		{
@@ -601,24 +628,8 @@ public class Move : MonoBehaviour {
 				hide1 = false;
 				
 				NetworkPlayer f = NetworkView.Find(l[theChoosenOneReversed]).owner;
-					if (Network.isClient)
-					{
-						networkView.RPC ("getCurHP", NetworkView.Find(l[theChoosenOneReversed]).owner , Network.player);
-						networkView.RPC ("sendCurHP",NetworkView.Find(l[theChoosenOneReversed]).owner , ShowACharacter.a.Class_.getHPValue().getCurrentHP ());
 
-
-				
-						networkView.RPC ("getMaxHP", NetworkView.Find(l[theChoosenOneReversed]).owner , Network.player);
-						networkView.RPC ("sendMaxHP",NetworkView.Find(l[theChoosenOneReversed]).owner , ShowACharacter.a.Class_.getHPValue().getMAXHP());
-
-						networkView.RPC ("getStats", NetworkView.Find(l[theChoosenOneReversed]).owner , Network.player);
-						networkView.RPC ("sendStats",NetworkView.Find(l[theChoosenOneReversed]).owner , ShowACharacter.a.Statistics.getDescription());
-
-				string respond = ShowACharacter.a.Class_.getClass () + ";" + ShowACharacter.a.Class_.getBAB () + ";" + ShowACharacter.a.Class_.getFORT () + ";" + ShowACharacter.a.Class_.getREF () + ";" + ShowACharacter.a.Class_.getWILL();
-				networkView.RPC ("getInfo", NetworkView.Find(l[theChoosenOneReversed]).owner , Network.player);
-						networkView.RPC ("sendInfo",NetworkView.Find(l[theChoosenOneReversed]).owner , respond);
-					}
-					else
+					if (serverStarted)
 					{
 						networkView.RPC ("getCurHP", NetworkView.Find(l[theChoosenOne]).owner , Network.player);
 						networkView.RPC ("sendCurHP",NetworkView.Find(l[theChoosenOne]).owner , ShowACharacter.a.Class_.getHPValue().getCurrentHP ());
@@ -635,6 +646,24 @@ public class Move : MonoBehaviour {
 
 						networkView.RPC ("getInfo", NetworkView.Find(l[theChoosenOne]).owner , Network.player);
 						networkView.RPC ("sendInfo",NetworkView.Find(l[theChoosenOne]).owner , respond);
+					}
+					else
+					{
+						networkView.RPC ("getCurHP", NetworkView.Find(l[theChoosenOneReversed]).owner , Network.player);
+						networkView.RPC ("sendCurHP",NetworkView.Find(l[theChoosenOneReversed]).owner , ShowACharacter.a.Class_.getHPValue().getCurrentHP ());
+						
+						
+						
+						networkView.RPC ("getMaxHP", NetworkView.Find(l[theChoosenOneReversed]).owner , Network.player);
+						networkView.RPC ("sendMaxHP",NetworkView.Find(l[theChoosenOneReversed]).owner , ShowACharacter.a.Class_.getHPValue().getMAXHP());
+						
+						networkView.RPC ("getStats", NetworkView.Find(l[theChoosenOneReversed]).owner , Network.player);
+						networkView.RPC ("sendStats",NetworkView.Find(l[theChoosenOneReversed]).owner , ShowACharacter.a.Statistics.getDescription());
+						
+						string respond = ShowACharacter.a.Class_.getClass () + ";" + ShowACharacter.a.Class_.getBAB () + ";" + ShowACharacter.a.Class_.getFORT () + ";" + ShowACharacter.a.Class_.getREF () + ";" + ShowACharacter.a.Class_.getWILL();
+						
+						networkView.RPC ("getInfo", NetworkView.Find(l[theChoosenOneReversed]).owner , Network.player);
+						networkView.RPC ("sendInfo",NetworkView.Find(l[theChoosenOneReversed]).owner , respond);
 					}
 
 
@@ -775,6 +804,16 @@ public class Move : MonoBehaviour {
 					TrueFight = true;
 					fight = false;
 					SendAccept = true;
+					if (Network.isServer)
+					{
+						serverStarted = true;
+						networkView.RPC ("whoStarted", NetworkView.Find (l [theChoosenOne]).owner, serverStarted);
+					}
+					else
+					{
+						serverStarted = false;
+						networkView.RPC ("whoStarted", NetworkView.Find (l [theChoosenOneReversed]).owner, serverStarted);
+					}
 				}
 			}
 			
@@ -817,7 +856,13 @@ public class Move : MonoBehaviour {
 
 		}
 	}
-	
+
+	[RPC]
+	public void whoStarted(bool b)
+	{
+		serverStarted = b;
+	}
+
 	private void calculateInit(int dex) {
 		Dice dd = new Dice ();
 		int[] roll = dd.Roll (1, 20);
@@ -848,20 +893,33 @@ public class Move : MonoBehaviour {
 		
 		if(dex < 0 )
 			MChat.roll ("Initiative : " + dd.getSimpleAnswer () + dex + "(DEX mod)\n");
-		
-		networkView.RPC ("getIniciative", NetworkView.Find(l[theChoosenOneReversed]).owner , Network.player);
+		if (Network.isServer) 
+		{
+			networkView.RPC ("getIniciative", NetworkView.Find (l [theChoosenOne]).owner, Network.player);
+		}
+		else
+		{
+			networkView.RPC ("getIniciative", NetworkView.Find (l [theChoosenOneReversed]).owner, Network.player);
+		}
 	}
 
 	private void TakeDamage(Skill spell ){
 		if (spell.getMod () == "HP") {
 			sendTOEter ( "Get " + spell.getSidesOfDice() + " bonus HP " );
-			if (Network.isClient)
+			if (serverStarted)
 			{
-				networkView.RPC ("send_getDamage", NetworkView.Find(l[theChoosenOneReversed]).owner , 2 );
+				networkView.RPC ("send_getDamage", NetworkView.Find(l[theChoosenOne]).owner , 2 );
 			}
 			else
 			{
-				networkView.RPC ("send_getDamage", NetworkView.Find(l[theChoosenOne]).owner , 2 );
+				if (Network.isClient)
+				{
+					networkView.RPC ("send_getDamage", NetworkView.Find(l[theChoosenOneReversed]).owner ,2);
+				}
+				else
+				{
+					networkView.RPC ("send_getDamage", NetworkView.Find(l[theChoosenOne]).owner ,2);
+				}
 			}
 			//Heal
 		} else {
@@ -882,13 +940,20 @@ public class Move : MonoBehaviour {
 							sendTOEter ( ShowACharacter.a.DName + " attacks enemy with :: \n" +  spell.getSkillName());
 							int g = (RollADamage(spell) + 5)*(-1);
 							
-							if (Network.isClient)
+							if (serverStarted)
 							{
-								networkView.RPC ("send_getDamage", NetworkView.Find(l[theChoosenOneReversed]).owner ,g );
+								networkView.RPC ("send_getDamage", NetworkView.Find(l[theChoosenOne]).owner ,g );
 							}
 							else
 							{
-								networkView.RPC ("send_getDamage", NetworkView.Find(l[theChoosenOne]).owner ,g );
+								if (Network.isClient)
+								{
+									networkView.RPC ("send_getDamage", NetworkView.Find(l[theChoosenOneReversed]).owner ,g);
+								}
+								else
+								{
+									networkView.RPC ("send_getDamage", NetworkView.Find(l[theChoosenOne]).owner ,g);
+								}
 							}
 						} else {
 							sendTOEter ( " Failed " );
@@ -900,13 +965,20 @@ public class Move : MonoBehaviour {
 						sendTOEter ( ShowACharacter.a.DName + " attacks enemy with :: \n" +  spell.getSkillName());
 						int g = RollADamage(spell)*(-1);
 
-						if (Network.isClient)
+						if (serverStarted)
 						{
-							networkView.RPC ("send_getDamage", NetworkView.Find(l[theChoosenOneReversed]).owner ,g );
+							networkView.RPC ("send_getDamage", NetworkView.Find(l[theChoosenOne]).owner ,g );
 						}
 						else
 						{
-							networkView.RPC ("send_getDamage", NetworkView.Find(l[theChoosenOne]).owner ,g );
+							if (Network.isClient)
+							{
+								networkView.RPC ("send_getDamage", NetworkView.Find(l[theChoosenOneReversed]).owner ,g);
+							}
+							else
+							{
+								networkView.RPC ("send_getDamage", NetworkView.Find(l[theChoosenOne]).owner ,g);
+							}
 						}
 					}
 				}
