@@ -150,9 +150,14 @@ public class Move : MonoBehaviour {
 	}
 	
 	[RPC]
-	public void setCount(int i)
+	public void setCount(int x)
 	{
-		counter = i;
+		counter = x;
+		l = new  List<NetworkViewID> ();
+		for (int i =0;i<counter;i++)
+		{
+			networkView.RPC ("retList", RPCMode.Server,i);
+		}
 	}
 	
 	
@@ -231,19 +236,23 @@ public class Move : MonoBehaviour {
 		if( dmg < 0 ) {
 
 			ShowACharacter.a.Class_.getHPValue().Hit(dmg*(-1));
-
-			if(ShowACharacter.a.Class_.getHPValue().getCurrentHP() <= 0 ){
+			TrueFight = true;
+			fight = false;
+			if(ShowACharacter.a.Class_.getHPValue().getCurrentHP() <= 0 )
+			{
 				//Game Over
 				TrueFight = false;
 				GameOver = true;
 				TrueGameOver = true;
 				gameOver();
 			}
-		} else {
+		} else 
+		{
 			ShowACharacter.a.Class_.getHPValue().Heal(dmg);
+			TrueFight = true;
+			fight = false;
 		}
-		TrueFight = true;
-		fight = false;
+
 	}
 
 	[RPC]
@@ -603,27 +612,21 @@ public class Move : MonoBehaviour {
 				// HELPPPPPPPP =P
 				if (GUI.Button (new Rect (228 , 5, 120, 40), "Fight", a)) 
 				{
-					
-					
-					networkView.RPC("getCount",RPCMode.Server);
-					
 					if (Network.isClient)
 					{
-						l = new  List<NetworkViewID> ();
-						for (int i =0;i<counter;i++)
-						{
-							networkView.RPC ("retList", RPCMode.Server,i);
-						}
+						networkView.RPC("getCount",RPCMode.Server);
+						hide1 = true;
+						hide = true;
 						might = true;
 					} else {
 						might = true;
-						hide1 = true;
-						hide = true;
+
 					}
 				}
 			} else { // MOMENT WALKI
 
-				if( TrueGameOver != true){
+				if( TrueGameOver == false)
+				{
 				hide = false;
 				hide1 = false;
 				
@@ -813,6 +816,7 @@ public class Move : MonoBehaviour {
 					{
 						serverStarted = false;
 						networkView.RPC ("whoStarted", NetworkView.Find (l [theChoosenOneReversed]).owner, serverStarted);
+
 					}
 				}
 			}
@@ -849,9 +853,9 @@ public class Move : MonoBehaviour {
 				sendTOEter ( "\nThe Winner is  :: " + NetworkManager.khg[theChoosenOne] + "\n");
 				TrueGameOver = true;
 				GameOver = false;
-				TrueFight = false;
 				fight = false;
 				TrueFight = false;
+				networkView.RPC ("sendTruFightOver", RPCMode.Others , TrueFight);
 			}
 
 		}
@@ -861,6 +865,12 @@ public class Move : MonoBehaviour {
 	public void whoStarted(bool b)
 	{
 		serverStarted = b;
+	}
+
+	[RPC]
+	public void sendTruFightOver(bool b)
+	{
+		TrueFight = b;
 	}
 
 	private void calculateInit(int dex) {
