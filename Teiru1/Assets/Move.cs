@@ -810,12 +810,16 @@ public class Move : MonoBehaviour {
 					if (Network.isServer)
 					{
 						serverStarted = true;
+						TrueGameOver = false;
 						networkView.RPC ("whoStarted", NetworkView.Find (l [theChoosenOne]).owner, serverStarted);
+						networkView.RPC ("sendTruGameOver", NetworkView.Find (l [theChoosenOne]).owner, TrueGameOver);
 					}
 					else
 					{
 						serverStarted = false;
+						TrueGameOver = false;
 						networkView.RPC ("whoStarted", NetworkView.Find (l [theChoosenOneReversed]).owner, serverStarted);
+						networkView.RPC ("sendTruGameOver", NetworkView.Find (l [theChoosenOneReversed]).owner, TrueGameOver);
 
 					}
 				}
@@ -871,6 +875,12 @@ public class Move : MonoBehaviour {
 	public void sendTruFightOver(bool b)
 	{
 		TrueFight = b;
+	}
+
+	[RPC]
+	public void sendTruGameOver(bool b)
+	{
+		TrueGameOver = b;
 	}
 
 	private void calculateInit(int dex) {
