@@ -58,6 +58,10 @@ public class CharacterClass {
 		return HP;
 	}
 
+	public void resetHP(){
+		HP.ResetHP ();
+	}
+
 	public int getArts(int a){
 				return Arts[a];
 	}

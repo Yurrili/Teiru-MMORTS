@@ -33,6 +33,10 @@ public class HPValue {
 	public int getCurrentHP(){
 		return CurrentHP;
 	}
+
+	public void ResetHP(){
+		CurrentHP = HPBasic;
+	}
 	
 	public void setMaxHP(int max){
 		int temp = MAXHP - max;

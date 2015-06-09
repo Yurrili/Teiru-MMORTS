@@ -51,6 +51,7 @@ public class HP_Bar : MonoBehaviour {
 					GUI.Box(new Rect(77, 72, 100,  5), "HP");
 					GUI.Box(new Rect(77, 72, 100,  5), "LVL 1", hp);
 					
+					ShowACharacter.a.Class_.resetHP();
 					string state = "State :" + ShowACharacter.a.Class_.getHPValue().getState();
 					
 					GUI.Label(new Rect(77, 90,100,  5), state, c);
