@@ -150,9 +150,14 @@ public class Move : MonoBehaviour {
 	}
 	
 	[RPC]
-	public void setCount(int i)
+	public void setCount(int x)
 	{
-		counter = i;
+		counter = x;
+		l = new  List<NetworkViewID> ();
+		for (int i =0;i<counter;i++)
+		{
+			networkView.RPC ("retList", RPCMode.Server,i);
+		}
 	}
 	
 	
@@ -603,23 +608,15 @@ public class Move : MonoBehaviour {
 				// HELPPPPPPPP =P
 				if (GUI.Button (new Rect (228 , 5, 120, 40), "Fight", a)) 
 				{
-					
-					
-					networkView.RPC("getCount",RPCMode.Server);
-
 					if (Network.isClient)
 					{
-						if (counter!=-1)
-						{
-							l = new  List<NetworkViewID> ();
-							for (int i =0;i<counter;i++)
-							{
-								networkView.RPC ("retList", RPCMode.Server,i);
-							}
-						}
+						if (counter==-1)
+						networkView.RPC("getCount",RPCMode.Server);
+
 						might = true;
 						hide1 = true;
 						hide = true;
+
 					} else {
 						might = true;
 						hide1 = true;
@@ -637,24 +634,47 @@ public class Move : MonoBehaviour {
 
 					if (serverStarted)
 					{
-						networkView.RPC ("getCurHP", NetworkView.Find(l[theChoosenOne]).owner , Network.player);
-						networkView.RPC ("sendCurHP",NetworkView.Find(l[theChoosenOne]).owner , ShowACharacter.a.Class_.getHPValue().getCurrentHP ());
-						
-						
-						
-						networkView.RPC ("getMaxHP", NetworkView.Find(l[theChoosenOne]).owner , Network.player);
-						networkView.RPC ("sendMaxHP",NetworkView.Find(l[theChoosenOne]).owner , ShowACharacter.a.Class_.getHPValue().getMAXHP());
-						
-						networkView.RPC ("getStats", NetworkView.Find(l[theChoosenOne]).owner , Network.player);
-						networkView.RPC ("sendStats",NetworkView.Find(l[theChoosenOne]).owner , ShowACharacter.a.Statistics.getDescription());
-						
-						string respond = ShowACharacter.a.Class_.getClass () + ";" + ShowACharacter.a.Class_.getBAB () + ";" + ShowACharacter.a.Class_.getFORT () + ";" + ShowACharacter.a.Class_.getREF () + ";" + ShowACharacter.a.Class_.getWILL();
+						if (Network.isClient)
+						{
+							networkView.RPC ("getCurHP", NetworkView.Find(l[theChoosenOneReversed]).owner , Network.player);
+							networkView.RPC ("sendCurHP",NetworkView.Find(l[theChoosenOneReversed]).owner , ShowACharacter.a.Class_.getHPValue().getCurrentHP ());
+							
+							
+							
+							networkView.RPC ("getMaxHP", NetworkView.Find(l[theChoosenOneReversed]).owner , Network.player);
+							networkView.RPC ("sendMaxHP",NetworkView.Find(l[theChoosenOneReversed]).owner , ShowACharacter.a.Class_.getHPValue().getMAXHP());
+							
+							networkView.RPC ("getStats", NetworkView.Find(l[theChoosenOneReversed]).owner , Network.player);
+							networkView.RPC ("sendStats",NetworkView.Find(l[theChoosenOneReversed]).owner , ShowACharacter.a.Statistics.getDescription());
+							
+							string respond = ShowACharacter.a.Class_.getClass () + ";" + ShowACharacter.a.Class_.getBAB () + ";" + ShowACharacter.a.Class_.getFORT () + ";" + ShowACharacter.a.Class_.getREF () + ";" + ShowACharacter.a.Class_.getWILL();
+							
+							networkView.RPC ("getInfo", NetworkView.Find(l[theChoosenOneReversed]).owner , Network.player);
+							networkView.RPC ("sendInfo",NetworkView.Find(l[theChoosenOneReversed]).owner , respond);
+						}
+						else
+						{
+							networkView.RPC ("getCurHP", NetworkView.Find(l[theChoosenOne]).owner , Network.player);
+							networkView.RPC ("sendCurHP",NetworkView.Find(l[theChoosenOne]).owner , ShowACharacter.a.Class_.getHPValue().getCurrentHP ());
+							
+							
+							
+							networkView.RPC ("getMaxHP", NetworkView.Find(l[theChoosenOne]).owner , Network.player);
+							networkView.RPC ("sendMaxHP",NetworkView.Find(l[theChoosenOne]).owner , ShowACharacter.a.Class_.getHPValue().getMAXHP());
+							
+							networkView.RPC ("getStats", NetworkView.Find(l[theChoosenOne]).owner , Network.player);
+							networkView.RPC ("sendStats",NetworkView.Find(l[theChoosenOne]).owner , ShowACharacter.a.Statistics.getDescription());
+							
+							string respond = ShowACharacter.a.Class_.getClass () + ";" + ShowACharacter.a.Class_.getBAB () + ";" + ShowACharacter.a.Class_.getFORT () + ";" + ShowACharacter.a.Class_.getREF () + ";" + ShowACharacter.a.Class_.getWILL();
+							
+							networkView.RPC ("getInfo", NetworkView.Find(l[theChoosenOne]).owner , Network.player);
+							networkView.RPC ("sendInfo",NetworkView.Find(l[theChoosenOne]).owner , respond);
+						}
 
-						networkView.RPC ("getInfo", NetworkView.Find(l[theChoosenOne]).owner , Network.player);
-						networkView.RPC ("sendInfo",NetworkView.Find(l[theChoosenOne]).owner , respond);
 					}
 					else
 					{
+
 						networkView.RPC ("getCurHP", NetworkView.Find(l[theChoosenOneReversed]).owner , Network.player);
 						networkView.RPC ("sendCurHP",NetworkView.Find(l[theChoosenOneReversed]).owner , ShowACharacter.a.Class_.getHPValue().getCurrentHP ());
 						
@@ -670,6 +690,7 @@ public class Move : MonoBehaviour {
 						
 						networkView.RPC ("getInfo", NetworkView.Find(l[theChoosenOneReversed]).owner , Network.player);
 						networkView.RPC ("sendInfo",NetworkView.Find(l[theChoosenOneReversed]).owner , respond);
+
 					}
 
 
@@ -810,10 +831,11 @@ public class Move : MonoBehaviour {
 					TrueFight = true;
 					fight = false;
 					SendAccept = true;
-					TrueGameOver = false;
+
 					if (Network.isServer)
 					{
 						serverStarted = true;
+						TrueGameOver = false;
 						networkView.RPC ("whoStarted", NetworkView.Find (l [theChoosenOne]).owner, serverStarted);
 						networkView.RPC ("sendTruGameOver", NetworkView.Find (l [theChoosenOne]).owner, TrueGameOver);
 					}
@@ -828,9 +850,10 @@ public class Move : MonoBehaviour {
 								networkView.RPC ("retList", RPCMode.Server,i);
 							}
 						}
+						TrueGameOver = false;
 						serverStarted = false;
 						networkView.RPC ("whoStarted", NetworkView.Find (l [theChoosenOneReversed]).owner, serverStarted);
-						networkView.RPC ("sendTruGameOver", NetworkView.Find (l [theChoosenOne]).owner, TrueGameOver);
+						networkView.RPC ("sendTruGameOver", NetworkView.Find (l [theChoosenOneReversed]).owner, TrueGameOver);
 					}
 				}
 			}
