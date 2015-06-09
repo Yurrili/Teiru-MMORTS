@@ -46,7 +46,9 @@ public class CharacterClass {
 
 	}
 
-
+	public void Refresh(){
+		HP.RefreshHP();
+	}
 	
 	public string getSkillDescription(int Rank, int skill){
 

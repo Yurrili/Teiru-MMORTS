@@ -16,6 +16,9 @@ public class HPValue {
 		CurrentHP = HPBasic;
 	}
 
+	public void RefreshHP(){
+		CurrentHP = HPBasic;
+	}
 
 	private void CalculateHP(){//to bedzie trzeba przetestowac dobrze
 		HPBasic = HPmod;

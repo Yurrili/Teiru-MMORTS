@@ -46,7 +46,7 @@ public class HP_Bar : MonoBehaviour {
 					GUI.DrawTexture(new Rect(23, 60, 40, 40), sprites[int.Parse(d+"")], ScaleMode.ScaleToFit);
 					
 					string nameLabel = "Name : " + NetworkManager.khg[0];
-					
+					ShowACharacter.a.Class_.Refresh();
 					GUI.Label(new Rect(75, 50, 80,  5), nameLabel, c);
 					GUI.Box(new Rect(77, 72, 100,  5), "HP");
 					GUI.Box(new Rect(77, 72, 100,  5), "LVL 1", hp);
