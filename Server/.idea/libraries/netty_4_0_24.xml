@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="netty-4.0.24">
-    <CLASSES>
-      <root url="file://$PROJECT_DIR$/debs/netty-4.0.24.Final" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>

@@ -609,12 +609,17 @@ public class Move : MonoBehaviour {
 					
 					if (Network.isClient)
 					{
-						l = new  List<NetworkViewID> ();
-						for (int i =0;i<counter;i++)
+						//if (l.Count==0)
 						{
-							networkView.RPC ("retList", RPCMode.Server,i);
+							l = new  List<NetworkViewID> ();
+							for (int i =0;i<counter;i++)
+							{
+								networkView.RPC ("retList", RPCMode.Server,i);
+							}
 						}
 						might = true;
+						hide1 = true;
+						hide = true;
 					} else {
 						might = true;
 						hide1 = true;
@@ -623,7 +628,8 @@ public class Move : MonoBehaviour {
 				}
 			} else { // MOMENT WALKI
 
-				if( TrueGameOver != true){
+				if( TrueGameOver == false)
+				{
 				hide = false;
 				hide1 = false;
 				
@@ -804,15 +810,18 @@ public class Move : MonoBehaviour {
 					TrueFight = true;
 					fight = false;
 					SendAccept = true;
+					TrueGameOver = false;
 					if (Network.isServer)
 					{
 						serverStarted = true;
 						networkView.RPC ("whoStarted", NetworkView.Find (l [theChoosenOne]).owner, serverStarted);
+						networkView.RPC ("sendTruGameOver", NetworkView.Find (l [theChoosenOne]).owner, TrueGameOver);
 					}
 					else
 					{
 						serverStarted = false;
 						networkView.RPC ("whoStarted", NetworkView.Find (l [theChoosenOneReversed]).owner, serverStarted);
+						networkView.RPC ("sendTruGameOver", NetworkView.Find (l [theChoosenOne]).owner, TrueGameOver);
 					}
 				}
 			}
@@ -851,10 +860,31 @@ public class Move : MonoBehaviour {
 				GameOver = false;
 				TrueFight = false;
 				fight = false;
-				TrueFight = false;
+				if (Network.isClient)
+				{
+					NetworkPlayer f = NetworkView.Find(l[theChoosenOneReversed]).owner;
+					networkView.RPC ("afterFightEnd", f, TrueFight );
+				}
+				else
+				{
+					NetworkPlayer f = NetworkView.Find(l[theChoosenOne]).owner;
+					networkView.RPC ("afterFightEnd", f, TrueFight );
+				}
 			}
 
 		}
+	}
+
+	[RPC]
+	public void afterFightEnd(bool b)
+	{
+		TrueFight = b;
+	}
+
+	[RPC]
+	public void sendTruGameOver(bool b)
+	{
+		TrueGameOver = b;
 	}
 
 	[RPC]
