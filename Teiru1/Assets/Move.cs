@@ -30,7 +30,7 @@ public class Move : MonoBehaviour {
 
 	public static List<NetworkViewID> l = new  List<NetworkViewID> ();
 	bool got = false;
-	public int counter = 0;
+	public static int counter = -1;
 
 	public static int theChoosenOne = 0;
 	public static int theChoosenOneReversed = 0; 
@@ -606,10 +606,10 @@ public class Move : MonoBehaviour {
 					
 					
 					networkView.RPC("getCount",RPCMode.Server);
-					
+
 					if (Network.isClient)
 					{
-						//if (l.Count==0)
+						if (counter!=-1)
 						{
 							l = new  List<NetworkViewID> ();
 							for (int i =0;i<counter;i++)
@@ -819,6 +819,15 @@ public class Move : MonoBehaviour {
 					}
 					else
 					{
+						networkView.RPC("getCount",RPCMode.Server);
+						if (counter!=-1)
+						{
+							l = new  List<NetworkViewID> ();
+							for (int i =0;i<counter;i++)
+							{
+								networkView.RPC ("retList", RPCMode.Server,i);
+							}
+						}
 						serverStarted = false;
 						networkView.RPC ("whoStarted", NetworkView.Find (l [theChoosenOneReversed]).owner, serverStarted);
 						networkView.RPC ("sendTruGameOver", NetworkView.Find (l [theChoosenOne]).owner, TrueGameOver);
